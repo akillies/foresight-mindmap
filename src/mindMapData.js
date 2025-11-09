@@ -252,6 +252,11 @@ const mindMapData = {
         ],
         application: 'Create power/interest grids, influence maps, and perspective matrices'
       },
+      relatedMethodologies: [
+        { id: 'env-scanning', type: 'complements', description: 'Stakeholder mapping reveals who to scan for signals and emerging issues in the environment' },
+        { id: 'scenario-planning', type: 'builds-on', description: 'Stakeholder analysis informs which scenarios to develop based on competing visions of different groups' },
+        { id: 'visioning', type: 'prerequisite', description: 'Understanding stakeholder perspectives is essential before creating inclusive preferred futures' }
+      ],
       wikipedia: 'https://en.wikipedia.org/wiki/Stakeholder_analysis',
       media: [
         {
@@ -326,6 +331,12 @@ const mindMapData = {
         domains: 'STEEP - Social, Technological, Economic, Environmental, Political'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Environmental_scanning',
+      relatedMethodologies: [
+        { id: 'stakeholder-analysis', type: 'complements', description: 'Stakeholder mapping identifies who to scan and which perspectives to monitor for emerging signals' },
+        { id: 'weak-signals', type: 'builds-on', description: 'Environmental scanning is the systematic process that detects weak signals across STEEP domains' },
+        { id: 'emerging-issues', type: 'complements', description: 'Scanning provides the raw data from which emerging issues are identified and analyzed' },
+        { id: 'scenario-planning', type: 'prerequisite', description: 'Scanning across multiple domains provides essential input for developing robust scenarios' }
+      ],
       media: [
         {
           type: 'video',
@@ -393,6 +404,12 @@ const mindMapData = {
         creator: 'Igor Ansoff (1975)'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Strategic_foresight#Weak_signals',
+      relatedMethodologies: [
+        { id: 'env-scanning', type: 'prerequisite', description: 'Environmental scanning provides the systematic process through which weak signals are detected across domains' },
+        { id: 'emerging-issues', type: 'builds-on', description: 'Weak signals evolve into emerging issues as they gain coherence and move through the issue lifecycle' },
+        { id: 'wild-cards', type: 'contrasts', description: 'Weak signals are subtle early indicators while wild cards are dramatic low-probability events with high impact' },
+        { id: 'scenario-planning', type: 'prerequisite', description: 'Detection of weak signals informs which uncertainties and discontinuities to explore in scenarios' }
+      ],
       media: [
         {
           type: 'video',
@@ -450,6 +467,12 @@ const mindMapData = {
         application: 'Monitor issue lifecycle to intervene at optimal time'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Emerging_issues_analysis',
+      relatedMethodologies: [
+        { id: 'env-scanning', type: 'prerequisite', description: 'Environmental scanning across STEEP domains provides the raw data from which emerging issues are identified' },
+        { id: 'weak-signals', type: 'prerequisite', description: 'Weak signals are the early indicators that coalesce into identifiable emerging issues over time' },
+        { id: 'scenario-planning', type: 'prerequisite', description: 'Emerging issues analysis identifies key uncertainties and driving forces to explore in scenario development' },
+        { id: 'strategic-issue-mgmt', type: 'builds-on', description: 'As emerging issues mature along the S-curve, they transition to strategic issue management for active response' }
+      ],
       media: [
         {
           type: 'video',
@@ -502,6 +525,12 @@ const mindMapData = {
         application: 'Analyze current issues across all three time scales to understand deeper forces'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Fernand_Braudel',
+      relatedMethodologies: [
+        { id: 'cycle-theory', type: 'complements', description: 'Macro-historical analysis examines deep structural time while cycle theory identifies recurring patterns within that timeframe' },
+        { id: 'cla', type: 'complements', description: 'Braudel\'s longue durée corresponds to CLA\'s worldview and myth layers, both revealing deep cultural structures' },
+        { id: 'scenario-planning', type: 'prerequisite', description: 'Understanding historical patterns across multiple time scales reveals which continuities and discontinuities to explore in scenarios' },
+        { id: 'emerging-issues', type: 'complements', description: 'Macro-historical perspective helps distinguish ephemeral issues from those connected to deep structural shifts' }
+      ],
       media: [
         {
           type: 'video',
@@ -564,6 +593,12 @@ const mindMapData = {
         application: 'Identify where we are in current cycles to anticipate transitions'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Kondratiev_wave',
+      relatedMethodologies: [
+        { id: 'macro-historical', type: 'complements', description: 'Cycle theory identifies recurring patterns within the deep structural timeframes revealed by macro-historical analysis' },
+        { id: 'scenario-planning', type: 'prerequisite', description: 'Understanding where we are in current cycles helps identify critical uncertainties and potential turning points for scenarios' },
+        { id: 'emerging-issues', type: 'complements', description: 'Cycle analysis helps determine which emerging issues signal transitions between eras versus normal cyclical fluctuations' },
+        { id: 'weak-signals', type: 'complements', description: 'Early indicators of cycle transitions often appear first as weak signals before becoming mainstream trends' }
+      ],
       media: [
         {
           type: 'video',
@@ -689,6 +724,12 @@ const mindMapData = {
         application: 'Deconstruct dominant narratives to reveal alternatives and empower marginalized voices'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Discourse_analysis',
+      relatedMethodologies: [
+        { id: 'cla', type: 'complements', description: 'Discourse analysis provides tools to examine CLA\'s third layer (discourse/worldview), revealing how language maintains specific futures' },
+        { id: 'scenario-planning', type: 'prerequisite', description: 'Analyzing dominant narratives and frames reveals hidden assumptions to challenge when developing alternative scenarios' },
+        { id: 'stakeholder-analysis', type: 'complements', description: 'Discourse analysis reveals power dynamics and whose voices shape organizational narratives about the future' },
+        { id: 'visioning', type: 'prerequisite', description: 'Deconstructing dominant discourses creates space for inclusive visioning that incorporates marginalized perspectives' }
+      ],
       media: [
         {
           type: 'video',
@@ -882,6 +923,12 @@ const mindMapData = {
         application: 'Include 1-2 wild card scenarios alongside plausible scenarios to stress-test strategies'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Wild_card_(foresight)',
+      relatedMethodologies: [
+        { id: 'weak-signals', type: 'contrasts', description: 'Weak signals are subtle early indicators requiring interpretation, while wild cards are dramatic discontinuities with immediate transformative impact' },
+        { id: 'scenario-planning', type: 'complements', description: 'Wild card scenarios complement plausible scenarios by stress-testing strategies against radical discontinuities and surprises' },
+        { id: 'env-scanning', type: 'prerequisite', description: 'Systematic environmental scanning can sometimes detect early signals of potential wild card events before they materialize' },
+        { id: 'backcasting', type: 'contrasts', description: 'Wild cards represent disruptive discontinuities while backcasting assumes ability to navigate smoothly toward preferred futures' }
+      ],
       media: [
         {
           type: 'video',
@@ -936,6 +983,12 @@ const mindMapData = {
         application: 'Generate comprehensive set of alternatives, discover non-obvious solutions'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Morphological_analysis_(problem-solving)',
+      relatedMethodologies: [
+        { id: 'scenario-planning', type: 'complements', description: 'Morphological analysis systematically explores all parameter combinations while scenario planning focuses on narratively coherent alternative futures' },
+        { id: 'cross-impact', type: 'complements', description: 'Morphological analysis generates comprehensive configuration spaces; cross-impact analysis evaluates how variables in those configurations interact' },
+        { id: 'delphi', type: 'complements', description: 'Morphological analysis creates exhaustive option sets; Delphi method builds expert consensus on which combinations are most plausible' },
+        { id: 'env-scanning', type: 'builds-on', description: 'Environmental scanning across STEEP domains identifies the key parameters and dimensions to include in morphological analysis' }
+      ],
       media: [
         {
           type: 'video',
@@ -1013,6 +1066,12 @@ const mindMapData = {
         ]
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Delphi_method',
+      relatedMethodologies: [
+        { id: 'scenario-planning', type: 'complements', description: 'Delphi builds expert consensus on most likely futures while scenario planning explores multiple divergent possibilities' },
+        { id: 'morphological', type: 'complements', description: 'Morphological analysis generates comprehensive option spaces; Delphi brings expert judgment to evaluate feasibility and likelihood' },
+        { id: 'stakeholder-analysis', type: 'prerequisite', description: 'Stakeholder mapping identifies which experts and knowledge holders to include in Delphi panels' },
+        { id: 'visioning', type: 'complements', description: 'Delphi method can build structured expert consensus on preferred futures and pathways to achieve collective visions' }
+      ],
       media: [
         {
           type: 'video',
@@ -1077,6 +1136,12 @@ const mindMapData = {
         application: 'Understand systemic effects and feedback loops between futures'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Cross-impact_analysis',
+      relatedMethodologies: [
+        { id: 'morphological', type: 'complements', description: 'Morphological analysis generates configuration spaces; cross-impact evaluates how components in those configurations interact and influence each other' },
+        { id: 'scenario-planning', type: 'complements', description: 'Cross-impact analysis reveals how drivers interact and cascade, helping assess scenario plausibility and internal coherence' },
+        { id: 'emerging-issues', type: 'builds-on', description: 'Cross-impact matrices show how emerging issues reinforce, dampen, or trigger cascades with other developments' },
+        { id: 'delphi', type: 'complements', description: 'Cross-impact provides systematic structure for interaction analysis; Delphi brings distributed expert judgment to assess impact strengths' }
+      ],
       media: [
         {
           type: 'video',
@@ -1150,6 +1215,12 @@ const mindMapData = {
         distinction: 'Normative futures work - not predicting, but choosing what we want'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Vision_statement',
+      relatedMethodologies: [
+        { id: 'backcasting', type: 'builds-on', description: 'Visioning articulates the desired future state; backcasting then works backward to identify pathways and milestones to achieve it' },
+        { id: 'stakeholder-analysis', type: 'prerequisite', description: 'Understanding diverse stakeholder perspectives ensures visioning processes are inclusive and incorporate marginalized voices' },
+        { id: 'discourse-analysis', type: 'prerequisite', description: 'Deconstructing dominant narratives creates space for participatory visioning that challenges existing power structures' },
+        { id: 'aspirational-futures', type: 'complements', description: 'Both methods focus on preferred futures, with visioning creating concrete images and aspirational futures exploring ideals and values' }
+      ],
       media: [
         {
           type: 'video',
@@ -1289,6 +1360,12 @@ const mindMapData = {
         application: 'Create dashboard for tracking and responding to strategic issues'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Strategic_management',
+      relatedMethodologies: [
+        { id: 'weak-signals', type: 'prerequisite', description: 'Strategic issue management\'s surveillance component systematically monitors for weak signals that indicate emerging issues' },
+        { id: 'emerging-issues', type: 'builds-on', description: 'As emerging issues mature along the S-curve, strategic issue management provides real-time response framework for action' },
+        { id: 'env-scanning', type: 'prerequisite', description: 'Environmental scanning across STEEP domains feeds the surveillance system with data about potential strategic issues' },
+        { id: 'scenario-planning', type: 'complements', description: 'Scenario planning prepares for multiple futures; strategic issue management responds to signals in real-time as they emerge' }
+      ],
       media: [
         {
           type: 'video',
@@ -1356,6 +1433,12 @@ const mindMapData = {
         philosophy: '"The best way to predict the future is to design it" - Buckminster Fuller'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Aspirational_reference_groups',
+      relatedMethodologies: [
+        { id: 'visioning', type: 'complements', description: 'Both create preferred futures, with visioning focusing on concrete images and aspirational futures on inspiring ideals and values' },
+        { id: 'backcasting', type: 'builds-on', description: 'Aspirational futures design articulates inspiring visions of abundance; backcasting then identifies concrete pathways to achieve them' },
+        { id: 'scenario-planning', type: 'contrasts', description: 'Scenario planning explores multiple plausible futures; aspirational futures design commits to creating specific preferred futures' },
+        { id: 'cla', type: 'complements', description: 'Aspirational futures work at CLA\'s deepest layer (myth/metaphor), reshaping cultural narratives from scarcity to abundance' }
+      ],
       media: [
         {
           type: 'video',
