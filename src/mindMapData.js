@@ -619,6 +619,11 @@ const mindMapData = {
         power: 'Reveals how deeper layers create surface problems, enabling transformative solutions'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Causal_layered_analysis',
+      relatedMethodologies: [
+        { id: 'scenario-planning', type: 'complements', description: 'CLA deepens scenario analysis by revealing underlying assumptions' },
+        { id: 'visioning', type: 'builds-on', description: 'CLA informs preferred futures by exposing hidden narratives' },
+        { id: 'futures-triangle', type: 'complements', description: 'Both map drivers - CLA goes deeper into cultural/mythic layers' }
+      ],
       media: [
         {
           type: 'video',
@@ -770,6 +775,12 @@ const mindMapData = {
         famousExample: 'Shell\'s scenarios helped them navigate 1973 oil crisis'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Scenario_planning',
+      relatedMethodologies: [
+        { id: 'cla', type: 'complements', description: 'CLA deepens scenario assumptions and worldviews' },
+        { id: 'delphi', type: 'builds-on', description: 'Delphi expert consensus informs scenario construction' },
+        { id: 'wild-cards', type: 'complements', description: 'Wild cards test scenario robustness and boundaries' },
+        { id: 'cross-impact', type: 'builds-on', description: 'Cross-impact analysis maps interconnections between scenario drivers' }
+      ],
       media: [
         {
           type: 'video',
@@ -1214,6 +1225,10 @@ const mindMapData = {
         famousExample: 'The Natural Step framework for sustainability'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Backcasting',
+      relatedMethodologies: [
+        { id: 'visioning', type: 'builds-on', description: 'Backcasting requires clear vision of preferred future as starting point' },
+        { id: 'scenarios', type: 'complements', description: 'Scenarios explore alternatives; backcasting maps pathway to chosen future' }
+      ],
       media: [
         {
           type: 'video',

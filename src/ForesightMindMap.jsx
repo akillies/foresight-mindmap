@@ -10,6 +10,7 @@ const ForesightMindMap = () => {
   const rendererRef = useRef(null);
   const nodesRef = useRef([]);
   const connectionsRef = useRef([]);
+  const crossPillarConnectionsRef = useRef([]);
   const raycasterRef = useRef(new THREE.Raycaster());
   const mouseRef = useRef(new THREE.Vector2());
   const isDraggingRef = useRef(false);
@@ -24,6 +25,7 @@ const ForesightMindMap = () => {
   const [imageError, setImageError] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [audioPreset, setAudioPreset] = useState(1);
+  const [showRelationships, setShowRelationships] = useState(false);
 
   // Ref to avoid stale closures in animation loop
   const hoveredNodeRef = useRef(null);
@@ -243,18 +245,22 @@ const ForesightMindMap = () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    // Enhanced graphics quality
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Lighting Setup
-    const ambientLight = new THREE.AmbientLight(0x404060, 0.4);
+    // Lighting Setup - Enhanced for better visibility
+    const ambientLight = new THREE.AmbientLight(0x505070, 0.7); // Brighter ambient (was 0x404060, 0.4)
     scene.add(ambientLight);
 
     const keyLight = new THREE.DirectionalLight(0x5C88DA, 1.2);
     keyLight.position.set(50, 50, 50);
     keyLight.castShadow = true;
-    keyLight.shadow.mapSize.width = 2048;
-    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.mapSize.width = 4096; // Higher quality shadows (was 2048)
+    keyLight.shadow.mapSize.height = 4096;
     scene.add(keyLight);
 
     const fillLight = new THREE.PointLight(0xFFCC66, 0.8, 100);
@@ -296,6 +302,18 @@ const ForesightMindMap = () => {
         // Reset scale for non-hovered nodes
         if (!node.isHovered && node.scale.x > 1.0) {
           node.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
+        }
+      });
+
+      // Animate connections based on selection
+      connectionsRef.current.forEach((conn) => {
+        const { parentId, childId, baseOpacity } = conn.userData;
+        const isRelated = selectedNode && (selectedNode.id === parentId || selectedNode.id === childId);
+        const targetOpacity = isRelated ? 0.7 : (baseOpacity || 0.3);
+
+        // Smooth lerp to target opacity
+        if (conn.material.opacity !== targetOpacity) {
+          conn.material.opacity += (targetOpacity - conn.material.opacity) * 0.1;
         }
       });
 
@@ -467,11 +485,12 @@ const ForesightMindMap = () => {
   const createCenterNode = (scene) => {
     const { center } = mindMapData;
     const geometry = new THREE.SphereGeometry(2.0, 32, 32);
-    const material = new THREE.MeshPhongMaterial({
+    const material = new THREE.MeshStandardMaterial({
       color: new THREE.Color(center.color),
       emissive: new THREE.Color(center.color),
       emissiveIntensity: 0.3,
-      shininess: 100,
+      roughness: 0.3,
+      metalness: 0.2,
       transparent: true,
       opacity: 0.9,
     });
@@ -512,11 +531,12 @@ const ForesightMindMap = () => {
       const y = 0;
 
       const geometry = new THREE.SphereGeometry(1.5, 32, 32);
-      const material = new THREE.MeshPhongMaterial({
+      const material = new THREE.MeshStandardMaterial({
         color: new THREE.Color(pillar.color),
         emissive: new THREE.Color(pillar.color),
         emissiveIntensity: 0.3,
-        shininess: 80,
+        roughness: 0.35,
+        metalness: 0.15,
         transparent: true,
         opacity: 0.9,
       });
@@ -544,7 +564,7 @@ const ForesightMindMap = () => {
       nodesRef.current.push(sphere);
 
       // Create connection to center
-      createConnection(scene, new THREE.Vector3(0, 0, 0), new THREE.Vector3(x, y, z), pillar.color);
+      createConnection(scene, new THREE.Vector3(0, 0, 0), new THREE.Vector3(x, y, z), pillar.color, 0.3, 'strategic-foresight', pillar.id);
     });
   };
 
@@ -573,11 +593,12 @@ const ForesightMindMap = () => {
       const y = parentPos.y;
 
       const geometry = new THREE.SphereGeometry(1.2, 32, 32);
-      const material = new THREE.MeshPhongMaterial({
+      const material = new THREE.MeshStandardMaterial({
         color: new THREE.Color(child.color),
         emissive: new THREE.Color(child.color),
         emissiveIntensity: 0.3,
-        shininess: 80,
+        roughness: 0.4,
+        metalness: 0.1,
         transparent: true,
         opacity: 0.9,
       });
@@ -605,7 +626,7 @@ const ForesightMindMap = () => {
       nodesRef.current.push(sphere);
 
       // Create connection to parent
-      createConnection(scene, parentPos, new THREE.Vector3(x, y, z), child.color);
+      createConnection(scene, parentPos, new THREE.Vector3(x, y, z), child.color, 0.3, parent.id, child.id);
     });
   };
 
@@ -633,11 +654,12 @@ const ForesightMindMap = () => {
 
       const mediaColor = MEDIA_COLORS[mediaItem.type] || COLORS.primary;
       const geometry = new THREE.SphereGeometry(0.8, 16, 16);
-      const material = new THREE.MeshPhongMaterial({
+      const material = new THREE.MeshStandardMaterial({
         color: new THREE.Color(mediaColor),
         emissive: new THREE.Color(mediaColor),
         emissiveIntensity: 0.4,
-        shininess: 100,
+        roughness: 0.25,
+        metalness: 0.3,
         transparent: true,
         opacity: 0.85,
       });
@@ -670,7 +692,7 @@ const ForesightMindMap = () => {
       nodesRef.current.push(sphere);
 
       // Create connection to parent
-      createConnection(scene, parentPos, new THREE.Vector3(x, y, z), mediaColor, 0.2);
+      createConnection(scene, parentPos, new THREE.Vector3(x, y, z), mediaColor, 0.2, parent.id, mediaId);
     });
   };
 
@@ -707,7 +729,7 @@ const ForesightMindMap = () => {
   };
 
   // Create Connection (curved line between nodes)
-  const createConnection = (scene, start, end, color, opacity = 0.3) => {
+  const createConnection = (scene, start, end, color, opacity = 0.3, parentId = null, childId = null) => {
     const midPoint = new THREE.Vector3(
       (start.x + end.x) / 2,
       (start.y + end.y) / 2 + 5,
@@ -724,7 +746,14 @@ const ForesightMindMap = () => {
     });
 
     const line = new THREE.Line(geometry, material);
-    line.userData = { startPos: start, endPos: end };
+    line.userData = {
+      startPos: start,
+      endPos: end,
+      parentId,
+      childId,
+      baseOpacity: opacity,
+      baseColor: color
+    };
     scene.add(line);
     connectionsRef.current.push(line);
   };
