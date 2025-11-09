@@ -197,6 +197,14 @@ const mindMapData = {
         creator: 'Sohail Inayatullah'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Strategic_foresight#Futures_Triangle',
+      metadata: {
+        difficulty: 'beginner',
+        timeRequired: '2-4 hours',
+        groupSize: 'small-large groups (5-30 people)',
+        bestFor: ['Quick situation analysis', 'Identifying strategic tensions', 'Workshop warm-up exercise', 'Clarifying competing forces'],
+        sectors: ['Government policy', 'Corporate strategy', 'NGO planning', 'Community development'],
+        commonPitfalls: ['Superficial identification of forces without deep analysis', 'Treating categories as silos rather than dynamic tensions', 'Focusing only on barriers (weight) while ignoring vision (pull)', 'Not updating triangle as situation evolves']
+      },
       media: [
         {
           type: 'video',
@@ -258,6 +266,14 @@ const mindMapData = {
         { id: 'visioning', type: 'prerequisite', description: 'Understanding stakeholder perspectives is essential before creating inclusive preferred futures' }
       ],
       wikipedia: 'https://en.wikipedia.org/wiki/Stakeholder_analysis',
+      metadata: {
+        difficulty: 'beginner',
+        timeRequired: '4-8 hours',
+        groupSize: 'small groups (3-8 people) or facilitated workshops',
+        bestFor: ['Mapping power dynamics', 'Identifying key influencers', 'Participatory planning', 'Conflict analysis'],
+        sectors: ['Public policy', 'Corporate strategy', 'Community development', 'Infrastructure projects'],
+        commonPitfalls: ['Mapping only obvious stakeholders, missing hidden influencers', 'Static analysis that doesn\'t track changing positions', 'Confusing stated positions with underlying interests', 'Not distinguishing between power, legitimacy, and urgency']
+      },
       media: [
         {
           type: 'image',
@@ -337,6 +353,14 @@ const mindMapData = {
         { id: 'emerging-issues', type: 'complements', description: 'Scanning provides the raw data from which emerging issues are identified and analyzed' },
         { id: 'scenario-planning', type: 'prerequisite', description: 'Scanning across multiple domains provides essential input for developing robust scenarios' }
       ],
+      metadata: {
+        difficulty: 'beginner',
+        timeRequired: 'Ongoing (30 min-2 hours daily)',
+        groupSize: 'individual or small teams (2-5 people)',
+        bestFor: ['Horizon scanning', 'Early warning systems', 'Strategic intelligence', 'Trend monitoring'],
+        sectors: ['Government intelligence', 'Corporate foresight', 'Defense', 'Technology forecasting'],
+        commonPitfalls: ['Information overload without filtering', 'Scanning only familiar sources', 'Passive collection without analysis', 'Siloed scanning without STEEP integration']
+      },
       media: [
         {
           type: 'video',
@@ -410,6 +434,14 @@ const mindMapData = {
         { id: 'wild-cards', type: 'contrasts', description: 'Weak signals are subtle early indicators while wild cards are dramatic low-probability events with high impact' },
         { id: 'scenario-planning', type: 'prerequisite', description: 'Detection of weak signals informs which uncertainties and discontinuities to explore in scenarios' }
       ],
+      metadata: {
+        difficulty: 'intermediate',
+        timeRequired: '4-8 hours initial + ongoing monitoring',
+        groupSize: 'small groups (3-6 people) with diverse perspectives',
+        bestFor: ['Detecting early change signals', 'Strategic surprise preparedness', 'Anticipatory intelligence', 'Innovation scouting'],
+        sectors: ['Technology forecasting', 'Defense intelligence', 'Corporate strategy', 'Policy planning'],
+        commonPitfalls: ['Dismissing signals as noise too quickly', 'Confirmation bias - seeing only expected signals', 'Not connecting signals across domains', 'Waiting for signals to strengthen before acting']
+      },
       media: [
         {
           type: 'video',
@@ -473,6 +505,14 @@ const mindMapData = {
         { id: 'scenario-planning', type: 'prerequisite', description: 'Emerging issues analysis identifies key uncertainties and driving forces to explore in scenario development' },
         { id: 'strategic-issue-mgmt', type: 'builds-on', description: 'As emerging issues mature along the S-curve, they transition to strategic issue management for active response' }
       ],
+      metadata: {
+        difficulty: 'intermediate',
+        timeRequired: '1-2 days for initial analysis',
+        groupSize: 'small expert teams (4-8 people)',
+        bestFor: ['Issue lifecycle tracking', 'S-curve analysis', 'Policy anticipation', 'Trend maturation assessment'],
+        sectors: ['Public policy', 'Regulatory affairs', 'Public health', 'Technology assessment'],
+        commonPitfalls: ['Mistaking fads for emerging issues', 'Not tracking issue evolution over time', 'Missing tipping points in lifecycle', 'Intervening too early or too late']
+      },
       media: [
         {
           type: 'video',
