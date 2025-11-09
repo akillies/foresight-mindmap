@@ -1852,7 +1852,7 @@ const ForesightMindMap = () => {
 
             {selectedMedia.type === 'video' && (
               <div>
-                <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '15px' }}>
+                <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '20px' }}>
                   <iframe
                     src={`https://www.youtube.com/embed/${selectedMedia.url.split('v=')[1]?.split('&')[0] || selectedMedia.url.split('/').pop()}?origin=${window.location.origin}`}
                     frameBorder="0"
@@ -1868,56 +1868,123 @@ const ForesightMindMap = () => {
                     }}
                   ></iframe>
                 </div>
-                <a
-                  href={selectedMedia.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-block',
-                    padding: '10px 20px',
-                    background: MEDIA_COLORS.video,
-                    color: '#000',
-                    textDecoration: 'none',
-                    borderRadius: '8px',
-                    fontSize: '13px',
-                    fontWeight: '600',
-                    transition: 'all 0.2s',
-                    fontFamily: 'Inter',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = 'scale(1.05)';
-                    e.target.style.boxShadow = `0 4px 12px ${MEDIA_COLORS.video}60`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = 'scale(1)';
-                    e.target.style.boxShadow = 'none';
-                  }}
-                >
-                  ▶ Open in YouTube
-                </a>
+
+                {/* Reference Footer */}
+                <div style={{
+                  borderTop: `1px solid ${MEDIA_COLORS.video}40`,
+                  paddingTop: '15px',
+                  marginTop: '15px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  fontFamily: 'monospace'
+                }}>
+                  <div style={{ fontSize: '10px', letterSpacing: '1px', color: '#666', fontWeight: '600' }}>
+                    SOURCE: <span style={{ color: MEDIA_COLORS.video }}>{selectedMedia.source || 'YouTube'}</span>
+                  </div>
+                  <a
+                    href={selectedMedia.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '8px 16px',
+                      background: `${MEDIA_COLORS.video}15`,
+                      border: `1px solid ${MEDIA_COLORS.video}`,
+                      color: MEDIA_COLORS.video,
+                      textDecoration: 'none',
+                      borderRadius: '6px',
+                      fontSize: '11px',
+                      fontWeight: '700',
+                      letterSpacing: '1px',
+                      transition: 'all 0.2s',
+                      fontFamily: 'monospace',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = MEDIA_COLORS.video;
+                      e.target.style.color = '#000';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = `${MEDIA_COLORS.video}15`;
+                      e.target.style.color = MEDIA_COLORS.video;
+                    }}
+                  >
+                    VIEW ORIGINAL →
+                  </a>
+                </div>
               </div>
             )}
 
             {selectedMedia.type === 'image' && (
               <div>
                 {!imageError ? (
-                  <img
-                    src={selectedMedia.url}
-                    alt={selectedMedia.title}
-                    onError={() => setImageError(true)}
-                    style={{
-                      maxWidth: '100%',
-                      maxHeight: '60vh',
-                      height: 'auto',
-                      borderRadius: '8px',
-                      display: 'block',
-                      margin: '0 auto',
-                      border: '2px solid rgba(92, 136, 218, 0.3)',
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      padding: '4px',
-                    }}
-                  />
+                  <div>
+                    <img
+                      src={selectedMedia.url}
+                      alt={selectedMedia.title}
+                      onError={() => setImageError(true)}
+                      style={{
+                        maxWidth: '100%',
+                        maxHeight: '60vh',
+                        height: 'auto',
+                        borderRadius: '8px',
+                        display: 'block',
+                        margin: '0 auto 20px',
+                        border: '2px solid rgba(92, 136, 218, 0.3)',
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                        background: 'rgba(255, 255, 255, 0.02)',
+                        padding: '4px',
+                      }}
+                    />
+
+                    {/* Reference Footer */}
+                    <div style={{
+                      borderTop: `1px solid ${MEDIA_COLORS.image}40`,
+                      paddingTop: '15px',
+                      marginTop: '15px',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      fontFamily: 'monospace'
+                    }}>
+                      <div style={{ fontSize: '10px', letterSpacing: '1px', color: '#666', fontWeight: '600' }}>
+                        SOURCE: <span style={{ color: MEDIA_COLORS.image }}>{selectedMedia.source || new URL(selectedMedia.url).hostname.replace('www.', '').toUpperCase()}</span>
+                      </div>
+                      <a
+                        href={selectedMedia.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          padding: '8px 16px',
+                          background: `${MEDIA_COLORS.image}15`,
+                          border: `1px solid ${MEDIA_COLORS.image}`,
+                          color: MEDIA_COLORS.image,
+                          textDecoration: 'none',
+                          borderRadius: '6px',
+                          fontSize: '11px',
+                          fontWeight: '700',
+                          letterSpacing: '1px',
+                          transition: 'all 0.2s',
+                          fontFamily: 'monospace',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.background = MEDIA_COLORS.image;
+                          e.target.style.color = '#000';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.background = `${MEDIA_COLORS.image}15`;
+                          e.target.style.color = MEDIA_COLORS.image;
+                        }}
+                      >
+                        VIEW ORIGINAL →
+                      </a>
+                    </div>
+                  </div>
                 ) : (
                   <div style={{
                     background: 'rgba(92, 136, 218, 0.1)',
@@ -1972,24 +2039,75 @@ const ForesightMindMap = () => {
             )}
 
             {(selectedMedia.type === 'article' || selectedMedia.type === 'document') && (
-              <a
-                href={selectedMedia.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-block',
-                  padding: '16px 32px',
-                  background: MEDIA_COLORS[selectedMedia.type],
-                  color: '#000',
-                  textDecoration: 'none',
-                  borderRadius: '8px',
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  marginTop: '10px',
-                }}
-              >
-                {selectedMedia.type === 'article' ? 'Read Article' : 'View Document'}
-              </a>
+              <div>
+                {/* Preview Box */}
+                <div style={{
+                  background: `${MEDIA_COLORS[selectedMedia.type]}08`,
+                  border: `2px dashed ${MEDIA_COLORS[selectedMedia.type]}40`,
+                  borderRadius: '12px',
+                  padding: '30px',
+                  textAlign: 'center',
+                  marginBottom: '20px'
+                }}>
+                  <div style={{ fontSize: '48px', marginBottom: '15px', opacity: 0.6 }}>
+                    {selectedMedia.type === 'article' ? '📄' : '📚'}
+                  </div>
+                  <div style={{
+                    fontSize: '14px',
+                    color: '#b8c5d8',
+                    lineHeight: '1.6',
+                    fontFamily: 'Inter'
+                  }}>
+                    Click "View Original" below to read the full {selectedMedia.type}
+                  </div>
+                </div>
+
+                {/* Reference Footer */}
+                <div style={{
+                  borderTop: `1px solid ${MEDIA_COLORS[selectedMedia.type]}40`,
+                  paddingTop: '15px',
+                  marginTop: '15px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  fontFamily: 'monospace'
+                }}>
+                  <div style={{ fontSize: '10px', letterSpacing: '1px', color: '#666', fontWeight: '600' }}>
+                    SOURCE: <span style={{ color: MEDIA_COLORS[selectedMedia.type] }}>{selectedMedia.source || new URL(selectedMedia.url).hostname.replace('www.', '').toUpperCase()}</span>
+                  </div>
+                  <a
+                    href={selectedMedia.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '8px 16px',
+                      background: `${MEDIA_COLORS[selectedMedia.type]}15`,
+                      border: `1px solid ${MEDIA_COLORS[selectedMedia.type]}`,
+                      color: MEDIA_COLORS[selectedMedia.type],
+                      textDecoration: 'none',
+                      borderRadius: '6px',
+                      fontSize: '11px',
+                      fontWeight: '700',
+                      letterSpacing: '1px',
+                      transition: 'all 0.2s',
+                      fontFamily: 'monospace',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = MEDIA_COLORS[selectedMedia.type];
+                      e.target.style.color = '#000';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = `${MEDIA_COLORS[selectedMedia.type]}15`;
+                      e.target.style.color = MEDIA_COLORS[selectedMedia.type];
+                    }}
+                  >
+                    VIEW ORIGINAL →
+                  </a>
+                </div>
+              </div>
             )}
           </div>
         </div>
