@@ -170,6 +170,16 @@ const mindMapData = {
       description: 'Three-force analysis framework for understanding plausibility',
       color: '#5C88DA',
       level: 2,
+      yearIntroduced: 2008,
+      pioneers: [
+        {
+          name: 'Sohail Inayatullah',
+          role: 'Creator',
+          organization: 'UNESCO Chair in Futures Studies',
+          contribution: 'Developed three-force framework for analyzing futures plausibility'
+        }
+      ],
+      historicalContext: 'Created as part of Inayatullah\'s broader Six Pillars framework to provide a simple yet powerful tool for mapping tensions between aspirations, trends, and barriers.',
       details: {
         overview: 'The Futures Triangle analyzes the interplay of three fundamental forces that determine which futures are plausible.',
         components: [
@@ -204,6 +214,22 @@ const mindMapData = {
       description: 'Identifying and mapping diverse perspectives and power dynamics',
       color: '#5C88DA',
       level: 2,
+      yearIntroduced: 1963,
+      pioneers: [
+        {
+          name: 'R. Edward Freeman',
+          role: 'Formalized for strategic management',
+          organization: 'Stanford Research Institute',
+          contribution: 'Developed stakeholder theory in strategic management context'
+        },
+        {
+          name: 'Eric Trist',
+          role: 'Applied to organizational planning',
+          organization: 'Tavistock Institute',
+          contribution: 'Socio-technical systems approach to stakeholder engagement'
+        }
+      ],
+      historicalContext: 'Emerged from organizational theory and strategic management in the 1960s, later adapted for futures work to map competing visions and power dynamics.',
       details: {
         overview: 'Understanding different stakeholders\' views of the future reveals competing visions and power dynamics that shape which futures emerge.',
         components: [
@@ -240,6 +266,22 @@ const mindMapData = {
       description: 'Systematic exploration across STEEP domains',
       color: '#FFCC66',
       level: 2,
+      yearIntroduced: 1967,
+      pioneers: [
+        {
+          name: 'Francis Joseph Aguilar',
+          role: 'Creator',
+          organization: 'Harvard Business School',
+          contribution: 'First systematic framework for environmental scanning (ETPS model)'
+        },
+        {
+          name: 'Chun Wei Choo',
+          role: 'Formalized scanning modes',
+          organization: 'University of Toronto',
+          contribution: 'Four Modes of Scanning framework (1999)'
+        }
+      ],
+      historicalContext: 'Introduced by Aguilar in 1967 as a method for identifying external factors affecting organizations. Choo formalized scanning modes in 1999, creating systematic approach for futures work.',
       details: {
         overview: 'Systematic monitoring of the external environment to identify signals of change across Social, Technological, Economic, Environmental, and Political domains.',
         modes: [
@@ -282,6 +324,16 @@ const mindMapData = {
       description: 'Early indicators of discontinuities and emerging change',
       color: '#FFCC66',
       level: 2,
+      yearIntroduced: 1975,
+      pioneers: [
+        {
+          name: 'Igor Ansoff',
+          role: 'Creator',
+          organization: 'Strategic Management',
+          contribution: 'Developed weak signals concept to detect strategic surprises early'
+        }
+      ],
+      historicalContext: 'Introduced by Ansoff in 1975 as response to strategic surprises facing organizations. Refined in 1980s to distinguish between weak signals and strong signals, becoming core method for anticipatory intelligence.',
       details: {
         overview: 'Weak signals are early, often ambiguous indicators of potentially significant change. They are easy to dismiss but can be harbingers of major discontinuities.',
         types: [
@@ -321,6 +373,22 @@ const mindMapData = {
       description: 'Identifying issues before they mature into major trends',
       color: '#FFCC66',
       level: 2,
+      yearIntroduced: 1977,
+      pioneers: [
+        {
+          name: 'Graham Molitor',
+          role: 'Pioneer',
+          organization: 'Public Policy Forecasting',
+          contribution: 'Developed issues lifecycle model and S-curve analysis'
+        },
+        {
+          name: 'Joseph Coates',
+          role: 'Formalized methodology',
+          organization: 'Coates & Jarratt Inc.',
+          contribution: 'Structured approach to identifying and analyzing emerging issues'
+        }
+      ],
+      historicalContext: 'Developed in late 1970s to track how issues evolve from fringe concerns to mainstream trends. Built on weak signals concept but added lifecycle perspective.',
       details: {
         overview: 'Emerging Issues Analysis tracks issues through their lifecycle—from weak signals to trends to mainstream concerns—allowing early response.',
         stages: [
@@ -357,6 +425,16 @@ const mindMapData = {
       description: 'Understanding change across micro, meso, and macro time scales',
       color: '#CC99CC',
       level: 2,
+      yearIntroduced: 1958,
+      pioneers: [
+        {
+          name: 'Fernand Braudel',
+          role: 'Creator',
+          organization: 'Annales School of History',
+          contribution: 'Developed three-tiered temporal framework - longue durée concept'
+        }
+      ],
+      historicalContext: 'Published in 1958 essay "Histoire et Sciences sociales: La longue durée" in Annales journal. Revolutionized historical thinking by distinguishing between event-driven history and deep structural changes.',
       details: {
         overview: 'Fernand Braudel\'s framework examines history at three time scales, revealing how deep structures shape surface events.',
         timeScales: [
@@ -398,6 +476,22 @@ const mindMapData = {
       description: 'Kondratiev waves, generational cycles, and long-term patterns',
       color: '#CC99CC',
       level: 2,
+      yearIntroduced: 1925,
+      pioneers: [
+        {
+          name: 'Nikolai Kondratiev',
+          role: 'Creator',
+          organization: 'Soviet economist',
+          contribution: 'Identified 40-60 year economic waves (K-waves)'
+        },
+        {
+          name: 'William Strauss & Neil Howe',
+          role: 'Generational theory',
+          organization: 'Independent researchers',
+          contribution: 'Developed generational cycle theory (1991)'
+        }
+      ],
+      historicalContext: 'Kondratiev waves identified in 1925, showing long-term economic cycles. Later expanded to include generational cycles (Strauss-Howe, 1991) and technology adoption patterns.',
       details: {
         overview: 'Various theories propose that social, economic, and technological change follows cyclical patterns. Understanding these can help anticipate turning points.',
         types: [
@@ -440,6 +534,16 @@ const mindMapData = {
       description: 'Four-layer deconstruction from litany to myth',
       color: '#FF9966',
       level: 2,
+      yearIntroduced: 1998,
+      pioneers: [
+        {
+          name: 'Sohail Inayatullah',
+          role: 'Creator',
+          organization: 'UNESCO Chair in Futures Studies',
+          contribution: 'Developed four-layer framework integrating poststructuralism with futures methods'
+        }
+      ],
+      historicalContext: 'Published in 1998 Futures journal article "Causal Layered Analysis: Poststructuralism as Method". Drew on Foucault, Sarkar, and critical theory to create transformative futures methodology.',
       details: {
         overview: 'CLA is a powerful method for deconstructing problems across four layers of depth—from surface symptoms to deep unconscious narratives.',
         layers: [
@@ -490,6 +594,22 @@ const mindMapData = {
       description: 'Examining language, power structures, and narrative frames',
       color: '#FF9966',
       level: 2,
+      yearIntroduced: 1969,
+      pioneers: [
+        {
+          name: 'Michel Foucault',
+          role: 'Theoretical foundation',
+          organization: 'Collège de France',
+          contribution: 'Power/knowledge framework - how discourse shapes reality'
+        },
+        {
+          name: 'Norman Fairclough',
+          role: 'Applied methodology',
+          organization: 'Lancaster University',
+          contribution: 'Critical discourse analysis framework (1989)'
+        }
+      ],
+      historicalContext: 'Foucault\'s "Archaeology of Knowledge" (1969) established theoretical foundation. Applied to futures in 1980s-90s to examine how language frames possible futures and maintains power structures.',
       details: {
         overview: 'Discourse analysis examines how language shapes reality, maintains power structures, and frames what futures are thinkable.',
         focus: [
@@ -528,6 +648,28 @@ const mindMapData = {
       description: 'Developing multiple plausible futures across key uncertainties',
       color: '#99CC99',
       level: 2,
+      yearIntroduced: 1950,
+      pioneers: [
+        {
+          name: 'Herman Kahn',
+          role: 'Founder',
+          organization: 'RAND Corporation',
+          contribution: 'Pioneered scenario thinking for military strategy during Cold War'
+        },
+        {
+          name: 'Pierre Wack',
+          role: 'Corporate pioneer',
+          organization: 'Shell Group Planning',
+          contribution: 'Applied scenarios to business planning, predicted 1973 oil crisis'
+        },
+        {
+          name: 'Peter Schwartz',
+          role: 'Popularizer',
+          organization: 'Global Business Network',
+          contribution: 'Commercialized scenarios, wrote "The Art of the Long View" (1991)'
+        }
+      ],
+      historicalContext: 'Originated at RAND in 1950s for nuclear war planning. Shell\'s Pierre Wack adapted for business (1970s), validating approach by preparing Shell for 1973 oil shock. GBN (1987) brought scenarios to mainstream.',
       details: {
         overview: 'Scenario planning creates multiple plausible futures to challenge assumptions and prepare for various possibilities. Pioneered at RAND and refined at Shell.',
         types: [
@@ -591,6 +733,22 @@ const mindMapData = {
       description: 'Low-probability, high-impact events and discontinuities',
       color: '#99CC99',
       level: 2,
+      yearIntroduced: 2001,
+      pioneers: [
+        {
+          name: 'John Petersen',
+          role: 'Formalized concept',
+          organization: 'Arlington Institute',
+          contribution: 'Systematized wild card thinking for strategic planning'
+        },
+        {
+          name: 'Nassim Nicholas Taleb',
+          role: 'Popularized as "Black Swans"',
+          organization: 'Independent scholar',
+          contribution: 'The Black Swan: Impact of highly improbable events (2007)'
+        }
+      ],
+      historicalContext: 'Formalized as futures methodology in early 2000s. Taleb\'s "Black Swan" (2007) brought concept to mainstream, showing how rare events shape history more than gradual trends.',
       details: {
         overview: 'Wild cards are surprising events with low probability but potentially transformative impact. Thinking through wild cards helps organizations prepare for radical discontinuities.',
         characteristics: [
@@ -632,6 +790,16 @@ const mindMapData = {
       description: 'Exploring solution spaces through parameter combinations',
       color: '#99CC99',
       level: 2,
+      yearIntroduced: 1948,
+      pioneers: [
+        {
+          name: 'Fritz Zwicky',
+          role: 'Creator',
+          organization: 'California Institute of Technology',
+          contribution: 'Developed morphological analysis for systematic problem-solving'
+        }
+      ],
+      historicalContext: 'Created by astrophysicist Zwicky at Caltech in 1930s-1940s, formalized in 1948 book "Morphological Astronomy". Applied to jet engines, leading to over 40 patents. Later adapted for futures and policy analysis.',
       details: {
         overview: 'Fritz Zwicky\'s method for systematically exploring all possible combinations of parameters to discover novel solutions.',
         process: [
@@ -678,6 +846,28 @@ const mindMapData = {
       description: 'Structured expert consensus building through iterative rounds',
       color: '#99CC99',
       level: 2,
+      yearIntroduced: 1950,
+      pioneers: [
+        {
+          name: 'Olaf Helmer',
+          role: 'Co-creator',
+          organization: 'RAND Corporation',
+          contribution: 'Developed iterative expert consensus methodology'
+        },
+        {
+          name: 'Norman Dalkey',
+          role: 'Co-creator',
+          organization: 'RAND Corporation',
+          contribution: 'Designed anonymous feedback mechanism'
+        },
+        {
+          name: 'Nicholas Rescher',
+          role: 'Formalized logic',
+          organization: 'RAND Corporation',
+          contribution: 'Philosophical foundations for expert forecasting'
+        }
+      ],
+      historicalContext: 'Developed at RAND in 1950-1960s for Cold War defense forecasting. Named after Oracle of Delphi. Kept secret until 1960s, then widely adopted for technology forecasting and policy planning.',
       details: {
         overview: 'The Delphi Method systematically gathers expert judgments through multiple rounds of questionnaires, with controlled feedback, to build consensus forecasts.',
         process: [
@@ -725,6 +915,22 @@ const mindMapData = {
       description: 'Analyzing how events and trends influence each other',
       color: '#99CC99',
       level: 2,
+      yearIntroduced: 1966,
+      pioneers: [
+        {
+          name: 'Theodore Gordon',
+          role: 'Creator',
+          organization: 'RAND Corporation',
+          contribution: 'Developed cross-impact matrix methodology'
+        },
+        {
+          name: 'Olaf Helmer',
+          role: 'Co-developer',
+          organization: 'Institute for the Future',
+          contribution: 'Applied to technology forecasting'
+        }
+      ],
+      historicalContext: 'Developed at RAND in 1966 to overcome limitations of single-trend forecasting. Recognized that events don\'t occur in isolation but influence each other in complex ways.',
       details: {
         overview: 'Cross-Impact Analysis examines how different trends, events, or scenarios might interact and influence each other\'s likelihood and impact.',
         process: [
@@ -762,6 +968,22 @@ const mindMapData = {
       description: 'Articulating compelling images of preferred futures',
       color: '#FF6B9D',
       level: 2,
+      yearIntroduced: 1987,
+      pioneers: [
+        {
+          name: 'Warren Ziegler',
+          role: 'Formalized participatory visioning',
+          organization: 'Denver Delphi Project',
+          contribution: 'Developed participatory methods for collective visioning'
+        },
+        {
+          name: 'Elise Boulding',
+          role: 'Imaging workshops',
+          organization: 'Peace research',
+          contribution: 'Created "Imaging a World Without Weapons" workshop method (1980s)'
+        }
+      ],
+      historicalContext: 'Formalized as futures methodology in 1980s. Ziegler\'s participatory approach and Boulding\'s imaging workshops established visioning as democratic alternative to expert-driven forecasting.',
       details: {
         overview: 'Visioning creates vivid, detailed descriptions of desired future states that inspire action and guide decision-making.',
         components: [
@@ -798,6 +1020,22 @@ const mindMapData = {
       description: 'Working backwards from preferred future to identify pathways',
       color: '#FF6B9D',
       level: 2,
+      yearIntroduced: 1982,
+      pioneers: [
+        {
+          name: 'John Robinson',
+          role: 'Creator',
+          organization: 'University of Waterloo',
+          contribution: 'Developed backcasting for energy policy and sustainability planning'
+        },
+        {
+          name: 'Karl-Henrik Robèrt',
+          role: 'Applied to sustainability',
+          organization: 'The Natural Step',
+          contribution: 'Created Natural Step framework using backcasting (1989)'
+        }
+      ],
+      historicalContext: 'Robinson developed backcasting in 1982 for Canadian energy futures, recognizing forecasting couldn\'t address radical sustainability goals. Natural Step (1989) popularized approach globally.',
       details: {
         overview: 'Backcasting starts with a desired future and works backward to identify the steps needed to reach it. Essential when trend-break is required.',
         process: [
@@ -850,6 +1088,16 @@ const mindMapData = {
       description: 'Real-time response system for emerging opportunities and threats',
       color: '#FF6B9D',
       level: 2,
+      yearIntroduced: 1980,
+      pioneers: [
+        {
+          name: 'Igor Ansoff',
+          role: 'Creator',
+          organization: 'Strategic Management',
+          contribution: 'Developed real-time response framework for strategic surprises'
+        }
+      ],
+      historicalContext: 'Published in 1980 book "Strategic Issue Management". Built on his earlier weak signals work (1975), creating complete system for detecting, assessing, and responding to strategic discontinuities in real-time.',
       details: {
         overview: 'Igor Ansoff\'s framework for detecting and responding to strategic issues in real-time, balancing efficiency with flexibility.',
         components: [
