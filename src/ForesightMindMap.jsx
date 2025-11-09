@@ -1048,7 +1048,13 @@ const ForesightMindMap = () => {
               ×
             </button>
 
-            <h2 style={{ color: MEDIA_COLORS[selectedMedia.type], marginBottom: '10px', fontFamily: 'Inter' }}>
+            <h2 style={{
+              color: MEDIA_COLORS[selectedMedia.type],
+              marginTop: '0',
+              marginBottom: '10px',
+              paddingRight: '60px',
+              fontFamily: 'Inter'
+            }}>
               {selectedMedia.title}
             </h2>
 
@@ -1098,9 +1104,15 @@ const ForesightMindMap = () => {
                 alt={selectedMedia.title}
                 style={{
                   maxWidth: '100%',
+                  maxHeight: '60vh',
                   height: 'auto',
                   borderRadius: '8px',
                   display: 'block',
+                  margin: '0 auto',
+                  border: '2px solid rgba(92, 136, 218, 0.3)',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                  background: 'rgba(255, 255, 255, 0.02)',
+                  padding: '4px',
                 }}
               />
             )}

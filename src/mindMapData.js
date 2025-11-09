@@ -204,6 +204,12 @@ const mindMapData = {
           title: 'Futures Triangle Diagram',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Futures_Triangle.svg/800px-Futures_Triangle.svg.png',
           description: 'Visual framework showing the three forces'
+        },
+        {
+          type: 'image',
+          title: 'UNESCO Logo',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/UNESCO_logo.svg',
+          description: 'UNESCO Chair in Futures Studies - Sohail Inayatullah developed Futures Triangle as UNESCO Chair holder'
         }
       ]
     },
@@ -314,6 +320,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Environmental_scanning',
           source: 'Wikipedia',
           description: 'Choo\'s framework for different scanning approaches'
+        },
+        {
+          type: 'image',
+          title: 'Harvard Business School Baker Library',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/c/c9/Harvard_business_school_baker_library_2009a.JPG',
+          description: 'Baker Library at Harvard Business School, where Francis Aguilar developed environmental scanning framework (1967)'
         }
       ]
     },
@@ -363,6 +375,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Strategic_foresight',
           source: 'Wikipedia',
           description: 'Understanding weak signal detection'
+        },
+        {
+          type: 'image',
+          title: 'Igor Ansoff Portrait',
+          url: 'https://commons.wikimedia.org/wiki/File:Igor_Ansoff,_1971.jpg',
+          description: 'Russian-American management theorist (1918-2002), father of strategic management and weak signals'
         }
       ]
     },
@@ -466,6 +484,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Longue_dur%C3%A9e',
           source: 'Wikipedia',
           description: 'Braudel\'s concept of long-term historical structures'
+        },
+        {
+          type: 'image',
+          title: 'Fernand Braudel Portrait',
+          url: 'https://commons.wikimedia.org/wiki/File:Fernand_Braudel_(1902-1985).jpg',
+          description: 'French historian (1902-1985), pioneer of the Annales School and longue durée concept'
         }
       ]
     },
@@ -584,6 +608,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Causal_layered_analysis',
           source: 'Wikipedia',
           description: 'Comprehensive overview of CLA'
+        },
+        {
+          type: 'image',
+          title: 'UNESCO Logo',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/UNESCO_logo.svg',
+          description: 'UNESCO Chair in Futures Studies - Sohail Inayatullah developed CLA as UNESCO Chair holder'
         }
       ]
     },
@@ -723,6 +753,30 @@ const mindMapData = {
           url: 'https://www.youtube.com/watch?v=6XU70gcKvbw',
           description: 'Dator explaining his four archetypes',
           year: 2009
+        },
+        {
+          type: 'image',
+          title: 'Four Generic Futures Framework',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Eisenhower_matrix.svg/512px-Eisenhower_matrix.svg.png',
+          description: '2x2 matrix representing Dator\'s four future archetypes: Growth, Collapse, Steady State, and Transformation'
+        },
+        {
+          type: 'image',
+          title: 'Herman Kahn Portrait',
+          url: 'https://commons.wikimedia.org/wiki/Category:Herman_Kahn',
+          description: 'American physicist and futurist (1922-1983), RAND Corporation pioneer of scenario thinking'
+        },
+        {
+          type: 'image',
+          title: 'Peter Schwartz Portrait',
+          url: 'https://commons.wikimedia.org/wiki/File:Peter_Schwartz_in_2022.jpg',
+          description: 'American futurist and business strategist (b. 1946), popularized scenario planning through Global Business Network'
+        },
+        {
+          type: 'image',
+          title: 'RAND Corporation Logo',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/Special:Redirect/file/Rand_Corporation_logo.svg',
+          description: 'RAND Corporation - birthplace of scenario planning in the 1950s, where Herman Kahn pioneered the methodology'
         }
       ]
     },
@@ -780,6 +834,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Wild_card_(foresight)',
           source: 'Wikipedia',
           description: 'Understanding high-impact surprises'
+        },
+        {
+          type: 'image',
+          title: 'Probability vs Impact Matrix',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/FAA_8040.4B_Risk_matrix.svg',
+          description: 'FAA risk matrix showing probability and severity axes - perfect for assessing wild card scenarios'
         }
       ]
     },
@@ -834,6 +894,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Morphological_analysis_(problem-solving)',
           source: 'Wikipedia',
           description: 'Complete guide to the method'
+        },
+        {
+          type: 'image',
+          title: 'Fritz Zwicky Portrait',
+          url: 'https://commons.wikimedia.org/wiki/Category:Fritz_Zwicky',
+          description: 'Swiss astronomer and astrophysicist (1898-1974), creator of morphological analysis and pioneer of dark matter theory'
         }
       ]
     },
@@ -905,6 +971,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Delphi_method',
           source: 'Wikipedia',
           description: 'Comprehensive guide to Delphi technique'
+        },
+        {
+          type: 'image',
+          title: 'RAND Corporation Logo',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/Special:Redirect/file/Rand_Corporation_logo.svg',
+          description: 'RAND Corporation - birthplace of Delphi Method in the 1950s for Cold War defense forecasting'
         }
       ]
     },
@@ -1191,6 +1263,12 @@ const mindMapData = {
           url: 'https://www.kurzweilai.net/the-law-of-accelerating-returns',
           description: 'Foundational essay on exponential technology growth',
           year: 2001
+        },
+        {
+          type: 'image',
+          title: 'Ray Kurzweil Portrait',
+          url: 'https://commons.wikimedia.org/wiki/File:Portrait_of_Ray_Kurzweil.png',
+          description: 'American inventor and futurist (b. 1948), known for 86% prediction accuracy and Law of Accelerating Returns'
         }
       ]
     },
@@ -1236,6 +1314,18 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Alvin_Toffler',
           source: 'Wikipedia',
           description: 'Biography and major works'
+        },
+        {
+          type: 'image',
+          title: 'Three Waves of Civilization Timeline',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Generation_timeline.svg/512px-Generation_timeline.svg.png',
+          description: 'Timeline representing Toffler\'s three waves: Agricultural Age (~8000 BCE) → Industrial Age (~1750) → Information Age (~1950)'
+        },
+        {
+          type: 'image',
+          title: 'Alvin Toffler Portrait',
+          url: 'https://commons.wikimedia.org/wiki/File:Alvin_Toffler_02.jpg',
+          description: 'American futurist (1928-2016), author of Future Shock and The Third Wave'
         }
       ]
     },
@@ -1278,6 +1368,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Buckminster_Fuller',
           source: 'Wikipedia',
           description: 'Complete biography and innovations'
+        },
+        {
+          type: 'image',
+          title: 'Buckminster Fuller Portrait',
+          url: 'https://commons.wikimedia.org/wiki/Category:Buckminster_Fuller',
+          description: 'American architect and futurist (1895-1983), #1 most influential futurist, creator of Spaceship Earth concept'
         }
       ]
     },
@@ -1322,6 +1418,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Isaac_Asimov',
           source: 'Wikipedia',
           description: 'Biography and complete works'
+        },
+        {
+          type: 'image',
+          title: 'Isaac Asimov Portrait',
+          url: 'https://commons.wikimedia.org/wiki/File:Isaac.Asimov01.jpg',
+          description: 'American biochemist and science fiction author (1920-1992), creator of Three Laws of Robotics'
         }
       ]
     },
@@ -1366,6 +1468,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Arthur_C._Clarke',
           source: 'Wikipedia',
           description: 'Complete biography and Clarke\'s Laws'
+        },
+        {
+          type: 'image',
+          title: 'Arthur C. Clarke Portrait',
+          url: 'https://commons.wikimedia.org/wiki/Category:Portraits_of_Arthur_C._Clarke',
+          description: 'British science fiction author (1917-2008), predicted communications satellites, Clarke Belt named in his honor'
         }
       ]
     },
@@ -1404,6 +1512,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Michael_Crichton',
           source: 'Wikipedia',
           description: 'Complete works and influence'
+        },
+        {
+          type: 'image',
+          title: 'Michael Crichton Portrait',
+          url: 'https://commons.wikimedia.org/wiki/Category:Michael_Crichton',
+          description: 'American author and filmmaker (1942-2008), master of techno-thrillers and cautionary tales'
         }
       ]
     },
@@ -1446,6 +1560,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Ursula_K._Le_Guin',
           source: 'Wikipedia',
           description: 'Biography and major works'
+        },
+        {
+          type: 'image',
+          title: 'Ursula K. Le Guin Portrait',
+          url: 'https://commons.wikimedia.org/wiki/File:Ursula_K_Le_Guin.JPG',
+          description: 'American author (1929-2018), explored gender fluidity and alternative social systems decades ahead of mainstream'
         }
       ]
     },
@@ -1490,6 +1610,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/William_Gibson',
           source: 'Wikipedia',
           description: 'Biography and influence on tech culture'
+        },
+        {
+          type: 'image',
+          title: 'William Gibson Portrait',
+          url: 'https://commons.wikimedia.org/wiki/Category:William_Gibson',
+          description: 'American-Canadian cyberpunk author (b. 1948), coined "cyberspace" and created cyberpunk genre'
         }
       ]
     },
@@ -1535,6 +1661,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Neal_Stephenson',
           source: 'Wikipedia',
           description: 'Complete works and influence'
+        },
+        {
+          type: 'image',
+          title: 'Neal Stephenson Portrait',
+          url: 'https://commons.wikimedia.org/wiki/Category:Neal_Stephenson',
+          description: 'American speculative fiction author (b. 1959), coined "metaverse" 30 years before Meta/Facebook'
         }
       ]
     }
