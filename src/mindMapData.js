@@ -659,6 +659,36 @@ const mindMapData = {
         { id: 'visioning', type: 'builds-on', description: 'CLA informs preferred futures by exposing hidden narratives' },
         { id: 'futures-triangle', type: 'complements', description: 'Both map drivers - CLA goes deeper into cultural/mythic layers' }
       ],
+      caseStudies: [
+        {
+          title: 'University of the Sunshine Coast 2032 Strategic Plan',
+          organization: 'University of the Sunshine Coast, Australia',
+          year: 2012,
+          challenge: 'University needed strategic direction beyond incremental planning to reimagine higher education\'s future role',
+          application: 'Inayatullah facilitated CLA workshops with faculty, staff, students, and community to deconstruct current university paradigm across four layers and co-create transformative vision',
+          outcome: 'Generated "USC 2032" plan focused on sustainability, indigenous knowledge integration, and community engagement rather than conventional growth metrics. Shifted from "teaching factory" metaphor to "learning ecosystem"',
+          layers: {
+            litany: 'Budget cuts, enrollment targets, rankings pressure',
+            social: 'Neoliberal education policy, credential inflation, research funding competition',
+            worldview: 'Universities as economic engines producing human capital for industry',
+            myth: 'Factory model - students as products, learning as assembly line, credentials as certificates of conformity'
+          }
+        },
+        {
+          title: 'Climate Change Communication Strategy',
+          organization: 'European Environment Agency',
+          year: 2009,
+          challenge: 'Public engagement with climate change remained low despite scientific consensus. Traditional information campaigns failing',
+          application: 'Applied CLA to understand why climate messages weren\'t resonating. Analyzed discourse across European countries and demographic segments',
+          outcome: 'Revealed problem was not information deficit but mythic narratives of progress, growth, and human dominion over nature. Led to new communication emphasizing stewardship narratives and systemic thinking',
+          layers: {
+            litany: 'Climate denial, political gridlock, consumer apathy, "it\'s too late anyway"',
+            social: 'Fossil fuel lobbying, short-term electoral cycles, carbon lock-in infrastructure',
+            worldview: 'Nature as resource for human use, technology will solve problems, growth = prosperity',
+            myth: 'Prometheus myth - humans as masters of fire/energy, nature as wilderness to be conquered, infinite frontier'
+          }
+        }
+      ],
       media: [
         {
           type: 'video',
@@ -821,6 +851,35 @@ const mindMapData = {
         { id: 'delphi', type: 'builds-on', description: 'Delphi expert consensus informs scenario construction' },
         { id: 'wild-cards', type: 'complements', description: 'Wild cards test scenario robustness and boundaries' },
         { id: 'cross-impact', type: 'builds-on', description: 'Cross-impact analysis maps interconnections between scenario drivers' }
+      ],
+      caseStudies: [
+        {
+          title: 'Shell and the 1973 Oil Crisis',
+          organization: 'Royal Dutch Shell Group Planning',
+          year: 1972,
+          challenge: 'Oil industry operated on assumption of stable, predictable prices. Planning based on single-point forecasts. Shell needed strategic flexibility',
+          application: 'Pierre Wack\'s team developed scenarios exploring what could disrupt oil markets. Created "Crisis" scenario imagining OPEC supply restrictions and price shocks alongside "Boom and Bust" alternative',
+          outcome: 'When 1973 oil crisis hit exactly as Crisis scenario predicted, Shell was only major oil company prepared. Shifted investments before competitors, moving from #7 to #2 global ranking. Validated scenario planning for business strategy',
+          keyInsight: 'Scenarios don\'t predict the future—they prepare minds to recognize it when it arrives. Shell managers had "rehearsed" the crisis mentally'
+        },
+        {
+          title: 'Mont Fleur Scenarios: Post-Apartheid South Africa',
+          organization: 'Mont Fleur Scenario Team, South Africa',
+          year: 1992,
+          challenge: 'South Africa transitioning from apartheid. Deep divisions between political factions. No shared vision of post-apartheid future. Risk of civil war',
+          application: 'Adam Kahane facilitated diverse group (ANC, government, business, civil society) through scenario process. Co-created four scenarios: Ostrich (denial), Lame Duck (weak government), Icarus (unsustainable populism), Flight of Flamingos (inclusive growth)',
+          outcome: 'Scenarios became common language across political spectrum. "Flight of Flamingos" inspired ANC\'s economic policy. Helped peaceful transition by making futures discussable. Demonstrated scenario planning for social transformation',
+          keyInsight: 'Scenarios as "boundary objects" - allowed hostile groups to explore futures together without requiring agreement on the past'
+        },
+        {
+          title: 'Singapore Scenarios 2065',
+          organization: 'Centre for Strategic Futures, Singapore Government',
+          year: 2015,
+          challenge: 'Singapore\'s 50th anniversary (SG50). Need to imagine next 50 years amid rising uncertainty: climate change, technology disruption, geopolitical shifts',
+          application: 'Developed seven scenarios spanning 2015-2065 using "cone of plausibility" approach. Engaged 2,500+ citizens in workshops. Combined expert analysis with public imagination',
+          outcome: 'Created "Our Singapore Conversation" - national dialogue on preferred futures. Informed long-term policies on sustainability, innovation, social cohesion. Built futures literacy across population',
+          keyInsight: 'Scenarios for nation-building - using foresight to create shared purpose and prepare society for long-term challenges'
+        }
       ],
       media: [
         {
@@ -1072,6 +1131,26 @@ const mindMapData = {
         { id: 'stakeholder-analysis', type: 'prerequisite', description: 'Stakeholder mapping identifies which experts and knowledge holders to include in Delphi panels' },
         { id: 'visioning', type: 'complements', description: 'Delphi method can build structured expert consensus on preferred futures and pathways to achieve collective visions' }
       ],
+      caseStudies: [
+        {
+          title: 'RAND Long-Range Forecasting Study',
+          organization: 'RAND Corporation for U.S. Air Force',
+          year: 1964,
+          challenge: 'U.S. military needed technological forecasts for strategic planning during Cold War. Traditional expert panels produced groupthink and dominant voices overshadowed others',
+          application: 'Olaf Helmer and Norman Dalkey conducted first major Delphi study with 82 experts forecasting breakthroughs in six areas: scientific, population control, automation, space, war prevention, weapon systems. Three rounds of anonymous questionnaires with controlled feedback',
+          outcome: 'Produced consensus forecasts for inventions like automatic language translators (predicted 1970s, actual 1990s), feasibility of lunar bases, and directed energy weapons. Demonstrated Delphi could harness distributed expertise while avoiding groupthink. Method declassified and adopted globally',
+          keyInsight: 'Anonymous iteration allows experts to revise views without losing face, producing better forecasts than face-to-face debate'
+        },
+        {
+          title: 'European Energy Policy Pathways 2050',
+          organization: 'European Commission Joint Research Centre',
+          year: 2011,
+          challenge: 'EU needed expert consensus on feasible pathways to 80-95% emissions reduction by 2050. Deep uncertainty about technology trajectories, costs, and social acceptance',
+          application: 'Three-round Delphi with 127 energy experts from academia, industry, government. Assessed likelihood, timing, barriers for 40+ energy technologies (renewables, storage, efficiency, CCS). Combined quantitative probability estimates with qualitative reasoning',
+          outcome: 'Built consensus that 2050 targets achievable but require immediate action. Offshore wind and solar PV more feasible than experts initially thought. Nuclear and CCS faced greater barriers than assumed. Informed EU\'s 2050 Energy Roadmap policy',
+          keyInsight: 'Structured iteration moved experts toward consensus on controversial topics (nuclear, CCS) by forcing examination of assumptions and evidence'
+        }
+      ],
       media: [
         {
           type: 'video',
@@ -1221,6 +1300,26 @@ const mindMapData = {
         { id: 'discourse-analysis', type: 'prerequisite', description: 'Deconstructing dominant narratives creates space for participatory visioning that challenges existing power structures' },
         { id: 'aspirational-futures', type: 'complements', description: 'Both methods focus on preferred futures, with visioning creating concrete images and aspirational futures exploring ideals and values' }
       ],
+      caseStudies: [
+        {
+          title: 'Chattanooga Vision 2000',
+          organization: 'Chattanooga, Tennessee',
+          year: 1984,
+          challenge: 'Chattanooga once branded "dirtiest city in America" (1969). Rust belt decline, environmental degradation, social division. Needed transformative vision to reverse decades of decline',
+          application: 'Community-wide visioning process engaged 1,700 citizens in facilitated workshops. Diverse groups (business, labor, minorities, youth) imagined preferred future. Co-created 40 goals across environment, economy, education, culture. Revisited vision every 5 years (Vision 2000, Vision 2010, Vision 2020)',
+          outcome: 'Transformed into sustainable city model: cleaned Tennessee River, created downtown aquarium/waterfront, became outdoor recreation hub, attracted tech companies (Amazon, Volkswagen). Poverty remains challenge but demonstrated participatory visioning can drive systemic change',
+          keyInsight: 'Inclusive visioning creates ownership across community, maintaining momentum across decades and political changes'
+        },
+        {
+          title: 'New Zealand 2050: Aotearoa as a Sustainable Nation',
+          organization: 'New Zealand Government & NGOs',
+          year: 2009,
+          challenge: 'NZ needed long-term sustainability vision beyond electoral cycles. Climate change, biodiversity loss, inequality growing. How to engage whole nation in preferred future?',
+          application: 'Government facilitated nationwide visioning using Elise Boulding\'s "imaging workshops" method. 50+ workshops with 2,000+ participants. Asked Kiwis to step "through the hedge" into 2050 and describe what they saw. Themes analyzed to create shared vision',
+          outcome: 'Produced "Vision New Zealand 2050" emphasizing clean energy, biodiversity restoration, bicultural partnership (Māori-Pākehā), wellbeing economy. Informed Zero Carbon Act (2019) and Wellbeing Budget framework. Showed national-scale participatory visioning possible',
+          keyInsight: 'Imagery-based visioning accesses deeper aspirations than analytical planning, creating emotional connection to preferred future'
+        }
+      ],
       media: [
         {
           type: 'video',
@@ -1299,6 +1398,26 @@ const mindMapData = {
       relatedMethodologies: [
         { id: 'visioning', type: 'builds-on', description: 'Backcasting requires clear vision of preferred future as starting point' },
         { id: 'scenarios', type: 'complements', description: 'Scenarios explore alternatives; backcasting maps pathway to chosen future' }
+      ],
+      caseStudies: [
+        {
+          title: 'Sweden\'s Fossil Fuel-Free Vision 2030',
+          organization: 'Swedish Government',
+          year: 2006,
+          challenge: 'Sweden committed to independence from fossil fuels by 2030—unprecedented goal requiring systemic transformation. Forecasting from current trends showed goal impossible',
+          application: 'Government used backcasting to work backward from fossil-free 2030 vision. Identified pathway milestones: renewable energy expansion, transportation electrification, biofuel development, carbon pricing, building efficiency. Engaged stakeholders to co-create implementation plans',
+          outcome: 'By 2020: 54% renewable energy (EU target: 20%), per capita emissions down 29% since 1990 while GDP grew 58%. Carbon tax reached $140/ton. Demonstrated backcasting enables "impossible" goals. Though 2030 target missed, progress exceeded all forecasts',
+          keyInsight: 'When goal requires breaking trends, backcasting reveals pathways forecasting cannot see. Ambition drives innovation'
+        },
+        {
+          title: 'IKEA: People & Planet Positive Strategy',
+          organization: 'IKEA Group',
+          year: 2012,
+          challenge: 'IKEA needed sustainability strategy aligned with 1.5°C climate target. Business-as-usual growth incompatible with planetary boundaries. How to grow while reducing absolute environmental impact?',
+          application: 'Used Natural Step backcasting framework. Defined 2030 vision: climate positive, circular economy, fair and equal. Worked backward to identify milestones across products, energy, materials, waste. Set science-based targets',
+          outcome: 'Committed to 100% renewable energy (achieved 2020), circular products (50% renewable/recycled materials by 2030), climate positive across value chain by 2030. Proving sustainability drives competitiveness. Annual sustainability report tracks progress against milestones',
+          keyInsight: 'Corporate backcasting aligns profit with purpose by starting from sustainability principles rather than incremental improvements'
+        }
       ],
       media: [
         {
