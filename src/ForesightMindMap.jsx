@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import mindMapData from './mindMapData';
+import TimelineView from './TimelineView';
 
 const ForesightMindMap = () => {
   const containerRef = useRef(null);
@@ -17,9 +18,9 @@ const ForesightMindMap = () => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedNodes, setExpandedNodes] = useState(new Set());
-  const [audioEnabled, setAudioEnabled] = useState(false);
   const [hoveredNode, setHoveredNode] = useState(null);
   const [selectedMedia, setSelectedMedia] = useState(null);
+  const [timelineVisible, setTimelineVisible] = useState(false);
 
   // LCARS Color Palette
   const COLORS = {
@@ -75,7 +76,6 @@ const ForesightMindMap = () => {
     const ambientLight = new THREE.AmbientLight(0x404060, 0.4);
     scene.add(ambientLight);
 
-    // Key Light (LCARS Blue)
     const keyLight = new THREE.DirectionalLight(0x5C88DA, 1.2);
     keyLight.position.set(50, 50, 50);
     keyLight.castShadow = true;
@@ -83,12 +83,10 @@ const ForesightMindMap = () => {
     keyLight.shadow.mapSize.height = 2048;
     scene.add(keyLight);
 
-    // Fill Light (LCARS Amber)
     const fillLight = new THREE.PointLight(0xFFCC66, 0.8, 100);
     fillLight.position.set(-30, 20, 40);
     scene.add(fillLight);
 
-    // Rim Light (LCARS Purple)
     const rimLight = new THREE.PointLight(0xCC99CC, 0.6, 100);
     rimLight.position.set(0, -30, -50);
     scene.add(rimLight);
@@ -202,7 +200,6 @@ const ForesightMindMap = () => {
 
       camera.position.multiplyScalar(scaleFactor);
 
-      // Constrain zoom
       const distance = camera.position.length();
       if (distance < 10) camera.position.setLength(10);
       if (distance > 200) camera.position.setLength(200);
@@ -585,10 +582,9 @@ const ForesightMindMap = () => {
     }
   };
 
-  // Filter nodes based on search
+  // Search filter
   useEffect(() => {
     if (!searchQuery.trim()) {
-      // Reset all opacities
       nodesRef.current.forEach(node => {
         if (node.material) {
           node.material.opacity = 0.9;
@@ -626,67 +622,197 @@ const ForesightMindMap = () => {
         }}
       />
 
-      {/* Search Box */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 10,
-        }}
-      >
+      {/* LCARS Search Box */}
+      <div style={{
+        position: 'absolute',
+        top: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 10,
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0',
+      }}>
+        <div style={{
+          background: COLORS.secondary,
+          padding: '14px 20px',
+          borderRadius: '20px 0 0 20px',
+          fontSize: '14px',
+          fontWeight: '700',
+          color: '#000000',
+          letterSpacing: '2px',
+          fontFamily: 'monospace',
+        }}>
+          SEARCH
+        </div>
         <input
           type="text"
-          placeholder="Search methodologies..."
+          placeholder="ENTER QUERY..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{
-            padding: '12px 24px',
-            fontSize: '16px',
-            border: `2px solid ${COLORS.primary}`,
-            borderRadius: '25px',
-            background: 'rgba(26, 26, 46, 0.95)',
-            color: COLORS.text,
-            width: '400px',
+            padding: '14px 24px',
+            fontSize: '14px',
+            fontWeight: '600',
+            border: `3px solid ${COLORS.primary}`,
+            borderLeft: 'none',
+            borderRadius: '0 20px 20px 0',
+            background: '#000000',
+            color: COLORS.secondary,
+            width: '300px',
             outline: 'none',
-            fontFamily: 'Inter, sans-serif',
-            backdropFilter: 'blur(10px)',
-            boxShadow: `0 0 20px ${COLORS.primary}40`,
+            fontFamily: 'monospace',
+            letterSpacing: '1px',
+            textTransform: 'uppercase',
           }}
         />
       </div>
 
-      {/* Control Panel */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '20px',
-          left: '20px',
-          background: 'rgba(26, 26, 46, 0.95)',
-          backdropFilter: 'blur(10px)',
+      {/* LCARS Control Panel */}
+      <div style={{
+        position: 'absolute',
+        top: '20px',
+        left: '20px',
+        width: '280px',
+        zIndex: 10,
+      }}>
+        {/* Header Bar */}
+        <div style={{
+          background: COLORS.primary,
+          padding: '12px 20px',
+          borderRadius: '20px 20px 0 0',
+          fontSize: '16px',
+          fontWeight: '700',
+          color: '#000000',
+          letterSpacing: '3px',
+          textAlign: 'center',
+          fontFamily: 'monospace',
+        }}>
+          LCARS 47
+        </div>
+
+        {/* Main Panel */}
+        <div style={{
+          background: '#000000',
+          border: `4px solid ${COLORS.primary}`,
+          borderTop: 'none',
+          borderRadius: '0 0 20px 20px',
           padding: '20px',
-          borderRadius: '12px',
-          border: `1px solid ${COLORS.primary}40`,
-          color: COLORS.text,
-          fontFamily: 'Inter, sans-serif',
-          maxWidth: '300px',
-          boxShadow: `0 0 30px ${COLORS.primary}40`,
-        }}
-      >
-        <h3 style={{ margin: '0 0 15px 0', fontSize: '18px', letterSpacing: '1px' }}>
-          STRATEGIC FORESIGHT
-        </h3>
-        <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#b8c5d8' }}>
-          <p style={{ margin: '0 0 10px 0' }}>
-            <strong>Controls:</strong>
-          </p>
-          <ul style={{ margin: 0, paddingLeft: '20px' }}>
-            <li>Drag to orbit</li>
-            <li>Scroll to zoom</li>
-            <li>Click nodes to expand</li>
-            <li>Click media orbs to view</li>
-          </ul>
+        }}>
+          {/* Status Bars */}
+          <div style={{ marginBottom: '15px' }}>
+            <div style={{
+              background: COLORS.highlight,
+              padding: '8px 12px',
+              borderRadius: '15px',
+              fontSize: '11px',
+              fontWeight: '700',
+              color: '#000000',
+              letterSpacing: '1px',
+              marginBottom: '6px',
+              fontFamily: 'monospace',
+            }}>
+              DRAG TO ORBIT
+            </div>
+            <div style={{
+              background: COLORS.accent,
+              padding: '8px 12px',
+              borderRadius: '15px',
+              fontSize: '11px',
+              fontWeight: '700',
+              color: '#000000',
+              letterSpacing: '1px',
+              marginBottom: '6px',
+              fontFamily: 'monospace',
+            }}>
+              SCROLL TO ZOOM
+            </div>
+            <div style={{
+              background: COLORS.pink,
+              padding: '8px 12px',
+              borderRadius: '15px',
+              fontSize: '11px',
+              fontWeight: '700',
+              color: '#000000',
+              letterSpacing: '1px',
+              marginBottom: '6px',
+              fontFamily: 'monospace',
+            }}>
+              CLICK TO EXPAND
+            </div>
+            <div style={{
+              background: COLORS.success,
+              padding: '8px 12px',
+              borderRadius: '15px',
+              fontSize: '11px',
+              fontWeight: '700',
+              color: '#000000',
+              letterSpacing: '1px',
+              fontFamily: 'monospace',
+            }}>
+              CLICK ORBS FOR MEDIA
+            </div>
+          </div>
+
+          {/* Timeline Toggle Button */}
+          <button
+            onClick={() => setTimelineVisible(!timelineVisible)}
+            style={{
+              width: '100%',
+              background: timelineVisible ? COLORS.accent : 'transparent',
+              border: `3px solid ${COLORS.accent}`,
+              color: timelineVisible ? '#000000' : COLORS.accent,
+              padding: '12px',
+              borderRadius: '15px',
+              fontSize: '12px',
+              fontWeight: '700',
+              letterSpacing: '2px',
+              cursor: 'pointer',
+              fontFamily: 'monospace',
+              marginBottom: '15px',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              if (!timelineVisible) {
+                e.target.style.background = `${COLORS.accent}20`;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!timelineVisible) {
+                e.target.style.background = 'transparent';
+              }
+            }}
+          >
+            {timelineVisible ? '◀ CLOSE TIMELINE' : 'TIMELINE VIEW ▶'}
+          </button>
+
+          {/* System Status Indicator */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            padding: '8px 12px',
+            background: 'rgba(92, 136, 218, 0.1)',
+            borderRadius: '10px',
+            border: `1px solid ${COLORS.primary}`,
+          }}>
+            <div style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              background: COLORS.success,
+              animation: 'pulse 2s infinite',
+            }} />
+            <span style={{
+              color: COLORS.success,
+              fontSize: '10px',
+              fontWeight: '700',
+              letterSpacing: '1px',
+              fontFamily: 'monospace',
+            }}>
+              SYSTEM ONLINE
+            </span>
+          </div>
         </div>
       </div>
 
@@ -861,7 +987,7 @@ const ForesightMindMap = () => {
                 e.target.style.boxShadow = 'none';
               }}
             >
-              📚 Read More on Wikipedia
+              Read More on Wikipedia
             </a>
           )}
         </div>
@@ -996,7 +1122,7 @@ const ForesightMindMap = () => {
                   marginTop: '10px',
                 }}
               >
-                {selectedMedia.type === 'article' ? '📚 Read Article' : '📄 View Document'}
+                {selectedMedia.type === 'article' ? 'Read Article' : 'View Document'}
               </a>
             )}
           </div>
@@ -1047,6 +1173,15 @@ const ForesightMindMap = () => {
           }
         }
 
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.4;
+          }
+        }
+
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
         * {
@@ -1070,6 +1205,11 @@ const ForesightMindMap = () => {
           background: ${COLORS.secondary};
         }
       `}</style>
+
+      {/* Timeline View */}
+      {timelineVisible && (
+        <TimelineView onClose={() => setTimelineVisible(false)} />
+      )}
     </div>
   );
 };

@@ -880,7 +880,719 @@ const mindMapData = {
         }
       ]
     }
-  ]
+  ],
+
+  // FUTURISTS & SCI-FI VISIONARIES
+  futurists: [
+    {
+      id: 'kurzweil',
+      type: 'futurist',
+      label: 'Ray\nKurzweil',
+      lifespan: '1948-present',
+      color: '#00F5FF',
+      level: 3,
+      description: 'Inventor, futurist, and author known for predictions about AI and the technological singularity',
+      details: {
+        overview: 'Ray Kurzweil is one of the most accurate technological futurists, with a claimed 86% prediction accuracy rate (contested by some at 42%). He pioneered the "Law of Accelerating Returns" which predicts exponential growth in technology.',
+        influence: 'Current Director of Engineering at Google. Influenced AI development, transhumanism, and long-range forecasting. Predicted smartphones, voice recognition, cloud computing, and AI assistants.',
+        methodology: 'Law of Accelerating Returns, exponential growth modeling, singularity timeline projections',
+        accuracyRating: 'very-high'
+      },
+      majorWorks: [
+        { title: 'The Age of Intelligent Machines', year: 1990 },
+        { title: 'The Age of Spiritual Machines', year: 1999 },
+        { title: 'The Singularity Is Near', year: 2005 },
+        { title: 'How to Create a Mind', year: 2012 },
+        { title: 'The Singularity Is Nearer', year: 2024 }
+      ],
+      keyPredictions: [
+        'Smartphones and portable computers (predicted 2009, iPhone 2007)',
+        'Voice recognition AI assistants (Siri, Alexa)',
+        'Cloud computing and internet mesh',
+        'Real-time language translation',
+        'Digital content distribution (streaming)',
+        'Self-driving cars',
+        'AGI by 2029 (pending)',
+        'Technological singularity by 2045 (pending)'
+      ],
+      media: [
+        {
+          type: 'video',
+          title: 'Ray Kurzweil: The Singularity is Near',
+          url: 'https://www.youtube.com/watch?v=1uIzS1uCOcE',
+          description: 'Kurzweil explaining his predictions for 2045',
+          year: 2020
+        },
+        {
+          type: 'video',
+          title: 'Ray Kurzweil on The Law of Accelerating Returns',
+          url: 'https://www.youtube.com/watch?v=IfbOyw3CT6A',
+          description: 'Explaining exponential technological growth',
+          year: 2015
+        },
+        {
+          type: 'article',
+          title: 'Ray Kurzweil - Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Ray_Kurzweil',
+          source: 'Wikipedia',
+          description: 'Comprehensive biography and prediction record'
+        },
+        {
+          type: 'document',
+          title: 'The Law of Accelerating Returns (2001)',
+          url: 'https://www.kurzweilai.net/the-law-of-accelerating-returns',
+          description: 'Foundational essay on exponential technology growth',
+          year: 2001
+        }
+      ]
+    },
+    {
+      id: 'toffler',
+      type: 'futurist',
+      label: 'Alvin\nToffler',
+      lifespan: '1928-2016',
+      color: '#FFCC66',
+      level: 3,
+      description: 'The "world\'s most famous futurologist" who established acceleration of change as fundamental principle',
+      details: {
+        overview: 'Toffler popularized concepts like "future shock," "information overload," and the "Third Wave" of civilization. He influenced leaders globally from China to Silicon Valley.',
+        influence: 'Shaped environmental scanning, change management theory, STEEP analysis precursor. Predicted telecommuting, prosumer culture, and knowledge economy.',
+        methodology: 'Three Waves framework, acceleration of change analysis, social transformation theory',
+        accuracyRating: 'very-high'
+      },
+      majorWorks: [
+        { title: 'Future Shock', year: 1970 },
+        { title: 'The Third Wave', year: 1980 },
+        { title: 'Powershift', year: 1990 }
+      ],
+      keyPredictions: [
+        'Internet and email proliferation',
+        'Telecommuting and "electronic cottage"',
+        'Information overload',
+        'Knowledge workers replacing industrial workers',
+        'Prosumer culture (producer + consumer)',
+        'Interactive media and cable TV',
+        'Cloning and digital advancements'
+      ],
+      media: [
+        {
+          type: 'video',
+          title: 'Alvin Toffler on Future Shock',
+          url: 'https://www.youtube.com/watch?v=wJW_bF-GEJE',
+          description: 'Toffler discussing acceleration of change',
+          year: 1972
+        },
+        {
+          type: 'article',
+          title: 'Alvin Toffler - Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Alvin_Toffler',
+          source: 'Wikipedia',
+          description: 'Biography and major works'
+        }
+      ]
+    },
+    {
+      id: 'fuller',
+      type: 'futurist',
+      label: 'Buckminster\nFuller',
+      lifespan: '1895-1983',
+      color: '#5C88DA',
+      level: 3,
+      description: 'Ranked #1 most influential futurist - pioneer of systems thinking and anticipatory design',
+      details: {
+        overview: 'Ranked #1 most influential futurist in Encyclopedia of the Future (ahead of H.G. Wells, Newton, da Vinci). Created "Spaceship Earth" concept and World Game.',
+        influence: 'Founded systems thinking, sustainability frameworks, and regenerative design. Influenced contemporary futurists including Toffler, Peters, and Naisbitt.',
+        methodology: 'World Game, Synergetics, Anticipatory Design Science, comprehensive systems approach',
+        accuracyRating: 'high'
+      },
+      majorWorks: [
+        { title: 'Operating Manual for Spaceship Earth', year: 1969 },
+        { title: 'Synergetics', year: 1975 },
+        { title: 'Critical Path', year: 1981 }
+      ],
+      keyPredictions: [
+        'Earth as closed system requiring stewardship',
+        'Need for global resource management',
+        'Systems thinking and holistic approaches',
+        'Sustainable architecture (geodesic domes)'
+      ],
+      media: [
+        {
+          type: 'video',
+          title: 'Buckminster Fuller: Thinking Out Loud',
+          url: 'https://www.youtube.com/watch?v=8ddKKEvGxmE',
+          description: 'Fuller on anticipatory design science',
+          year: 1975
+        },
+        {
+          type: 'article',
+          title: 'Buckminster Fuller - Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Buckminster_Fuller',
+          source: 'Wikipedia',
+          description: 'Complete biography and innovations'
+        }
+      ]
+    },
+    {
+      id: 'asimov',
+      type: 'sci-fi-writer',
+      label: 'Isaac\nAsimov',
+      lifespan: '1920-1992',
+      color: '#00F5FF',
+      level: 3,
+      description: 'Created foundational frameworks for AI ethics and computational social science',
+      details: {
+        overview: 'Created the Three Laws of Robotics (1942) which remain fundamental for AI ethics. Invented "psychohistory" - mathematical sociology predicting large-scale trends, precursor to Big Data.',
+        influence: 'Still influences AI developers and roboticists. Three Laws remain reference point for AI safety discussions. Inspired data science and predictive analytics.',
+        methodology: 'Hard science fiction, mathematical sociology, ethical speculation',
+        accuracyRating: 'very-high'
+      },
+      majorWorks: [
+        { title: 'I, Robot', year: 1950 },
+        { title: 'Foundation', year: 1951 },
+        { title: 'The Caves of Steel', year: 1954 }
+      ],
+      keyPredictions: [
+        'Three Laws of Robotics (AI ethics framework)',
+        'Psychohistory (Big Data/predictive analytics)',
+        'Digital education and learning systems',
+        'Automated homes and smart appliances',
+        'Portable communication devices',
+        'Remote work and telecommuting'
+      ],
+      media: [
+        {
+          type: 'video',
+          title: 'Isaac Asimov on Science Fiction and Prediction',
+          url: 'https://www.youtube.com/watch?v=cFOCUr18dTQ',
+          description: 'Asimov discussing role of sci-fi in futures thinking',
+          year: 1988
+        },
+        {
+          type: 'article',
+          title: 'Isaac Asimov - Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Isaac_Asimov',
+          source: 'Wikipedia',
+          description: 'Biography and complete works'
+        }
+      ]
+    },
+    {
+      id: 'clarke',
+      type: 'sci-fi-writer',
+      label: 'Arthur C.\nClarke',
+      lifespan: '1917-2008',
+      color: '#8B5CF6',
+      level: 3,
+      description: 'Predicted communications satellites 20 years before Sputnik - "Clarke Belt" named in his honor',
+      details: {
+        overview: 'Famous for Third Law: "Any sufficiently advanced technology is indistinguishable from magic." Predicted geostationary satellites (1945), tablet computers, voice AI, and remote work.',
+        influence: 'Influenced space policy, satellite industry, and AI safety discourse. HAL 9000 anticipated AI systems expected by 2030-2040.',
+        methodology: 'Hard science fiction, detailed technical speculation, Clarke\'s Three Laws',
+        accuracyRating: 'very-high'
+      },
+      majorWorks: [
+        { title: '2001: A Space Odyssey', year: 1968 },
+        { title: 'Rendezvous with Rama', year: 1973 },
+        { title: 'The Fountains of Paradise', year: 1979 }
+      ],
+      keyPredictions: [
+        'Communications satellites (1945) - "Clarke Belt"',
+        'Tablet computers ("Newspad" in 2001)',
+        'Voice assistants (HAL 9000 → Siri/Alexa)',
+        'Remote work: "Men will no longer commute but communicate"',
+        'Video calling and global connectivity',
+        'Space elevators (pending)'
+      ],
+      media: [
+        {
+          type: 'video',
+          title: 'Arthur C. Clarke Predicts the Future in 1964',
+          url: 'https://www.youtube.com/watch?v=qYA0B3JMKXU',
+          description: 'Clarke discussing future technology',
+          year: 1964
+        },
+        {
+          type: 'article',
+          title: 'Arthur C. Clarke - Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Arthur_C._Clarke',
+          source: 'Wikipedia',
+          description: 'Complete biography and Clarke\'s Laws'
+        }
+      ]
+    },
+    {
+      id: 'crichton',
+      type: 'sci-fi-writer',
+      label: 'Michael\nCrichton',
+      lifespan: '1942-2008',
+      color: '#EC4899',
+      level: 3,
+      description: 'Master of cautionary tales exploring pathological failure of complex systems',
+      details: {
+        overview: 'Shaped bioethics and tech risk discourse through techno-thrillers. Explored biosecurity, AI control problems, genetic engineering ethics, and nanotechnology dangers.',
+        influence: 'Jurassic Park influenced biotech regulation debates. Westworld presaged AI safety concerns. Shaped public discourse on emerging tech risks.',
+        methodology: 'Techno-thriller, chaos theory application, risk forecasting, cautionary narrative',
+        accuracyRating: 'high'
+      },
+      majorWorks: [
+        { title: 'The Andromeda Strain', year: 1969 },
+        { title: 'Westworld', year: 1973 },
+        { title: 'Jurassic Park', year: 1990 },
+        { title: 'Prey', year: 2002 }
+      ],
+      keyPredictions: [
+        'Biotech ethics challenges and "playing God"',
+        'AI control problems and emergence',
+        'Nanotechnology dangers',
+        'Corporate-driven tech risks',
+        'Complex system failures (chaos theory)',
+        'Surveillance and privacy erosion'
+      ],
+      media: [
+        {
+          type: 'article',
+          title: 'Michael Crichton - Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Michael_Crichton',
+          source: 'Wikipedia',
+          description: 'Complete works and influence'
+        }
+      ]
+    },
+    {
+      id: 'leguin',
+      type: 'sci-fi-writer',
+      label: 'Ursula K.\nLe Guin',
+      lifespan: '1929-2018',
+      color: '#F59E0B',
+      level: 3,
+      description: 'Used "elsewhere" to magnify contemporary issues decades before mainstream discourse',
+      details: {
+        overview: 'Explored gender fluidity (1969), alternative political systems, ecological thinking, and anarchist organization models through anthropological speculation.',
+        influence: 'Shaped thinking on gender, governance, and ecology. Demonstrated sci-fi as tool for social imagination and worldbuilding.',
+        methodology: 'Anthropological speculation, worldbuilding, social systems design',
+        accuracyRating: 'high'
+      },
+      majorWorks: [
+        { title: 'The Left Hand of Darkness', year: 1969 },
+        { title: 'The Dispossessed', year: 1974 },
+        { title: 'The Lathe of Heaven', year: 1971 }
+      ],
+      keyPredictions: [
+        'Gender fluidity (1969, decades ahead)',
+        'Alternative political/economic systems',
+        'Ecological consciousness',
+        'Anarchist organization models'
+      ],
+      media: [
+        {
+          type: 'video',
+          title: 'Ursula K. Le Guin on Science Fiction',
+          url: 'https://www.youtube.com/watch?v=ELfmWWzzWns',
+          description: 'Le Guin discussing role of sci-fi in imagining alternatives',
+          year: 2014
+        },
+        {
+          type: 'article',
+          title: 'Ursula K. Le Guin - Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Ursula_K._Le_Guin',
+          source: 'Wikipedia',
+          description: 'Biography and major works'
+        }
+      ]
+    },
+    {
+      id: 'gibson',
+      type: 'sci-fi-writer',
+      label: 'William\nGibson',
+      lifespan: '1948-present',
+      color: '#06B6D4',
+      level: 3,
+      description: 'Coined "cyberspace" and envisioned internet culture before widespread internet',
+      details: {
+        overview: 'Created cyberpunk genre. Famous quote: "The future is already here, just unevenly distributed." Predicted VR, hacking culture, corporate tech dominance, neural interfaces.',
+        influence: 'Shaped cyberpunk genre and tech industry imagination. Influenced Matrix films and VR development.',
+        methodology: 'Near-future extrapolation, cultural trend analysis, cyberpunk worldbuilding',
+        accuracyRating: 'very-high'
+      },
+      majorWorks: [
+        { title: 'Neuromancer', year: 1984 },
+        { title: 'Count Zero', year: 1986 },
+        { title: 'Pattern Recognition', year: 2003 }
+      ],
+      keyPredictions: [
+        'Cyberspace (coined the term)',
+        'Virtual reality',
+        'Hacking culture',
+        'Corporate tech dominance',
+        'Neural interfaces',
+        'Augmented reality'
+      ],
+      media: [
+        {
+          type: 'video',
+          title: 'William Gibson on Neuromancer',
+          url: 'https://www.youtube.com/watch?v=U8sKRQ7MhAA',
+          description: 'Gibson discussing cyberpunk and prediction',
+          year: 2014
+        },
+        {
+          type: 'article',
+          title: 'William Gibson - Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/William_Gibson',
+          source: 'Wikipedia',
+          description: 'Biography and influence on tech culture'
+        }
+      ]
+    },
+    {
+      id: 'stephenson',
+      type: 'sci-fi-writer',
+      label: 'Neal\nStephenson',
+      lifespan: '1959-present',
+      color: '#A855F7',
+      level: 3,
+      description: 'Coined "metaverse" 30 years before Meta/Facebook - works used by tech companies for R&D',
+      details: {
+        overview: 'Combines hard science with detailed social/cultural speculation. Snow Crash influenced tech industry vision of VR. Works used by Google, Microsoft for inspiration.',
+        influence: 'Coined "metaverse" inspiring Meta/Facebook. Influenced virtual reality development, cryptocurrency concepts, and nanotechnology research.',
+        methodology: 'Detailed technical speculation, alternative history, mathematical fiction',
+        accuracyRating: 'very-high'
+      },
+      majorWorks: [
+        { title: 'Snow Crash', year: 1992 },
+        { title: 'The Diamond Age', year: 1995 },
+        { title: 'Cryptonomicon', year: 1999 },
+        { title: 'Anathem', year: 2008 }
+      ],
+      keyPredictions: [
+        'Metaverse (coined 1992)',
+        'Avatar culture',
+        'Virtual economies',
+        'Nanotechnology applications',
+        'Cryptocurrency precursors',
+        'AR/VR integration'
+      ],
+      media: [
+        {
+          type: 'video',
+          title: 'Neal Stephenson on Snow Crash and the Metaverse',
+          url: 'https://www.youtube.com/watch?v=Ok4vYkgC5U8',
+          description: 'Stephenson discussing his predictions',
+          year: 2021
+        },
+        {
+          type: 'article',
+          title: 'Neal Stephenson - Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Neal_Stephenson',
+          source: 'Wikipedia',
+          description: 'Complete works and influence'
+        }
+      ]
+    }
+  ],
+
+  // SPECULATIVE FUTURES 2060+
+  speculativeFutures: {
+    root: {
+      id: 'speculative-2060',
+      label: 'Speculative\nFutures 2060+',
+      description: 'Multiple plausible futures beyond conventional forecasting - the cone of possibilities',
+      color: '#9D4EDD',
+      level: 0,
+      uncertainty: 'high',
+      timeframe: '2060-2100',
+      details: {
+        overview: 'As we extend beyond 2060, uncertainty expands exponentially. These scenarios represent the "cone of possibilities" - multiple divergent futures shaped by critical uncertainties in AI, climate, biotechnology, and social evolution.',
+        methodology: 'Combines scenario planning, science fiction prototyping, futures cone analysis, and long-range forecasting',
+        inspiration: [
+          'Futures Cone (Joseph Voros, 1994)',
+          'Jim Dator\'s Four Generic Futures',
+          'Shell Long-Range Scenarios',
+          'Science Fiction Prototyping methodology'
+        ],
+        philosophy: 'The future cannot be predicted, but multiple futures can be imagined and prepared for'
+      },
+      grokipedia: 'https://en.wikipedia.org/wiki/Futures_cone',
+      media: [
+        {
+          type: 'image',
+          title: 'Futures Cone Diagram',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Futures_cone.svg/1200px-Futures_cone.svg.png',
+          description: 'Visual representation of expanding uncertainty over time'
+        },
+        {
+          type: 'article',
+          title: 'The Futures Cone',
+          url: 'https://thevoroscope.com/2017/02/24/the-futures-cone-use-and-history/',
+          source: 'The Voroscope',
+          description: 'History and application of the futures cone framework'
+        }
+      ]
+    },
+
+    scenarios: [
+      {
+        id: 'ai-singularity',
+        label: 'AI\nSingularity',
+        parent: 'speculative-2060',
+        color: '#00F5FF',
+        level: 1,
+        uncertainty: 'high',
+        probability: 'medium-high',
+        timeframe: '2040-2060',
+        description: 'Artificial General Intelligence achieved, leading to technological singularity and human-AI merger',
+        details: {
+          overview: 'AGI achieved by 2029-2040 (per Kurzweil and 50% of AI researchers), leading to technological singularity by 2045-2060. Human-AI merger becomes possible, redefining civilization.',
+          keyMilestones: [
+            '2029-2040: AGI achieved (Kurzweil prediction, expert consensus)',
+            '2040-2050: AI surpasses human intelligence across all domains',
+            '2050-2060: Singularity - exponential intelligence explosion',
+            '2060+: Post-human civilization, mind uploading'
+          ],
+          drivers: [
+            'Exponential growth in computing power',
+            'Deep learning breakthroughs',
+            'Quantum computing advances',
+            'Brain-computer interface development'
+          ],
+          implications: [
+            'Automated scientific discovery',
+            'Solutions to climate, disease, aging',
+            'Existential risk scenarios',
+            'Redefinition of human purpose and identity'
+          ],
+          sources: 'Ray Kurzweil, Nick Bostrom, Metaculus AI predictions, AI researcher surveys'
+        },
+        media: [
+          {
+            type: 'video',
+            title: 'Ray Kurzweil: Singularity 2045',
+            url: 'https://www.youtube.com/watch?v=1uIzS1uCOcE',
+            description: 'Predictions for the singularity timeline',
+            year: 2020
+          },
+          {
+            type: 'article',
+            title: 'AI Timeline Predictions',
+            url: 'https://ourworldindata.org/ai-timelines',
+            source: 'Our World in Data',
+            description: 'Expert consensus on AGI arrival'
+          },
+          {
+            type: 'document',
+            title: 'The Singularity Is Near',
+            url: 'https://en.wikipedia.org/wiki/The_Singularity_Is_Near',
+            description: 'Kurzweil\'s comprehensive singularity timeline',
+            year: 2005
+          }
+        ]
+      },
+      {
+        id: 'climate-adaptation',
+        label: 'Climate\nAdaptation',
+        parent: 'speculative-2060',
+        color: '#10B981',
+        level: 1,
+        uncertainty: 'medium',
+        probability: 'high',
+        timeframe: '2030-2100',
+        description: '+3°C warming triggers massive green tech mobilization and geoengineering',
+        details: {
+          overview: 'Global temperature increases 3°C by 2060. Massive green technology mobilization and geoengineering deployment establish precarious equilibrium or trigger runaway scenarios.',
+          keyMilestones: [
+            '2030-2040: Climate crisis deepens, mass displacement begins',
+            '2040-2060: Geoengineering deployment, green tech scaling',
+            '2060-2080: Stabilization or runaway scenarios diverge',
+            '2080+: New climate equilibrium or cascading collapse'
+          ],
+          drivers: [
+            'Carbon emissions trajectory',
+            'Climate tipping point activation',
+            'Geoengineering effectiveness',
+            'Global cooperation levels',
+            'Green technology advancement'
+          ],
+          implications: [
+            '1 billion+ climate refugees',
+            'Coastal megacity adaptation or abandonment',
+            'Agricultural transformation (vertical farming, lab meat)',
+            'Climate authoritarianism risk',
+            'Regenerative economy transition'
+          ],
+          sources: 'IPCC scenarios, climate science consensus, Ministry for the Future (K.S. Robinson)'
+        },
+        media: [
+          {
+            type: 'image',
+            title: 'IPCC Climate Scenarios 2100',
+            url: 'https://www.ipcc.ch/site/assets/uploads/2018/02/SYR_AR5_FINAL_full.pdf',
+            description: 'Official climate projection scenarios'
+          },
+          {
+            type: 'article',
+            title: 'Climate Change Scenarios',
+            url: 'https://en.wikipedia.org/wiki/Representative_Concentration_Pathway',
+            source: 'Wikipedia',
+            description: 'RCP scenarios and implications'
+          }
+        ]
+      },
+      {
+        id: 'space-expansion',
+        label: 'Space\nExpansion',
+        parent: 'speculative-2060',
+        color: '#8B5CF6',
+        level: 1,
+        uncertainty: 'high',
+        probability: 'medium',
+        timeframe: '2040-2100',
+        description: 'Multi-planetary species - Mars colony, asteroid mining, interplanetary economy',
+        details: {
+          overview: 'Humanity becomes multi-planetary. Mars colony established by 2060, asteroid mining viable, space-based economy emerges. New forms of governance for space settlements.',
+          keyMilestones: [
+            '2030-2045: Permanent Moon base, first Mars landings',
+            '2045-2060: Mars colony 1000+ people, asteroid mining begins',
+            '2060-2080: O\'Neill cylinders, interplanetary commerce',
+            '2080+: Terraforming Mars, Jupiter moon bases'
+          ],
+          drivers: [
+            'SpaceX/commercial space advancement',
+            'Resource scarcity on Earth',
+            'Geopolitical competition',
+            'Technological breakthroughs (fusion, life support)'
+          ],
+          implications: [
+            'Multi-planetary species resilience',
+            'New forms of governance',
+            'Space-based solar power',
+            'Cultural diversification',
+            'Off-world manufacturing'
+          ],
+          sources: 'CSIS Space 2060 scenarios, NASA planning, The Expanse (Corey), Red Mars (Robinson)'
+        },
+        media: [
+          {
+            type: 'document',
+            title: 'The Future of Space 2060',
+            url: 'https://aerospace.csis.org/data/space-futures/',
+            description: 'Eight scenarios for space to 2060',
+            source: 'CSIS',
+            year: 2019
+          },
+          {
+            type: 'article',
+            title: 'Space Colonization',
+            url: 'https://en.wikipedia.org/wiki/Space_colonization',
+            source: 'Wikipedia',
+            description: 'Technical and social challenges'
+          }
+        ]
+      },
+      {
+        id: 'biotech-revolution',
+        label: 'Biotech\nRevolution',
+        parent: 'speculative-2060',
+        color: '#EC4899',
+        level: 1,
+        uncertainty: 'high',
+        probability: 'high',
+        timeframe: '2030-2080',
+        description: 'CRISPR mainstream - life extension, genetic enhancement, synthetic biology',
+        details: {
+          overview: 'CRISPR and synthetic biology transform human health and capabilities. Life extension to 120+, cognitive enhancement, designer genetics create new ethical divides between "GenRich" and "GenPoor".',
+          keyMilestones: [
+            '2030-2040: CRISPR mainstream, designer babies legalized',
+            '2040-2060: Aging reversal, life expectancy 120+ years',
+            '2060-2080: Synthetic organisms, radical human modification',
+            '2080+: "Post-human" species divergence, genetic diversity'
+          ],
+          drivers: [
+            'CRISPR and gene editing maturation',
+            'Synthetic biology advances',
+            'Longevity research breakthroughs',
+            'Demand for enhancement',
+            'Biotech commercialization'
+          ],
+          implications: [
+            'Genetic inequality (GenRich vs GenPoor divide)',
+            'Human identity questions',
+            'Regulatory challenges',
+            'Olympic splitting (natural/augmented/cyborg categories)',
+            'Pandemic risks from engineered pathogens'
+          ],
+          sources: 'Gattaca (1997), Jurassic Park ethics, CRISPR research, bioethics discourse'
+        },
+        media: [
+          {
+            type: 'article',
+            title: 'CRISPR Gene Editing',
+            url: 'https://en.wikipedia.org/wiki/CRISPR',
+            source: 'Wikipedia',
+            description: 'Technology and ethical implications'
+          },
+          {
+            type: 'article',
+            title: 'Genetic Enhancement Ethics',
+            url: 'https://en.wikipedia.org/wiki/Genetic_engineering#Ethics',
+            source: 'Wikipedia',
+            description: 'Ethical debates on human modification'
+          }
+        ]
+      },
+      {
+        id: 'collapse-reset',
+        label: 'Collapse\n& Reset',
+        parent: 'speculative-2060',
+        color: '#EF4444',
+        level: 1,
+        uncertainty: 'medium',
+        probability: 'low-medium',
+        timeframe: '2040-2080',
+        description: 'Cascading failures fragment civilization into neo-medieval localized resilience',
+        details: {
+          overview: 'Polycrisis (climate + pandemic + conflict) triggers cascading system failures. Post-collapse world fragments into neo-medieval regions with localized resilience and regenerative practices.',
+          keyMilestones: [
+            '2030-2050: Polycrisis intensifies (climate + pandemic + war)',
+            '2050-2070: Major system collapses, societal fragmentation',
+            '2070-2100: Local adaptation, new social forms emerge',
+            '2100+: Recovery pathways or permanent altered state'
+          ],
+          drivers: [
+            'Climate tipping points cascading',
+            'Resource depletion (water, soil, energy)',
+            'Geopolitical conflict escalation',
+            'Pandemic vulnerability',
+            'Economic inequality extremes'
+          ],
+          implications: [
+            'Population decrease 30-50%',
+            'Localized governance and bioregionalism',
+            'Low-tech resilience and appropriate technology',
+            'Knowledge preservation challenges',
+            'Potential for regenerative recovery'
+          ],
+          sources: 'Parable of the Sower (Butler), The Road (McCarthy), collapse studies, resilience theory'
+        },
+        media: [
+          {
+            type: 'article',
+            title: 'Societal Collapse',
+            url: 'https://en.wikipedia.org/wiki/Societal_collapse',
+            source: 'Wikipedia',
+            description: 'Historical patterns and modern risks'
+          },
+          {
+            type: 'article',
+            title: 'Resilience Theory',
+            url: 'https://en.wikipedia.org/wiki/Resilience_(ecology)',
+            source: 'Wikipedia',
+            description: 'Recovery and adaptation frameworks'
+          }
+        ]
+      }
+    ]
+  }
 };
 
 export default mindMapData;
