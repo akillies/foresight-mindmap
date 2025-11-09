@@ -1080,7 +1080,7 @@ const ForesightMindMap = () => {
             margin: 0,
           }}
         >
-          STRATEGIC FORESIGHT EXPLORER
+          FUTURE STUDIES EXPLORER
         </h1>
 
         {/* Main Panel */}
@@ -2430,6 +2430,25 @@ const ForesightMindMap = () => {
           <TimelineView onClose={() => setTimelineVisible(false)} />
         </div>
       )}
+
+      {/* Hidden About Section - Copyright & Attribution */}
+      <div
+        style={{
+          position: 'absolute',
+          left: '-10000px',
+          top: 'auto',
+          width: '1px',
+          height: '1px',
+          overflow: 'hidden'
+        }}
+        role="contentinfo"
+        aria-label="Copyright and attribution information"
+      >
+        <p>Future Studies Explorer - Copyright © 2025 Alexander Kline Consulting. All rights reserved.</p>
+        <p>An interactive 3D visualization of strategic foresight methodologies based on the Six Pillars framework by Sohail Inayatullah.</p>
+        <p>Developer: Alexander Kline Consulting</p>
+        <p>Contact: Alexander Kline Consulting</p>
+      </div>
     </div>
   );
 };
