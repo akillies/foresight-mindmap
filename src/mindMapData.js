@@ -598,7 +598,15 @@ const mindMapData = {
           url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Fernand_Braudel_(1902-1985).jpg',
           description: 'French historian (1902-1985), pioneer of the Annales School and longue durée concept'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'advanced',
+        timeRequired: '2-4 weeks for comprehensive analysis',
+        groupSize: 'small research teams (3-5 people) with historical knowledge',
+        bestFor: ['Understanding deep structural forces', 'Distinguishing ephemeral from enduring change', 'Long-term strategic planning', 'Historical pattern recognition', 'Contextualizing current events'],
+        sectors: ['Academic research', 'Policy planning', 'Cultural institutions', 'Strategic consulting', 'International relations'],
+        commonPitfalls: ['Focusing only on macro scale and ignoring events', 'Deterministic thinking that discounts agency', 'Insufficient historical data for all three scales', 'Mistaking correlation across timeframes for causation', 'Overwhelming complexity when analyzing multiple parallel structures']
+      }
     },
     {
       id: 'cycle-theory',
@@ -660,7 +668,15 @@ const mindMapData = {
           source: 'Wikipedia',
           description: 'Deep dive into cycle theory covering Kondratiev waves, generational cycles, technology adoption curves, and other cyclical patterns in economic and social systems. Explores how understanding these rhythms helps anticipate turning points and transitions between eras.'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'intermediate',
+        timeRequired: '1-3 days for cycle mapping and analysis',
+        groupSize: 'small teams (3-6 people) with economic/historical knowledge',
+        bestFor: ['Anticipating turning points', 'Technology adoption timing', 'Economic trend forecasting', 'Generational shift planning', 'Long-wave pattern recognition'],
+        sectors: ['Economic forecasting', 'Technology planning', 'Investment strategy', 'Demographic planning', 'Innovation management'],
+        commonPitfalls: ['Over-deterministic cycle predictions', 'Ignoring disruptions that break cycles', 'Confusing cycles with one-time trends', 'Forcing data to fit cycle theories', 'Missing the influence of policy interventions']
+      }
     },
 
     // DEEPENING Methods
@@ -757,7 +773,15 @@ const mindMapData = {
           url: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/UNESCO_logo.svg',
           description: 'UNESCO Chair in Futures Studies - Sohail Inayatullah developed CLA as UNESCO Chair holder'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'advanced',
+        timeRequired: '1-2 days for initial workshop, ongoing for implementation',
+        groupSize: 'facilitated workshops (8-15 people) with diverse perspectives',
+        bestFor: ['Deep problem reframing', 'Transformative strategy development', 'Uncovering hidden assumptions', 'Cultural/worldview analysis', 'Participatory futures work'],
+        sectors: ['Strategic planning', 'Policy development', 'Organizational change', 'Education reform', 'Sustainability transitions'],
+        commonPitfalls: ['Staying stuck at superficial layers', 'Difficulty accessing myth/metaphor layer', 'Group resistance to challenging worldviews', 'Not moving from analysis to action', 'Facilitator bias influencing layer interpretations']
+      }
     },
     {
       id: 'discourse-analysis',
@@ -840,7 +864,15 @@ const mindMapData = {
           url: 'https://www.sciencedirect.com/science/article/abs/pii/S0016328715001160',
           description: 'Exploring how narratives, worldviews, and myths underlie possible, probable, and preferred futures'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'advanced',
+        timeRequired: '1-3 weeks for comprehensive discourse analysis',
+        groupSize: 'small analytical teams (2-4 people) with linguistic/critical theory background',
+        bestFor: ['Deconstructing dominant narratives', 'Revealing power structures', 'Amplifying marginalized voices', 'Language and framing analysis', 'Challenging assumptions in futures work'],
+        sectors: ['Policy analysis', 'Media studies', 'Social change organizations', 'International development', 'Political communication'],
+        commonPitfalls: ['Over-intellectualizing without actionable insights', 'Researcher bias in interpretation', 'Missing nuanced cultural contexts', 'Neglecting material conditions behind discourse', 'Alienating stakeholders with academic jargon']
+      }
     },
 
     // CREATING ALTERNATIVES Methods
@@ -986,7 +1018,15 @@ const mindMapData = {
           url: 'https://upload.wikimedia.org/wikipedia/commons/Special:Redirect/file/Rand_Corporation_logo.svg',
           description: 'RAND Corporation - birthplace of scenario planning in the 1950s, where Herman Kahn pioneered the methodology'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'intermediate',
+        timeRequired: '2-5 days for full scenario development process',
+        groupSize: 'workshops with 8-20 participants plus facilitation team',
+        bestFor: ['Strategic planning under uncertainty', 'Exploring multiple plausible futures', 'Stress-testing strategies', 'Building organizational foresight capacity', 'Long-term decision making'],
+        sectors: ['Corporate strategy', 'Government planning', 'Defense/security', 'Energy and resources', 'Technology companies'],
+        commonPitfalls: ['Creating too many scenarios', 'Scenarios too similar or predictable', 'Focusing on preferred futures instead of plausible ones', 'Not connecting scenarios to current decisions', 'Treating scenarios as predictions']
+      }
     },
     {
       id: 'wild-cards',
@@ -1055,7 +1095,15 @@ const mindMapData = {
           url: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/FAA_8040.4B_Risk_matrix.svg',
           description: 'FAA risk matrix showing probability and severity axes - perfect for assessing wild card scenarios'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'beginner',
+        timeRequired: '2-4 hours for initial wild card brainstorming',
+        groupSize: 'diverse groups (6-12 people) for creative divergence',
+        bestFor: ['Stress-testing plans', 'Building strategic resilience', 'Challenging assumptions', 'Crisis preparedness', 'Expanding imagination'],
+        sectors: ['Risk management', 'Business continuity', 'Defense/security', 'Financial services', 'Public health'],
+        commonPitfalls: ['Focusing only on negative wild cards', 'Dismissing ideas as too improbable', 'Not preparing response strategies', 'Confusing wild cards with science fiction', 'Analysis paralysis from too many possibilities']
+      }
     },
     {
       id: 'morphological',
@@ -1121,7 +1169,15 @@ const mindMapData = {
           url: 'https://commons.wikimedia.org/wiki/Special:FilePath/ETH-BIB-Zwicky, Fritz (1898-1974)-Portr 01030.tif',
           description: 'Swiss astronomer and astrophysicist (1898-1974), creator of morphological analysis and pioneer of dark matter theory'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'intermediate',
+        timeRequired: '1-3 days for comprehensive morphological mapping',
+        groupSize: 'small expert teams (4-8 people) with domain knowledge',
+        bestFor: ['Systematic exploration of solution spaces', 'Technology design and innovation', 'Complex problem decomposition', 'Identifying novel combinations', 'Comprehensive option generation'],
+        sectors: ['Product development', 'Technology forecasting', 'Engineering design', 'Policy options analysis', 'Research and development'],
+        commonPitfalls: ['Too many parameters creating unmanageable combinations', 'Inadequate parameter definition', 'Not evaluating feasibility of combinations', 'Overwhelming stakeholders with complexity', 'Focusing on technical feasibility over desirability']
+      }
     },
 
     // Additional Toolbox Methods under CREATING
@@ -1224,7 +1280,15 @@ const mindMapData = {
           url: 'https://upload.wikimedia.org/wikipedia/commons/Special:Redirect/file/Rand_Corporation_logo.svg',
           description: 'RAND Corporation - birthplace of Delphi Method in the 1950s for Cold War defense forecasting'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'intermediate',
+        timeRequired: '3-6 weeks for full multi-round Delphi process',
+        groupSize: 'expert panels (10-50 experts) with facilitator team',
+        bestFor: ['Building expert consensus', 'Technology forecasting', 'Long-range predictions', 'Policy development', 'Distributed expertise aggregation'],
+        sectors: ['Technology assessment', 'Healthcare planning', 'Defense strategy', 'Standards development', 'Academic research'],
+        commonPitfalls: ['Expert panel not diverse enough', 'Too many or too few rounds', 'Poor questionnaire design', 'Forcing consensus prematurely', 'Not maintaining expert engagement across rounds']
+      }
     },
     {
       id: 'cross-impact',
@@ -1301,7 +1365,15 @@ const mindMapData = {
           url: 'https://www.foresight-platform.eu/wp-content/uploads/2011/04/Cross-Impact_Analysis.pdf',
           description: 'European Foresight Platform practical guide to conducting cross-impact analysis in strategic planning'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'advanced',
+        timeRequired: '2-4 days for matrix construction and analysis',
+        groupSize: 'expert workshops (6-12 people) with systems thinking skills',
+        bestFor: ['Understanding systemic interactions', 'Identifying feedback loops', 'Assessing scenario coherence', 'Evaluating cascading effects', 'Complex systems analysis'],
+        sectors: ['Systems planning', 'Technology assessment', 'Policy analysis', 'Strategic foresight', 'Complex project management'],
+        commonPitfalls: ['Matrix becomes too large to manage', 'Superficial impact assessments', 'Missing indirect/second-order effects', 'Not updating matrix as conditions change', 'Over-reliance on quantitative scoring']
+      }
     },
 
     // TRANSFORMING Methods
@@ -1407,7 +1479,15 @@ const mindMapData = {
           url: 'https://www.peopleandparticipation.net/download/report/4907c5e7a6f58',
           description: 'European Awareness Scenario Workshop methodology - practical guide to facilitating participatory visioning sessions'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'beginner',
+        timeRequired: '1-2 days for initial visioning workshop',
+        groupSize: 'participatory workshops (15-50 people) with diverse stakeholders',
+        bestFor: ['Creating shared aspirations', 'Community engagement', 'Strategic direction setting', 'Organizational alignment', 'Motivating collective action'],
+        sectors: ['Community planning', 'Organizational development', 'Sustainability initiatives', 'Education planning', 'Regional development'],
+        commonPitfalls: ['Vision too vague or aspirational without concrete elements', 'Not inclusive of marginalized voices', 'No pathway from vision to action', 'Vision disconnected from current reality', 'Facilitator imposing their preferred vision']
+      }
     },
     {
       id: 'backcasting',
@@ -1499,7 +1579,15 @@ const mindMapData = {
           source: 'Wikipedia',
           description: 'Complete guide to backcasting methodology, explaining how it differs from forecasting by starting with a desired future and working backwards to identify necessary steps. Covers applications in sustainability planning, policy design, and transformative change where conventional forecasting is inadequate.'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'intermediate',
+        timeRequired: '3-5 days for pathway development and milestone mapping',
+        groupSize: 'strategic planning teams (6-15 people) with implementation authority',
+        bestFor: ['Sustainability transitions', 'Transformational change', 'Goal-oriented planning', 'Breaking trend-dependencies', 'Long-term target achievement'],
+        sectors: ['Sustainability planning', 'Climate action', 'Energy transitions', 'Urban planning', 'Corporate transformation'],
+        commonPitfalls: ['Vision not concrete enough to backcast from', 'Underestimating barriers to change', 'Not identifying critical path dependencies', 'Missing near-term actionable steps', 'Assuming linear pathway when disruptions likely']
+      }
     },
     {
       id: 'strategic-issue',
@@ -1558,7 +1646,15 @@ const mindMapData = {
           url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ansoff_Matrix.JPG',
           description: 'Igor Ansoff\'s strategic planning framework: Market Penetration, Market Development, Product Development, Diversification'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'advanced',
+        timeRequired: '2-4 weeks to design system, ongoing for operation',
+        groupSize: 'dedicated strategic teams (3-5 people) plus organizational network',
+        bestFor: ['Real-time strategic response', 'Organizational agility', 'Managing discontinuities', 'Balancing efficiency with flexibility', 'Early warning systems'],
+        sectors: ['Corporate strategy', 'Competitive intelligence', 'Risk management', 'Strategic planning offices', 'Innovation management'],
+        commonPitfalls: ['System becomes bureaucratic rather than agile', 'Alert fatigue from too many issues', 'Not empowering rapid response', 'Surveillance without action mechanisms', 'Losing efficiency in pursuit of flexibility']
+      }
     },
     {
       id: 'aspirational-futures',
@@ -1652,7 +1748,15 @@ const mindMapData = {
           source: 'Wikipedia',
           description: 'Analysis of Star Trek\'s optimistic economic and social vision where humanity has eliminated poverty, scarcity, and war through replicator technology and collaborative governance. Explores how this aspirational fiction has influenced real-world futurists, technologists, and policy makers seeking to create post-scarcity abundance futures.'
         }
-      ]
+      ],
+      metadata: {
+        difficulty: 'beginner',
+        timeRequired: '1-2 days for initial aspirational vision creation',
+        groupSize: 'creative workshops (8-20 people) with diverse, optimistic mindsets',
+        bestFor: ['Inspiring transformative innovation', 'Long-term civilization design', 'Countering dystopian narratives', 'Mobilizing collaborative action', 'Technology ethics and direction'],
+        sectors: ['Technology development', 'Social innovation', 'Education and inspiration', 'Space exploration', 'Future studies'],
+        commonPitfalls: ['Naivety about implementation challenges', 'Ignoring power structures and political realities', 'Technologically deterministic thinking', 'Not addressing inequality in transition', 'Dismissing as unrealistic fantasy']
+      }
     }
   ],
 

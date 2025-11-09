@@ -974,9 +974,11 @@ const ForesightMindMap = () => {
 
   return (
     <div style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden' }}>
-      {/* 3D Canvas Container */}
-      <div
+      {/* 3D Canvas Container - Main Visualization */}
+      <main
         ref={containerRef}
+        role="main"
+        aria-label="Interactive 3D mind map visualization of Strategic Foresight methodologies"
         style={{
           width: '100%',
           height: '100%',
@@ -986,16 +988,20 @@ const ForesightMindMap = () => {
       />
 
       {/* LCARS Search Box */}
-      <div style={{
-        position: 'absolute',
-        top: '20px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 10,
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0',
-      }}>
+      <nav
+        role="search"
+        aria-label="Search foresight methodologies and content"
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 10,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0',
+        }}
+      >
         <div style={{
           background: COLORS.secondary,
           padding: '14px 20px',
@@ -1005,14 +1011,18 @@ const ForesightMindMap = () => {
           color: '#000000',
           letterSpacing: '2px',
           fontFamily: 'monospace',
-        }}>
+        }}
+        aria-hidden="true"
+        >
           SEARCH
         </div>
         <input
-          type="text"
+          type="search"
           placeholder="ENTER QUERY..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          aria-label="Search for Strategic Foresight pillars, methodologies, and educational resources"
+          aria-describedby="search-results-status"
           style={{
             padding: '14px 24px',
             fontSize: '14px',
@@ -1029,30 +1039,49 @@ const ForesightMindMap = () => {
             textTransform: 'uppercase',
           }}
         />
-      </div>
+        {/* Screen reader announcement for search results */}
+        <div
+          id="search-results-status"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }}
+        >
+          {searchQuery && `Filtering results for: ${searchQuery}`}
+        </div>
+      </nav>
 
       {/* LCARS Control Panel */}
-      <div style={{
-        position: 'absolute',
-        top: '20px',
-        left: '20px',
-        width: '280px',
-        zIndex: 10,
-      }}>
+      <aside
+        role="complementary"
+        aria-labelledby="control-panel-title"
+        aria-label="Navigation controls and interactive features"
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '20px',
+          width: '280px',
+          zIndex: 10,
+        }}
+      >
         {/* Header Bar */}
-        <div style={{
-          background: COLORS.primary,
-          padding: '12px 20px',
-          borderRadius: '20px 20px 0 0',
-          fontSize: '16px',
-          fontWeight: '700',
-          color: '#000000',
-          letterSpacing: '3px',
-          textAlign: 'center',
-          fontFamily: 'monospace',
-        }}>
-          LCARS 47
-        </div>
+        <h1
+          id="control-panel-title"
+          style={{
+            background: COLORS.primary,
+            padding: '12px 20px',
+            borderRadius: '20px 20px 0 0',
+            fontSize: '16px',
+            fontWeight: '700',
+            color: '#000000',
+            letterSpacing: '3px',
+            textAlign: 'center',
+            fontFamily: 'monospace',
+            margin: 0,
+          }}
+        >
+          STRATEGIC FORESIGHT EXPLORER
+        </h1>
 
         {/* Main Panel */}
         <div style={{
@@ -1120,6 +1149,9 @@ const ForesightMindMap = () => {
           {/* Timeline Toggle Button */}
           <button
             onClick={() => setTimelineVisible(!timelineVisible)}
+            aria-label={timelineVisible ? 'Close historical timeline view' : 'Open historical timeline view of foresight methodologies'}
+            aria-pressed={timelineVisible}
+            aria-controls="timeline-panel"
             style={{
               width: '100%',
               background: timelineVisible ? COLORS.accent : 'transparent',
@@ -1152,6 +1184,9 @@ const ForesightMindMap = () => {
           {/* Relationships Toggle */}
           <button
             onClick={() => setShowRelationships(!showRelationships)}
+            aria-label={showRelationships ? 'Hide cross-pillar methodology relationships' : 'Show cross-pillar methodology relationships'}
+            aria-pressed={showRelationships}
+            aria-describedby="relationships-description"
             style={{
               width: '100%',
               background: showRelationships ? COLORS.success : 'transparent',
@@ -1180,29 +1215,46 @@ const ForesightMindMap = () => {
           >
             {showRelationships ? '✓ RELATIONSHIPS ON' : '○ SHOW RELATIONSHIPS'}
           </button>
+          <div
+            id="relationships-description"
+            style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }}
+          >
+            Display connections between methodologies across different strategic foresight pillars
+          </div>
 
           {/* Audio Controls */}
-          <div style={{
-            background: 'rgba(255, 107, 157, 0.1)',
-            border: `2px solid ${COLORS.pink}`,
-            borderRadius: '15px',
-            padding: '15px',
-            marginBottom: '15px',
-          }}>
-            <div style={{
-              color: COLORS.pink,
-              fontSize: '11px',
-              fontWeight: '700',
-              letterSpacing: '2px',
-              marginBottom: '12px',
-              fontFamily: 'monospace',
-            }}>
+          <section
+            role="region"
+            aria-labelledby="audio-controls-heading"
+            style={{
+              background: 'rgba(255, 107, 157, 0.1)',
+              border: `2px solid ${COLORS.pink}`,
+              borderRadius: '15px',
+              padding: '15px',
+              marginBottom: '15px',
+            }}
+          >
+            <h2
+              id="audio-controls-heading"
+              style={{
+                color: COLORS.pink,
+                fontSize: '11px',
+                fontWeight: '700',
+                letterSpacing: '2px',
+                marginBottom: '12px',
+                fontFamily: 'monospace',
+                margin: '0 0 12px 0',
+              }}
+            >
               AMBIENT AUDIO
-            </div>
+            </h2>
 
             {/* Audio Toggle */}
             <button
               onClick={() => setAudioEnabled(!audioEnabled)}
+              aria-label={audioEnabled ? 'Disable ambient background audio' : 'Enable ambient background audio'}
+              aria-pressed={audioEnabled}
+              aria-describedby="audio-presets-group"
               style={{
                 width: '100%',
                 background: audioEnabled ? COLORS.pink : 'transparent',
@@ -1233,7 +1285,12 @@ const ForesightMindMap = () => {
             </button>
 
             {/* Preset Radio Buttons */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <fieldset
+              id="audio-presets-group"
+              role="radiogroup"
+              aria-label="Select ambient audio preset for focus or relaxation"
+              style={{ display: 'flex', flexDirection: 'column', gap: '6px', border: 'none', padding: 0, margin: 0 }}
+            >
               {[1, 2, 3].map(presetNum => (
                 <label
                   key={presetNum}
@@ -1263,6 +1320,7 @@ const ForesightMindMap = () => {
                     checked={audioPreset === presetNum}
                     onChange={() => setAudioPreset(presetNum)}
                     disabled={!audioEnabled}
+                    aria-label={`${AUDIO_PRESETS[presetNum].label} - ${presetNum === 1 ? 'Beta waves for focused study' : presetNum === 2 ? 'Alpha waves for calm workflow' : 'Deep ambient soundscape'}`}
                     style={{
                       width: '14px',
                       height: '14px',
@@ -1281,8 +1339,8 @@ const ForesightMindMap = () => {
                   </span>
                 </label>
               ))}
-            </div>
-          </div>
+            </fieldset>
+          </section>
 
           {/* System Status Indicator */}
           <div style={{
@@ -1312,11 +1370,14 @@ const ForesightMindMap = () => {
             </span>
           </div>
         </div>
-      </div>
+      </aside>
 
       {/* Info Panel */}
       {selectedNode && (
-        <div
+        <aside
+          role="region"
+          aria-labelledby="selected-node-title"
+          aria-label={`Detailed information about ${selectedNode.label?.replace(/\\n/g, ' ')}`}
           style={{
             position: 'absolute',
             top: '0',
@@ -1334,8 +1395,19 @@ const ForesightMindMap = () => {
             boxShadow: `-10px 0 40px ${selectedNode.color || COLORS.primary}30`,
           }}
         >
+          {/* Live region for node selection announcements */}
+          <div
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }}
+          >
+            Now viewing: {selectedNode.label?.replace(/\\n/g, ' ')}
+          </div>
+
           <button
             onClick={() => setSelectedNode(null)}
+            aria-label="Close information panel"
             style={{
               position: 'absolute',
               top: '20px',
@@ -1367,6 +1439,7 @@ const ForesightMindMap = () => {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
             <h2
+              id="selected-node-title"
               style={{
                 margin: '0',
                 fontSize: '24px',
@@ -1408,17 +1481,21 @@ const ForesightMindMap = () => {
           </p>
 
           {selectedNode.pioneers && selectedNode.pioneers.length > 0 && (
-            <div style={{ marginBottom: '24px' }}>
-              <h4 style={{
-                color: COLORS.secondary,
-                fontSize: '12px',
-                letterSpacing: '2px',
-                marginBottom: '12px',
-                fontWeight: '700',
-                fontFamily: 'monospace',
-              }}>
+            <section aria-labelledby="pioneers-heading" style={{ marginBottom: '24px' }}>
+              <h3
+                id="pioneers-heading"
+                style={{
+                  color: COLORS.secondary,
+                  fontSize: '12px',
+                  letterSpacing: '2px',
+                  marginBottom: '12px',
+                  fontWeight: '700',
+                  fontFamily: 'monospace',
+                  margin: '0 0 12px 0',
+                }}
+              >
                 PIONEERS
-              </h4>
+              </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {selectedNode.pioneers.map((pioneer, idx) => (
                   <div
@@ -1456,21 +1533,25 @@ const ForesightMindMap = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
           {selectedNode.historicalContext && (
-            <div style={{ marginBottom: '24px' }}>
-              <h4 style={{
-                color: COLORS.secondary,
-                fontSize: '12px',
-                letterSpacing: '2px',
-                marginBottom: '12px',
-                fontWeight: '700',
-                fontFamily: 'monospace',
-              }}>
+            <section aria-labelledby="history-heading" style={{ marginBottom: '24px' }}>
+              <h3
+                id="history-heading"
+                style={{
+                  color: COLORS.secondary,
+                  fontSize: '12px',
+                  letterSpacing: '2px',
+                  marginBottom: '12px',
+                  fontWeight: '700',
+                  fontFamily: 'monospace',
+                  margin: '0 0 12px 0',
+                }}
+              >
                 HISTORY
-              </h4>
+              </h3>
               <p style={{
                 fontSize: '13px',
                 lineHeight: '1.7',
@@ -1482,21 +1563,25 @@ const ForesightMindMap = () => {
               }}>
                 {selectedNode.historicalContext}
               </p>
-            </div>
+            </section>
           )}
 
           {selectedNode.application && (
-            <div style={{ marginBottom: '24px' }}>
-              <h4 style={{
-                color: COLORS.accent,
-                fontSize: '12px',
-                letterSpacing: '2px',
-                marginBottom: '12px',
-                fontWeight: '700',
-                fontFamily: 'monospace',
-              }}>
+            <section aria-labelledby="application-heading" style={{ marginBottom: '24px' }}>
+              <h3
+                id="application-heading"
+                style={{
+                  color: COLORS.accent,
+                  fontSize: '12px',
+                  letterSpacing: '2px',
+                  marginBottom: '12px',
+                  fontWeight: '700',
+                  fontFamily: 'monospace',
+                  margin: '0 0 12px 0',
+                }}
+              >
                 HOW TO USE
-              </h4>
+              </h3>
               <div style={{
                 fontSize: '13px',
                 lineHeight: '1.7',
@@ -1508,11 +1593,11 @@ const ForesightMindMap = () => {
               }}>
                 {selectedNode.application}
               </div>
-            </div>
+            </section>
           )}
 
           {selectedNode.famousExample && (
-            <div style={{ marginBottom: '24px' }}>
+            <section aria-labelledby="example-heading" style={{ marginBottom: '24px' }}>
               <div style={{
                 background: `linear-gradient(135deg, ${COLORS.highlight}25, ${COLORS.pink}25)`,
                 border: `2px solid ${COLORS.highlight}`,
@@ -1527,19 +1612,25 @@ const ForesightMindMap = () => {
                   right: '8px',
                   fontSize: '24px',
                   opacity: 0.3,
-                }}>
+                }}
+                aria-hidden="true"
+                >
                   ⭐
                 </div>
-                <h4 style={{
-                  color: COLORS.highlight,
-                  fontSize: '12px',
-                  letterSpacing: '2px',
-                  marginBottom: '10px',
-                  fontWeight: '700',
-                  fontFamily: 'monospace',
-                }}>
+                <h3
+                  id="example-heading"
+                  style={{
+                    color: COLORS.highlight,
+                    fontSize: '12px',
+                    letterSpacing: '2px',
+                    marginBottom: '10px',
+                    fontWeight: '700',
+                    fontFamily: 'monospace',
+                    margin: '0 0 10px 0',
+                  }}
+                >
                   FAMOUS EXAMPLE
-                </h4>
+                </h3>
                 <div style={{
                   fontSize: '13px',
                   lineHeight: '1.7',
@@ -1549,7 +1640,7 @@ const ForesightMindMap = () => {
                   {selectedNode.famousExample}
                 </div>
               </div>
-            </div>
+            </section>
           )}
 
           {(selectedNode.types || selectedNode.modes || selectedNode.archetypes) && (
@@ -1755,17 +1846,21 @@ const ForesightMindMap = () => {
             if (mediaByNode.length === 0) return null;
 
             return (
-              <div style={{ marginTop: '24px', marginBottom: '20px' }}>
-                <h4 style={{
-                  color: COLORS.success,
-                  fontSize: '12px',
-                  letterSpacing: '2px',
-                  marginBottom: '12px',
-                  fontWeight: '700',
-                  fontFamily: 'monospace',
-                }}>
+              <section aria-labelledby="media-library-heading" style={{ marginTop: '24px', marginBottom: '20px' }}>
+                <h3
+                  id="media-library-heading"
+                  style={{
+                    color: COLORS.success,
+                    fontSize: '12px',
+                    letterSpacing: '2px',
+                    marginBottom: '12px',
+                    fontWeight: '700',
+                    fontFamily: 'monospace',
+                    margin: '0 0 12px 0',
+                  }}
+                >
                   MEDIA LIBRARY
-                </h4>
+                </h3>
 
                 {mediaByNode.map((nodeGroup, idx) => (
                   <div key={idx} style={{ marginBottom: '16px' }}>
@@ -1836,7 +1931,7 @@ const ForesightMindMap = () => {
                 }}>
                   Click media orbs in the 3D view to explore
                 </div>
-              </div>
+              </section>
             );
           })()}
 
@@ -1845,6 +1940,7 @@ const ForesightMindMap = () => {
               href={selectedNode.wikipedia}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`Learn more about ${selectedNode.label?.replace(/\\n/g, ' ')} on Wikipedia (opens in new tab)`}
               style={{
                 display: 'inline-block',
                 marginTop: '20px',
@@ -1873,12 +1969,16 @@ const ForesightMindMap = () => {
               Read More on Wikipedia
             </a>
           )}
-        </div>
+        </aside>
       )}
 
       {/* Media Viewer */}
       {selectedMedia && (
         <div
+          role="dialog"
+          aria-labelledby="media-viewer-title"
+          aria-describedby="media-viewer-description"
+          aria-modal="true"
           style={{
             position: 'fixed',
             top: 0,
@@ -1897,7 +1997,8 @@ const ForesightMindMap = () => {
             setImageError(false);
           }}
         >
-          <div
+          <article
+            role="document"
             style={{
               background: COLORS.panel,
               borderRadius: '12px',
@@ -1913,9 +2014,10 @@ const ForesightMindMap = () => {
           >
             <button
               onClick={() => {
-            setSelectedMedia(null);
-            setImageError(false);
-          }}
+                setSelectedMedia(null);
+                setImageError(false);
+              }}
+              aria-label="Close media viewer"
               style={{
                 position: 'absolute',
                 top: '20px',
@@ -1937,13 +2039,16 @@ const ForesightMindMap = () => {
               ×
             </button>
 
-            <h2 style={{
-              color: MEDIA_COLORS[selectedMedia.type],
-              marginTop: '0',
-              marginBottom: '10px',
-              paddingRight: '60px',
-              fontFamily: 'Inter'
-            }}>
+            <h2
+              id="media-viewer-title"
+              style={{
+                color: MEDIA_COLORS[selectedMedia.type],
+                marginTop: '0',
+                marginBottom: '10px',
+                paddingRight: '60px',
+                fontFamily: 'Inter'
+              }}
+            >
               {selectedMedia.title}
             </h2>
 
@@ -1964,7 +2069,10 @@ const ForesightMindMap = () => {
               </span>
             )}
 
-            <p style={{ color: '#b8c5d8', marginBottom: '20px', fontSize: '14px', lineHeight: '1.6', fontFamily: 'Inter' }}>
+            <p
+              id="media-viewer-description"
+              style={{ color: '#b8c5d8', marginBottom: '20px', fontSize: '14px', lineHeight: '1.6', fontFamily: 'Inter' }}
+            >
               {selectedMedia.description}
             </p>
 
@@ -1973,9 +2081,11 @@ const ForesightMindMap = () => {
                 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '20px' }}>
                   <iframe
                     src={`https://www.youtube.com/embed/${selectedMedia.url.split('v=')[1]?.split('&')[0] || selectedMedia.url.split('/').pop()}?origin=${window.location.origin}`}
+                    title={selectedMedia.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
+                    aria-label={`Video: ${selectedMedia.title}`}
                     style={{
                       position: 'absolute',
                       top: 0,
@@ -2004,6 +2114,7 @@ const ForesightMindMap = () => {
                     href={selectedMedia.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`View original video on ${selectedMedia.source || 'YouTube'} (opens in new tab)`}
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
@@ -2041,8 +2152,9 @@ const ForesightMindMap = () => {
                   <div>
                     <img
                       src={selectedMedia.url}
-                      alt={selectedMedia.title}
+                      alt={`${selectedMedia.title} - ${selectedMedia.description}`}
                       onError={() => setImageError(true)}
+                      loading="lazy"
                       style={{
                         maxWidth: '100%',
                         maxHeight: '60vh',
@@ -2074,6 +2186,7 @@ const ForesightMindMap = () => {
                         href={selectedMedia.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`View full-size image (opens in new tab)`}
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
@@ -2197,6 +2310,7 @@ const ForesightMindMap = () => {
                     href={selectedMedia.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Read full ${selectedMedia.type} on ${selectedMedia.source || 'external website'} (opens in new tab)`}
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
@@ -2227,13 +2341,15 @@ const ForesightMindMap = () => {
                 </div>
               </div>
             )}
-          </div>
+          </article>
         </div>
       )}
 
       {/* Hover Tooltip */}
       {hoveredNode && !selectedNode && (
         <div
+          role="tooltip"
+          aria-live="polite"
           style={{
             position: 'absolute',
             bottom: '30px',
@@ -2310,7 +2426,9 @@ const ForesightMindMap = () => {
 
       {/* Timeline View */}
       {timelineVisible && (
-        <TimelineView onClose={() => setTimelineVisible(false)} />
+        <div id="timeline-panel">
+          <TimelineView onClose={() => setTimelineVisible(false)} />
+        </div>
       )}
     </div>
   );
