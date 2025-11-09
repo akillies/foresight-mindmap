@@ -49,6 +49,9 @@ const TimelineView = ({ onClose }) => {
   // Speculative futures
   const speculativeFutures = mindMapData.speculativeFutures?.scenarios || [];
 
+  // Positive futures
+  const positiveFutures = mindMapData.positiveFutures?.milestones || [];
+
   return (
     <div
       style={{
@@ -581,6 +584,121 @@ const TimelineView = ({ onClose }) => {
               </div>
             );
           })}
+        </div>
+
+        {/* Positive Futures 2025-2099 Section */}
+        <div style={{ marginTop: '40px' }}>
+          <h3
+            style={{
+              color: '#10B981',
+              fontSize: '14px',
+              fontWeight: '700',
+              letterSpacing: '2px',
+              marginBottom: '12px',
+              fontFamily: 'monospace',
+            }}
+          >
+            POSITIVE FUTURES 2025-2099 🚀
+          </h3>
+          <div
+            style={{
+              color: COLORS.text,
+              fontSize: '11px',
+              opacity: 0.7,
+              marginBottom: '20px',
+              fontStyle: 'italic',
+              fontFamily: 'Inter, sans-serif',
+            }}
+          >
+            Star Trek-inspired pathway: abundance, collaboration, enlightenment
+          </div>
+
+          {positiveFutures.map((milestone) => (
+            <div
+              key={milestone.id}
+              style={{
+                marginBottom: '20px',
+                background: `${milestone.color}15`,
+                border: `2px solid ${milestone.color}`,
+                borderRadius: '12px',
+                padding: '16px',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                <div style={{ flex: 1 }}>
+                  <div
+                    style={{
+                      color: milestone.color,
+                      fontSize: '12px',
+                      fontWeight: '700',
+                      marginBottom: '4px',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    {milestone.year}
+                  </div>
+                  <h4
+                    style={{
+                      color: COLORS.text,
+                      fontSize: '14px',
+                      fontWeight: '700',
+                      marginBottom: '8px',
+                      fontFamily: 'Inter, sans-serif',
+                    }}
+                  >
+                    {milestone.title}
+                  </h4>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  color: COLORS.text,
+                  fontSize: '11px',
+                  lineHeight: '1.6',
+                  opacity: 0.9,
+                  marginBottom: '12px',
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              >
+                {milestone.description}
+              </div>
+
+              {milestone.details?.keyDevelopments && (
+                <div>
+                  <div
+                    style={{
+                      fontSize: '9px',
+                      color: milestone.color,
+                      fontWeight: '700',
+                      marginBottom: '8px',
+                      letterSpacing: '1px',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    KEY DEVELOPMENTS
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    {milestone.details.keyDevelopments.slice(0, 3).map((dev, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          fontSize: '10px',
+                          color: COLORS.text,
+                          opacity: 0.8,
+                          paddingLeft: '12px',
+                          borderLeft: `2px solid ${milestone.color}40`,
+                          fontFamily: 'Inter, sans-serif',
+                        }}
+                      >
+                        • {dev}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 

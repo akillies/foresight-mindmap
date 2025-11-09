@@ -1296,6 +1296,94 @@ const mindMapData = {
           description: 'Igor Ansoff\'s strategic planning framework: Market Penetration, Market Development, Product Development, Diversification'
         }
       ]
+    },
+    {
+      id: 'aspirational-futures',
+      label: 'Aspirational\nFutures Design',
+      parent: 'transforming',
+      description: 'Star Trek-inspired abundance futures through innovation and collaboration',
+      color: '#FF6B9D',
+      level: 2,
+      yearIntroduced: 1966,
+      pioneers: [
+        {
+          name: 'Gene Roddenberry',
+          role: 'Visionary storyteller',
+          organization: 'Star Trek',
+          contribution: 'Created aspirational vision of post-scarcity, collaborative humanity exploring space united in purpose'
+        },
+        {
+          name: 'Buckminster Fuller',
+          role: 'Designer & systems thinker',
+          organization: 'World Game Institute',
+          contribution: 'Advocated "Design Science Revolution" - making world work for 100% of humanity through innovation'
+        },
+        {
+          name: 'Jacque Fresco',
+          role: 'Social engineer',
+          organization: 'The Venus Project',
+          contribution: 'Resource-based economy design eliminating scarcity through technology and intelligent management'
+        }
+      ],
+      historicalContext: 'Star Trek (1966) presented optimistic future where humanity overcame scarcity, conflict, and division. Fuller\'s World Game (1969) and Fresco\'s Venus Project (1994) provided frameworks for achieving such futures through design and technology.',
+      details: {
+        overview: 'Aspirational Futures Design creates positive visions of abundance, collaboration, and enlightenment to inspire action toward preferred futures. Combines storytelling, systems thinking, and technological optimism.',
+        principles: [
+          'Abundance Mindset - Technology enables post-scarcity for all',
+          'Global Collaboration - Diverse perspectives unite to solve challenges',
+          'Human+AI Partnership - Technology augments human potential',
+          'Innovation-Driven - Every challenge met with ingenuity',
+          'Enlightenment Focus - Resources freed for human flourishing'
+        ],
+        pathway: 'Design desirable futures (2025-2099) → Build prototypes → Scale solutions → Achieve transformation',
+        application: 'Create compelling visions that mobilize action toward Star Trek-like civilization',
+        timeHorizon: '2025-2099 and beyond',
+        philosophy: '"The best way to predict the future is to design it" - Buckminster Fuller'
+      },
+      wikipedia: 'https://en.wikipedia.org/wiki/Aspirational_reference_groups',
+      media: [
+        {
+          type: 'video',
+          title: 'Star Trek: Optimistic Vision of Future',
+          url: 'https://www.youtube.com/watch?v=PjiXkJ6P8CI',
+          description: 'Gene Roddenberry\'s inspiring vision of humanity\'s potential',
+          year: 1991
+        },
+        {
+          type: 'video',
+          title: 'Buckminster Fuller: Thinking Out Loud',
+          url: 'https://www.youtube.com/watch?v=BUUKm0k6FMg',
+          description: 'Fuller on making the world work for everyone through design',
+          year: 1996
+        },
+        {
+          type: 'video',
+          title: 'The Venus Project: Resource-Based Economy',
+          url: 'https://www.youtube.com/watch?v=Yb5ivvcTvRQ',
+          description: 'Jacque Fresco presenting vision of post-scarcity civilization',
+          year: 2008
+        },
+        {
+          type: 'image',
+          title: 'Star Trek Enterprise: Symbol of Unity',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Milky_Way_IR_Spitzer.jpg',
+          description: 'Humanity united in exploration and discovery - the aspirational vision'
+        },
+        {
+          type: 'document',
+          title: 'Operating Manual for Spaceship Earth',
+          url: 'https://www.bfi.org/about-fuller/resources/operating-manual',
+          description: 'Buckminster Fuller\'s guide to managing Earth\'s resources for all humanity',
+          year: 1968
+        },
+        {
+          type: 'article',
+          title: 'Star Trek Economics: Post-Scarcity Futures',
+          url: 'https://en.wikipedia.org/wiki/Star_Trek#Philosophy_and_themes',
+          source: 'Wikipedia',
+          description: 'Analysis of Star Trek\'s optimistic economic and social vision'
+        }
+      ]
     }
   ],
 
@@ -2067,6 +2155,119 @@ const mindMapData = {
             description: 'Recovery and adaptation frameworks'
           }
         ]
+      }
+    ]
+  },
+
+  // POSITIVE FUTURES 2025-2099: Star Trek Pathway
+  positiveFutures: {
+    root: {
+      id: 'positive-2025',
+      label: 'Positive\nFutures 2025-2099',
+      description: 'Star Trek-inspired pathway: abundance, collaboration, enlightenment',
+      color: '#10B981',
+      level: 0,
+      uncertainty: 'medium',
+      timeframe: '2025-2099',
+      details: {
+        overview: 'An optimistic trajectory where humanity meets challenges with innovation, collaboration, and abundance thinking - progressing toward an enlightened, post-scarcity civilization by 2099.',
+        philosophy: 'Human ingenuity + AI partnership + global cooperation = Star Trek-like future',
+        principles: [
+          'Every challenge met with invention',
+          'Diverse perspectives drive solutions',
+          'Technology creates abundance for all',
+          'Resources freed for human flourishing'
+        ]
+      }
+    },
+    milestones: [
+      {
+        id: 'ai-collaboration-era',
+        year: '2025-2035',
+        title: 'AI+Human Collaboration Era',
+        description: 'AI systems augment human creativity and problem-solving',
+        color: '#10B981',
+        uncertainty: 'low',
+        probability: 'medium-high',
+        details: {
+          overview: 'Foundation decade where AI transitions from tool to partner, amplifying human capabilities across science, education, and creativity',
+          keyDevelopments: [
+            'AI assistants become ubiquitous research partners',
+            'Personalized education reaches global scale',
+            'Scientific discovery accelerates 10x through AI collaboration',
+            'Creative tools democratize innovation'
+          ],
+          tippingPoint: 'AI systems prove beneficial when aligned with human values',
+          societalImpact: 'Productivity boom, knowledge work transforms, new forms of human-machine collaboration emerge',
+          sources: 'OpenAI forecasts, MIT Technology Review, AI alignment research'
+        },
+        media: []
+      },
+      {
+        id: 'post-scarcity-prototypes',
+        year: '2040-2050',
+        title: 'Post-Scarcity Prototypes',
+        description: 'Energy abundance and resource optimization demonstrate feasibility',
+        color: '#10B981',
+        uncertainty: 'medium',
+        probability: 'medium',
+        details: {
+          overview: 'Breakthrough decade where fusion power, advanced recycling, and AI resource management create regional abundance models',
+          keyDevelopments: [
+            'Commercial fusion power reaches grid parity',
+            'AI-optimized resource allocation eliminates waste',
+            'Vertical farming feeds cities sustainably',
+            'Advanced materials enable circular economy'
+          ],
+          tippingPoint: 'First regions achieve energy + food abundance',
+          societalImpact: 'Scarcity mindset begins shifting, basic needs guaranteed in pilot regions, economic models evolve',
+          sources: 'ITER fusion project, Buckminster Fuller Institute, circular economy research'
+        },
+        media: []
+      },
+      {
+        id: 'global-cooperation-frameworks',
+        year: '2060-2075',
+        title: 'Global Cooperation Frameworks',
+        description: 'United problem-solving transcends national boundaries',
+        color: '#10B981',
+        uncertainty: 'medium',
+        probability: 'medium',
+        details: {
+          overview: 'Maturation decade where existential challenges (climate, pandemics, asteroids) necessitate and enable global coordination',
+          keyDevelopments: [
+            'Climate restoration becomes coordinated global project',
+            'Planetary defense systems operational',
+            'Universal translation enables seamless collaboration',
+            'Shared challenges build trust and interdependence'
+          ],
+          tippingPoint: 'Successful global mobilization proves cooperation works',
+          societalImpact: 'National interests align with planetary wellbeing, "Spaceship Earth" mindset dominates, new governance models emerge',
+          sources: 'Star Trek philosophy, Operating Manual for Spaceship Earth (Fuller), UN SDGs evolution'
+        },
+        media: []
+      },
+      {
+        id: 'enlightenment-renaissance',
+        year: '2080-2099',
+        title: 'Enlightenment Renaissance',
+        description: 'Human potential unlocked, golden era begins',
+        color: '#10B981',
+        uncertainty: 'high',
+        probability: 'medium',
+        details: {
+          overview: 'Culmination decade where abundance + collaboration + technology free humanity to pursue wisdom, exploration, and self-actualization',
+          keyDevelopments: [
+            'Basic needs universally met through automation',
+            'Education becomes lifelong journey of discovery',
+            'Space exploration unites humanity in common purpose',
+            'Arts and sciences flourish with freed human potential'
+          ],
+          tippingPoint: 'Society prioritizes meaning over material accumulation',
+          societalImpact: 'Star Trek-like civilization emerges, human flourishing becomes primary goal, new challenges focus on growth and exploration',
+          sources: 'Star Trek vision (Roddenberry), The Venus Project (Fresco), transhumanist optimism'
+        },
+        media: []
       }
     ]
   }

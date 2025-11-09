@@ -22,9 +22,17 @@ const ForesightMindMap = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [timelineVisible, setTimelineVisible] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [audioEnabled, setAudioEnabled] = useState(false);
+  const [audioPreset, setAudioPreset] = useState(1);
 
   // Ref to avoid stale closures in animation loop
   const hoveredNodeRef = useRef(null);
+
+  // Audio refs
+  const audioContextRef = useRef(null);
+  const audioSourceRef = useRef(null); // For both file playback and oscillators
+  const gainNodeRef = useRef(null);
+  const audioBuffersRef = useRef({}); // Cache loaded audio buffers
 
   // LCARS Color Palette
   const COLORS = {
@@ -46,6 +54,168 @@ const ForesightMindMap = () => {
     article: '#FFCC66',
     document: '#99CC99'
   };
+
+  // Audio presets - all generative for now
+  const AUDIO_PRESETS = {
+    1: { type: 'generative', baseFreq: 528, binauralBeat: 14, label: 'STUDY FOCUS', harmonics: false },    // Beta waves for focus
+    2: { type: 'generative', baseFreq: 432, binauralBeat: 10, label: 'CALM FLOW', harmonics: false },      // Alpha waves for flow
+    3: { type: 'generative', baseFreq: 174, binauralBeat: 3, label: 'WARP CORE', harmonics: true }         // Deep ambient
+  };
+
+  // Audio engine with Web Audio API - supports both file playback and generative
+  useEffect(() => {
+    const oscillatorsRef = []; // Track all oscillators for proper cleanup
+
+    const stopAudio = () => {
+      // Stop all oscillators
+      oscillatorsRef.forEach(osc => {
+        try {
+          osc.stop();
+          osc.disconnect();
+        } catch (e) {
+          // Already stopped
+        }
+      });
+      oscillatorsRef.length = 0;
+
+      // Stop audio source
+      if (audioSourceRef.current) {
+        try {
+          if (audioSourceRef.current.stop) {
+            audioSourceRef.current.stop();
+          }
+          if (audioSourceRef.current.disconnect) {
+            audioSourceRef.current.disconnect();
+          }
+        } catch (e) {
+          // Already stopped
+        }
+        audioSourceRef.current = null;
+      }
+
+      // Disconnect gain node
+      if (gainNodeRef.current) {
+        try {
+          gainNodeRef.current.disconnect();
+        } catch (e) {
+          // Already disconnected
+        }
+        gainNodeRef.current = null;
+      }
+    };
+
+    const playGenerativeAudio = async (ctx, preset, gainNode, baseVolume) => {
+      // Create stereo panners for binaural effect
+      const pannerLeft = ctx.createStereoPanner();
+      pannerLeft.pan.value = -1;
+      const pannerRight = ctx.createStereoPanner();
+      pannerRight.pan.value = 1;
+
+      // Main binaural oscillators
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      osc1.type = 'sine';
+      osc2.type = 'sine';
+      osc1.frequency.setValueAtTime(preset.baseFreq, ctx.currentTime);
+      osc2.frequency.setValueAtTime(preset.baseFreq + preset.binauralBeat, ctx.currentTime);
+
+      osc1.connect(pannerLeft);
+      pannerLeft.connect(gainNode);
+      osc2.connect(pannerRight);
+      pannerRight.connect(gainNode);
+
+      oscillatorsRef.push(osc1, osc2);
+
+      // Add harmonics for WARP CORE
+      if (preset.harmonics) {
+        const harmonics = [preset.baseFreq * 2, preset.baseFreq * 1.5, preset.baseFreq * 0.5];
+        harmonics.forEach((freq, idx) => {
+          const harmOsc = ctx.createOscillator();
+          harmOsc.type = 'sine';
+          harmOsc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+          const harmGain = ctx.createGain();
+          harmGain.gain.setValueAtTime(0, ctx.currentTime);
+          harmGain.gain.linearRampToValueAtTime(baseVolume * (0.3 / (idx + 1)), ctx.currentTime + 2);
+
+          harmOsc.connect(harmGain);
+          harmGain.connect(ctx.destination);
+          harmOsc.start();
+          oscillatorsRef.push(harmOsc);
+        });
+      }
+
+      osc1.start();
+      osc2.start();
+      audioSourceRef.current = { stop: () => {}, disconnect: () => {} }; // Cleanup handled by oscillatorsRef
+    };
+
+    const playFileAudio = async (ctx, preset, gainNode) => {
+      // Check if buffer is cached
+      if (!audioBuffersRef.current[preset.file]) {
+        try {
+          const response = await fetch(preset.file);
+          const arrayBuffer = await response.arrayBuffer();
+          const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+          audioBuffersRef.current[preset.file] = audioBuffer;
+        } catch (error) {
+          console.error('Error loading audio file:', error);
+          return;
+        }
+      }
+
+      const source = ctx.createBufferSource();
+      source.buffer = audioBuffersRef.current[preset.file];
+      source.loop = true; // Seamless looping
+      source.connect(gainNode);
+      source.start(0);
+      audioSourceRef.current = source;
+    };
+
+    if (audioEnabled) {
+      (async () => {
+        // Initialize AudioContext
+        if (!audioContextRef.current) {
+          audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        const ctx = audioContextRef.current;
+        const preset = AUDIO_PRESETS[audioPreset];
+
+        // Stop any existing audio
+        stopAudio();
+
+        // Create gain node with fade in
+        const gainNode = ctx.createGain();
+        const baseVolume = 0.075; // Reduced from 0.15 - more comfortable default volume
+        gainNode.gain.setValueAtTime(0, ctx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(baseVolume, ctx.currentTime + 2);
+        gainNode.connect(ctx.destination);
+        gainNodeRef.current = gainNode;
+
+        // Play based on preset type
+        if (preset.type === 'file') {
+          await playFileAudio(ctx, preset, gainNode);
+        } else if (preset.type === 'generative') {
+          await playGenerativeAudio(ctx, preset, gainNode, baseVolume);
+        }
+      })();
+    } else {
+      // Fade out before stopping
+      if (gainNodeRef.current && audioContextRef.current) {
+        const ctx = audioContextRef.current;
+        gainNodeRef.current.gain.linearRampToValueAtTime(0, ctx.currentTime + 1);
+        setTimeout(stopAudio, 1000);
+      } else {
+        stopAudio();
+      }
+    }
+
+    // Cleanup on unmount or any change
+    return () => {
+      stopAudio();
+    };
+  }, [audioEnabled, audioPreset]);
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
@@ -801,6 +971,109 @@ const ForesightMindMap = () => {
           >
             {timelineVisible ? '◀ CLOSE TIMELINE' : 'TIMELINE VIEW ▶'}
           </button>
+
+          {/* Audio Controls */}
+          <div style={{
+            background: 'rgba(255, 107, 157, 0.1)',
+            border: `2px solid ${COLORS.pink}`,
+            borderRadius: '15px',
+            padding: '15px',
+            marginBottom: '15px',
+          }}>
+            <div style={{
+              color: COLORS.pink,
+              fontSize: '11px',
+              fontWeight: '700',
+              letterSpacing: '2px',
+              marginBottom: '12px',
+              fontFamily: 'monospace',
+            }}>
+              AMBIENT AUDIO
+            </div>
+
+            {/* Audio Toggle */}
+            <button
+              onClick={() => setAudioEnabled(!audioEnabled)}
+              style={{
+                width: '100%',
+                background: audioEnabled ? COLORS.pink : 'transparent',
+                border: `2px solid ${COLORS.pink}`,
+                color: audioEnabled ? '#000000' : COLORS.pink,
+                padding: '10px',
+                borderRadius: '10px',
+                fontSize: '11px',
+                fontWeight: '700',
+                letterSpacing: '2px',
+                cursor: 'pointer',
+                fontFamily: 'monospace',
+                marginBottom: '10px',
+                transition: 'all 0.2s',
+              }}
+              onMouseEnter={(e) => {
+                if (!audioEnabled) {
+                  e.target.style.background = `${COLORS.pink}20`;
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!audioEnabled) {
+                  e.target.style.background = 'transparent';
+                }
+              }}
+            >
+              {audioEnabled ? '■ AUDIO ON' : '▶ AUDIO OFF'}
+            </button>
+
+            {/* Preset Radio Buttons */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              {[1, 2, 3].map(presetNum => (
+                <label
+                  key={presetNum}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    cursor: 'pointer',
+                    padding: '6px 8px',
+                    borderRadius: '8px',
+                    background: audioEnabled && audioPreset === presetNum ? `${COLORS.pink}20` : 'transparent',
+                    transition: 'background 0.2s',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (audioEnabled) {
+                      e.currentTarget.style.background = `${COLORS.pink}15`;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = audioEnabled && audioPreset === presetNum ? `${COLORS.pink}20` : 'transparent';
+                  }}
+                >
+                  <input
+                    type="radio"
+                    name="audioPreset"
+                    value={presetNum}
+                    checked={audioPreset === presetNum}
+                    onChange={() => setAudioPreset(presetNum)}
+                    disabled={!audioEnabled}
+                    style={{
+                      width: '14px',
+                      height: '14px',
+                      cursor: audioEnabled ? 'pointer' : 'not-allowed',
+                      accentColor: COLORS.pink,
+                    }}
+                  />
+                  <span style={{
+                    color: audioEnabled ? COLORS.pink : '#666',
+                    fontSize: '10px',
+                    fontWeight: '600',
+                    letterSpacing: '1px',
+                    fontFamily: 'monospace',
+                  }}>
+                    MUSIC {presetNum}: {AUDIO_PRESETS[presetNum].label}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
 
           {/* System Status Indicator */}
           <div style={{
