@@ -1156,16 +1156,36 @@ const ForesightMindMap = () => {
             ×
           </button>
 
-          <h2
-            style={{
-              margin: '0 0 10px 0',
-              fontSize: '24px',
-              color: selectedNode.color || COLORS.primary,
-              letterSpacing: '1px',
-            }}
-          >
-            {selectedNode.label?.replace(/\\n/g, ' ')}
-          </h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
+            <h2
+              style={{
+                margin: '0',
+                fontSize: '24px',
+                color: selectedNode.color || COLORS.primary,
+                letterSpacing: '1px',
+              }}
+            >
+              {selectedNode.label?.replace(/\\n/g, ' ')}
+            </h2>
+            {selectedNode.yearIntroduced && (
+              <span
+                style={{
+                  display: 'inline-block',
+                  padding: '4px 10px',
+                  background: `${selectedNode.color || COLORS.primary}20`,
+                  border: `1px solid ${selectedNode.color || COLORS.primary}`,
+                  borderRadius: '12px',
+                  fontSize: '11px',
+                  fontWeight: '700',
+                  color: selectedNode.color || COLORS.primary,
+                  letterSpacing: '1px',
+                  fontFamily: 'monospace',
+                }}
+              >
+                {selectedNode.yearIntroduced}
+              </span>
+            )}
+          </div>
 
           <p
             style={{
@@ -1177,6 +1197,255 @@ const ForesightMindMap = () => {
           >
             {selectedNode.description}
           </p>
+
+          {selectedNode.pioneers && selectedNode.pioneers.length > 0 && (
+            <div style={{ marginBottom: '24px' }}>
+              <h4 style={{
+                color: COLORS.secondary,
+                fontSize: '12px',
+                letterSpacing: '2px',
+                marginBottom: '12px',
+                fontWeight: '700',
+                fontFamily: 'monospace',
+              }}>
+                PIONEERS
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {selectedNode.pioneers.map((pioneer, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: `${selectedNode.color || COLORS.primary}10`,
+                      border: `1px solid ${selectedNode.color || COLORS.primary}40`,
+                      borderRadius: '8px',
+                      padding: '12px',
+                    }}
+                  >
+                    <div style={{
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      color: selectedNode.color || COLORS.primary,
+                      marginBottom: '4px',
+                    }}>
+                      {pioneer.name}
+                    </div>
+                    <div style={{
+                      fontSize: '11px',
+                      color: COLORS.secondary,
+                      marginBottom: '6px',
+                      fontStyle: 'italic',
+                    }}>
+                      {pioneer.role} • {pioneer.organization}
+                    </div>
+                    <div style={{
+                      fontSize: '12px',
+                      color: '#b8c5d8',
+                      lineHeight: '1.5',
+                    }}>
+                      {pioneer.contribution}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {selectedNode.historicalContext && (
+            <div style={{ marginBottom: '24px' }}>
+              <h4 style={{
+                color: COLORS.secondary,
+                fontSize: '12px',
+                letterSpacing: '2px',
+                marginBottom: '12px',
+                fontWeight: '700',
+                fontFamily: 'monospace',
+              }}>
+                HISTORY
+              </h4>
+              <p style={{
+                fontSize: '13px',
+                lineHeight: '1.7',
+                color: '#d0d8e8',
+                background: `${selectedNode.color || COLORS.primary}08`,
+                padding: '14px',
+                borderRadius: '8px',
+                borderLeft: `3px solid ${selectedNode.color || COLORS.primary}`,
+              }}>
+                {selectedNode.historicalContext}
+              </p>
+            </div>
+          )}
+
+          {selectedNode.application && (
+            <div style={{ marginBottom: '24px' }}>
+              <h4 style={{
+                color: COLORS.accent,
+                fontSize: '12px',
+                letterSpacing: '2px',
+                marginBottom: '12px',
+                fontWeight: '700',
+                fontFamily: 'monospace',
+              }}>
+                HOW TO USE
+              </h4>
+              <div style={{
+                fontSize: '13px',
+                lineHeight: '1.7',
+                color: '#d0d8e8',
+                background: `${COLORS.accent}12`,
+                padding: '14px',
+                borderRadius: '8px',
+                border: `1px solid ${COLORS.accent}40`,
+              }}>
+                {selectedNode.application}
+              </div>
+            </div>
+          )}
+
+          {selectedNode.famousExample && (
+            <div style={{ marginBottom: '24px' }}>
+              <div style={{
+                background: `linear-gradient(135deg, ${COLORS.highlight}25, ${COLORS.pink}25)`,
+                border: `2px solid ${COLORS.highlight}`,
+                borderRadius: '10px',
+                padding: '16px',
+                position: 'relative',
+                overflow: 'hidden',
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  top: '8px',
+                  right: '8px',
+                  fontSize: '24px',
+                  opacity: 0.3,
+                }}>
+                  ⭐
+                </div>
+                <h4 style={{
+                  color: COLORS.highlight,
+                  fontSize: '12px',
+                  letterSpacing: '2px',
+                  marginBottom: '10px',
+                  fontWeight: '700',
+                  fontFamily: 'monospace',
+                }}>
+                  FAMOUS EXAMPLE
+                </h4>
+                <div style={{
+                  fontSize: '13px',
+                  lineHeight: '1.7',
+                  color: '#ffffff',
+                  fontWeight: '500',
+                }}>
+                  {selectedNode.famousExample}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {(selectedNode.types || selectedNode.modes || selectedNode.archetypes) && (
+            <div style={{ marginBottom: '24px' }}>
+              {selectedNode.types && (
+                <div style={{ marginBottom: '16px' }}>
+                  <h4 style={{
+                    color: selectedNode.color || COLORS.primary,
+                    fontSize: '12px',
+                    letterSpacing: '2px',
+                    marginBottom: '10px',
+                    fontWeight: '700',
+                    fontFamily: 'monospace',
+                  }}>
+                    TYPES
+                  </h4>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {selectedNode.types.map((type, idx) => (
+                      <span
+                        key={idx}
+                        style={{
+                          display: 'inline-block',
+                          padding: '6px 12px',
+                          background: `${selectedNode.color || COLORS.primary}20`,
+                          border: `1px solid ${selectedNode.color || COLORS.primary}60`,
+                          borderRadius: '6px',
+                          fontSize: '12px',
+                          color: COLORS.text,
+                          fontWeight: '500',
+                        }}
+                      >
+                        {type}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {selectedNode.modes && (
+                <div style={{ marginBottom: '16px' }}>
+                  <h4 style={{
+                    color: selectedNode.color || COLORS.primary,
+                    fontSize: '12px',
+                    letterSpacing: '2px',
+                    marginBottom: '10px',
+                    fontWeight: '700',
+                    fontFamily: 'monospace',
+                  }}>
+                    MODES
+                  </h4>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {selectedNode.modes.map((mode, idx) => (
+                      <span
+                        key={idx}
+                        style={{
+                          display: 'inline-block',
+                          padding: '6px 12px',
+                          background: `${selectedNode.color || COLORS.primary}20`,
+                          border: `1px solid ${selectedNode.color || COLORS.primary}60`,
+                          borderRadius: '6px',
+                          fontSize: '12px',
+                          color: COLORS.text,
+                          fontWeight: '500',
+                        }}
+                      >
+                        {mode}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {selectedNode.archetypes && (
+                <div>
+                  <h4 style={{
+                    color: selectedNode.color || COLORS.primary,
+                    fontSize: '12px',
+                    letterSpacing: '2px',
+                    marginBottom: '10px',
+                    fontWeight: '700',
+                    fontFamily: 'monospace',
+                  }}>
+                    ARCHETYPES
+                  </h4>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {selectedNode.archetypes.map((archetype, idx) => (
+                      <span
+                        key={idx}
+                        style={{
+                          display: 'inline-block',
+                          padding: '6px 12px',
+                          background: `${selectedNode.color || COLORS.primary}20`,
+                          border: `1px solid ${selectedNode.color || COLORS.primary}60`,
+                          borderRadius: '6px',
+                          fontSize: '12px',
+                          color: COLORS.text,
+                          fontWeight: '500',
+                        }}
+                      >
+                        {archetype}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {selectedNode.details && (
             <div style={{ marginTop: '20px' }}>
@@ -1243,6 +1512,68 @@ const ForesightMindMap = () => {
                   )}
                 </div>
               )}
+            </div>
+          )}
+
+          {selectedNode.media && selectedNode.media.length > 0 && (
+            <div style={{ marginTop: '24px', marginBottom: '20px' }}>
+              <h4 style={{
+                color: COLORS.success,
+                fontSize: '12px',
+                letterSpacing: '2px',
+                marginBottom: '12px',
+                fontWeight: '700',
+                fontFamily: 'monospace',
+              }}>
+                MEDIA LIBRARY
+              </h4>
+              <div style={{
+                display: 'flex',
+                gap: '12px',
+                flexWrap: 'wrap',
+              }}>
+                {(() => {
+                  const mediaCounts = selectedNode.media.reduce((acc, item) => {
+                    acc[item.type] = (acc[item.type] || 0) + 1;
+                    return acc;
+                  }, {});
+                  const mediaTypes = [
+                    { type: 'video', icon: '📺', label: 'Videos' },
+                    { type: 'image', icon: '🖼️', label: 'Images' },
+                    { type: 'document', icon: '📄', label: 'Docs' },
+                    { type: 'article', icon: '📚', label: 'Articles' },
+                  ];
+                  return mediaTypes.filter(mt => mediaCounts[mt.type]).map(mt => (
+                    <div
+                      key={mt.type}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        padding: '8px 12px',
+                        background: `${COLORS.success}15`,
+                        border: `1px solid ${COLORS.success}40`,
+                        borderRadius: '8px',
+                        fontSize: '13px',
+                        color: COLORS.text,
+                      }}
+                    >
+                      <span style={{ fontSize: '16px' }}>{mt.icon}</span>
+                      <span style={{ fontWeight: '600' }}>{mediaCounts[mt.type]}</span>
+                      <span style={{ opacity: 0.7 }}>{mt.label}</span>
+                    </div>
+                  ));
+                })()}
+              </div>
+              <div style={{
+                marginTop: '10px',
+                fontSize: '11px',
+                color: COLORS.text,
+                opacity: 0.6,
+                fontStyle: 'italic',
+              }}>
+                Click nodes in the 3D view to explore media
+              </div>
             </div>
           )}
 
