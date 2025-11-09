@@ -1705,67 +1705,121 @@ const ForesightMindMap = () => {
             </div>
           )}
 
-          {selectedNode.media && selectedNode.media.length > 0 && (
-            <div style={{ marginTop: '24px', marginBottom: '20px' }}>
-              <h4 style={{
-                color: COLORS.success,
-                fontSize: '12px',
-                letterSpacing: '2px',
-                marginBottom: '12px',
-                fontWeight: '700',
-                fontFamily: 'monospace',
-              }}>
-                MEDIA LIBRARY
-              </h4>
-              <div style={{
-                display: 'flex',
-                gap: '12px',
-                flexWrap: 'wrap',
-              }}>
-                {(() => {
-                  const mediaCounts = selectedNode.media.reduce((acc, item) => {
-                    acc[item.type] = (acc[item.type] || 0) + 1;
-                    return acc;
-                  }, {});
-                  const mediaTypes = [
-                    { type: 'video', icon: '📺', label: 'Videos' },
-                    { type: 'image', icon: '🖼️', label: 'Images' },
-                    { type: 'document', icon: '📄', label: 'Docs' },
-                    { type: 'article', icon: '📚', label: 'Articles' },
-                  ];
-                  return mediaTypes.filter(mt => mediaCounts[mt.type]).map(mt => (
-                    <div
-                      key={mt.type}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        padding: '8px 12px',
-                        background: `${COLORS.success}15`,
-                        border: `1px solid ${COLORS.success}40`,
-                        borderRadius: '8px',
-                        fontSize: '13px',
-                        color: COLORS.text,
-                      }}
-                    >
-                      <span style={{ fontSize: '16px' }}>{mt.icon}</span>
-                      <span style={{ fontWeight: '600' }}>{mediaCounts[mt.type]}</span>
-                      <span style={{ opacity: 0.7 }}>{mt.label}</span>
+          {(() => {
+            // Aggregate media from selected node and expanded children
+            const mediaByNode = [];
+
+            // Add selected node's media
+            if (selectedNode.media && selectedNode.media.length > 0) {
+              mediaByNode.push({
+                nodeLabel: selectedNode.label,
+                nodeColor: selectedNode.color,
+                media: selectedNode.media,
+                isParent: true
+              });
+            }
+
+            // Add expanded children's media
+            if (selectedNode.children && expandedNodes.has(selectedNode.id)) {
+              selectedNode.children.forEach(child => {
+                if (child.media && child.media.length > 0) {
+                  mediaByNode.push({
+                    nodeLabel: child.label,
+                    nodeColor: child.color,
+                    media: child.media,
+                    isParent: false
+                  });
+                }
+              });
+            }
+
+            if (mediaByNode.length === 0) return null;
+
+            return (
+              <div style={{ marginTop: '24px', marginBottom: '20px' }}>
+                <h4 style={{
+                  color: COLORS.success,
+                  fontSize: '12px',
+                  letterSpacing: '2px',
+                  marginBottom: '12px',
+                  fontWeight: '700',
+                  fontFamily: 'monospace',
+                }}>
+                  MEDIA LIBRARY
+                </h4>
+
+                {mediaByNode.map((nodeGroup, idx) => (
+                  <div key={idx} style={{ marginBottom: '16px' }}>
+                    {/* Node label - only show if there are multiple nodes */}
+                    {mediaByNode.length > 1 && (
+                      <div style={{
+                        fontSize: '11px',
+                        fontWeight: '600',
+                        color: nodeGroup.nodeColor,
+                        marginBottom: '8px',
+                        paddingLeft: '4px',
+                        borderLeft: `3px solid ${nodeGroup.nodeColor}`,
+                        paddingTop: '2px',
+                        paddingBottom: '2px',
+                      }}>
+                        {nodeGroup.nodeLabel.replace(/\n/g, ' ')}
+                      </div>
+                    )}
+
+                    {/* Media counts */}
+                    <div style={{
+                      display: 'flex',
+                      gap: '12px',
+                      flexWrap: 'wrap',
+                    }}>
+                      {(() => {
+                        const mediaCounts = nodeGroup.media.reduce((acc, item) => {
+                          acc[item.type] = (acc[item.type] || 0) + 1;
+                          return acc;
+                        }, {});
+                        const mediaTypes = [
+                          { type: 'video', icon: '📺', label: 'Videos' },
+                          { type: 'image', icon: '🖼️', label: 'Images' },
+                          { type: 'document', icon: '📄', label: 'Docs' },
+                          { type: 'article', icon: '📚', label: 'Articles' },
+                        ];
+                        return mediaTypes.filter(mt => mediaCounts[mt.type]).map(mt => (
+                          <div
+                            key={mt.type}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              padding: '8px 12px',
+                              background: `${COLORS.success}15`,
+                              border: `1px solid ${COLORS.success}40`,
+                              borderRadius: '8px',
+                              fontSize: '13px',
+                              color: COLORS.text,
+                            }}
+                          >
+                            <span style={{ fontSize: '16px' }}>{mt.icon}</span>
+                            <span style={{ fontWeight: '600' }}>{mediaCounts[mt.type]}</span>
+                            <span style={{ opacity: 0.7 }}>{mt.label}</span>
+                          </div>
+                        ));
+                      })()}
                     </div>
-                  ));
-                })()}
+                  </div>
+                ))}
+
+                <div style={{
+                  marginTop: '10px',
+                  fontSize: '11px',
+                  color: COLORS.text,
+                  opacity: 0.6,
+                  fontStyle: 'italic',
+                }}>
+                  Click media orbs in the 3D view to explore
+                </div>
               </div>
-              <div style={{
-                marginTop: '10px',
-                fontSize: '11px',
-                color: COLORS.text,
-                opacity: 0.6,
-                fontStyle: 'italic',
-              }}>
-                Click nodes in the 3D view to explore media
-              </div>
-            </div>
-          )}
+            );
+          })()}
 
           {selectedNode.wikipedia && (
             <a
