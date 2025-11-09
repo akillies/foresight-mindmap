@@ -1,5 +1,8 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 import mindMapData from './mindMapData';
 import TimelineView from './TimelineView';
 
@@ -8,9 +11,11 @@ const ForesightMindMap = () => {
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
   const rendererRef = useRef(null);
+  const composerRef = useRef(null);
   const nodesRef = useRef([]);
   const connectionsRef = useRef([]);
   const crossPillarConnectionsRef = useRef([]);
+  const particlesRef = useRef(null);
   const raycasterRef = useRef(new THREE.Raycaster());
   const mouseRef = useRef(new THREE.Vector2());
   const isDraggingRef = useRef(false);
@@ -252,6 +257,19 @@ const ForesightMindMap = () => {
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
+    // Post-Processing: Bloom Effect for Cinematic Glow
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      1.5,  // strength
+      0.4,  // radius
+      0.85  // threshold
+    );
+    composer.addPass(bloomPass);
+    composerRef.current = composer;
+
     // Lighting Setup - Enhanced for better visibility
     const ambientLight = new THREE.AmbientLight(0x505070, 0.7); // Brighter ambient (was 0x404060, 0.4)
     scene.add(ambientLight);
@@ -317,6 +335,28 @@ const ForesightMindMap = () => {
         }
       });
 
+      // Animate starfield particles (twinkling and drift)
+      if (particlesRef.current) {
+        const positions = particlesRef.current.geometry.attributes.position.array;
+        const time = Date.now() * 0.001;
+
+        for (let i = 0; i < positions.length / 3; i++) {
+          const i3 = i * 3;
+
+          // Gentle vertical drift (sine wave) - only for some particles
+          if (i % 10 === 0) {
+            positions[i3 + 1] += Math.sin(time * 0.5 + i) * 0.01;
+          }
+        }
+
+        particlesRef.current.geometry.attributes.position.needsUpdate = true;
+
+        // Twinkling effect via opacity
+        const baseOpacity = 0.8;
+        const twinkle = Math.sin(time * 2) * 0.2;
+        particlesRef.current.material.opacity = baseOpacity + twinkle;
+      }
+
       // Raycasting for hover effects
       raycasterRef.current.setFromCamera(mouseRef.current, camera);
       const intersects = raycasterRef.current.intersectObjects(nodesRef.current, false);
@@ -342,7 +382,8 @@ const ForesightMindMap = () => {
         }
       }
 
-      renderer.render(scene, camera);
+      // Render with bloom post-processing
+      composerRef.current.render();
     };
 
     animate();
@@ -412,6 +453,7 @@ const ForesightMindMap = () => {
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
+      composerRef.current.setSize(width, height);
     };
 
     // Store container ref for reliable cleanup
@@ -479,6 +521,9 @@ const ForesightMindMap = () => {
 
     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particles);
+
+    // Store for animation
+    particlesRef.current = particles;
   };
 
   // Create Center Node (Level 0)
