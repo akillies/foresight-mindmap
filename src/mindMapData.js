@@ -809,6 +809,12 @@ const mindMapData = {
           year: 2013
         },
         {
+          type: 'image',
+          title: 'Fairclough\'s Three-Dimensional CDA Framework',
+          url: 'https://www.researchgate.net/figure/CDA-Three-Dimensional-Norman-Fairclough-Fairclough-2010_fig1_358499059',
+          description: 'Norman Fairclough\'s critical discourse analysis framework showing three interconnected dimensions: text (linguistic analysis), discourse practice (production and consumption of text), and sociocultural practice (institutional and social contexts). This layered approach reveals how language perpetuates power structures and shapes what futures are considered possible or desirable.'
+        },
+        {
           type: 'article',
           title: 'Discourse Analysis in Futures Studies',
           url: 'https://en.wikipedia.org/wiki/Discourse_analysis',
@@ -1367,6 +1373,12 @@ const mindMapData = {
           url: 'https://www.youtube.com/watch?v=uL3UbDyGq9A',
           description: 'How to facilitate visioning workshops',
           year: 2016
+        },
+        {
+          type: 'image',
+          title: 'Components of Effective Visions',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Vision_Framework.svg/1200px-Vision_Framework.svg.png',
+          description: 'Framework showing the four essential components of effective vision statements: Aspirational (inspiring and motivating stakeholders), Concrete (specific and tangible outcomes), Inclusive (incorporates diverse perspectives and voices), and Actionable (suggests clear pathways forward). This model helps ensure visions are both compelling and implementable, balancing inspiration with practical guidance for strategic planning.'
         },
         {
           type: 'article',
