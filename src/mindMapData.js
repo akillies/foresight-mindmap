@@ -31,20 +31,20 @@ const mindMapData = {
         type: 'image',
         title: 'Futures Cone (Joseph Voros)',
         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Futures_cone.svg/1200px-Futures_cone.svg.png',
-        description: 'Visual representation of possible, plausible, probable, and preferable futures'
+        description: 'Visual representation of possible, plausible, probable, and preferable futures expanding from the present moment. This foundational diagram shows how uncertainty increases over time, with different categories of futures nested within each other - from the broadest cone of possible futures to the narrowest desired preferable futures.'
       },
       {
         type: 'article',
         title: 'Futures Studies - Encyclopedia Entry',
         url: 'https://en.wikipedia.org/wiki/Futures_studies',
         source: 'Wikipedia',
-        description: 'Comprehensive overview of the field and its history'
+        description: 'Comprehensive overview of the field and its history, covering major methodologies, pioneers, and theoretical foundations. Essential reading for understanding how futures thinking evolved from military planning to a multidisciplinary academic field.'
       },
       {
         type: 'image',
         title: 'SWOT Analysis Framework',
         url: 'https://commons.wikimedia.org/wiki/Special:FilePath/SWOT en.svg',
-        description: 'Foundation matrix for strategic analysis: Strengths, Weaknesses, Opportunities, Threats'
+        description: 'Foundation matrix for strategic analysis mapping Strengths, Weaknesses, Opportunities, and Threats. This classic 2x2 framework helps organizations assess internal capabilities against external environment, forming the basis for strategic planning and foresight work.'
       }
     ]
   },
@@ -209,7 +209,7 @@ const mindMapData = {
           type: 'image',
           title: 'Futures Triangle Diagram',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Futures_Triangle.svg/800px-Futures_Triangle.svg.png',
-          description: 'Visual framework showing the three forces'
+          description: 'Visual framework showing the three forces that shape futures: Pull of the Future (vision/goals), Push of the Present (trends/momentum), and Weight of the Past (barriers/resistance). Understanding the dynamic tension between these forces helps assess which futures are truly plausible.'
         },
         {
           type: 'image',
@@ -258,14 +258,14 @@ const mindMapData = {
           type: 'image',
           title: 'Stakeholder Power/Interest Grid',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Stakeholder_analysis.png/1200px-Stakeholder_analysis.png',
-          description: 'Classic framework for mapping stakeholder relationships'
+          description: 'Classic 2x2 framework for mapping stakeholder relationships based on their power (ability to influence) and interest (degree of concern) in an issue. This grid helps prioritize engagement strategies: manage closely (high power/high interest), keep satisfied (high power/low interest), keep informed (low power/high interest), or monitor (low power/low interest).'
         },
         {
           type: 'article',
           title: 'Stakeholder Analysis in Foresight',
           url: 'https://en.wikipedia.org/wiki/Stakeholder_analysis',
           source: 'Wikipedia',
-          description: 'Comprehensive guide to stakeholder mapping'
+          description: 'Comprehensive guide to stakeholder mapping techniques used in foresight work, covering methods for identifying stakeholders, assessing their future visions, analyzing power dynamics, and engaging diverse voices in participatory futures processes.'
         },
         {
           type: 'document',
@@ -345,7 +345,7 @@ const mindMapData = {
           title: 'Four Modes of Scanning',
           url: 'https://en.wikipedia.org/wiki/Environmental_scanning',
           source: 'Wikipedia',
-          description: 'Choo\'s framework for different scanning approaches'
+          description: 'Choo\'s framework categorizing four distinct modes of environmental scanning: undirected viewing (general exposure), conditioned viewing (directed topics), informal search (unstructured data gathering), and formal search (systematic investigation). This typology helps organizations design appropriate scanning strategies based on information needs and uncertainty levels.'
         },
         {
           type: 'image',
@@ -514,7 +514,7 @@ const mindMapData = {
           type: 'image',
           title: 'Braudel\'s Three Time Scales',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Braudel_time_scales.png/1200px-Braudel_time_scales.png',
-          description: 'Diagram showing micro, meso, and macro time'
+          description: 'Diagram showing Braudel\'s three overlapping time scales of historical change: événements (micro - events/individual actions), conjonctures (meso - social/economic cycles lasting decades), and longue durée (macro - deep structural patterns over centuries). This framework helps futurists see beyond surface events to underlying patterns.'
         },
         {
           type: 'article',
@@ -576,14 +576,14 @@ const mindMapData = {
           type: 'image',
           title: 'Kondratiev Wave Timeline',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Kondratieff_Wave.svg/1200px-Kondratieff_Wave.svg.png',
-          description: 'Historical waves of economic development'
+          description: 'Historical timeline showing five Kondratiev waves of economic development from 1780s to present: Industrial Revolution (steam/textiles), Railway Age (steel/rail), Electrical Age (electricity/chemicals), Mass Production Age (automobiles/petrochemicals), and Information Age (computers/telecommunications). Each wave lasts 40-60 years with distinct innovation clusters.'
         },
         {
           type: 'article',
           title: 'Economic Cycles and Innovation',
           url: 'https://en.wikipedia.org/wiki/Kondratiev_wave',
           source: 'Wikipedia',
-          description: 'Deep dive into cycle theory'
+          description: 'Deep dive into cycle theory covering Kondratiev waves, generational cycles, technology adoption curves, and other cyclical patterns in economic and social systems. Explores how understanding these rhythms helps anticipate turning points and transitions between eras.'
         }
       ]
     },
@@ -644,7 +644,7 @@ const mindMapData = {
           title: 'Causal Layered Analysis',
           url: 'https://en.wikipedia.org/wiki/Causal_layered_analysis',
           source: 'Wikipedia',
-          description: 'Comprehensive overview of CLA'
+          description: 'Comprehensive overview of Causal Layered Analysis methodology, explaining how the four-layer framework (litany, social causes, discourse/worldview, myth/metaphor) deconstructs problems to reveal transformative solutions. Includes examples, applications, and theoretical foundations in poststructuralism.'
         },
         {
           type: 'image',
@@ -800,14 +800,14 @@ const mindMapData = {
           type: 'image',
           title: 'Scenario Cross Matrix (2x2)',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Scenario_matrix.png/1200px-Scenario_matrix.png',
-          description: 'Classic framework for generating scenarios'
+          description: 'Classic 2x2 scenario matrix framework for generating four distinct scenarios by crossing two critical uncertainties. This tool helps explore the scenario space systematically, ensuring diversity of futures while keeping the number manageable. Widely used in Shell scenario planning and corporate foresight.'
         },
         {
           type: 'article',
           title: 'Scenario Planning',
           url: 'https://en.wikipedia.org/wiki/Scenario_planning',
           source: 'Wikipedia',
-          description: 'Comprehensive guide to scenario methods'
+          description: 'Comprehensive guide to scenario planning methods covering the Shell approach, GBN frameworks, intuitive logics, and various scenario development techniques. Explains the process from horizon scanning to scenario construction, narrative development, and strategic testing.'
         },
         {
           type: 'video',
@@ -948,14 +948,14 @@ const mindMapData = {
           type: 'image',
           title: 'Morphological Box Example',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Morphological_box.png/1200px-Morphological_box.png',
-          description: 'Visual framework for exploring combinations'
+          description: 'Visual representation of a morphological box showing how parameters (rows) with multiple values (columns) can be systematically combined to generate comprehensive solution spaces. This multi-dimensional matrix approach helps explore all possible configurations, revealing novel combinations that might otherwise be missed.'
         },
         {
           type: 'article',
           title: 'Morphological Analysis',
           url: 'https://en.wikipedia.org/wiki/Morphological_analysis_(problem-solving)',
           source: 'Wikipedia',
-          description: 'Complete guide to the method'
+          description: 'Complete guide to morphological analysis methodology covering Fritz Zwicky\'s systematic approach to exploring solution spaces. Explains how to define parameters, identify values, construct morphological boxes, evaluate feasible combinations, and apply the method to complex problems from technology forecasting to policy design.'
         },
         {
           type: 'image',
@@ -1025,14 +1025,14 @@ const mindMapData = {
           type: 'image',
           title: 'Delphi Process Flow Diagram',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Delphi_Method.png/1200px-Delphi_Method.png',
-          description: 'Visual representation of iterative rounds'
+          description: 'Visual flowchart showing the iterative process of Delphi method rounds: initial expert questionnaire, anonymous feedback distribution, expert revision based on group responses, further refinement, and final consensus. The diagram illustrates how multiple rounds reduce variance and build expert agreement while avoiding groupthink.'
         },
         {
           type: 'article',
           title: 'Delphi Method',
           url: 'https://en.wikipedia.org/wiki/Delphi_method',
           source: 'Wikipedia',
-          description: 'Comprehensive guide to Delphi technique'
+          description: 'Comprehensive guide to Delphi technique covering its history at RAND Corporation, methodological principles (anonymity, iteration, controlled feedback, statistical aggregation), variations (policy Delphi, real-time Delphi), and applications in technology forecasting, policy analysis, and strategic planning.'
         },
         {
           type: 'image',
@@ -1089,7 +1089,7 @@ const mindMapData = {
           type: 'image',
           title: 'Cross-Impact Matrix',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Cross_impact_matrix.png/1200px-Cross_impact_matrix.png',
-          description: 'Example of impact assessment matrix'
+          description: 'Example cross-impact matrix showing how events/trends (rows) influence other events/trends (columns) with probabilistic ratings. This grid structure reveals feedback loops, cascading effects, and indirect relationships between drivers of change, helping assess how one development might trigger or inhibit others.'
         },
         {
           type: 'document',
@@ -1163,7 +1163,7 @@ const mindMapData = {
           title: 'Visioning in Strategic Foresight',
           url: 'https://en.wikipedia.org/wiki/Vision_statement',
           source: 'Wikipedia',
-          description: 'Guide to creating effective visions'
+          description: 'Guide to creating effective visions of preferred futures that inspire action and guide decision-making. Covers characteristics of compelling visions (aspirational, concrete, inclusive, actionable), participatory visioning techniques, and methods for building shared purpose across diverse stakeholders.'
         },
         {
           type: 'document',
@@ -1255,7 +1255,7 @@ const mindMapData = {
           title: 'Backcasting',
           url: 'https://en.wikipedia.org/wiki/Backcasting',
           source: 'Wikipedia',
-          description: 'Complete guide to backcasting'
+          description: 'Complete guide to backcasting methodology, explaining how it differs from forecasting by starting with a desired future and working backwards to identify necessary steps. Covers applications in sustainability planning, policy design, and transformative change where conventional forecasting is inadequate.'
         }
       ]
     },
@@ -1302,7 +1302,7 @@ const mindMapData = {
           title: 'Strategic Issue Management',
           url: 'https://en.wikipedia.org/wiki/Strategic_management',
           source: 'Wikipedia',
-          description: 'Overview of strategic management approaches'
+          description: 'Overview of strategic management approaches including Igor Ansoff\'s strategic issue management system for detecting and responding to weak signals in real-time. Explains the balance between operational efficiency and strategic flexibility, and methods for creating responsive organizational systems.'
         },
         {
           type: 'image',
@@ -1396,7 +1396,7 @@ const mindMapData = {
           title: 'Star Trek Economics: Post-Scarcity Futures',
           url: 'https://en.wikipedia.org/wiki/Star_Trek#Philosophy_and_themes',
           source: 'Wikipedia',
-          description: 'Analysis of Star Trek\'s optimistic economic and social vision'
+          description: 'Analysis of Star Trek\'s optimistic economic and social vision where humanity has eliminated poverty, scarcity, and war through replicator technology and collaborative governance. Explores how this aspirational fiction has influenced real-world futurists, technologists, and policy makers seeking to create post-scarcity abundance futures.'
         }
       ]
     }
@@ -1455,7 +1455,7 @@ const mindMapData = {
           title: 'Ray Kurzweil - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Ray_Kurzweil',
           source: 'Wikipedia',
-          description: 'Comprehensive biography and prediction record'
+          description: 'Comprehensive biography covering Ray Kurzweil\'s life, major inventions (OCR, text-to-speech, music synthesis), prediction methodology (Law of Accelerating Returns), and track record of forecasts with documented accuracy assessments. Includes analysis of both successful predictions (smartphones, AI assistants) and controversial claims (singularity timeline).'
         },
         {
           type: 'document',
@@ -1513,7 +1513,7 @@ const mindMapData = {
           title: 'Alvin Toffler - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Alvin_Toffler',
           source: 'Wikipedia',
-          description: 'Biography and major works'
+          description: 'Biography covering Alvin Toffler\'s life as futurologist, his major works (Future Shock, The Third Wave, Powershift), influence on business and political leaders worldwide, and key concepts like information overload, prosumer, and acceleration of change. Documents his prescient insights about knowledge economy and technology\'s social impact.'
         },
         {
           type: 'image',
@@ -1567,7 +1567,7 @@ const mindMapData = {
           title: 'Buckminster Fuller - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Buckminster_Fuller',
           source: 'Wikipedia',
-          description: 'Complete biography and innovations'
+          description: 'Complete biography covering Fuller\'s life as architect, systems theorist, and futurist. Documents his innovations (geodesic dome, Dymaxion designs), philosophical framework (Spaceship Earth, Design Science Revolution, ephemeralization), influence on sustainability movement, and vision of making the world work for 100% of humanity through anticipatory design.'
         },
         {
           type: 'image',
@@ -1617,7 +1617,7 @@ const mindMapData = {
           title: 'Isaac Asimov - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Isaac_Asimov',
           source: 'Wikipedia',
-          description: 'Biography and complete works'
+          description: 'Biography covering Asimov\'s life as biochemist and prolific science fiction author (500+ books). Documents his major works (Foundation series, Robot series), creation of Three Laws of Robotics and psychohistory concepts, influence on AI ethics and data science, and prescient predictions about automation, education, and networked society.'
         },
         {
           type: 'image',
@@ -1667,7 +1667,7 @@ const mindMapData = {
           title: 'Arthur C. Clarke - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Arthur_C._Clarke',
           source: 'Wikipedia',
-          description: 'Complete biography and Clarke\'s Laws'
+          description: 'Complete biography covering Clarke\'s life as physicist, science fiction author, and futurist. Documents his major works (2001: A Space Odyssey, Childhood\'s End, Rendezvous with Rama), Clarke\'s Three Laws (especially "any sufficiently advanced technology is indistinguishable from magic"), accurate predictions (communications satellites, space stations), and lasting influence on space exploration and technology forecasting.'
         },
         {
           type: 'image',
@@ -1711,7 +1711,7 @@ const mindMapData = {
           title: 'Michael Crichton - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Michael_Crichton',
           source: 'Wikipedia',
-          description: 'Complete works and influence'
+          description: 'Complete works including Jurassic Park, The Andromeda Strain, Westworld, and Prey. Documents Crichton\'s influence on public understanding of emerging technologies (genetic engineering, nanotechnology, AI) through techno-thrillers exploring unintended consequences and systemic risks. His cautionary tales shaped discourse around technological governance and precautionary principle.'
         },
         {
           type: 'image',
@@ -1759,7 +1759,7 @@ const mindMapData = {
           title: 'Ursula K. Le Guin - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Ursula_K._Le_Guin',
           source: 'Wikipedia',
-          description: 'Biography and major works'
+          description: 'Biography covering Le Guin\'s life as anthropologist\'s daughter and pioneering science fiction author. Documents her major works (The Left Hand of Darkness, The Dispossessed, Earthsea), exploration of gender fluidity decades before mainstream discourse, alternative political systems (anarchist utopias), ecological consciousness, and use of "elsewhere" to illuminate contemporary social issues.'
         },
         {
           type: 'image',
@@ -1809,7 +1809,7 @@ const mindMapData = {
           title: 'William Gibson - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/William_Gibson',
           source: 'Wikipedia',
-          description: 'Biography and influence on tech culture'
+          description: 'Biography covering Gibson\'s creation of cyberpunk genre through Neuromancer (1984), coining of term "cyberspace," and prescient vision of internet culture, virtual reality, and tech-noir aesthetics before widespread internet adoption. Documents his influence on tech developers, hackers, and Silicon Valley culture, with concepts like the matrix, cyber-consoles, and mega-corporations shaping how we imagine digital futures.'
         },
         {
           type: 'image',
@@ -1899,7 +1899,7 @@ const mindMapData = {
           type: 'image',
           title: 'Futures Cone Diagram',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Futures_cone.svg/1200px-Futures_cone.svg.png',
-          description: 'Visual representation of expanding uncertainty over time'
+          description: 'Visual diagram showing how uncertainty expands from the present moment into multiple nested cones representing different categories of futures: possible (physically conceivable), plausible (based on current knowledge), probable (trending trajectories), and preferable (desired outcomes). This foundational framework helps futurists explore the full range of potential futures while distinguishing between what could happen versus what we want to happen.'
         },
         {
           type: 'article',
