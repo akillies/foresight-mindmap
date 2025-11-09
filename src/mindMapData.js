@@ -39,6 +39,12 @@ const mindMapData = {
         url: 'https://en.wikipedia.org/wiki/Futures_studies',
         source: 'Wikipedia',
         description: 'Comprehensive overview of the field and its history'
+      },
+      {
+        type: 'image',
+        title: 'SWOT Analysis Framework',
+        url: 'https://commons.wikimedia.org/wiki/Special:FilePath/SWOT en.svg',
+        description: 'Foundation matrix for strategic analysis: Strengths, Weaknesses, Opportunities, Threats'
       }
     ]
   },
@@ -60,7 +66,7 @@ const mindMapData = {
           'Weight of the Past - Barriers and legacies'
         ]
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Strategic_foresight',
+      wikipedia: 'https://en.wikipedia.org/wiki/Strategic_foresight',
       children: ['futures-triangle', 'stakeholder-analysis']
     },
     {
@@ -80,7 +86,7 @@ const mindMapData = {
           'Artists and science fiction'
         ]
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Environmental_scanning',
+      wikipedia: 'https://en.wikipedia.org/wiki/Environmental_scanning',
       children: ['env-scanning', 'weak-signals', 'emerging-issues']
     },
     {
@@ -98,7 +104,7 @@ const mindMapData = {
           'Macro - Longue durée and structures (centuries)'
         ]
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Kondratiev_wave',
+      wikipedia: 'https://en.wikipedia.org/wiki/Kondratiev_wave',
       children: ['macro-historical', 'cycle-theory']
     },
     {
@@ -118,7 +124,7 @@ const mindMapData = {
           'Layer 4: Myth/Metaphor (unconscious narratives)'
         ]
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Causal_layered_analysis',
+      wikipedia: 'https://en.wikipedia.org/wiki/Causal_layered_analysis',
       children: ['cla', 'discourse-analysis']
     },
     {
@@ -140,7 +146,7 @@ const mindMapData = {
           'Normative - How to reach target?'
         ]
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Scenario_planning',
+      wikipedia: 'https://en.wikipedia.org/wiki/Scenario_planning',
       children: ['scenarios', 'wild-cards', 'morphological']
     },
     {
@@ -155,7 +161,7 @@ const mindMapData = {
         keyDistinction: 'Backcasting works backward from desired future (vs forecasting which projects forward from present)',
         whenToUse: 'When trend-break required to reach desired target'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Backcasting',
+      wikipedia: 'https://en.wikipedia.org/wiki/Backcasting',
       children: ['visioning', 'backcasting', 'strategic-issue']
     }
   ],
@@ -190,7 +196,7 @@ const mindMapData = {
         application: 'Plot issues on the triangle to understand tensions and identify pathways forward',
         creator: 'Sohail Inayatullah'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Strategic_foresight#Futures_Triangle',
+      wikipedia: 'https://en.wikipedia.org/wiki/Strategic_foresight#Futures_Triangle',
       media: [
         {
           type: 'video',
@@ -246,7 +252,7 @@ const mindMapData = {
         ],
         application: 'Create power/interest grids, influence maps, and perspective matrices'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Stakeholder_analysis',
+      wikipedia: 'https://en.wikipedia.org/wiki/Stakeholder_analysis',
       media: [
         {
           type: 'image',
@@ -260,6 +266,26 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Stakeholder_analysis',
           source: 'Wikipedia',
           description: 'Comprehensive guide to stakeholder mapping'
+        },
+        {
+          type: 'document',
+          title: 'Strategic Management: A Stakeholder Approach',
+          url: 'https://www.researchgate.net/publication/228320877_A_Stakeholder_Approach_to_Strategic_Management',
+          description: 'R. Edward Freeman\'s foundational 1984 work establishing stakeholder theory',
+          year: 1984
+        },
+        {
+          type: 'document',
+          title: 'Stakeholder Salience Model (Mitchell, Agle, Wood)',
+          url: 'https://www.jstor.org/stable/259247',
+          description: 'Theory of stakeholder identification based on power, legitimacy, and urgency attributes',
+          year: 1997
+        },
+        {
+          type: 'document',
+          title: 'Stakeholder Mapping in Foresight Processes',
+          url: 'https://coe.gsa.gov/docs/StrategicForesight101.pdf',
+          description: 'GSA guide to strategic foresight methodologies including stakeholder engagement frameworks'
         }
       ]
     },
@@ -299,7 +325,7 @@ const mindMapData = {
         creator: 'Choo (1999) - Four Modes of Scanning',
         domains: 'STEEP - Social, Technological, Economic, Environmental, Political'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Environmental_scanning',
+      wikipedia: 'https://en.wikipedia.org/wiki/Environmental_scanning',
       media: [
         {
           type: 'video',
@@ -326,6 +352,12 @@ const mindMapData = {
           title: 'Harvard Business School Baker Library',
           url: 'https://upload.wikimedia.org/wikipedia/commons/c/c9/Harvard_business_school_baker_library_2009a.JPG',
           description: 'Baker Library at Harvard Business School, where Francis Aguilar developed environmental scanning framework (1967)'
+        },
+        {
+          type: 'image',
+          title: 'Porter\'s Five Forces Model',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Competitiveforces.svg',
+          description: 'Michael Porter\'s framework for analyzing industry competitive forces: rivalry, suppliers, buyers, substitutes, new entrants'
         }
       ]
     },
@@ -360,7 +392,7 @@ const mindMapData = {
         ],
         creator: 'Igor Ansoff (1975)'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Strategic_foresight#Weak_signals',
+      wikipedia: 'https://en.wikipedia.org/wiki/Strategic_foresight#Weak_signals',
       media: [
         {
           type: 'video',
@@ -379,7 +411,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Igor Ansoff Portrait',
-          url: 'https://commons.wikimedia.org/wiki/File:Igor_Ansoff,_1971.jpg',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Igor_Ansoff,_1971.jpg',
           description: 'Russian-American management theorist (1918-2002), father of strategic management and weak signals'
         }
       ]
@@ -417,7 +449,7 @@ const mindMapData = {
         ],
         application: 'Monitor issue lifecycle to intervene at optimal time'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Emerging_issues_analysis',
+      wikipedia: 'https://en.wikipedia.org/wiki/Emerging_issues_analysis',
       media: [
         {
           type: 'video',
@@ -431,6 +463,12 @@ const mindMapData = {
           title: 'Issue Lifecycle Diagram',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Technology-Adoption-Lifecycle.png/1200px-Technology-Adoption-Lifecycle.png',
           description: 'Visual representation of issue maturation'
+        },
+        {
+          type: 'image',
+          title: 'Diffusion of Innovation (Rogers)',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/DiffusionOfInnovation.png',
+          description: 'Everett Rogers\' bell curve showing how innovations spread through society: innovators, early adopters, early/late majority, laggards'
         }
       ]
     },
@@ -463,7 +501,7 @@ const mindMapData = {
         creator: 'Fernand Braudel',
         application: 'Analyze current issues across all three time scales to understand deeper forces'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Fernand_Braudel',
+      wikipedia: 'https://en.wikipedia.org/wiki/Fernand_Braudel',
       media: [
         {
           type: 'video',
@@ -488,7 +526,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Fernand Braudel Portrait',
-          url: 'https://commons.wikimedia.org/wiki/File:Fernand_Braudel_(1902-1985).jpg',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Fernand_Braudel_(1902-1985).jpg',
           description: 'French historian (1902-1985), pioneer of the Annales School and longue durée concept'
         }
       ]
@@ -525,7 +563,7 @@ const mindMapData = {
         ],
         application: 'Identify where we are in current cycles to anticipate transitions'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Kondratiev_wave',
+      wikipedia: 'https://en.wikipedia.org/wiki/Kondratiev_wave',
       media: [
         {
           type: 'video',
@@ -567,7 +605,7 @@ const mindMapData = {
           contribution: 'Developed four-layer framework integrating poststructuralism with futures methods'
         }
       ],
-      historicalContext: 'Published in 1998 Futures journal article "Causal Layered Analysis: Poststructuralism as Method". Drew on Foucault, Sarkar, and critical theory to create transformative futures methodology.',
+      historicalContext: 'Published in 1998 Futures journal article "Causal Layered Analysis: Poststructuralism as Method". Drew on P.R. Sarkar\'s social cycle theory, critical theory, and poststructuralist analysis to create transformative futures methodology.',
       details: {
         overview: 'CLA is a powerful method for deconstructing problems across four layers of depth—from surface symptoms to deep unconscious narratives.',
         layers: [
@@ -580,7 +618,7 @@ const mindMapData = {
         creator: 'Sohail Inayatullah (1998)',
         power: 'Reveals how deeper layers create surface problems, enabling transformative solutions'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Causal_layered_analysis',
+      wikipedia: 'https://en.wikipedia.org/wiki/Causal_layered_analysis',
       media: [
         {
           type: 'video',
@@ -588,12 +626,6 @@ const mindMapData = {
           url: 'https://www.youtube.com/watch?v=7-8Xe9m7riM',
           description: 'Creator demonstrating CLA methodology',
           year: 2011
-        },
-        {
-          type: 'image',
-          title: 'CLA Four Layers Diagram',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Causal_Layered_Analysis.png/1200px-Causal_Layered_Analysis.png',
-          description: 'Visual representation of the four analytical layers'
         },
         {
           type: 'document',
@@ -627,19 +659,19 @@ const mindMapData = {
       yearIntroduced: 1969,
       pioneers: [
         {
-          name: 'Michel Foucault',
-          role: 'Theoretical foundation',
-          organization: 'Collège de France',
-          contribution: 'Power/knowledge framework - how discourse shapes reality'
+          name: 'Norman Fairclough',
+          role: 'Critical discourse analysis',
+          organization: 'Lancaster University',
+          contribution: 'Three-dimensional CDA framework (1989) - analyzing text, discourse practice, and sociocultural practice'
         },
         {
-          name: 'Norman Fairclough',
-          role: 'Applied methodology',
-          organization: 'Lancaster University',
-          contribution: 'Critical discourse analysis framework (1989)'
+          name: 'James Paul Gee',
+          role: 'Applied discourse analysis',
+          organization: 'Arizona State University',
+          contribution: 'Developed toolkit approach to discourse analysis applicable to social and organizational contexts'
         }
       ],
-      historicalContext: 'Foucault\'s "Archaeology of Knowledge" (1969) established theoretical foundation. Applied to futures in 1980s-90s to examine how language frames possible futures and maintains power structures.',
+      historicalContext: 'Critical discourse analysis emerged in 1980s-90s with Fairclough\'s three-dimensional framework. Applied to futures studies to examine how language frames possible futures and maintains power structures in organizational and policy contexts.',
       details: {
         overview: 'Discourse analysis examines how language shapes reality, maintains power structures, and frames what futures are thinkable.',
         focus: [
@@ -648,17 +680,17 @@ const mindMapData = {
           'Power/knowledge relationships',
           'Dominant and marginalized discourses'
         ],
-        inspiration: 'Michel Foucault - Power/Knowledge',
+        inspiration: 'Norman Fairclough - Critical Discourse Analysis',
         application: 'Deconstruct dominant narratives to reveal alternatives and empower marginalized voices'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Discourse_analysis',
+      wikipedia: 'https://en.wikipedia.org/wiki/Discourse_analysis',
       media: [
         {
           type: 'video',
-          title: 'Michel Foucault on Power and Knowledge',
-          url: 'https://www.youtube.com/watch?v=BBJTeNTZtGU',
-          description: 'Foucault discussing discourse and power',
-          year: 1984
+          title: 'Norman Fairclough: Critical Discourse Analysis',
+          url: 'https://www.youtube.com/watch?v=68ShJJmPzKs',
+          description: 'Fairclough explaining critical discourse analysis framework and methodology',
+          year: 2013
         },
         {
           type: 'article',
@@ -666,6 +698,25 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Discourse_analysis',
           source: 'Wikipedia',
           description: 'Methods for analyzing discourse'
+        },
+        {
+          type: 'document',
+          title: 'Fairclough\'s Three-Dimensional CDA Framework',
+          url: 'https://www.researchgate.net/figure/CDA-Three-Dimensional-Norman-Fairclough-Fairclough-2010_fig1_358499059',
+          description: 'Norman Fairclough\'s critical discourse analysis framework: text, discourse practice, and sociocultural practice',
+          year: 1995
+        },
+        {
+          type: 'document',
+          title: 'Communication in Futures Studies: A Discursive Analysis',
+          url: 'https://www.sciencedirect.com/science/article/abs/pii/S0016328719303556',
+          description: 'Critical discourse analysis of how communication and language function within the futures field'
+        },
+        {
+          type: 'document',
+          title: 'Narrative Foresight Methodology',
+          url: 'https://www.sciencedirect.com/science/article/abs/pii/S0016328715001160',
+          description: 'Exploring how narratives, worldviews, and myths underlie possible, probable, and preferred futures'
         }
       ]
     },
@@ -718,7 +769,7 @@ const mindMapData = {
         ],
         famousExample: 'Shell\'s scenarios helped them navigate 1973 oil crisis'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Scenario_planning',
+      wikipedia: 'https://en.wikipedia.org/wiki/Scenario_planning',
       media: [
         {
           type: 'video',
@@ -763,13 +814,13 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Herman Kahn Portrait',
-          url: 'https://commons.wikimedia.org/wiki/Category:Herman_Kahn',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Herman Kahn.jpg',
           description: 'American physicist and futurist (1922-1983), RAND Corporation pioneer of scenario thinking'
         },
         {
           type: 'image',
           title: 'Peter Schwartz Portrait',
-          url: 'https://commons.wikimedia.org/wiki/File:Peter_Schwartz_in_2022.jpg',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Peter_Schwartz_in_2022.jpg',
           description: 'American futurist and business strategist (b. 1946), popularized scenario planning through Global Business Network'
         },
         {
@@ -819,7 +870,7 @@ const mindMapData = {
         ],
         application: 'Include 1-2 wild card scenarios alongside plausible scenarios to stress-test strategies'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Wild_card_(foresight)',
+      wikipedia: 'https://en.wikipedia.org/wiki/Wild_card_(foresight)',
       media: [
         {
           type: 'video',
@@ -873,7 +924,7 @@ const mindMapData = {
         creator: 'Fritz Zwicky (1948)',
         application: 'Generate comprehensive set of alternatives, discover non-obvious solutions'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Morphological_analysis_(problem-solving)',
+      wikipedia: 'https://en.wikipedia.org/wiki/Morphological_analysis_(problem-solving)',
       media: [
         {
           type: 'video',
@@ -898,7 +949,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Fritz Zwicky Portrait',
-          url: 'https://commons.wikimedia.org/wiki/Category:Fritz_Zwicky',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/ETH-BIB-Zwicky, Fritz (1898-1974)-Portr 01030.tif',
           description: 'Swiss astronomer and astrophysicist (1898-1974), creator of morphological analysis and pioneer of dark matter theory'
         }
       ]
@@ -950,7 +1001,7 @@ const mindMapData = {
           'Taps distributed expertise'
         ]
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Delphi_method',
+      wikipedia: 'https://en.wikipedia.org/wiki/Delphi_method',
       media: [
         {
           type: 'video',
@@ -1014,7 +1065,7 @@ const mindMapData = {
         ],
         application: 'Understand systemic effects and feedback loops between futures'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Cross-impact_analysis',
+      wikipedia: 'https://en.wikipedia.org/wiki/Cross-impact_analysis',
       media: [
         {
           type: 'video',
@@ -1028,6 +1079,26 @@ const mindMapData = {
           title: 'Cross-Impact Matrix',
           url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Cross_impact_matrix.png/1200px-Cross_impact_matrix.png',
           description: 'Example of impact assessment matrix'
+        },
+        {
+          type: 'document',
+          title: 'Initial Experiments with Cross-Impact Matrix (Gordon & Hayward, 1968)',
+          url: 'https://www.rand.org/content/dam/rand/pubs/papers/2008/P3820.pdf',
+          description: 'Theodore Gordon and Olaf Helmer\'s original RAND paper introducing cross-impact analysis methodology',
+          year: 1968
+        },
+        {
+          type: 'document',
+          title: 'MICMAC Methodology Guide',
+          url: 'https://www.sciencedirect.com/science/article/abs/pii/S0016328700000584',
+          description: 'Duperrin & Godet\'s MICMAC (Matrix of Crossed Impacts - Multiplication Applied to a Classification) structural analysis method',
+          year: 1973
+        },
+        {
+          type: 'document',
+          title: 'Cross-Impact Analysis for Foresight',
+          url: 'https://www.foresight-platform.eu/wp-content/uploads/2011/04/Cross-Impact_Analysis.pdf',
+          description: 'European Foresight Platform practical guide to conducting cross-impact analysis in strategic planning'
         }
       ]
     },
@@ -1067,7 +1138,7 @@ const mindMapData = {
         application: 'Create shared vision to align stakeholders and guide strategy',
         distinction: 'Normative futures work - not predicting, but choosing what we want'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Vision_statement',
+      wikipedia: 'https://en.wikipedia.org/wiki/Vision_statement',
       media: [
         {
           type: 'video',
@@ -1082,6 +1153,26 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Vision_statement',
           source: 'Wikipedia',
           description: 'Guide to creating effective visions'
+        },
+        {
+          type: 'document',
+          title: 'Elise Boulding\'s Imaging Workshop Methodology',
+          url: 'https://www.mediate.com/articles/boulding.cfm',
+          description: 'The "workshop of all workshops" - Boulding\'s technique of stepping through an imagined hedge 30 years into the future to create detailed preferred visions',
+          year: 1988
+        },
+        {
+          type: 'document',
+          title: 'Warren Ziegler: Ways of Enspiriting',
+          url: 'https://www.jstor.org/stable/43156527',
+          description: 'Ziegler\'s participatory visioning framework emphasizing democratic engagement and collective imagination in futures work',
+          year: 1991
+        },
+        {
+          type: 'document',
+          title: 'Participatory Futures Workshop Guide',
+          url: 'https://www.peopleandparticipation.net/download/report/4907c5e7a6f58',
+          description: 'European Awareness Scenario Workshop methodology - practical guide to facilitating participatory visioning sessions'
         }
       ]
     },
@@ -1122,7 +1213,7 @@ const mindMapData = {
         creator: 'John Robinson (1982)',
         famousExample: 'The Natural Step framework for sustainability'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Backcasting',
+      wikipedia: 'https://en.wikipedia.org/wiki/Backcasting',
       media: [
         {
           type: 'video',
@@ -1182,7 +1273,7 @@ const mindMapData = {
         philosophy: 'Organizations need both efficiency (operating system) and flexibility (strategic issue management)',
         application: 'Create dashboard for tracking and responding to strategic issues'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Strategic_management',
+      wikipedia: 'https://en.wikipedia.org/wiki/Strategic_management',
       media: [
         {
           type: 'video',
@@ -1197,6 +1288,12 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Strategic_management',
           source: 'Wikipedia',
           description: 'Overview of strategic management approaches'
+        },
+        {
+          type: 'image',
+          title: 'Ansoff Matrix (Product-Market Growth)',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ansoff_Matrix.JPG',
+          description: 'Igor Ansoff\'s strategic planning framework: Market Penetration, Market Development, Product Development, Diversification'
         }
       ]
     }
@@ -1267,7 +1364,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Ray Kurzweil Portrait',
-          url: 'https://commons.wikimedia.org/wiki/File:Portrait_of_Ray_Kurzweil.png',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Portrait_of_Ray_Kurzweil.png',
           description: 'American inventor and futurist (b. 1948), known for 86% prediction accuracy and Law of Accelerating Returns'
         }
       ]
@@ -1324,7 +1421,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Alvin Toffler Portrait',
-          url: 'https://commons.wikimedia.org/wiki/File:Alvin_Toffler_02.jpg',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Alvin_Toffler_02.jpg',
           description: 'American futurist (1928-2016), author of Future Shock and The Third Wave'
         }
       ]
@@ -1372,7 +1469,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Buckminster Fuller Portrait',
-          url: 'https://commons.wikimedia.org/wiki/Category:Buckminster_Fuller',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/R. Buckminster Fuller 1972.jpg',
           description: 'American architect and futurist (1895-1983), #1 most influential futurist, creator of Spaceship Earth concept'
         }
       ]
@@ -1422,7 +1519,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Isaac Asimov Portrait',
-          url: 'https://commons.wikimedia.org/wiki/File:Isaac.Asimov01.jpg',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Isaac.Asimov01.jpg',
           description: 'American biochemist and science fiction author (1920-1992), creator of Three Laws of Robotics'
         }
       ]
@@ -1472,7 +1569,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Arthur C. Clarke Portrait',
-          url: 'https://commons.wikimedia.org/wiki/Category:Portraits_of_Arthur_C._Clarke',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Arthur C. Clarke (1982).jpg',
           description: 'British science fiction author (1917-2008), predicted communications satellites, Clarke Belt named in his honor'
         }
       ]
@@ -1516,7 +1613,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Michael Crichton Portrait',
-          url: 'https://commons.wikimedia.org/wiki/Category:Michael_Crichton',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/MichaelCrichton.jpg',
           description: 'American author and filmmaker (1942-2008), master of techno-thrillers and cautionary tales'
         }
       ]
@@ -1564,7 +1661,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Ursula K. Le Guin Portrait',
-          url: 'https://commons.wikimedia.org/wiki/File:Ursula_K_Le_Guin.JPG',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ursula_K_Le_Guin.JPG',
           description: 'American author (1929-2018), explored gender fluidity and alternative social systems decades ahead of mainstream'
         }
       ]
@@ -1614,7 +1711,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'William Gibson Portrait',
-          url: 'https://commons.wikimedia.org/wiki/Category:William_Gibson',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/William Gibson 60th birthday portrait.jpg',
           description: 'American-Canadian cyberpunk author (b. 1948), coined "cyberspace" and created cyberpunk genre'
         }
       ]
@@ -1665,7 +1762,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Neal Stephenson Portrait',
-          url: 'https://commons.wikimedia.org/wiki/Category:Neal_Stephenson',
+          url: 'https://commons.wikimedia.org/wiki/Special:FilePath/Reamde Reading by Neal Stephenson at Third Place Books - Flickr - brewbooks.jpg',
           description: 'American speculative fiction author (b. 1959), coined "metaverse" 30 years before Meta/Facebook'
         }
       ]
@@ -1693,7 +1790,7 @@ const mindMapData = {
         ],
         philosophy: 'The future cannot be predicted, but multiple futures can be imagined and prepared for'
       },
-      grokipedia: 'https://en.wikipedia.org/wiki/Futures_cone',
+      wikipedia: 'https://en.wikipedia.org/wiki/Futures_cone',
       media: [
         {
           type: 'image',

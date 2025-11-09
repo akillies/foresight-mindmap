@@ -21,6 +21,7 @@ const ForesightMindMap = () => {
   const [hoveredNode, setHoveredNode] = useState(null);
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [timelineVisible, setTimelineVisible] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   // Ref to avoid stale closures in animation loop
   const hoveredNodeRef = useRef(null);
@@ -564,6 +565,7 @@ const ForesightMindMap = () => {
 
     // Handle media click
     if (nodeData.isMedia) {
+      setImageError(false); // Reset error state for new media
       setSelectedMedia(nodeData);
       return;
     }
@@ -971,9 +973,9 @@ const ForesightMindMap = () => {
             </div>
           )}
 
-          {selectedNode.grokipedia && (
+          {selectedNode.wikipedia && (
             <a
-              href={selectedNode.grokipedia}
+              href={selectedNode.wikipedia}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -1023,7 +1025,10 @@ const ForesightMindMap = () => {
             justifyContent: 'center',
             padding: '40px',
           }}
-          onClick={() => setSelectedMedia(null)}
+          onClick={() => {
+            setSelectedMedia(null);
+            setImageError(false);
+          }}
         >
           <div
             style={{
@@ -1040,7 +1045,10 @@ const ForesightMindMap = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={() => setSelectedMedia(null)}
+              onClick={() => {
+            setSelectedMedia(null);
+            setImageError(false);
+          }}
               style={{
                 position: 'absolute',
                 top: '20px',
@@ -1094,41 +1102,124 @@ const ForesightMindMap = () => {
             </p>
 
             {selectedMedia.type === 'video' && (
-              <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-                <iframe
-                  src={`https://www.youtube.com/embed/${selectedMedia.url.split('v=')[1]?.split('&')[0] || selectedMedia.url.split('/').pop()}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+              <div>
+                <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '15px' }}>
+                  <iframe
+                    src={`https://www.youtube.com/embed/${selectedMedia.url.split('v=')[1]?.split('&')[0] || selectedMedia.url.split('/').pop()}?origin=${window.location.origin}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '8px',
+                    }}
+                  ></iframe>
+                </div>
+                <a
+                  href={selectedMedia.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
+                    display: 'inline-block',
+                    padding: '10px 20px',
+                    background: MEDIA_COLORS.video,
+                    color: '#000',
+                    textDecoration: 'none',
                     borderRadius: '8px',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    transition: 'all 0.2s',
+                    fontFamily: 'Inter',
                   }}
-                ></iframe>
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'scale(1.05)';
+                    e.target.style.boxShadow = `0 4px 12px ${MEDIA_COLORS.video}60`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'scale(1)';
+                    e.target.style.boxShadow = 'none';
+                  }}
+                >
+                  ▶ Open in YouTube
+                </a>
               </div>
             )}
 
             {selectedMedia.type === 'image' && (
-              <img
-                src={selectedMedia.url}
-                alt={selectedMedia.title}
-                style={{
-                  maxWidth: '100%',
-                  maxHeight: '60vh',
-                  height: 'auto',
-                  borderRadius: '8px',
-                  display: 'block',
-                  margin: '0 auto',
-                  border: '2px solid rgba(92, 136, 218, 0.3)',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-                  background: 'rgba(255, 255, 255, 0.02)',
-                  padding: '4px',
-                }}
-              />
+              <div>
+                {!imageError ? (
+                  <img
+                    src={selectedMedia.url}
+                    alt={selectedMedia.title}
+                    onError={() => setImageError(true)}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '60vh',
+                      height: 'auto',
+                      borderRadius: '8px',
+                      display: 'block',
+                      margin: '0 auto',
+                      border: '2px solid rgba(92, 136, 218, 0.3)',
+                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                      background: 'rgba(255, 255, 255, 0.02)',
+                      padding: '4px',
+                    }}
+                  />
+                ) : (
+                  <div style={{
+                    background: 'rgba(92, 136, 218, 0.1)',
+                    border: '2px dashed rgba(92, 136, 218, 0.4)',
+                    borderRadius: '12px',
+                    padding: '30px',
+                    textAlign: 'center',
+                    color: COLORS.text
+                  }}>
+                    <div style={{ fontSize: '48px', marginBottom: '20px', opacity: 0.5 }}>🖼️</div>
+                    <div style={{
+                      fontSize: '16px',
+                      lineHeight: '1.8',
+                      marginBottom: '20px',
+                      fontFamily: 'Inter',
+                      color: '#b8c5d8'
+                    }}>
+                      {selectedMedia.description || 'Image not available'}
+                    </div>
+                    {selectedNode?.grokipedia && (
+                      <a
+                        href={selectedNode.wikipedia}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: 'inline-block',
+                          padding: '12px 24px',
+                          background: COLORS.primary,
+                          color: '#000',
+                          textDecoration: 'none',
+                          borderRadius: '8px',
+                          fontSize: '14px',
+                          fontWeight: '600',
+                          fontFamily: 'Inter',
+                          transition: 'all 0.2s',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.transform = 'scale(1.05)';
+                          e.target.style.boxShadow = `0 4px 12px ${COLORS.primary}60`;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.transform = 'scale(1)';
+                          e.target.style.boxShadow = 'none';
+                        }}
+                      >
+                        📖 Learn More
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
             )}
 
             {(selectedMedia.type === 'article' || selectedMedia.type === 'document') && (
