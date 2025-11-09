@@ -306,19 +306,38 @@ const ForesightMindMap = () => {
 
       // Animate nodes
       nodesRef.current.forEach((node, index) => {
+        const isSelected = selectedNode && node.userData.id === selectedNode.id;
+
         // Floating motion
         if (node.originalY !== undefined) {
           node.position.y = node.originalY + Math.sin(Date.now() * 0.0008 + index) * 0.3;
         }
 
-        // Pulse effect
+        // Pulse effect - enhanced for selected node
         if (node.material && node.material.emissive) {
-          const baseIntensity = node.isHovered ? 0.6 : 0.3;
-          node.material.emissiveIntensity = baseIntensity + Math.sin(Date.now() * 0.002 + index) * 0.1;
+          let baseIntensity;
+          let pulseAmplitude;
+
+          if (isSelected) {
+            baseIntensity = 0.9;  // Much brighter for selected node
+            pulseAmplitude = 0.2;  // Stronger pulse for selected
+          } else if (node.isHovered) {
+            baseIntensity = 0.6;
+            pulseAmplitude = 0.1;
+          } else {
+            baseIntensity = 0.3;
+            pulseAmplitude = 0.1;
+          }
+
+          node.material.emissiveIntensity = baseIntensity + Math.sin(Date.now() * 0.002 + index) * pulseAmplitude;
         }
 
-        // Reset scale for non-hovered nodes
-        if (!node.isHovered && node.scale.x > 1.0) {
+        // Scale effect for selected node
+        if (isSelected) {
+          const targetScale = new THREE.Vector3(1.4, 1.4, 1.4);
+          node.scale.lerp(targetScale, 0.15);
+        } else if (!node.isHovered && node.scale.x > 1.0) {
+          // Reset scale for non-selected, non-hovered nodes
           node.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
         }
       });
