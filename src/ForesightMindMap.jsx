@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import mindMapData from './mindMapData';
 import TimelineView from './TimelineView';
@@ -22,6 +22,9 @@ const ForesightMindMap = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [timelineVisible, setTimelineVisible] = useState(false);
 
+  // Ref to avoid stale closures in animation loop
+  const hoveredNodeRef = useRef(null);
+
   // LCARS Color Palette
   const COLORS = {
     primary: '#5C88DA',
@@ -43,7 +46,7 @@ const ForesightMindMap = () => {
     document: '#99CC99'
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!containerRef.current) return;
 
     // Initialize Three.js Scene
@@ -138,9 +141,16 @@ const ForesightMindMap = () => {
         const hoveredObj = intersects[0].object;
         hoveredObj.isHovered = true;
         hoveredObj.scale.setScalar(1.1);
-        setHoveredNode(hoveredObj.userData);
+        // Use ref to avoid stale closure - update state only when changed
+        if (hoveredNodeRef.current !== hoveredObj.userData) {
+          hoveredNodeRef.current = hoveredObj.userData;
+          setHoveredNode(hoveredObj.userData);
+        }
       } else {
-        setHoveredNode(null);
+        if (hoveredNodeRef.current !== null) {
+          hoveredNodeRef.current = null;
+          setHoveredNode(null);
+        }
       }
 
       renderer.render(scene, camera);
@@ -215,28 +225,32 @@ const ForesightMindMap = () => {
       renderer.setSize(width, height);
     };
 
-    containerRef.current.addEventListener('mousemove', handleMouseMove);
-    containerRef.current.addEventListener('mousedown', handleMouseDown);
-    containerRef.current.addEventListener('mouseup', handleMouseUp);
-    containerRef.current.addEventListener('click', handleClick);
-    containerRef.current.addEventListener('wheel', handleWheel, { passive: false });
+    // Store container ref for reliable cleanup
+    const container = containerRef.current;
+    container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mousedown', handleMouseDown);
+    container.addEventListener('mouseup', handleMouseUp);
+    container.addEventListener('click', handleClick);
+    container.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('resize', handleResize);
 
     // Cleanup
     return () => {
-      cancelAnimationFrame(frameId);
-      if (containerRef.current) {
-        containerRef.current.removeEventListener('mousemove', handleMouseMove);
-        containerRef.current.removeEventListener('mousedown', handleMouseDown);
-        containerRef.current.removeEventListener('mouseup', handleMouseUp);
-        containerRef.current.removeEventListener('click', handleClick);
-        containerRef.current.removeEventListener('wheel', handleWheel);
-      }
+      if (frameId) cancelAnimationFrame(frameId);
+
+      // Use stored container ref for reliable cleanup
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mousedown', handleMouseDown);
+      container.removeEventListener('mouseup', handleMouseUp);
+      container.removeEventListener('click', handleClick);
+      container.removeEventListener('wheel', handleWheel);
       window.removeEventListener('resize', handleResize);
+
       renderer.dispose();
-      if (containerRef.current && renderer.domElement) {
-        containerRef.current.removeChild(renderer.domElement);
+      if (container && renderer.domElement) {
+        container.removeChild(renderer.domElement);
       }
+      rendererRef.current = null;
     };
   }, []);
 
