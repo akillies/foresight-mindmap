@@ -758,6 +758,69 @@ const ForesightMindMap = () => {
     connectionsRef.current.push(line);
   };
 
+  // Create Cross-Pillar Relationship Connections
+  const createCrossPillarConnections = (scene) => {
+    if (!showRelationships) return;
+    if (!selectedNode && !hoveredNode) return;
+
+    const activeNode = selectedNode || hoveredNode;
+    if (!activeNode || !activeNode.relatedMethodologies) return;
+
+    const { methodologies } = mindMapData;
+
+    activeNode.relatedMethodologies.forEach(rel => {
+      // Find both nodes in the scene
+      const sourceNode = nodesRef.current.find(n => n.userData.id === activeNode.id);
+      const targetNode = nodesRef.current.find(n => n.userData.id === rel.id);
+
+      if (!sourceNode || !targetNode) return;
+
+      const sourcePos = sourceNode.position;
+      const targetPos = targetNode.position;
+
+      // Create dashed line
+      const midPoint = new THREE.Vector3(
+        (sourcePos.x + targetPos.x) / 2,
+        (sourcePos.y + targetPos.y) / 2 + 3,
+        (sourcePos.z + targetPos.z) / 2
+      );
+
+      const curve = new THREE.CatmullRomCurve3([sourcePos, midPoint, targetPos]);
+      const points = curve.getPoints(50);
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+
+      const material = new THREE.LineDashedMaterial({
+        color: new THREE.Color('#CCCCCC'),
+        opacity: 0.15,
+        transparent: true,
+        dashSize: 2,
+        gapSize: 1,
+      });
+
+      const line = new THREE.Line(geometry, material);
+      line.computeLineDistances(); // Required for dashed lines
+      line.userData = {
+        isCrossPillar: true,
+        sourceId: activeNode.id,
+        targetId: rel.id,
+        relationshipType: rel.type
+      };
+
+      scene.add(line);
+      crossPillarConnectionsRef.current.push(line);
+    });
+  };
+
+  // Remove Cross-Pillar Connections
+  const removeCrossPillarConnections = (scene) => {
+    crossPillarConnectionsRef.current.forEach(conn => {
+      scene.remove(conn);
+      conn.geometry.dispose();
+      conn.material.dispose();
+    });
+    crossPillarConnectionsRef.current = [];
+  };
+
   // Handle Node Click
   const handleNodeClick = (node) => {
     const nodeData = node.userData;
@@ -823,6 +886,27 @@ const ForesightMindMap = () => {
       }
     });
   }, [searchQuery]);
+
+  // Cross-Pillar Relationship Connections
+  useEffect(() => {
+    const scene = sceneRef.current;
+    if (!scene) return;
+
+    // Remove existing cross-pillar connections
+    removeCrossPillarConnections(scene);
+
+    // Create new connections if conditions are met
+    if (showRelationships && (selectedNode || hoveredNode)) {
+      createCrossPillarConnections(scene);
+    }
+
+    // Cleanup on unmount
+    return () => {
+      if (scene) {
+        removeCrossPillarConnections(scene);
+      }
+    };
+  }, [showRelationships, selectedNode, hoveredNode]);
 
   return (
     <div style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden' }}>
@@ -999,6 +1083,38 @@ const ForesightMindMap = () => {
             }}
           >
             {timelineVisible ? '◀ CLOSE TIMELINE' : 'TIMELINE VIEW ▶'}
+          </button>
+
+          {/* Relationships Toggle */}
+          <button
+            onClick={() => setShowRelationships(!showRelationships)}
+            style={{
+              width: '100%',
+              background: showRelationships ? COLORS.success : 'transparent',
+              border: `3px solid ${COLORS.success}`,
+              color: showRelationships ? '#000000' : COLORS.success,
+              padding: '12px',
+              borderRadius: '15px',
+              fontSize: '12px',
+              fontWeight: '700',
+              letterSpacing: '2px',
+              cursor: 'pointer',
+              fontFamily: 'monospace',
+              marginBottom: '15px',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              if (!showRelationships) {
+                e.target.style.background = `${COLORS.success}20`;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!showRelationships) {
+                e.target.style.background = 'transparent';
+              }
+            }}
+          >
+            {showRelationships ? '✓ RELATIONSHIPS ON' : '○ SHOW RELATIONSHIPS'}
           </button>
 
           {/* Audio Controls */}
