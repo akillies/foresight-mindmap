@@ -63,11 +63,11 @@ const ForesightMindMap = () => {
     document: '#99CC99'
   };
 
-  // Audio presets - all generative for now
+  // Audio presets - all generative binaural frequencies for deep learning and healing
   const AUDIO_PRESETS = {
-    1: { type: 'generative', baseFreq: 528, binauralBeat: 14, label: 'STUDY FOCUS', harmonics: false },    // Beta waves for focus
-    2: { type: 'generative', baseFreq: 432, binauralBeat: 10, label: 'CALM FLOW', harmonics: false },      // Alpha waves for flow
-    3: { type: 'generative', baseFreq: 174, binauralBeat: 3, label: 'WARP CORE', harmonics: true }         // Deep ambient
+    1: { type: 'generative', baseFreq: 528, binauralBeat: 14, label: 'STUDY FOCUS (528Hz + 14Hz Beta)', harmonics: false },    // Beta waves for focus
+    2: { type: 'generative', baseFreq: 432, binauralBeat: 10, label: 'CALM FLOW (432Hz + 10Hz Alpha)', harmonics: false },      // Alpha waves for flow
+    3: { type: 'generative', baseFreq: 174, binauralBeat: 3, label: 'WARP CORE (174Hz + 3Hz Delta)', harmonics: true }         // Deep ambient
   };
 
   // Audio engine with Web Audio API - supports both file playback and generative
