@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import mindMapData from './mindMapData';
 import TimelineView from './TimelineView';
 
@@ -257,6 +258,16 @@ const ForesightMindMap = () => {
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
+    // Initialize OrbitControls for camera rotation
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 10;
+    controls.maxDistance = 200;
+    controls.maxPolarAngle = Math.PI; // Allow full rotation including looking from above
+    controls.minPolarAngle = 0;
+    controls.enablePan = false; // Disable panning to keep focus on center
+
     // Post-Processing: Bloom Effect for Cinematic Glow
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
@@ -401,6 +412,9 @@ const ForesightMindMap = () => {
         }
       }
 
+      // Update OrbitControls
+      controls.update();
+
       // Render with bloom post-processing
       composerRef.current.render();
     };
@@ -496,6 +510,7 @@ const ForesightMindMap = () => {
       container.removeEventListener('wheel', handleWheel);
       window.removeEventListener('resize', handleResize);
 
+      controls.dispose();
       renderer.dispose();
       if (container && renderer.domElement) {
         container.removeChild(renderer.domElement);
@@ -669,7 +684,10 @@ const ForesightMindMap = () => {
 
       const sphere = new THREE.Mesh(geometry, material);
       sphere.position.set(x, y, z);
-      sphere.userData = child;
+      sphere.userData = {
+        ...child,
+        parent: parent.id
+      };
       sphere.castShadow = true;
       sphere.receiveShadow = true;
       sphere.originalY = y;

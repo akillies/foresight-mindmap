@@ -30,6 +30,26 @@ const TimelineView = ({ onClose }) => {
     { id: 'speculative', label: 'SPECULATIVE', range: '2030s-2100', color: COLORS.speculative },
   ];
 
+  // Filter helper function for era filtering
+  const filterByEra = (year) => {
+    if (selectedEra === 'all') return true;
+
+    const eraRanges = {
+      'foundation': [1940, 1959],
+      'cold-war': [1950, 1969],
+      'corporate': [1970, 1989],
+      'academic': [1990, 2009],
+      'modern': [2010, 2029],
+      'speculative': [2030, 2100]
+    };
+
+    const range = eraRanges[selectedEra];
+    if (!range) return true;
+
+    const [start, end] = range;
+    return year >= start && year <= end;
+  };
+
   // Historical methodologies with years (simplified timeline)
   const methodologyTimeline = [
     { year: 1948, name: 'Morphological Analysis', creator: 'Fritz Zwicky', color: COLORS.success },
@@ -214,7 +234,7 @@ const TimelineView = ({ onClose }) => {
           >
             METHODOLOGY DEVELOPMENT
           </h3>
-          {methodologyTimeline.map((item, index) => (
+          {methodologyTimeline.filter(item => filterByEra(item.year)).map((item, index) => (
             <div
               key={index}
               style={{
@@ -309,7 +329,10 @@ const TimelineView = ({ onClose }) => {
           >
             FUTURISTS & VISIONARIES
           </h3>
-          {futuristsTimeline.map((futurist, index) => {
+          {futuristsTimeline.filter(futurist => {
+            const startYear = parseInt(futurist.lifespan.split('-')[0]);
+            return filterByEra(startYear);
+          }).map((futurist, index) => {
             const startYear = futurist.lifespan.split('-')[0];
             const isFuturist = futurist.type === 'futurist';
 
@@ -435,7 +458,7 @@ const TimelineView = ({ onClose }) => {
             The cone of possibilities - uncertainty expands exponentially beyond 2060
           </div>
 
-          {speculativeFutures.map((scenario) => {
+          {speculativeFutures.filter(() => selectedEra === 'all' || selectedEra === 'speculative').map((scenario) => {
             // Calculate opacity based on uncertainty
             const opacityMap = { low: 1.0, medium: 0.8, high: 0.6, 'very-high': 0.4 };
             const opacity = showUncertainty ? opacityMap[scenario.uncertainty] || 0.7 : 1.0;
@@ -613,7 +636,7 @@ const TimelineView = ({ onClose }) => {
             Star Trek-inspired pathway: abundance, collaboration, enlightenment
           </div>
 
-          {positiveFutures.map((milestone) => (
+          {positiveFutures.filter(milestone => filterByEra(parseInt(milestone.year))).map((milestone) => (
             <div
               key={milestone.id}
               style={{
