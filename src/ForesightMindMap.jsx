@@ -527,10 +527,10 @@ const ForesightMindMap = () => {
     };
   }, []);
 
-  // Create Enhanced Starfield (8000 particles with size variation and distant galaxies)
+  // Create Enhanced Starfield (4000 particles with size variation and subtle galaxies)
   const createStarfield = (scene) => {
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 8000; // Increased from 2000 for denser space
+    const particlesCount = 4000; // Balanced density - enhanced but not overwhelming
     const positions = new Float32Array(particlesCount * 3);
     const colors = new Float32Array(particlesCount * 3);
     const sizes = new Float32Array(particlesCount); // Variable star sizes
@@ -591,10 +591,10 @@ const ForesightMindMap = () => {
     createDistantGalaxies(scene);
   };
 
-  // Create distant galaxy sprites for atmospheric depth
+  // Create subtle distant galaxy sprites for atmospheric depth (don't compete with nodes)
   const createDistantGalaxies = (scene) => {
-    const galaxyCount = 8;
-    const lcarColors = [0x5C88DA, 0xFF6B9D, 0xCC99CC, 0x9D4EDD];
+    const galaxyCount = 4; // Reduced from 8 for subtlety
+    const lcarColors = [0x5C88DA, 0xCC99CC];
 
     for (let i = 0; i < galaxyCount; i++) {
       const canvas = document.createElement('canvas');
@@ -602,14 +602,14 @@ const ForesightMindMap = () => {
       canvas.height = 64;
       const ctx = canvas.getContext('2d');
 
-      // Create radial gradient for galaxy glow
+      // Create radial gradient for galaxy glow (more subtle)
       const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
       const color = lcarColors[i % lcarColors.length];
       const r = (color >> 16) & 255;
       const g = (color >> 8) & 255;
       const b = color & 255;
-      gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.3)`);
-      gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.1)`);
+      gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.15)`); // Reduced from 0.3
+      gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.05)`); // Reduced from 0.1
       gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, 64, 64);
@@ -618,19 +618,19 @@ const ForesightMindMap = () => {
       const material = new THREE.SpriteMaterial({
         map: texture,
         transparent: true,
-        opacity: 0.6,
+        opacity: 0.35, // Reduced from 0.6 for subtlety
         blending: THREE.AdditiveBlending,
       });
 
       const sprite = new THREE.Sprite(material);
       const angle = (i / galaxyCount) * Math.PI * 2;
-      const distance = 180 + Math.random() * 50;
+      const distance = 220 + Math.random() * 30; // Further away
       sprite.position.set(
         Math.cos(angle) * distance,
-        (Math.random() - 0.5) * 100,
+        (Math.random() - 0.5) * 80,
         Math.sin(angle) * distance
       );
-      sprite.scale.set(40 + Math.random() * 20, 40 + Math.random() * 20, 1);
+      sprite.scale.set(30 + Math.random() * 15, 30 + Math.random() * 15, 1); // Smaller
 
       scene.add(sprite);
     }
@@ -854,24 +854,45 @@ const ForesightMindMap = () => {
     });
   };
 
-  // Remove Child Nodes
+  // Remove Child Nodes (including their children and media)
   const removeChildNodes = (scene, parentNode) => {
     const parent = parentNode.userData;
+
+    // Find all child nodes and media nodes
     const nodesToRemove = nodesRef.current.filter(node => {
-      return node.userData.parent === parent.id || node.userData.parentId === parent.id;
+      return node.userData.parent === parent.id ||
+             node.userData.parentId === parent.id ||
+             node.userData.isMedia && node.userData.parentNodeId === parent.id;
     });
 
+    // Also remove children of children recursively
+    const getDescendants = (parentId) => {
+      return nodesRef.current.filter(node =>
+        node.userData.parent === parentId || node.userData.parentId === parentId
+      );
+    };
+
+    // Collect all descendants
+    const allNodesToRemove = [...nodesToRemove];
     nodesToRemove.forEach(node => {
-      scene.remove(node);
-      node.geometry.dispose();
-      node.material.dispose();
+      const descendants = getDescendants(node.userData.id);
+      allNodesToRemove.push(...descendants);
     });
 
-    nodesRef.current = nodesRef.current.filter(node => !nodesToRemove.includes(node));
+    // Remove duplicates
+    const uniqueNodesToRemove = [...new Set(allNodesToRemove)];
 
-    // Remove connections
+    uniqueNodesToRemove.forEach(node => {
+      scene.remove(node);
+      if (node.geometry) node.geometry.dispose();
+      if (node.material) node.material.dispose();
+    });
+
+    nodesRef.current = nodesRef.current.filter(node => !uniqueNodesToRemove.includes(node));
+
+    // Remove connections (check against all descendants, not just first level)
     const connectionsToRemove = connectionsRef.current.filter(conn => {
-      return nodesToRemove.some(node =>
+      return uniqueNodesToRemove.some(node =>
         node.position.equals(conn.userData.endPos) ||
         node.position.equals(conn.userData.startPos)
       );
