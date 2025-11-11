@@ -365,9 +365,10 @@ const ForesightMindMap = () => {
         }
       });
 
-      // Animate starfield particles (twinkling and drift)
+      // Animate enhanced starfield (twinkling, drift, and rotation)
       if (particlesRef.current) {
         const positions = particlesRef.current.geometry.attributes.position.array;
+        const velocities = particlesRef.current.geometry.userData.velocities;
         const time = Date.now() * 0.001;
 
         for (let i = 0; i < positions.length / 3; i++) {
@@ -376,6 +377,13 @@ const ForesightMindMap = () => {
           // Gentle vertical drift (sine wave) - only for some particles
           if (i % 10 === 0) {
             positions[i3 + 1] += Math.sin(time * 0.5 + i) * 0.01;
+          }
+
+          // Slow orbital rotation using stored velocities
+          if (velocities) {
+            positions[i3] += velocities[i3] * 10;
+            positions[i3 + 1] += velocities[i3 + 1] * 10;
+            positions[i3 + 2] += velocities[i3 + 2] * 10;
           }
         }
 
@@ -519,38 +527,58 @@ const ForesightMindMap = () => {
     };
   }, []);
 
-  // Create Starfield
+  // Create Enhanced Starfield (8000 particles with size variation and distant galaxies)
   const createStarfield = (scene) => {
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 2000;
+    const particlesCount = 8000; // Increased from 2000 for denser space
     const positions = new Float32Array(particlesCount * 3);
     const colors = new Float32Array(particlesCount * 3);
+    const sizes = new Float32Array(particlesCount); // Variable star sizes
+    const velocities = new Float32Array(particlesCount * 3); // For rotation animation
 
     const lcarBlue = new THREE.Color(0x5C88DA);
     const lcarAmber = new THREE.Color(0xFFCC66);
+    const lcarPink = new THREE.Color(0xFF6B9D);
     const white = new THREE.Color(0xFFFFFF);
 
     for (let i = 0; i < particlesCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 400;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 400;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 400;
+      // Position in 3D space (larger area for depth)
+      positions[i * 3] = (Math.random() - 0.5) * 500;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 500;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 500;
 
+      // Color variation with LCARS palette
       const colorChoice = Math.random();
-      const color = colorChoice < 0.5 ? lcarBlue : colorChoice < 0.75 ? lcarAmber : white;
+      const color = colorChoice < 0.4 ? lcarBlue :
+                    colorChoice < 0.6 ? lcarAmber :
+                    colorChoice < 0.75 ? white : lcarPink;
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;
+
+      // Variable star sizes (0.3 to 1.5) - some stars brighter/closer
+      sizes[i] = Math.random() * 1.2 + 0.3;
+
+      // Slow rotation velocities
+      velocities[i * 3] = (Math.random() - 0.5) * 0.0001;
+      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.0001;
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.0001;
     }
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+    // Store velocities for rotation animation
+    particlesGeometry.userData = { velocities };
 
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.7,
+      size: 1.0, // Base size (will be multiplied by size attribute)
       vertexColors: true,
       opacity: 0.8,
       transparent: true,
       blending: THREE.AdditiveBlending,
+      sizeAttenuation: true, // Makes distant stars smaller
     });
 
     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
@@ -558,6 +586,54 @@ const ForesightMindMap = () => {
 
     // Store for animation
     particlesRef.current = particles;
+
+    // Add distant galaxy sprites for depth
+    createDistantGalaxies(scene);
+  };
+
+  // Create distant galaxy sprites for atmospheric depth
+  const createDistantGalaxies = (scene) => {
+    const galaxyCount = 8;
+    const lcarColors = [0x5C88DA, 0xFF6B9D, 0xCC99CC, 0x9D4EDD];
+
+    for (let i = 0; i < galaxyCount; i++) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 64;
+      canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+
+      // Create radial gradient for galaxy glow
+      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      const color = lcarColors[i % lcarColors.length];
+      const r = (color >> 16) & 255;
+      const g = (color >> 8) & 255;
+      const b = color & 255;
+      gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.3)`);
+      gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.1)`);
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 64, 64);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      const material = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const sprite = new THREE.Sprite(material);
+      const angle = (i / galaxyCount) * Math.PI * 2;
+      const distance = 180 + Math.random() * 50;
+      sprite.position.set(
+        Math.cos(angle) * distance,
+        (Math.random() - 0.5) * 100,
+        Math.sin(angle) * distance
+      );
+      sprite.scale.set(40 + Math.random() * 20, 40 + Math.random() * 20, 1);
+
+      scene.add(sprite);
+    }
   };
 
   // Create Center Node (Level 0)
