@@ -17,6 +17,7 @@ const ForesightMindMap = () => {
   const connectionsRef = useRef([]);
   const crossPillarConnectionsRef = useRef([]);
   const particlesRef = useRef(null);
+  const nebulasRef = useRef([]);
   const raycasterRef = useRef(new THREE.Raycaster());
   const mouseRef = useRef(new THREE.Vector2());
   const isDraggingRef = useRef(false);
@@ -303,6 +304,9 @@ const ForesightMindMap = () => {
     // Create Starfield Background
     createStarfield(scene);
 
+    // Create Animated Nebulas
+    createNebulas(scene);
+
     // Create Nodes
     createCenterNode(scene);
     createLevel1Nodes(scene);
@@ -413,6 +417,11 @@ const ForesightMindMap = () => {
         const twinkle = Math.sin(time * 2) * 0.2;
         particlesRef.current.material.opacity = baseOpacity + twinkle;
       }
+
+      // Animate nebulas (slow rotation)
+      nebulasRef.current.forEach((nebula) => {
+        nebula.rotation.z += nebula.userData.rotationSpeed;
+      });
 
       // Raycasting for hover effects
       raycasterRef.current.setFromCamera(mouseRef.current, camera);
@@ -652,6 +661,84 @@ const ForesightMindMap = () => {
       sprite.scale.set(30 + Math.random() * 15, 30 + Math.random() * 15, 1); // Smaller
 
       scene.add(sprite);
+    }
+  };
+
+  // Create Animated Nebula Backgrounds
+  const createNebulas = (scene) => {
+    const nebulaCount = 3;
+    const nebulaColors = [
+      { primary: [92, 136, 218], secondary: [204, 153, 204] },  // Blue to Purple
+      { primary: [255, 107, 157], secondary: [153, 78, 221] },  // Pink to Purple
+      { primary: [99, 204, 153], secondary: [92, 136, 218] }    // Teal to Blue
+    ];
+
+    for (let i = 0; i < nebulaCount; i++) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 512;
+      canvas.height = 512;
+      const ctx = canvas.getContext('2d');
+
+      // Create complex nebula with multiple gradients and noise
+      const colors = nebulaColors[i];
+
+      // Background radial gradient
+      const gradient1 = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
+      gradient1.addColorStop(0, `rgba(${colors.primary[0]}, ${colors.primary[1]}, ${colors.primary[2]}, 0.08)`);
+      gradient1.addColorStop(0.4, `rgba(${colors.secondary[0]}, ${colors.secondary[1]}, ${colors.secondary[2]}, 0.04)`);
+      gradient1.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = gradient1;
+      ctx.fillRect(0, 0, 512, 512);
+
+      // Add second offset gradient for depth
+      const gradient2 = ctx.createRadialGradient(
+        256 + Math.random() * 100 - 50,
+        256 + Math.random() * 100 - 50,
+        0,
+        256,
+        256,
+        200
+      );
+      gradient2.addColorStop(0, `rgba(${colors.secondary[0]}, ${colors.secondary[1]}, ${colors.secondary[2]}, 0.06)`);
+      gradient2.addColorStop(0.5, `rgba(${colors.primary[0]}, ${colors.primary[1]}, ${colors.primary[2]}, 0.03)`);
+      gradient2.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = gradient2;
+      ctx.fillRect(0, 0, 512, 512);
+
+      // Create texture from canvas
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.needsUpdate = true;
+
+      // Create large plane for nebula
+      const geometry = new THREE.PlaneGeometry(200, 200);
+      const material = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+        side: THREE.DoubleSide,
+        depthWrite: false
+      });
+
+      const nebula = new THREE.Mesh(geometry, material);
+
+      // Position nebulas at different depths and angles
+      const angle = (i / nebulaCount) * Math.PI * 2;
+      const distance = 180 + i * 20;
+      nebula.position.set(
+        Math.cos(angle) * distance,
+        (Math.random() - 0.5) * 60,
+        Math.sin(angle) * distance
+      );
+
+      // Random rotation for variety
+      nebula.rotation.z = Math.random() * Math.PI * 2;
+
+      // Store rotation speed for animation
+      nebula.userData.rotationSpeed = (Math.random() - 0.5) * 0.0002;
+
+      scene.add(nebula);
+      nebulasRef.current.push(nebula);
     }
   };
 
