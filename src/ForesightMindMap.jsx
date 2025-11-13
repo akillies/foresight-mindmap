@@ -751,15 +751,17 @@ const ForesightMindMap = () => {
   // Create Center Node (Level 0)
   const createCenterNode = (scene) => {
     const { center } = mindMapData;
+
+    // Main sphere - glass-like with higher emissive
     const geometry = new THREE.SphereGeometry(2.0, 32, 32);
     const material = new THREE.MeshStandardMaterial({
       color: new THREE.Color(center.color),
       emissive: new THREE.Color(center.color),
-      emissiveIntensity: 0.3,
-      roughness: 0.3,
-      metalness: 0.2,
+      emissiveIntensity: 0.8,
+      roughness: 0.1,  // Much smoother/glossier
+      metalness: 0.6,  // More metallic/reflective
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.85,
     });
 
     const sphere = new THREE.Mesh(geometry, material);
@@ -769,12 +771,35 @@ const ForesightMindMap = () => {
     sphere.receiveShadow = true;
     sphere.originalY = 0;
 
-    // Glow effect
-    const glowGeometry = new THREE.SphereGeometry(2.5, 32, 32);
+    // Inner bright core (energy center)
+    const coreGeometry = new THREE.SphereGeometry(1.2, 16, 16);
+    const coreMaterial = new THREE.MeshBasicMaterial({
+      color: new THREE.Color(center.color),
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending,
+    });
+    const core = new THREE.Mesh(coreGeometry, coreMaterial);
+    sphere.add(core);
+
+    // Inner glow layer (fresnel-like effect)
+    const innerGlowGeometry = new THREE.SphereGeometry(1.95, 32, 32);
+    const innerGlowMaterial = new THREE.MeshBasicMaterial({
+      color: new THREE.Color(center.color),
+      transparent: true,
+      opacity: 0.3,
+      side: THREE.BackSide,
+      blending: THREE.AdditiveBlending,
+    });
+    const innerGlow = new THREE.Mesh(innerGlowGeometry, innerGlowMaterial);
+    sphere.add(innerGlow);
+
+    // Outer glow effect (larger, more diffuse)
+    const glowGeometry = new THREE.SphereGeometry(2.8, 32, 32);
     const glowMaterial = new THREE.MeshBasicMaterial({
       color: new THREE.Color(center.color),
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.15,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     });
@@ -797,15 +822,16 @@ const ForesightMindMap = () => {
       const z = Math.sin(angle) * radius;
       const y = 0;
 
+      // Main sphere - glass-like with higher emissive
       const geometry = new THREE.SphereGeometry(1.5, 32, 32);
       const material = new THREE.MeshStandardMaterial({
         color: new THREE.Color(pillar.color),
         emissive: new THREE.Color(pillar.color),
-        emissiveIntensity: 0.3,
-        roughness: 0.35,
-        metalness: 0.15,
+        emissiveIntensity: 0.7,
+        roughness: 0.15,  // Smoother/glossier
+        metalness: 0.5,   // More metallic/reflective
         transparent: true,
-        opacity: 0.9,
+        opacity: 0.85,
       });
 
       const sphere = new THREE.Mesh(geometry, material);
@@ -815,12 +841,35 @@ const ForesightMindMap = () => {
       sphere.receiveShadow = true;
       sphere.originalY = y;
 
-      // Glow effect
-      const glowGeometry = new THREE.SphereGeometry(2.0, 32, 32);
+      // Inner bright core (energy center)
+      const coreGeometry = new THREE.SphereGeometry(0.9, 16, 16);
+      const coreMaterial = new THREE.MeshBasicMaterial({
+        color: new THREE.Color(pillar.color),
+        transparent: true,
+        opacity: 0.5,
+        blending: THREE.AdditiveBlending,
+      });
+      const core = new THREE.Mesh(coreGeometry, coreMaterial);
+      sphere.add(core);
+
+      // Inner glow layer (fresnel-like effect)
+      const innerGlowGeometry = new THREE.SphereGeometry(1.45, 32, 32);
+      const innerGlowMaterial = new THREE.MeshBasicMaterial({
+        color: new THREE.Color(pillar.color),
+        transparent: true,
+        opacity: 0.25,
+        side: THREE.BackSide,
+        blending: THREE.AdditiveBlending,
+      });
+      const innerGlow = new THREE.Mesh(innerGlowGeometry, innerGlowMaterial);
+      sphere.add(innerGlow);
+
+      // Outer glow effect (larger, more diffuse)
+      const glowGeometry = new THREE.SphereGeometry(2.1, 32, 32);
       const glowMaterial = new THREE.MeshBasicMaterial({
         color: new THREE.Color(pillar.color),
         transparent: true,
-        opacity: 0.15,
+        opacity: 0.12,
         side: THREE.BackSide,
         blending: THREE.AdditiveBlending,
       });
@@ -859,15 +908,16 @@ const ForesightMindMap = () => {
       const z = parentPos.z + localZ;
       const y = parentPos.y;
 
+      // Main sphere - glass-like with higher emissive
       const geometry = new THREE.SphereGeometry(1.2, 32, 32);
       const material = new THREE.MeshStandardMaterial({
         color: new THREE.Color(child.color),
         emissive: new THREE.Color(child.color),
-        emissiveIntensity: 0.3,
-        roughness: 0.4,
-        metalness: 0.1,
+        emissiveIntensity: 0.6,
+        roughness: 0.2,  // Smoother/glossier
+        metalness: 0.4,  // More metallic/reflective
         transparent: true,
-        opacity: 0.9,
+        opacity: 0.85,
       });
 
       const sphere = new THREE.Mesh(geometry, material);
@@ -880,12 +930,35 @@ const ForesightMindMap = () => {
       sphere.receiveShadow = true;
       sphere.originalY = y;
 
-      // Glow effect
-      const glowGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+      // Inner bright core (energy center)
+      const coreGeometry = new THREE.SphereGeometry(0.7, 16, 16);
+      const coreMaterial = new THREE.MeshBasicMaterial({
+        color: new THREE.Color(child.color),
+        transparent: true,
+        opacity: 0.4,
+        blending: THREE.AdditiveBlending,
+      });
+      const core = new THREE.Mesh(coreGeometry, coreMaterial);
+      sphere.add(core);
+
+      // Inner glow layer (fresnel-like effect)
+      const innerGlowGeometry = new THREE.SphereGeometry(1.15, 32, 32);
+      const innerGlowMaterial = new THREE.MeshBasicMaterial({
+        color: new THREE.Color(child.color),
+        transparent: true,
+        opacity: 0.2,
+        side: THREE.BackSide,
+        blending: THREE.AdditiveBlending,
+      });
+      const innerGlow = new THREE.Mesh(innerGlowGeometry, innerGlowMaterial);
+      sphere.add(innerGlow);
+
+      // Outer glow effect (larger, more diffuse)
+      const glowGeometry = new THREE.SphereGeometry(1.7, 32, 32);
       const glowMaterial = new THREE.MeshBasicMaterial({
         color: new THREE.Color(child.color),
         transparent: true,
-        opacity: 0.12,
+        opacity: 0.1,
         side: THREE.BackSide,
         blending: THREE.AdditiveBlending,
       });
@@ -923,13 +996,15 @@ const ForesightMindMap = () => {
       const y = parentPos.y;
 
       const mediaColor = MEDIA_COLORS[mediaItem.type] || COLORS.primary;
+
+      // Main sphere - glass-like
       const geometry = new THREE.SphereGeometry(0.8, 16, 16);
       const material = new THREE.MeshStandardMaterial({
         color: new THREE.Color(mediaColor),
         emissive: new THREE.Color(mediaColor),
-        emissiveIntensity: 0.4,
-        roughness: 0.25,
-        metalness: 0.3,
+        emissiveIntensity: 0.6,
+        roughness: 0.2,
+        metalness: 0.4,
         transparent: true,
         opacity: 0.85,
       });
@@ -946,12 +1021,23 @@ const ForesightMindMap = () => {
       sphere.receiveShadow = true;
       sphere.originalY = y;
 
-      // Glow effect
-      const glowGeometry = new THREE.SphereGeometry(1.1, 16, 16);
+      // Inner bright core (small energy center)
+      const coreGeometry = new THREE.SphereGeometry(0.5, 12, 12);
+      const coreMaterial = new THREE.MeshBasicMaterial({
+        color: new THREE.Color(mediaColor),
+        transparent: true,
+        opacity: 0.4,
+        blending: THREE.AdditiveBlending,
+      });
+      const core = new THREE.Mesh(coreGeometry, coreMaterial);
+      sphere.add(core);
+
+      // Outer glow effect
+      const glowGeometry = new THREE.SphereGeometry(1.2, 16, 16);
       const glowMaterial = new THREE.MeshBasicMaterial({
         color: new THREE.Color(mediaColor),
         transparent: true,
-        opacity: 0.15,
+        opacity: 0.12,
         side: THREE.BackSide,
         blending: THREE.AdditiveBlending,
       });
@@ -1002,12 +1088,12 @@ const ForesightMindMap = () => {
 
     nodesRef.current = nodesRef.current.filter(node => !uniqueNodesToRemove.includes(node));
 
-    // Remove connections (check against all descendants, not just first level)
+    // Remove connections by checking node IDs instead of positions
+    const removedNodeIds = new Set(uniqueNodesToRemove.map(node => node.userData.id));
     const connectionsToRemove = connectionsRef.current.filter(conn => {
-      return uniqueNodesToRemove.some(node =>
-        node.position.equals(conn.userData.endPos) ||
-        node.position.equals(conn.userData.startPos)
-      );
+      const { parentId, childId } = conn.userData;
+      // Remove connection if either endpoint node is being removed
+      return removedNodeIds.has(parentId) || removedNodeIds.has(childId);
     });
 
     connectionsToRemove.forEach(conn => {
@@ -1214,14 +1300,22 @@ const ForesightMindMap = () => {
       });
     } else {
       // Expand
+      let hasExpanded = false;
+
       if (nodeData.children && nodeData.children.length > 0) {
         createChildNodes(sceneRef.current, node);
-        setExpandedNodes(prev => new Set(prev).add(nodeId));
+        hasExpanded = true;
       }
 
       // Show media if available
       if (nodeData.media && nodeData.media.length > 0) {
         createMediaNodes(sceneRef.current, node);
+        hasExpanded = true;
+      }
+
+      // Add to expanded nodes if anything was created
+      if (hasExpanded) {
+        setExpandedNodes(prev => new Set(prev).add(nodeId));
       }
     }
   };
