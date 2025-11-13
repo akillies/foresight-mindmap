@@ -353,15 +353,34 @@ const ForesightMindMap = () => {
         }
       });
 
-      // Animate connections based on selection
+      // Animate connections based on selection AND move energy particles
       connectionsRef.current.forEach((conn) => {
-        const { parentId, childId, baseOpacity } = conn.userData;
+        const { parentId, childId, baseOpacity, curve, particles, particleProgress, particleSpeed } = conn.userData;
         const isRelated = selectedNode && (selectedNode.id === parentId || selectedNode.id === childId);
         const targetOpacity = isRelated ? 0.7 : (baseOpacity || 0.3);
 
-        // Smooth lerp to target opacity
+        // Smooth lerp to target opacity for base line
         if (conn.material.opacity !== targetOpacity) {
           conn.material.opacity += (targetOpacity - conn.material.opacity) * 0.1;
+        }
+
+        // Animate energy particles along the curve
+        if (particles && curve && particleProgress) {
+          const positions = particles.geometry.attributes.position.array;
+
+          for (let i = 0; i < particleProgress.length; i++) {
+            // Move particle along curve
+            particleProgress[i] += particleSpeed;
+            if (particleProgress[i] > 1) particleProgress[i] = 0; // Loop back to start
+
+            // Get position on curve
+            const point = curve.getPoint(particleProgress[i]);
+            positions[i * 3] = point.x;
+            positions[i * 3 + 1] = point.y;
+            positions[i * 3 + 2] = point.z;
+          }
+
+          particles.geometry.attributes.position.needsUpdate = true;
         }
       });
 
@@ -902,12 +921,19 @@ const ForesightMindMap = () => {
       scene.remove(conn);
       conn.geometry.dispose();
       conn.material.dispose();
+
+      // Also dispose particle systems
+      if (conn.userData.particles) {
+        scene.remove(conn.userData.particles);
+        conn.userData.particles.geometry.dispose();
+        conn.userData.particles.material.dispose();
+      }
     });
 
     connectionsRef.current = connectionsRef.current.filter(conn => !connectionsToRemove.includes(conn));
   };
 
-  // Create Connection (curved line between nodes)
+  // Create Connection (curved line with energy particles)
   const createConnection = (scene, start, end, color, opacity = 0.3, parentId = null, childId = null) => {
     const midPoint = new THREE.Vector3(
       (start.x + end.x) / 2,
@@ -917,21 +943,69 @@ const ForesightMindMap = () => {
 
     const curve = new THREE.CatmullRomCurve3([start, midPoint, end]);
     const points = curve.getPoints(50);
+
+    // Dimmer base line (static)
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
     const material = new THREE.LineBasicMaterial({
       color: new THREE.Color(color),
-      opacity: opacity,
+      opacity: opacity * 0.3, // Much dimmer
       transparent: true,
     });
 
     const line = new THREE.Line(geometry, material);
+
+    // Create energy particles along the curve (3-5 particles per connection)
+    const particleCount = 4;
+    const particlePositions = new Float32Array(particleCount * 3);
+    const particleColors = new Float32Array(particleCount * 3);
+    const particleSizes = new Float32Array(particleCount);
+
+    const particleColor = new THREE.Color(color);
+
+    for (let i = 0; i < particleCount; i++) {
+      // Initial positions evenly spaced along curve
+      const t = i / particleCount;
+      const point = curve.getPoint(t);
+
+      particlePositions[i * 3] = point.x;
+      particlePositions[i * 3 + 1] = point.y;
+      particlePositions[i * 3 + 2] = point.z;
+
+      particleColors[i * 3] = particleColor.r;
+      particleColors[i * 3 + 1] = particleColor.g;
+      particleColors[i * 3 + 2] = particleColor.b;
+
+      particleSizes[i] = 0.2;
+    }
+
+    const particleGeometry = new THREE.BufferGeometry();
+    particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+    particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+    particleGeometry.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
+
+    const particleMaterial = new THREE.PointsMaterial({
+      size: 0.2,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.9,
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true,
+    });
+
+    const particles = new THREE.Points(particleGeometry, particleMaterial);
+    scene.add(particles);
+
     line.userData = {
       startPos: start,
       endPos: end,
       parentId,
       childId,
       baseOpacity: opacity,
-      baseColor: color
+      baseColor: color,
+      curve: curve,
+      particles: particles,
+      particleProgress: Array(particleCount).fill(0).map((_, i) => i / particleCount), // Track each particle's progress
+      particleSpeed: 0.003 + Math.random() * 0.002 // Slight speed variation
     };
     scene.add(line);
     connectionsRef.current.push(line);
@@ -1001,6 +1075,23 @@ const ForesightMindMap = () => {
   };
 
   // Handle Node Click
+  // Helper to get all descendant node IDs recursively
+  const getDescendantIds = (nodeId) => {
+    const descendantIds = [];
+    const collectDescendants = (parentId) => {
+      nodesRef.current.forEach(node => {
+        const data = node.userData;
+        if (data.parent === parentId || data.parentId === parentId) {
+          descendantIds.push(data.id);
+          // Recursively collect this node's descendants
+          collectDescendants(data.id);
+        }
+      });
+    };
+    collectDescendants(nodeId);
+    return descendantIds;
+  };
+
   const handleNodeClick = (node) => {
     const nodeData = node.userData;
 
@@ -1018,11 +1109,14 @@ const ForesightMindMap = () => {
     const isExpanded = expandedNodes.has(nodeId);
 
     if (isExpanded) {
-      // Collapse
+      // Collapse - also remove all descendant IDs from expandedNodes
+      const descendantIds = getDescendantIds(nodeId);
       removeChildNodes(sceneRef.current, node);
       setExpandedNodes(prev => {
         const newSet = new Set(prev);
         newSet.delete(nodeId);
+        // Remove all descendants from expanded tracking
+        descendantIds.forEach(id => newSet.delete(id));
         return newSet;
       });
     } else {
