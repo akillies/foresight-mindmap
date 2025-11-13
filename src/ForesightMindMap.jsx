@@ -18,6 +18,7 @@ const ForesightMindMap = () => {
   const crossPillarConnectionsRef = useRef([]);
   const particlesRef = useRef(null);
   const nebulasRef = useRef([]);
+  const expandedNodesRef = useRef(new Set());
   const raycasterRef = useRef(new THREE.Raycaster());
   const mouseRef = useRef(new THREE.Vector2());
   const isDraggingRef = useRef(false);
@@ -70,6 +71,11 @@ const ForesightMindMap = () => {
     2: { type: 'generative', baseFreq: 432, binauralBeat: 10, label: 'CALM FLOW (432Hz + 10Hz Alpha)', harmonics: false },      // Alpha waves for flow
     3: { type: 'generative', baseFreq: 174, binauralBeat: 3, label: 'WARP CORE (174Hz + 3Hz Delta)', harmonics: true }         // Deep ambient
   };
+
+  // Keep expandedNodesRef in sync with expandedNodes state (fixes stale closure in event handlers)
+  useEffect(() => {
+    expandedNodesRef.current = expandedNodes;
+  }, [expandedNodes]);
 
   // Audio engine with Web Audio API - supports both file playback and generative
   useEffect(() => {
@@ -1193,7 +1199,7 @@ const ForesightMindMap = () => {
     setSelectedNode(nodeData);
 
     const nodeId = nodeData.id;
-    const isExpanded = expandedNodes.has(nodeId);
+    const isExpanded = expandedNodesRef.current.has(nodeId);
 
     if (isExpanded) {
       // Collapse - also remove all descendant IDs from expandedNodes
