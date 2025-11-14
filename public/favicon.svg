@@ -1,0 +1,25 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="32" height="32" fill="#000000" rx="4"/>
+
+  <!-- Central node -->
+  <circle cx="16" cy="16" r="6" fill="#5C88DA" filter="url(#glow)"/>
+
+  <!-- Six pillars around center -->
+  <circle cx="16" cy="6" r="3" fill="#FFCC66" opacity="0.8"/>
+  <circle cx="24" cy="11" r="3" fill="#FF6B9D" opacity="0.8"/>
+  <circle cx="24" cy="21" r="3" fill="#64c8ff" opacity="0.8"/>
+  <circle cx="16" cy="26" r="3" fill="#99CC99" opacity="0.8"/>
+  <circle cx="8" cy="21" r="3" fill="#FFAA66" opacity="0.8"/>
+  <circle cx="8" cy="11" r="3" fill="#5C88DA" opacity="0.8"/>
+</svg>

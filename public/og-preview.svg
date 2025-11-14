@@ -1,0 +1,109 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- LCARS-style background -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- LCARS accent bars -->
+  <rect x="0" y="0" width="8" height="630" fill="#FF6B9D"/>
+  <rect x="0" y="0" width="300" height="8" fill="#5C88DA"/>
+  <rect x="900" y="0" width="300" height="8" fill="#FFCC66"/>
+
+  <!-- Central visualization concept -->
+  <g transform="translate(600, 315)">
+    <!-- Center node -->
+    <circle r="40" fill="#5C88DA" filter="url(#glow)" opacity="0.9"/>
+    <text text-anchor="middle" y="8" fill="#000" font-size="16" font-weight="700" font-family="Arial, sans-serif">SF</text>
+
+    <!-- Six pillars (hexagon) -->
+    <g opacity="0.7">
+      <circle cx="0" cy="-120" r="25" fill="#5C88DA" filter="url(#glow)"/>
+      <circle cx="104" cy="-60" r="25" fill="#FFCC66" filter="url(#glow)"/>
+      <circle cx="104" cy="60" r="25" fill="#64c8ff" filter="url(#glow)"/>
+      <circle cx="0" cy="120" r="25" fill="#99CC99" filter="url(#glow)"/>
+      <circle cx="-104" cy="60" r="25" fill="#FF6B9D" filter="url(#glow)"/>
+      <circle cx="-104" cy="-60" r="25" fill="#FFAA66" filter="url(#glow)"/>
+    </g>
+
+    <!-- Connection lines -->
+    <g stroke="#5C88DA" stroke-width="2" opacity="0.3">
+      <line x1="0" y1="-40" x2="0" y2="-95"/>
+      <line x1="35" y1="-20" x2="79" y2="-55"/>
+      <line x1="35" y1="20" x2="79" y2="55"/>
+      <line x1="0" y1="40" x2="0" y2="95"/>
+      <line x1="-35" y1="20" x2="-79" y2="55"/>
+      <line x1="-35" y1="-20" x2="-79" y2="-55"/>
+    </g>
+
+    <!-- Methodologies (smaller orbs around pillars) -->
+    <g opacity="0.5">
+      <circle cx="0" cy="-170" r="12" fill="#FF6B9D"/>
+      <circle cx="30" cy="-150" r="12" fill="#64c8ff"/>
+      <circle cx="-30" cy="-150" r="12" fill="#FFCC66"/>
+
+      <circle cx="150" cy="-80" r="12" fill="#99CC99"/>
+      <circle cx="130" cy="-40" r="12" fill="#FF6B9D"/>
+
+      <circle cx="150" cy="80" r="12" fill="#5C88DA"/>
+      <circle cx="130" cy="40" r="12" fill="#FFCC66"/>
+
+      <circle cx="0" cy="170" r="12" fill="#64c8ff"/>
+      <circle cx="30" cy="150" r="12" fill="#99CC99"/>
+
+      <circle cx="-150" cy="80" r="12" fill="#FF6B9D"/>
+      <circle cx="-130" cy="40" r="12" fill="#5C88DA"/>
+
+      <circle cx="-150" cy="-80" r="12" fill="#FFCC66"/>
+      <circle cx="-130" cy="-40" r="12" fill="#64c8ff"/>
+    </g>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="80" text-anchor="middle" fill="#5C88DA" font-size="56" font-weight="700" font-family="Arial, sans-serif" filter="url(#glow)">
+    FUTURE STUDIES EXPLORER
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="130" text-anchor="middle" fill="#E8F1FF" font-size="28" font-family="Arial, sans-serif">
+    Interactive 3D Strategic Foresight Mind Map
+  </text>
+
+  <!-- Description -->
+  <text x="600" y="530" text-anchor="middle" fill="#b8c5d8" font-size="20" font-family="Arial, sans-serif">
+    Explore 18 Foresight Methodologies • Six Pillars Framework
+  </text>
+
+  <!-- Footer badge -->
+  <g transform="translate(600, 580)">
+    <rect x="-150" y="-20" width="300" height="40" rx="20" fill="#5C88DA" opacity="0.2"/>
+    <text text-anchor="middle" y="8" fill="#5C88DA" font-size="18" font-weight="600" font-family="monospace">
+      foresight-mindmap.netlify.app
+    </text>
+  </g>
+
+  <!-- Particle effect -->
+  <g opacity="0.2" fill="#5C88DA">
+    <circle cx="150" cy="100" r="2"/>
+    <circle cx="1050" cy="150" r="2"/>
+    <circle cx="200" cy="500" r="2"/>
+    <circle cx="1000" cy="450" r="2"/>
+    <circle cx="100" cy="300" r="2"/>
+    <circle cx="1100" cy="300" r="2"/>
+    <circle cx="300" cy="200" r="2"/>
+    <circle cx="900" cy="550" r="2"/>
+  </g>
+</svg>
