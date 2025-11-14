@@ -1513,6 +1513,13 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Kondratiev_wave',
           source: 'Wikipedia',
           description: 'Deep dive into cycle theory covering Kondratiev waves, generational cycles, technology adoption curves, and other cyclical patterns in economic and social systems. Explores how understanding these rhythms helps anticipate turning points and transitions between eras.'
+        },
+        {
+          type: 'image',
+          title: 'Kondratiev-Schumpeter Innovation Waves',
+          url: '/diagrams/innovation-waves.svg',
+          description: 'Visual representation of six long waves of creative destruction (1785-2060+): Water power/textiles (1785-1845), Steam/railways (1845-1900), Electricity/chemicals (1900-1950), Petrochemicals/electronics (1950-1990), Digital networks/software (1990-2020), and AI/renewable energy (2020-2060?). Kondratiev (1925) empirically identified 40-60 year economic cycles; Schumpeter (1939) explained the mechanism through innovation clustering and creative destruction. Shows how general-purpose technologies drive long-wave economic growth.',
+          source: 'AK Consulting'
         }
       ],
       metadata: {
@@ -1618,6 +1625,13 @@ const mindMapData = {
           title: 'UNESCO Logo',
           url: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/UNESCO_logo.svg',
           description: 'UNESCO Chair in Futures Studies - Sohail Inayatullah developed CLA as UNESCO Chair holder'
+        },
+        {
+          type: 'image',
+          title: 'CLA Four Layers Framework',
+          url: '/diagrams/cla-four-layers.svg',
+          description: 'Visual representation of Causal Layered Analysis\' four-layer depth framework (Inayatullah, 1998): Layer 1 (Litany) - surface headlines and quantifiable trends; Layer 2 (Systemic Causes) - social, economic, political systems and structures; Layer 3 (Worldview/Discourse) - ideological assumptions and paradigms that make systems seem natural; Layer 4 (Myth/Metaphor) - deep unconscious narratives and archetypal stories. Shows how transformative change requires shifting myths/metaphors, not just surface interventions.',
+          source: 'AK Consulting'
         }
       ],
       metadata: {
@@ -2360,6 +2374,13 @@ const mindMapData = {
           title: 'RAND Corporation Logo',
           url: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Rand_Corporation_logo.svg',
           description: 'RAND Corporation - birthplace of Delphi Method in the 1950s for Cold War defense forecasting'
+        },
+        {
+          type: 'image',
+          title: 'Delphi Method: Four Core Principles',
+          url: '/diagrams/delphi-process.svg',
+          description: 'Comprehensive visualization of Delphi method iterative process flow (RAND, 1950s): Round 1 (initial independent forecasts), Round 2 (controlled feedback with statistics), Round 3+ (iteration until convergence), and final consensus report. Includes detailed explanation of four core principles: Anonymity (prevents groupthink), Iteration (enables revision through reflection), Controlled Feedback (statistical summary only), and Statistical Aggregation (median/IQR, not averages). Shows feedback loop for non-converged results.',
+          source: 'AK Consulting'
         }
       ],
       metadata: {

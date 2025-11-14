@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+  <!-- Delphi Method Process Flow Diagram -->
+  <!-- Iterative expert consensus building process developed by RAND Corporation -->
+
+  <defs>
+    <style>
+      .process-box { stroke: #333; stroke-width: 2; rx: 8; }
+      .round1 { fill: #E8F4F8; stroke: #3498DB; }
+      .round2 { fill: #FFF4E6; stroke: #F39C12; }
+      .round3 { fill: #E8F8F5; stroke: #1ABC9C; }
+      .final { fill: #F4ECF7; stroke: #9B59B6; }
+      .process-title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333; text-anchor: middle; }
+      .process-desc { font-family: Arial, sans-serif; font-size: 12px; fill: #555; }
+      .arrow { fill: none; stroke: #555; stroke-width: 2.5; marker-end: url(#arrowhead); }
+      .feedback-arrow { stroke-dasharray: 5,3; stroke: #E74C3C; }
+      .header { font-family: Arial, sans-serif; font-size: 26px; font-weight: bold; fill: #333; text-anchor: middle; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; fill: #666; text-anchor: middle; }
+      .principle { font-family: Arial, sans-serif; font-size: 11px; fill: #444; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#555" />
+    </marker>
+    <marker id="arrowhead-feedback" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#E74C3C" />
+    </marker>
+  </defs>
+
+  <!-- Header -->
+  <text x="500" y="30" class="header">Delphi Method Process Flow</text>
+  <text x="500" y="50" class="subtitle">Structured expert consensus through anonymous iteration (RAND Corporation, 1950s)</text>
+
+  <!-- ROUND 1: Initial Questionnaire -->
+  <rect x="50" y="100" width="220" height="110" class="process-box round1"/>
+  <text x="160" y="125" class="process-title" fill="#2980B9">ROUND 1</text>
+  <text x="160" y="145" class="process-title" fill="#2980B9">Initial Questionnaire</text>
+  <text x="70" y="168" class="process-desc">• Broad, open-ended questions</text>
+  <text x="70" y="184" class="process-desc">• No prior information shared</text>
+  <text x="70" y="200" class="process-desc">• Experts respond anonymously</text>
+
+  <!-- Arrow to Round 2 -->
+  <line x1="270" y1="155" x2="340" y2="155" class="arrow"/>
+
+  <!-- ROUND 2: Feedback + Statistics -->
+  <rect x="340" y="100" width="240" height="110" class="process-box round2"/>
+  <text x="460" y="125" class="process-title" fill="#D68910">ROUND 2</text>
+  <text x="460" y="145" class="process-title" fill="#D68910">Controlled Feedback</text>
+  <text x="360" y="168" class="process-desc">• Summary of Round 1 responses</text>
+  <text x="360" y="184" class="process-desc">• Statistical aggregation (median, IQR)</text>
+  <text x="360" y="200" class="process-desc">• Experts revise estimates anonymously</text>
+
+  <!-- Arrow to Round 3 -->
+  <line x1="580" y1="155" x2="650" y2="155" class="arrow"/>
+
+  <!-- ROUND 3: Iterate Toward Consensus -->
+  <rect x="650" y="100" width="240" height="110" class="process-box round3"/>
+  <text x="770" y="125" class="process-title" fill="#148F77">ROUND 3+</text>
+  <text x="770" y="145" class="process-title" fill="#148F77">Iteration & Refinement</text>
+  <text x="670" y="168" class="process-desc">• Show convergence/divergence</text>
+  <text x="670" y="184" class="process-desc">• Outliers explain reasoning</text>
+  <text x="670" y="200" class="process-desc">• Repeat until stability achieved</text>
+
+  <!-- Feedback loop arrow -->
+  <path d="M 770 210 L 770 240 L 460 240 L 460 210" class="arrow feedback-arrow" marker-end="url(#arrowhead-feedback)"/>
+  <text x="615" y="235" class="process-desc" fill="#E74C3C" text-anchor="middle" font-style="italic">If consensus not reached, iterate</text>
+
+  <!-- Arrow to Final -->
+  <line x1="770" y1="100" x2="770" y2="40" x2="500" y2="40" x2="500" y2="280" class="arrow"/>
+
+  <!-- FINAL: Consensus Report -->
+  <rect x="350" y="280" width="300" height="110" class="process-box final"/>
+  <text x="500" y="305" class="process-title" fill="#7D3C98">FINAL OUTPUT</text>
+  <text x="500" y="325" class="process-title" fill="#7D3C98">Consensus Report</text>
+  <text x="370" y="348" class="process-desc">• Converged expert forecasts</text>
+  <text x="370" y="364" class="process-desc">• Areas of agreement & disagreement</text>
+  <text x="370" y="380" class="process-desc">• Rationale from outlier perspectives</text>
+
+  <!-- Four Principles Box -->
+  <rect x="50" y="420" width="900" height="230" fill="rgba(255,235,205,0.3)" stroke="#999" stroke-width="2" rx="5"/>
+  <text x="500" y="445" text-anchor="middle" style="font-family: Arial; font-size: 18px; font-weight: bold; fill: #333;">
+    Four Core Principles of Delphi Method
+  </text>
+
+  <!-- Principle 1 -->
+  <rect x="70" y="460" width="200" height="170" fill="rgba(52,152,219,0.1)" stroke="#3498DB" rx="5"/>
+  <text x="170" y="482" text-anchor="middle" style="font-family: Arial; font-size: 14px; font-weight: bold; fill: #2980B9;">
+    1. ANONYMITY
+  </text>
+  <text x="85" y="502" class="principle">Experts never know who</text>
+  <text x="85" y="516" class="principle">else is participating.</text>
+  <text x="85" y="535" class="principle" font-weight="bold">Why:</text>
+  <text x="85" y="549" class="principle">Prevents groupthink,</text>
+  <text x="85" y="563" class="principle">authority bias, social</text>
+  <text x="85" y="577" class="principle">pressure. Encourages</text>
+  <text x="85" y="591" class="principle">honest, independent</text>
+  <text x="85" y="605" class="principle">judgment.</text>
+
+  <!-- Principle 2 -->
+  <rect x="290" y="460" width="200" height="170" fill="rgba(243,156,18,0.1)" stroke="#F39C12" rx="5"/>
+  <text x="390" y="482" text-anchor="middle" style="font-family: Arial; font-size: 14px; font-weight: bold; fill: #D68910;">
+    2. ITERATION
+  </text>
+  <text x="305" y="502" class="principle">Multiple rounds (typically</text>
+  <text x="305" y="516" class="principle">2-4) with feedback.</text>
+  <text x="305" y="535" class="principle" font-weight="bold">Why:</text>
+  <text x="305" y="549" class="principle">Allows experts to revise</text>
+  <text x="305" y="563" class="principle">views based on group</text>
+  <text x="305" y="577" class="principle">wisdom. Convergence</text>
+  <text x="305" y="591" class="principle">emerges through</text>
+  <text x="305" y="605" class="principle">reflection, not debate.</text>
+
+  <!-- Principle 3 -->
+  <rect x="510" y="460" width="200" height="170" fill="rgba(26,188,156,0.1)" stroke="#1ABC9C" rx="5"/>
+  <text x="610" y="482" text-anchor="middle" style="font-family: Arial; font-size: 14px; font-weight: bold; fill: #148F77;">
+    3. CONTROLLED FEEDBACK
+  </text>
+  <text x="525" y="502" class="principle">Statistical summary, not</text>
+  <text x="525" y="516" class="principle">individual opinions shared.</text>
+  <text x="525" y="535" class="principle" font-weight="bold">Why:</text>
+  <text x="525" y="549" class="principle">Shows distribution without</text>
+  <text x="525" y="563" class="principle">revealing identities.</text>
+  <text x="525" y="577" class="principle">Highlights consensus and</text>
+  <text x="525" y="591" class="principle">outliers objectively.</text>
+
+  <!-- Principle 4 -->
+  <rect x="730" y="460" width="200" height="170" fill="rgba(155,89,182,0.1)" stroke="#9B59B6" rx="5"/>
+  <text x="830" y="482" text-anchor="middle" style="font-family: Arial; font-size: 14px; font-weight: bold; fill: #7D3C98;">
+    4. STATISTICAL AGGREGATION
+  </text>
+  <text x="745" y="502" class="principle">Median, interquartile range,</text>
+  <text x="745" y="516" class="principle">not simple averages.</text>
+  <text x="745" y="535" class="principle" font-weight="bold">Why:</text>
+  <text x="745" y="549" class="principle">Robust to outliers. Shows</text>
+  <text x="745" y="563" class="principle">spread of opinion. Allows</text>
+  <text x="745" y="577" class="principle">dissent to be visible while</text>
+  <text x="745" y="591" class="principle">identifying central tendency.</text>
+
+  <!-- Footer -->
+  <text x="500" y="685" style="font-family: Arial; font-size: 10px; fill: #999; text-anchor: middle;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

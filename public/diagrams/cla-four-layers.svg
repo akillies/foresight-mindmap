@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <!-- CLA (Causal Layered Analysis) Four Layers Diagram -->
+  <!-- Educational visualization of Sohail Inayatullah's depth framework -->
+
+  <defs>
+    <style>
+      .layer-box { stroke: #333; stroke-width: 2; }
+      .layer1 { fill: #FFE5E5; }
+      .layer2 { fill: #FFD4A3; }
+      .layer3 { fill: #C4D7F2; }
+      .layer4 { fill: #D4A5D4; }
+      .layer-title { font-family: Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #333; }
+      .layer-subtitle { font-family: Arial, sans-serif; font-size: 14px; fill: #666; font-style: italic; }
+      .layer-desc { font-family: Arial, sans-serif; font-size: 13px; fill: #444; }
+      .layer-example { font-family: Arial, sans-serif; font-size: 11px; fill: #666; }
+      .header { font-family: Arial, sans-serif; font-size: 26px; font-weight: bold; fill: #333; text-anchor: middle; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; fill: #666; text-anchor: middle; }
+      .arrow { fill: none; stroke: #666; stroke-width: 2; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Header -->
+  <text x="450" y="35" class="header">Causal Layered Analysis (CLA)</text>
+  <text x="450" y="55" class="subtitle">Four Layers of Reality - From Surface to Deep Structure (Sohail Inayatullah, 1998)</text>
+
+  <!-- Depth arrow on left -->
+  <line x1="50" y1="120" x2="50" y2="620" class="arrow"/>
+  <text x="30" y="370" transform="rotate(-90 30 370)" class="subtitle">Increasing Depth</text>
+
+  <!-- Layer 1: LITANY (Surface level) -->
+  <rect x="120" y="100" width="700" height="110" class="layer-box layer1" rx="5"/>
+  <text x="140" y="130" class="layer-title">1. LITANY</text>
+  <text x="140" y="150" class="layer-subtitle">Surface level - Headlines, official discourse</text>
+  <text x="140" y="172" class="layer-desc">What: Quantifiable trends, media headlines, official statements, obvious problems</text>
+  <text x="140" y="188" class="layer-desc">Question: "What is happening?"</text>
+  <text x="140" y="204" class="layer-example">Example: "Traffic congestion is getting worse" • "Crime rates are rising" • "Test scores declining"</text>
+
+  <!-- Layer 2: SYSTEMIC CAUSES -->
+  <rect x="120" y="230" width="700" height="110" class="layer-box layer2" rx="5"/>
+  <text x="140" y="260" class="layer-title">2. SYSTEMIC CAUSES</text>
+  <text x="140" y="280" class="layer-subtitle">Social, economic, political systems - Technical analysis</text>
+  <text x="140" y="302" class="layer-desc">What: Economic structures, governance systems, institutional relationships, data patterns</text>
+  <text x="140" y="318" class="layer-desc">Question: "What are the systemic causes behind the litany?"</text>
+  <text x="140" y="334" class="layer-example">Example: "Urban sprawl + car-centric planning" • "Inequality + weak social services" • "Standardized testing regime"</text>
+
+  <!-- Layer 3: WORLDVIEW / DISCOURSE -->
+  <rect x="120" y="360" width="700" height="120" class="layer-box layer3" rx="5"/>
+  <text x="140" y="390" class="layer-title">3. WORLDVIEW / DISCOURSE</text>
+  <text x="140" y="410" class="layer-subtitle">Deeper assumptions - How we frame problems</text>
+  <text x="140" y="432" class="layer-desc">What: Ideologies, cultural narratives, epistemic frameworks, what counts as "progress"</text>
+  <text x="140" y="448" class="layer-desc">Question: "What worldview makes this system seem natural or inevitable?"</text>
+  <text x="140" y="464" class="layer-example">Example: "Mobility = individual car ownership" • "Safety through punishment" • "Intelligence = test performance"</text>
+
+  <!-- Layer 4: MYTH / METAPHOR -->
+  <rect x="120" y="500" width="700" height="120" class="layer-box layer4" rx="5"/>
+  <text x="140" y="530" class="layer-title">4. MYTH / METAPHOR</text>
+  <text x="140" y="550" class="layer-subtitle">Deepest level - Unconscious archetypes and images</text>
+  <text x="140" y="572" class="layer-desc">What: Deep cultural stories, emotional symbols, archetypal narratives, "felt" truths</text>
+  <text x="140" y="588" class="layer-desc">Question: "What deep story or metaphor holds this worldview in place?"</text>
+  <text x="140" y="604" class="layer-example">Example: "Freedom = open road" • "Order vs. chaos battle" • "Meritocracy ladder to climb"</text>
+
+  <!-- Side note -->
+  <rect x="120" y="635" width="700" height="45" fill="rgba(255,235,205,0.5)" stroke="#999" rx="5"/>
+  <text x="470" y="653" text-anchor="middle" class="layer-desc" font-weight="bold">Transformative Futures Work:</text>
+  <text x="470" y="670" text-anchor="middle" class="layer-example">Surface-level interventions (litany) rarely create lasting change. Shifting myths/metaphors enables new worldviews, which enable new systems.</text>
+
+  <!-- Footer -->
+  <text x="450" y="695" style="font-family: Arial; font-size: 10px; fill: #999; text-anchor: middle;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600">
+  <!-- Schumpeter Innovation Waves Diagram -->
+  <!-- Educational visualization showing six waves of technological innovation -->
+
+  <defs>
+    <style>
+      .wave-line { fill: none; stroke-width: 3; opacity: 0.7; }
+      .wave1 { stroke: #8B4513; }
+      .wave2 { stroke: #DC143C; }
+      .wave3 { stroke: #FF8C00; }
+      .wave4 { stroke: #4169E1; }
+      .wave5 { stroke: #9370DB; }
+      .wave6 { stroke: #00CED1; }
+      .axis-line { stroke: #333; stroke-width: 2; fill: none; }
+      .year-label { font-family: Arial, sans-serif; font-size: 12px; fill: #666; text-anchor: middle; }
+      .wave-label { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; text-anchor: middle; }
+      .tech-label { font-family: Arial, sans-serif; font-size: 11px; fill: #666; text-anchor: middle; }
+      .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333; text-anchor: middle; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; fill: #666; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <text x="600" y="30" class="header">Kondratiev-Schumpeter Innovation Waves</text>
+  <text x="600" y="50" class="subtitle">Six long waves of creative destruction: 40-60 year cycles of economic growth driven by technological innovation (Kondratiev, 1925; Schumpeter, 1939)</text>
+
+  <!-- Y-axis label -->
+  <text x="30" y="250" transform="rotate(-90 30 250)" class="subtitle">Economic Growth</text>
+
+  <!-- Axes -->
+  <line x1="80" y1="500" x2="1150" y2="500" class="axis-line"/>
+  <line x1="80" y1="500" x2="80" y2="80" class="axis-line"/>
+
+  <!-- Wave 1: 1785-1845 - Water power, textiles, iron -->
+  <path d="M 100 450 Q 150 200 200 450" class="wave-line wave1"/>
+  <rect x="120" y="150" width="100" height="65" fill="rgba(139,69,19,0.1)" stroke="#8B4513" rx="3"/>
+  <text x="170" y="168" class="wave-label" fill="#8B4513">1st Wave</text>
+  <text x="170" y="185" class="tech-label">1785-1845</text>
+  <text x="170" y="200" class="tech-label">Water power</text>
+  <text x="170" y="212" class="tech-label">Textiles, Iron</text>
+
+  <!-- Wave 2: 1845-1900 - Steam, railways, steel -->
+  <path d="M 200 450 Q 280 180 360 450" class="wave-line wave2"/>
+  <rect x="250" y="130" width="100" height="65" fill="rgba(220,20,60,0.1)" stroke="#DC143C" rx="3"/>
+  <text x="300" y="148" class="wave-label" fill="#DC143C">2nd Wave</text>
+  <text x="300" y="165" class="tech-label">1845-1900</text>
+  <text x="300" y="180" class="tech-label">Steam, Railways</text>
+  <text x="300" y="192" class="tech-label">Steel</text>
+
+  <!-- Wave 3: 1900-1950 - Electricity, chemicals, internal combustion -->
+  <path d="M 360 450 Q 450 170 540 450" class="wave-line wave3"/>
+  <rect x="410" y="110" width="110" height="75" fill="rgba(255,140,0,0.1)" stroke="#FF8C00" rx="3"/>
+  <text x="465" y="128" class="wave-label" fill="#FF8C00">3rd Wave</text>
+  <text x="465" y="145" class="tech-label">1900-1950</text>
+  <text x="465" y="160" class="tech-label">Electricity</text>
+  <text x="465" y="172" class="tech-label">Chemicals</text>
+  <text x="465" y="184" class="tech-label">Internal combustion</text>
+
+  <!-- Wave 4: 1950-1990 - Petrochemicals, electronics, aviation -->
+  <path d="M 540 450 Q 630 160 720 450" class="wave-line wave4"/>
+  <rect x="590" y="100" width="110" height="75" fill="rgba(65,105,225,0.1)" stroke="#4169E1" rx="3"/>
+  <text x="645" y="118" class="wave-label" fill="#4169E1">4th Wave</text>
+  <text x="645" y="135" class="tech-label">1950-1990</text>
+  <text x="645" y="150" class="tech-label">Petrochemicals</text>
+  <text x="645" y="162" class="tech-label">Electronics</text>
+  <text x="645" y="174" class="tech-label">Aviation</text>
+
+  <!-- Wave 5: 1990-2020 - Digital networks, software, biotechnology -->
+  <path d="M 720 450 Q 810 150 900 450" class="wave-line wave5"/>
+  <rect x="770" y="90" width="110" height="85" fill="rgba(147,112,219,0.1)" stroke="#9370DB" rx="3"/>
+  <text x="825" y="108" class="wave-label" fill="#9370DB">5th Wave</text>
+  <text x="825" y="125" class="tech-label">1990-2020</text>
+  <text x="825" y="140" class="tech-label">Digital networks</text>
+  <text x="825" y="152" class="tech-label">Software, Internet</text>
+  <text x="825" y="164" class="tech-label">Biotechnology</text>
+
+  <!-- Wave 6: 2020-2060? - AI, renewable energy, nanotechnology -->
+  <path d="M 900 450 Q 1000 140 1100 350" class="wave-line wave6"/>
+  <rect x="950" y="80" width="120" height="95" fill="rgba(0,206,209,0.1)" stroke="#00CED1" rx="3"/>
+  <text x="1010" y="98" class="wave-label" fill="#00CED1">6th Wave</text>
+  <text x="1010" y="115" class="tech-label">2020-2060?</text>
+  <text x="1010" y="130" class="tech-label">AI, Robotics</text>
+  <text x="1010" y="142" class="tech-label">Renewable energy</text>
+  <text x="1010" y="154" class="tech-label">Nanotechnology</text>
+  <text x="1010" y="166" class="tech-label">Quantum computing</text>
+
+  <!-- Timeline markers -->
+  <text x="100" y="520" class="year-label">1785</text>
+  <text x="280" y="520" class="year-label">1845</text>
+  <text x="450" y="520" class="year-label">1900</text>
+  <text x="630" y="520" class="year-label">1950</text>
+  <text x="810" y="520" class="year-label">1990</text>
+  <text x="1000" y="520" class="year-label">2020</text>
+  <text x="1100" y="520" class="year-label">2060?</text>
+
+  <!-- Legend -->
+  <rect x="80" y="540" width="1040" height="40" fill="rgba(255,235,205,0.3)" stroke="#999" rx="5"/>
+  <text x="600" y="560" class="tech-label">Each wave: ~40-60 years of growth as new technologies mature, then decline as next wave emerges</text>
+  <text x="600" y="575" class="tech-label" font-weight="bold">Schumpeter's "Creative Destruction" - old industries disrupted by new general-purpose technologies</text>
+
+  <!-- Footer -->
+  <text x="600" y="595" style="font-family: Arial; font-size: 10px; fill: #999; text-anchor: middle;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>
