@@ -1544,7 +1544,7 @@ const mindMapData = {
       ],
       historicalContext: 'Published in 1998 Futures journal article "Causal Layered Analysis: Poststructuralism as Method". Drew on P.R. Sarkar\'s social cycle theory, critical theory, and poststructuralist analysis to create transformative futures methodology.',
       details: {
-        overview: 'CLA is a powerful method for deconstructing problems across four layers of depth—from surface symptoms to deep unconscious narratives.',
+        overview: 'Causal Layered Analysis (CLA), developed by Sohail Inayatullah in 1998, is a transformative futures methodology that deconstructs problems across four layers of increasing depth: Litany (surface events and data), Social Causes (systemic drivers and STEEP factors), Discourse/Worldview (ideological structures and paradigms), and Myth/Metaphor (deep unconscious narratives and cultural archetypes). Unlike conventional analysis that stops at symptoms or systems, CLA reveals how deeper cultural narratives and metaphors create surface realities. By excavating these hidden layers, CLA enables transformative interventions that address root causes rather than symptoms. The method integrates poststructuralist critique with futures thinking, asking not just "what is the future?" but "whose future?" and "what narratives sustain current trajectories?" CLA is particularly powerful for revealing how language, power, and culture constrain our imagination of alternatives, opening space for genuinely novel futures.',
         layers: [
           'Layer 1: Litany - Surface data, headlines, obvious problems',
           'Layer 2: Social Causes - STEEP factors, systemic drivers, institutional forces',
@@ -1653,7 +1653,7 @@ const mindMapData = {
       ],
       historicalContext: 'Critical discourse analysis emerged in 1980s-90s with Fairclough\'s three-dimensional framework. Applied to futures studies to examine how language frames possible futures and maintains power structures in organizational and policy contexts.',
       details: {
-        overview: 'Discourse analysis examines how language shapes reality, maintains power structures, and frames what futures are thinkable.',
+        overview: 'Discourse Analysis, pioneered by Norman Fairclough in the 1980s, examines how language, narratives, and communication patterns shape social reality and constrain or enable futures thinking. Applied to foresight, it reveals how dominant discourses frame what futures are considered possible, desirable, or even thinkable, while marginalizing alternative visions. The method analyzes text, discourse practices, and sociocultural contexts to uncover power relations embedded in language. By deconstructing organizational narratives, policy documents, and media representations of the future, discourse analysis exposes whose voices dominate futures conversations and whose are silenced. This critical lens is essential for inclusive foresight, revealing how seemingly neutral language perpetuates existing power structures and limits imagination of alternatives.',
         focus: [
           'Language and terminology choices',
           'Narrative frames and stories',
@@ -1752,7 +1752,7 @@ const mindMapData = {
       ],
       historicalContext: 'Originated at RAND in 1950s for nuclear war planning. Shell\'s Pierre Wack adapted for business (1970s), validating approach by preparing Shell for 1973 oil shock. GBN (1987) brought scenarios to mainstream.',
       details: {
-        overview: 'Scenario planning creates multiple plausible futures to challenge assumptions and prepare for various possibilities. Pioneered at RAND and refined at Shell.',
+        overview: 'Scenario Planning, developed at Royal Dutch Shell in the 1970s by Pierre Wack, creates multiple plausible narrative descriptions of how the future might unfold, based on different assumptions about key uncertainties and driving forces. Unlike forecasting (which predicts a single future) or visioning (which imagines preferred futures), scenarios explore the space of possibility by asking "what if?" Rather than attempting to predict the future, scenarios prepare decision-makers to recognize and respond effectively when different futures emerge. The method identifies critical uncertainties (factors that will significantly impact the future but whose outcomes are unpredictable), constructs 3-4 divergent but plausible scenarios, and uses these narratives to test strategies and surface hidden assumptions. Effective scenarios are not best/worst case, but genuinely different logics of how the future could unfold, each internally consistent and challenging to conventional thinking.',
         types: [
           'Predictive - What will happen? (forecasts)',
           'Explorative - What can happen? (possibilities)',
@@ -2299,7 +2299,7 @@ const mindMapData = {
       ],
       historicalContext: 'Developed at RAND in 1950-1960s for Cold War defense forecasting. Named after Oracle of Delphi. Kept secret until 1960s, then widely adopted for technology forecasting and policy planning.',
       details: {
-        overview: 'The Delphi Method systematically gathers expert judgments through multiple rounds of questionnaires, with controlled feedback, to build consensus forecasts.',
+        overview: 'The Delphi Method, developed at RAND Corporation in the 1950s by Olaf Helmer and Norman Dalkey, is a structured forecasting technique that builds expert consensus through iterative rounds of anonymous surveys with controlled feedback. Designed to overcome the pitfalls of traditional expert panels (groupthink, dominance by loud voices, pressure to conform), Delphi allows experts to revise their judgments after seeing aggregated group responses without knowing individual opinions. The process typically involves 2-4 rounds: experts provide initial forecasts, receive statistical summary of group responses, reflect on divergence from their own views, and revise estimates. The method is particularly valuable for long-term forecasting (10-30 years) where historical data is limited, for complex socio-technical systems with many interacting factors, and when expert judgment must substitute for empirical evidence. Delphi has been widely used for technology forecasting, policy planning, and strategic foresight.',
         process: [
           'Round 1 - Experts provide independent forecasts',
           'Round 2 - Experts see anonymized results, revise',
@@ -2607,7 +2607,7 @@ const mindMapData = {
       ],
       historicalContext: 'Formalized as futures methodology in 1980s. Ziegler\'s participatory approach and Boulding\'s imaging workshops established visioning as democratic alternative to expert-driven forecasting.',
       details: {
-        overview: 'Visioning creates vivid, detailed descriptions of desired future states that inspire action and guide decision-making.',
+        overview: 'Visioning, formalized by Elise Boulding and others in the 1980s-90s, is a participatory process for creating shared, compelling images of desired futures that guide strategic action toward transformation. Unlike forecasting (which extrapolates trends) or scenario planning (which explores multiple possibilities), visioning asks "what do we want?" and uses imagination to articulate aspirational futures that motivate change. The process typically engages diverse stakeholders in facilitated workshops using techniques like "imaging the future" (mentally stepping into a preferred future and describing it in present tense), visual mapping, and narrative storytelling. Effective visions are positive and aspirational (not problem-focused), concrete and vivid (not abstract), inclusive (reflecting diverse values), and actionable (guiding strategy). Visioning is particularly powerful for communities, organizations, and movements seeking transformative change rather than incremental improvement, creating emotional connection and shared ownership of preferred futures.',
         components: [
           'Aspirational - Inspiring and motivating',
           'Concrete - Specific and tangible',
@@ -2719,7 +2719,7 @@ const mindMapData = {
       ],
       historicalContext: 'Robinson developed backcasting in 1982 for Canadian energy futures, recognizing forecasting couldn\'t address radical sustainability goals. Natural Step (1989) popularized approach globally.',
       details: {
-        overview: 'Backcasting starts with a desired future and works backward to identify the steps needed to reach it. Essential when trend-break is required.',
+        overview: 'Backcasting, pioneered by John Robinson in the 1980s for energy and sustainability planning, is a strategic planning method that works backward from a defined desirable future to identify pathways and actions needed to reach it. Unlike forecasting (which projects current trends forward) or scenario planning (which explores multiple possibilities), backcasting begins with normative goal-setting: "What future do we want?" and then asks "How do we get there?" The process defines a specific future state (typically 15-30 years out), describes it in detail, and then traces logical steps backward to the present, identifying necessary changes, decision points, and interventions along the way. Backcasting is especially valuable when: current trends are undesirable and must be disrupted, the problem is complex and requires systemic change, the goal is ambitious and transformative, or dominant interests resist change. It has been widely applied to climate strategy, sustainable cities, and technology transitions.',
         process: [
           'Step 1 - Define preferred future state (vision)',
           'Step 2 - Analyze gap between present and vision',
@@ -3019,7 +3019,7 @@ const mindMapData = {
       ],
       historicalContext: 'Star Trek (1966) presented optimistic future where humanity overcame scarcity, conflict, and division. Fuller\'s World Game (1969) and Fresco\'s Venus Project (1994) provided frameworks for achieving such futures through design and technology.',
       details: {
-        overview: 'Aspirational Futures Design creates positive visions of abundance, collaboration, and enlightenment to inspire action toward preferred futures. Combines storytelling, systems thinking, and technological optimism.',
+        overview: 'Aspirational Futures Design, inspired by Gene Roddenberry\'s Star Trek and advanced by thinkers like Buckminster Fuller and Jacque Fresco, imagines radically optimistic post-scarcity futures where technology, social innovation, and human collaboration solve existential challenges and enable human flourishing. Rather than extrapolating current trends or managing risks, this approach asks "What is the most inspiring future we can imagine?" and uses that vision to pull present action toward transformative goals. Star Trek exemplifies this: a future where humanity has transcended war, poverty, and nationalism, united in exploration and self-betterment. Aspirational futures challenge default pessimism in foresight, providing positive visions that motivate action, attract resources, and shift cultural narratives from scarcity to abundance. The method is particularly relevant for addressing civilizational challenges (climate, AI, inequality) where incremental change is insufficient and bold reimagining is needed to inspire transformative action.',
         principles: [
           'Abundance Mindset - Technology enables post-scarcity for all',
           'Global Collaboration - Diverse perspectives unite to solve challenges',
