@@ -75,6 +75,11 @@ const ForesightMindMap = () => {
     3: { type: 'generative', baseFreq: 174, binauralBeat: 3, label: 'WARP CORE (174Hz + 3Hz Delta)', harmonics: true }         // Deep ambient regeneration
   };
 
+  // CRITICAL FIX: Reusable Vector3 objects to prevent memory leak in animation loop
+  // Creating new Vector3 every frame (60 FPS × nodes) causes browser crashes
+  const SCALE_SELECTED = new THREE.Vector3(1.4, 1.4, 1.4);
+  const SCALE_NORMAL = new THREE.Vector3(1, 1, 1);
+
   // Keep expandedNodesRef in sync with expandedNodes state (fixes stale closure in event handlers)
   useEffect(() => {
     expandedNodesRef.current = expandedNodes;
@@ -356,13 +361,12 @@ const ForesightMindMap = () => {
           node.material.emissiveIntensity = baseIntensity + Math.sin(Date.now() * 0.002 + index) * pulseAmplitude;
         }
 
-        // Scale effect for selected node
+        // Scale effect for selected node (using reusable Vector3 to prevent memory leak)
         if (isSelected) {
-          const targetScale = new THREE.Vector3(1.4, 1.4, 1.4);
-          node.scale.lerp(targetScale, 0.15);
+          node.scale.lerp(SCALE_SELECTED, 0.15);
         } else if (!node.isHovered && node.scale.x > 1.0) {
           // Reset scale for non-selected, non-hovered nodes
-          node.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
+          node.scale.lerp(SCALE_NORMAL, 0.1);
         }
       });
 
@@ -1196,9 +1200,10 @@ const ForesightMindMap = () => {
     if (!parent.children) return;
 
     // Safety check: prevent too many total nodes (browser crash protection)
-    // History: 250 → 150 → 100 → 40 (EMERGENCY - still crashing)
-    // Ultra-conservative limit until root cause fully resolved
-    const MAX_TOTAL_NODES = 40;
+    // Fixed root cause: Vector3 memory leak in animation loop (was creating 6000+ objects/sec)
+    // Reasonable limit: 1 center + 6 pillars + 18 methods + 54 media (3 per method) = 79
+    // Set to 100 for comfortable margin
+    const MAX_TOTAL_NODES = 100;
     if (nodesRef.current.length >= MAX_TOTAL_NODES) {
       console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping child nodes for ${parent.id}`);
       return;
@@ -1294,9 +1299,10 @@ const ForesightMindMap = () => {
     if (!parent.media || parent.media.length === 0) return;
 
     // Safety check: prevent too many total nodes (browser crash protection)
-    // History: 250 → 150 → 100 → 40 (EMERGENCY - still crashing)
-    // Ultra-conservative limit until root cause fully resolved
-    const MAX_TOTAL_NODES = 40;
+    // Fixed root cause: Vector3 memory leak in animation loop (was creating 6000+ objects/sec)
+    // Reasonable limit: 1 center + 6 pillars + 18 methods + 54 media (3 per method) = 79
+    // Set to 100 for comfortable margin
+    const MAX_TOTAL_NODES = 100;
     if (nodesRef.current.length >= MAX_TOTAL_NODES) {
       console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping media nodes for ${parent.id}`);
       return;
@@ -1584,7 +1590,19 @@ const ForesightMindMap = () => {
   };
 
   const handleNodeClick = (node) => {
+    // DEFENSIVE: Guard against null/undefined
+    if (!node || !node.userData) {
+      console.warn('handleNodeClick: Invalid node', node);
+      return;
+    }
+
     const nodeData = node.userData;
+
+    // DEFENSIVE: Guard against missing ID
+    if (!nodeData.id) {
+      console.warn('handleNodeClick: Node missing ID', nodeData);
+      return;
+    }
 
     // Handle media click
     if (nodeData.isMedia) {
@@ -1598,6 +1616,12 @@ const ForesightMindMap = () => {
 
     const nodeId = nodeData.id;
     const isExpanded = expandedNodesRef.current.has(nodeId);
+
+    // DEFENSIVE: Guard against missing scene
+    if (!sceneRef.current) {
+      console.warn('handleNodeClick: Scene not ready');
+      return;
+    }
 
     if (isExpanded) {
       // Collapse - also remove all descendant IDs from expandedNodes
@@ -1614,13 +1638,14 @@ const ForesightMindMap = () => {
       // Expand
       let hasExpanded = false;
 
-      if (nodeData.children && nodeData.children.length > 0) {
+      // DEFENSIVE: Check children exists and is array before accessing
+      if (Array.isArray(nodeData.children) && nodeData.children.length > 0) {
         createChildNodes(sceneRef.current, node);
         hasExpanded = true;
       }
 
-      // Show media if available
-      if (nodeData.media && nodeData.media.length > 0) {
+      // DEFENSIVE: Check media exists and is array before accessing
+      if (Array.isArray(nodeData.media) && nodeData.media.length > 0) {
         createMediaNodes(sceneRef.current, node);
         hasExpanded = true;
       }
