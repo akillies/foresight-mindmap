@@ -1693,13 +1693,6 @@ const mindMapData = {
         },
         {
           type: 'document',
-          title: 'Fairclough\'s Three-Dimensional CDA Framework',
-          url: 'https://www.researchgate.net/figure/CDA-Three-Dimensional-Norman-Fairclough-Fairclough-2010_fig1_358499059',
-          description: 'Norman Fairclough\'s critical discourse analysis framework: text, discourse practice, and sociocultural practice',
-          year: 1995
-        },
-        {
-          type: 'document',
           title: 'Communication in Futures Studies: A Discursive Analysis',
           url: 'https://www.sciencedirect.com/science/article/abs/pii/S0016328719303556',
           description: 'Critical discourse analysis of how communication and language function within the futures field'
