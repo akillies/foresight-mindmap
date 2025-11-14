@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 750">
+  <!-- Stakeholder Power/Interest Grid Diagram -->
+  <!-- 2x2 matrix for categorizing stakeholders by power and interest -->
+
+  <defs>
+    <style>
+      .axis-line { stroke: #333; stroke-width: 3; fill: none; }
+      .quad1 { fill: rgba(220,53,69,0.15); stroke: #DC3545; stroke-width: 2; }
+      .quad2 { fill: rgba(255,193,7,0.15); stroke: #FFC107; stroke-width: 2; }
+      .quad3 { fill: rgba(108,117,125,0.15); stroke: #6C757D; stroke-width: 2; }
+      .quad4 { fill: rgba(40,167,69,0.15); stroke: #28A745; stroke-width: 2; }
+      .quad-title { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #333; text-anchor: middle; }
+      .quad-subtitle { font-family: Arial, sans-serif; font-size: 13px; fill: #666; text-anchor: middle; font-style: italic; }
+      .strategy { font-family: Arial, sans-serif; font-size: 12px; fill: #444; }
+      .example { font-family: Arial, sans-serif; font-size: 11px; fill: #555; }
+      .axis-label { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333; text-anchor: middle; }
+      .axis-tick { font-family: Arial, sans-serif; font-size: 14px; fill: #666; text-anchor: middle; }
+      .header { font-family: Arial, sans-serif; font-size: 26px; font-weight: bold; fill: #333; text-anchor: middle; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; fill: #666; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <text x="450" y="35" class="header">Stakeholder Power/Interest Matrix</text>
+  <text x="450" y="55" class="subtitle">Strategic engagement framework for mapping stakeholder influence and concern</text>
+
+  <!-- Quadrant 3: Low Power, Low Interest (bottom-left) - MONITOR -->
+  <rect x="100" y="400" width="350" height="280" class="quad3" rx="5"/>
+  <text x="275" y="435" class="quad-title" fill="#495057">MONITOR</text>
+  <text x="275" y="458" class="quad-subtitle">Low Power × Low Interest</text>
+  <text x="120" y="485" class="strategy" font-weight="bold">Strategy: Minimal Effort</text>
+  <text x="120" y="505" class="example">• Monitor with low-frequency updates</text>
+  <text x="120" y="523" class="example">• Generic communications sufficient</text>
+  <text x="120" y="541" class="example">• Don't invest significant resources</text>
+  <text x="120" y="559" class="example">• Watch for changes in status</text>
+  <text x="120" y="585" class="example" font-style="italic">Examples: Peripheral community members,</text>
+  <text x="120" y="603" class="example" font-style="italic">distant competitors, general public with no</text>
+  <text x="120" y="621" class="example" font-style="italic">direct stake, uninvolved government agencies</text>
+  <text x="275" y="655" class="strategy" font-weight="bold" fill="#6C757D">Engagement: Broadcast only</text>
+
+  <!-- Quadrant 4: High Power, Low Interest (bottom-right) - KEEP SATISFIED -->
+  <rect x="450" y="400" width="350" height="280" class="quad2" rx="5"/>
+  <text x="625" y="435" class="quad-title" fill="#D39E00">KEEP SATISFIED</text>
+  <text x="625" y="458" class="quad-subtitle">High Power × Low Interest</text>
+  <text x="470" y="485" class="strategy" font-weight="bold">Strategy: Satisfy Their Needs</text>
+  <text x="470" y="505" class="example">• Keep them happy but not overwhelmed</text>
+  <text x="470" y="523" class="example">• Prevent them from becoming interested</text>
+  <text x="470" y="541" class="example">• Brief, high-level updates</text>
+  <text x="470" y="559" class="example">• Respect their time and priorities</text>
+  <text x="470" y="585" class="example" font-style="italic">Examples: Senior executives with veto power</text>
+  <text x="470" y="603" class="example" font-style="italic">but delegated responsibility, regulators with</text>
+  <text x="470" y="621" class="example" font-style="italic">approval authority, powerful allies focused</text>
+  <text x="470" y="639" class="example" font-style="italic">elsewhere, funding bodies (grant-makers)</text>
+  <text x="625" y="655" class="strategy" font-weight="bold" fill="#D39E00">Engagement: Satisfy, don't burden</text>
+
+  <!-- Quadrant 1: Low Power, High Interest (top-left) - KEEP INFORMED -->
+  <rect x="100" y="100" width="350" height="300" class="quad4" rx="5"/>
+  <text x="275" y="135" class="quad-title" fill="#218838">KEEP INFORMED</text>
+  <text x="275" y="158" class="quad-subtitle">Low Power × High Interest</text>
+  <text x="120" y="185" class="strategy" font-weight="bold">Strategy: Show Consideration</text>
+  <text x="120" y="205" class="example">• Keep well informed and engaged</text>
+  <text x="120" y="223" class="example">• Listen to concerns and input</text>
+  <text x="120" y="241" class="example">• Build support and advocacy</text>
+  <text x="120" y="259" class="example">• May become influential through coalitions</text>
+  <text x="120" y="285" class="example" font-style="italic">Examples: Frontline staff affected by change,</text>
+  <text x="120" y="303" class="example" font-style="italic">advocacy groups, local communities impacted,</text>
+  <text x="120" y="321" class="example" font-style="italic">subject matter experts, passionate individuals</text>
+  <text x="120" y="339" class="example" font-style="italic">without formal authority, early adopters</text>
+  <text x="275" y="370" class="strategy" font-weight="bold" fill="#28A745">Engagement: Consult actively</text>
+
+  <!-- Quadrant 2: High Power, High Interest (top-right) - MANAGE CLOSELY -->
+  <rect x="450" y="100" width="350" height="300" class="quad1" rx="5"/>
+  <text x="625" y="135" class="quad-title" fill="#C82333">MANAGE CLOSELY</text>
+  <text x="625" y="158" class="quad-subtitle">High Power × High Interest</text>
+  <text x="470" y="185" class="strategy" font-weight="bold">Strategy: Key Players - Full Engagement</text>
+  <text x="470" y="205" class="example">• Co-create solutions collaboratively</text>
+  <text x="470" y="223" class="example">• Frequent, detailed communication</text>
+  <text x="470" y="241" class="example">• Build strong working relationships</text>
+  <text x="470" y="259" class="example">• Involve in decision-making</text>
+  <text x="470" y="277" class="example">• Address concerns immediately</text>
+  <text x="470" y="303" class="example" font-style="italic">Examples: Project sponsors, key clients/</text>
+  <text x="470" y="321" class="example" font-style="italic">customers, regulatory authorities with direct</text>
+  <text x="470" y="339" class="example" font-style="italic">oversight, board members, strategic partners,</text>
+  <text x="470" y="357" class="example" font-style="italic">major investors, executive leadership team</text>
+  <text x="625" y="370" class="strategy" font-weight="bold" fill="#DC3545">Engagement: Partnership mode</text>
+
+  <!-- Axes -->
+  <line x1="100" y1="400" x2="800" y2="400" class="axis-line"/>
+  <line x1="450" y1="100" x2="450" y2="680" class="axis-line"/>
+
+  <!-- X-axis label and ticks -->
+  <text x="450" y="715" class="axis-label">POWER (Ability to Influence)</text>
+  <text x="275" y="420" class="axis-tick">Low</text>
+  <text x="625" y="420" class="axis-tick">High</text>
+
+  <!-- Y-axis label and ticks -->
+  <text x="50" y="410" transform="rotate(-90 50 410)" class="axis-label">INTEREST (Degree of Concern)</text>
+  <text x="430" y="550" class="axis-tick" text-anchor="end">Low</text>
+  <text x="430" y="250" class="axis-tick" text-anchor="end">High</text>
+
+  <!-- Footer note -->
+  <text x="450" y="745" style="font-family: Arial; font-size: 10px; fill: #999; text-anchor: middle;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

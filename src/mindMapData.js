@@ -517,6 +517,13 @@ const mindMapData = {
       media: [
         {
           type: 'image',
+          title: 'Stakeholder Power/Interest Matrix (Educational)',
+          url: '/diagrams/stakeholder-power-interest.svg',
+          description: 'Comprehensive 2×2 stakeholder mapping framework with detailed engagement strategies for each quadrant: Manage Closely (high power/high interest key players requiring partnership), Keep Satisfied (high power/low interest influencers to satisfy without burdening), Keep Informed (low power/high interest advocates to consult actively), and Monitor (low power/low interest peripheral stakeholders). Includes concrete examples, strategic guidance, and engagement approaches for effective stakeholder management in foresight and futures work.',
+          source: 'AK Consulting'
+        },
+        {
+          type: 'image',
           title: 'Stakeholder Power/Interest Grid',
           url: 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Stakeholder_analysis.png',
           description: 'Classic 2x2 framework for mapping stakeholder relationships based on their power (ability to influence) and interest (degree of concern) in an issue. This grid helps prioritize engagement strategies: manage closely (high power/high interest), keep satisfied (high power/low interest), keep informed (low power/high interest), or monitor (low power/low interest).'
