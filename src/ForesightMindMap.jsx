@@ -1627,7 +1627,12 @@ const ForesightMindMap = () => {
   };
 
   // Search filter
+  // Enhanced Search: Search all data, auto-expand parents when matches found
   useEffect(() => {
+    const scene = sceneRef.current;
+    if (!scene) return;
+
+    // Reset opacity if no search query
     if (!searchQuery.trim()) {
       nodesRef.current.forEach(node => {
         if (node.material) {
@@ -1639,19 +1644,40 @@ const ForesightMindMap = () => {
     }
 
     const query = searchQuery.toLowerCase();
+
+    // Search ALL methodologies in data (not just rendered nodes)
+    const matchingMethodologies = mindMapData.methodologies.filter(method =>
+      (method.label && method.label.toLowerCase().includes(query)) ||
+      (method.description && method.description.toLowerCase().includes(query)) ||
+      (method.id && method.id.toLowerCase().includes(query))
+    );
+
+    // Auto-expand parent pillars if methodologies match but aren't visible
+    matchingMethodologies.forEach(method => {
+      const parentPillarId = method.pillar;
+      const parentPillar = nodesRef.current.find(n => n.userData.id === parentPillarId);
+
+      if (parentPillar && !expandedNodes.has(parentPillarId)) {
+        // Auto-expand parent to reveal matched methodology
+        setExpandedNodes(prev => new Set([...prev, parentPillarId]));
+      }
+    });
+
+    // Highlight matching nodes (existing behavior)
     nodesRef.current.forEach(node => {
       const data = node.userData;
       const matches =
         (data.label && data.label.toLowerCase().includes(query)) ||
         (data.description && data.description.toLowerCase().includes(query)) ||
-        (data.title && data.title.toLowerCase().includes(query));
+        (data.title && data.title.toLowerCase().includes(query)) ||
+        (data.id && data.id.toLowerCase().includes(query));
 
       if (node.material) {
         node.material.opacity = matches ? 1.0 : 0.2;
-        node.material.emissiveIntensity = matches ? 0.6 : 0.1;
+        node.material.emissiveIntensity = matches ? 0.7 : 0.1;
       }
     });
-  }, [searchQuery]);
+  }, [searchQuery, expandedNodes]);
 
   // Cross-Pillar Relationship Connections
   useEffect(() => {
