@@ -1201,9 +1201,9 @@ const ForesightMindMap = () => {
 
     // Safety check: prevent too many total nodes (browser crash protection)
     // Fixed root cause: Vector3 memory leak in animation loop (was creating 6000+ objects/sec)
-    // Reasonable limit: 1 center + 6 pillars + 18 methods + 54 media (3 per method) = 79
-    // Set to 100 for comfortable margin
-    const MAX_TOTAL_NODES = 100;
+    // Max scenario: 1 center + 6 pillars + 18 methods + 108 media (6 per method) = 133
+    // Set to 200 for comfortable exploration without limits
+    const MAX_TOTAL_NODES = 200;
     if (nodesRef.current.length >= MAX_TOTAL_NODES) {
       console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping child nodes for ${parent.id}`);
       return;
@@ -1300,9 +1300,9 @@ const ForesightMindMap = () => {
 
     // Safety check: prevent too many total nodes (browser crash protection)
     // Fixed root cause: Vector3 memory leak in animation loop (was creating 6000+ objects/sec)
-    // Reasonable limit: 1 center + 6 pillars + 18 methods + 54 media (3 per method) = 79
-    // Set to 100 for comfortable margin
-    const MAX_TOTAL_NODES = 100;
+    // Max scenario: 1 center + 6 pillars + 18 methods + 108 media (6 per method) = 133
+    // Set to 200 for comfortable exploration without limits
+    const MAX_TOTAL_NODES = 200;
     if (nodesRef.current.length >= MAX_TOTAL_NODES) {
       console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping media nodes for ${parent.id}`);
       return;
@@ -2664,30 +2664,50 @@ const ForesightMindMap = () => {
                           return acc;
                         }, {});
                         const mediaTypes = [
-                          { type: 'video', icon: '[VID]', label: 'Videos' },
-                          { type: 'image', icon: '[IMG]', label: 'Images' },
-                          { type: 'document', icon: '[DOC]', label: 'Docs' },
-                          { type: 'article', icon: '[ART]', label: 'Articles' },
+                          { type: 'video', icon: '►', label: 'Videos', color: '#FF6B9D' },
+                          { type: 'image', icon: '■', label: 'Images', color: '#64c8ff' },
+                          { type: 'document', icon: '▬', label: 'Docs', color: '#99CC99' },
+                          { type: 'article', icon: '●', label: 'Articles', color: '#FFCC66' },
                         ];
                         return mediaTypes.filter(mt => mediaCounts[mt.type]).map(mt => (
-                          <div
+                          <button
                             key={mt.type}
+                            onClick={() => {
+                              // Find the methodology node in 3D scene
+                              const methodNode = nodesRef.current.find(n => n.userData.id === nodeGroup.id);
+                              if (methodNode) {
+                                // If not expanded, expand it to show media orbs
+                                if (!expandedNodesRef.current.has(nodeGroup.id)) {
+                                  handleNodeClick(methodNode);
+                                }
+                              }
+                            }}
                             style={{
                               display: 'flex',
                               alignItems: 'center',
                               gap: '6px',
                               padding: '8px 12px',
-                              background: `${COLORS.success}15`,
-                              border: `1px solid ${COLORS.success}40`,
+                              background: `${mt.color}15`,
+                              border: `1px solid ${mt.color}40`,
                               borderRadius: '8px',
                               fontSize: '13px',
                               color: COLORS.text,
+                              cursor: 'pointer',
+                              transition: 'all 0.2s',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = `${mt.color}30`;
+                              e.currentTarget.style.borderColor = `${mt.color}80`;
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = `${mt.color}15`;
+                              e.currentTarget.style.borderColor = `${mt.color}40`;
                             }}
                           >
-                            <span style={{ fontSize: '16px' }}>{mt.icon}</span>
+                            <span style={{ fontSize: '16px', color: mt.color }}>{mt.icon}</span>
                             <span style={{ fontWeight: '600' }}>{mediaCounts[mt.type]}</span>
                             <span style={{ opacity: 0.7 }}>{mt.label}</span>
-                          </div>
+                          </button>
                         ));
                       })()}
                     </div>
@@ -2701,7 +2721,7 @@ const ForesightMindMap = () => {
                   opacity: 0.6,
                   fontStyle: 'italic',
                 }}>
-                  Click media orbs in the 3D view to explore
+                  Click badges to expand and view media orbs in 3D space
                 </div>
               </section>
             );
@@ -2876,7 +2896,7 @@ const ForesightMindMap = () => {
                       fontSize: '64px',
                       marginBottom: '16px',
                       opacity: 0.8
-                    }}>[VID]</div>
+                    }}>►</div>
                     <div style={{
                       fontSize: '14px',
                       color: '#b8c5d8',
@@ -3019,7 +3039,7 @@ const ForesightMindMap = () => {
                     textAlign: 'center',
                     color: COLORS.text
                   }}>
-                    <div style={{ fontSize: '24px', marginBottom: '20px', opacity: 0.5, fontFamily: 'monospace', fontWeight: '700' }}>[IMG]</div>
+                    <div style={{ fontSize: '64px', marginBottom: '20px', opacity: 0.8, fontFamily: 'Arial', fontWeight: '400' }}>■</div>
                     <div style={{
                       fontSize: '16px',
                       lineHeight: '1.8',
@@ -3075,7 +3095,7 @@ const ForesightMindMap = () => {
                   marginBottom: '20px'
                 }}>
                   <div style={{ fontSize: '48px', marginBottom: '15px', opacity: 0.6 }}>
-                    {selectedMedia.type === 'article' ? '[ART]' : '[DOC]'}
+                    {selectedMedia.type === 'article' ? '●' : '▬'}
                   </div>
                   <div style={{
                     fontSize: '14px',
