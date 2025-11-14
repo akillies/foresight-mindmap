@@ -1196,7 +1196,8 @@ const ForesightMindMap = () => {
     if (!parent.children) return;
 
     // Safety check: prevent too many total nodes (browser crash protection)
-    const MAX_TOTAL_NODES = 250;
+    // Lowered from 250 to 150 after user reported crashes "a few nodes in"
+    const MAX_TOTAL_NODES = 150;
     if (nodesRef.current.length >= MAX_TOTAL_NODES) {
       console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping child nodes for ${parent.id}`);
       return;
@@ -1292,7 +1293,8 @@ const ForesightMindMap = () => {
     if (!parent.media || parent.media.length === 0) return;
 
     // Safety check: prevent too many total nodes (browser crash protection)
-    const MAX_TOTAL_NODES = 250;
+    // Lowered from 250 to 150 after user reported crashes "a few nodes in"
+    const MAX_TOTAL_NODES = 150;
     if (nodesRef.current.length >= MAX_TOTAL_NODES) {
       console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping media nodes for ${parent.id}`);
       return;
@@ -2805,23 +2807,74 @@ const ForesightMindMap = () => {
 
             {selectedMedia.type === 'video' && (
               <div>
-                <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '20px' }}>
-                  <iframe
-                    src={`https://www.youtube.com/embed/${selectedMedia.url.split('v=')[1]?.split('&')[0] || selectedMedia.url.split('/').pop()}?origin=${window.location.origin}`}
-                    title={selectedMedia.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    aria-label={`Video: ${selectedMedia.title}`}
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      borderRadius: '8px',
-                    }}
-                  ></iframe>
+                {/* Lightweight video preview - no iframe embed to prevent hangs/crashes */}
+                <div style={{
+                  position: 'relative',
+                  paddingBottom: '56.25%',
+                  height: 0,
+                  overflow: 'hidden',
+                  marginBottom: '20px',
+                  background: 'linear-gradient(135deg, rgba(255, 107, 157, 0.1) 0%, rgba(92, 136, 218, 0.1) 100%)',
+                  borderRadius: '8px',
+                  border: `2px solid ${MEDIA_COLORS.video}40`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    textAlign: 'center',
+                    width: '80%'
+                  }}>
+                    <div style={{
+                      fontSize: '64px',
+                      marginBottom: '16px',
+                      opacity: 0.8
+                    }}>📺</div>
+                    <div style={{
+                      fontSize: '14px',
+                      color: '#b8c5d8',
+                      fontWeight: '600',
+                      marginBottom: '12px'
+                    }}>
+                      VIDEO RESOURCE
+                    </div>
+                    <a
+                      href={selectedMedia.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Watch ${selectedMedia.title} on YouTube (opens in new tab)`}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        padding: '12px 24px',
+                        background: MEDIA_COLORS.video,
+                        color: '#000',
+                        textDecoration: 'none',
+                        borderRadius: '8px',
+                        fontSize: '13px',
+                        fontWeight: '700',
+                        letterSpacing: '1px',
+                        transition: 'all 0.2s',
+                        fontFamily: 'monospace',
+                        boxShadow: `0 4px 12px ${MEDIA_COLORS.video}40`
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.transform = 'scale(1.05)';
+                        e.target.style.boxShadow = `0 6px 16px ${MEDIA_COLORS.video}60`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.transform = 'scale(1)';
+                        e.target.style.boxShadow = `0 4px 12px ${MEDIA_COLORS.video}40`;
+                      }}
+                    >
+                      ▶ WATCH ON YOUTUBE
+                    </a>
+                  </div>
                 </div>
 
                 {/* Reference Footer */}
@@ -2837,38 +2890,9 @@ const ForesightMindMap = () => {
                   <div style={{ fontSize: '10px', letterSpacing: '1px', color: '#666', fontWeight: '600' }}>
                     SOURCE: <span style={{ color: MEDIA_COLORS.video }}>{selectedMedia.source || 'YouTube'}</span>
                   </div>
-                  <a
-                    href={selectedMedia.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View original video on ${selectedMedia.source || 'YouTube'} (opens in new tab)`}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      padding: '8px 16px',
-                      background: `${MEDIA_COLORS.video}15`,
-                      border: `1px solid ${MEDIA_COLORS.video}`,
-                      color: MEDIA_COLORS.video,
-                      textDecoration: 'none',
-                      borderRadius: '6px',
-                      fontSize: '11px',
-                      fontWeight: '700',
-                      letterSpacing: '1px',
-                      transition: 'all 0.2s',
-                      fontFamily: 'monospace',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.background = MEDIA_COLORS.video;
-                      e.target.style.color = '#000';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.background = `${MEDIA_COLORS.video}15`;
-                      e.target.style.color = MEDIA_COLORS.video;
-                    }}
-                  >
-                    VIEW ORIGINAL →
-                  </a>
+                  <div style={{ fontSize: '10px', color: '#888' }}>
+                    Click thumbnail above to watch externally
+                  </div>
                 </div>
               </div>
             )}
