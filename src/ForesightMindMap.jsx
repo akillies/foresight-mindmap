@@ -1305,19 +1305,20 @@ const ForesightMindMap = () => {
     const angleStep = (Math.PI * 2) / parent.media.length;
 
     parent.media.forEach((mediaItem, index) => {
-      // Check if already exists
-      const mediaId = `${parent.id}-media-${index}`;
-      const existing = nodesRef.current.find(n => n.userData.mediaId === mediaId);
-      if (existing) return;
+      try {
+        // Check if already exists
+        const mediaId = `${parent.id}-media-${index}`;
+        const existing = nodesRef.current.find(n => n.userData.mediaId === mediaId);
+        if (existing) return;
 
-      const angle = index * angleStep;
-      const localX = Math.cos(angle) * radius;
-      const localZ = Math.sin(angle) * radius;
-      const x = parentPos.x + localX;
-      const z = parentPos.z + localZ;
-      const y = parentPos.y;
+        const angle = index * angleStep;
+        const localX = Math.cos(angle) * radius;
+        const localZ = Math.sin(angle) * radius;
+        const x = parentPos.x + localX;
+        const z = parentPos.z + localZ;
+        const y = parentPos.y;
 
-      const mediaColor = MEDIA_COLORS[mediaItem.type] || COLORS.primary;
+        const mediaColor = MEDIA_COLORS[mediaItem.type] || COLORS.primary;
 
       // Single optimized sphere - reduced from 3 meshes to 1 for performance
       // Reduced segments from 16 to 8 (75% fewer polygons)
@@ -1353,6 +1354,15 @@ const ForesightMindMap = () => {
 
       // Create connection to parent
       createConnection(scene, parentPos, new THREE.Vector3(x, y, z), mediaColor, 0.2, parent.id, mediaId);
+      } catch (error) {
+        console.error('createMediaNodes: Failed to create media node', {
+          error: error.message,
+          parentId: parent.id,
+          mediaIndex: index,
+          mediaTitle: mediaItem?.title
+        });
+        // Continue to next media item - don't let one failure kill all media
+      }
     });
   };
 
@@ -1576,20 +1586,21 @@ const ForesightMindMap = () => {
   };
 
   const handleNodeClick = (node) => {
-    // DEFENSIVE: Guard against null/undefined
-    if (!node || !node.userData) {
-      console.warn('handleNodeClick: Invalid node', node);
-      return;
-    }
+    try {
+      // DEFENSIVE: Guard against null/undefined
+      if (!node || !node.userData) {
+        console.warn('handleNodeClick: Invalid node', node);
+        return;
+      }
 
-    const nodeData = node.userData;
+      const nodeData = node.userData;
 
-    // Handle media click FIRST (media nodes use mediaId, not id)
-    if (nodeData.isMedia) {
-      setImageError(false); // Reset error state for new media
-      setSelectedMedia(nodeData);
-      return;
-    }
+      // Handle media click FIRST (media nodes use mediaId, not id)
+      if (nodeData.isMedia) {
+        setImageError(false); // Reset error state for new media
+        setSelectedMedia(nodeData);
+        return;
+      }
 
     // DEFENSIVE: Guard against missing ID (for regular nodes)
     if (!nodeData.id) {
@@ -1640,6 +1651,16 @@ const ForesightMindMap = () => {
       if (hasExpanded) {
         setExpandedNodes(prev => new Set(prev).add(nodeId));
       }
+    }
+    } catch (error) {
+      console.error('handleNodeClick: Error occurred', {
+        error: error.message,
+        stack: error.stack,
+        nodeId: node?.userData?.id,
+        nodeLabel: node?.userData?.label
+      });
+      // Graceful degradation - show error to user but don't crash
+      alert(`Unable to open node: ${node?.userData?.label || 'Unknown'}. Error: ${error.message}`);
     }
   };
 
