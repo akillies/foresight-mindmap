@@ -1300,15 +1300,11 @@ const ForesightMindMap = () => {
     const parentPos = parentNode.position;
     const radius = 8;
 
-    // CRITICAL FIX: Limit media items to prevent overload
-    // Environmental Scanning has 58 items (outlier - average is 4-6)
-    // Increased to 10: ensures all diagrams visible (scenarios has 9 items)
-    // Memory leak fixed - safe to show more now
-    const MAX_MEDIA_PER_METHOD = 10;
-    const mediaToRender = parent.media.slice(0, MAX_MEDIA_PER_METHOD);
-    const angleStep = (Math.PI * 2) / mediaToRender.length;
+    // No limit - memory leak fixed via reusable Vector3 constants (lines 84-85)
+    // All media items now rendered for complete knowledge base access
+    const angleStep = (Math.PI * 2) / parent.media.length;
 
-    mediaToRender.forEach((mediaItem, index) => {
+    parent.media.forEach((mediaItem, index) => {
       // Check if already exists
       const mediaId = `${parent.id}-media-${index}`;
       const existing = nodesRef.current.find(n => n.userData.mediaId === mediaId);
