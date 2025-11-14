@@ -223,6 +223,56 @@
     <!-- "At Rest" and "Faster Does It" by Kevin MacLeod (incompetech.com) -->
     <!-- Licensed under Creative Commons: By Attribution 3.0 License -->
     <!-- http://creativecommons.org/licenses/by/3.0/ -->
+
+    <!-- Mobile Responsive CSS -->
+    <style>
+      @media (max-width: 768px) {
+        /* Stack panels on mobile */
+        aside[aria-label*="Navigation controls"] {
+          width: calc(100vw - 40px) !important;
+          max-width: 320px !important;
+        }
+
+        aside[aria-label*="Detailed information"] {
+          width: 100vw !important;
+          right: 0 !important;
+          top: auto !important;
+          bottom: 0 !important;
+          height: 60vh !important;
+          max-height: 500px !important;
+          border-left: none !important;
+          border-top: 2px solid currentColor !important;
+        }
+
+        /* Adjust toggle button for bottom panel */
+        aside[aria-label*="Detailed information"] button[aria-label*="info panel"] {
+          left: 50% !important;
+          transform: translateX(-50%) rotate(90deg) !important;
+          top: -40px !important;
+          width: 80px !important;
+          height: 40px !important;
+        }
+
+        /* Make search bar mobile-friendly */
+        nav[role="search"] input {
+          font-size: 16px !important; /* Prevents zoom on iOS */
+        }
+      }
+
+      @media (max-width: 480px) {
+        /* Extra small screens */
+        aside[aria-label*="Navigation controls"] {
+          top: 10px !important;
+          left: 10px !important;
+          width: calc(100vw - 20px) !important;
+        }
+
+        h1#control-panel-title {
+          font-size: 12px !important;
+          letter-spacing: 1px !important;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

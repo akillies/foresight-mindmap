@@ -37,6 +37,10 @@ const ForesightMindMap = () => {
   const [audioPreset, setAudioPreset] = useState(1);
   const [showRelationships, setShowRelationships] = useState(false);
 
+  // Mobile responsiveness
+  const [controlPanelOpen, setControlPanelOpen] = useState(true);
+  const [infoPanelOpen, setInfoPanelOpen] = useState(true);
+
   // Ref to avoid stale closures in animation loop
   const hoveredNodeRef = useRef(null);
 
@@ -1199,15 +1203,8 @@ const ForesightMindMap = () => {
     const parent = parentNode.userData;
     if (!parent.children) return;
 
-    // Safety check: prevent too many total nodes (browser crash protection)
-    // Fixed root cause: Vector3 memory leak in animation loop (was creating 6000+ objects/sec)
-    // Max scenario: 1 center + 6 pillars + 18 methods + 108 media (6 per method) = 133
-    // Set to 200 for comfortable exploration without limits
-    const MAX_TOTAL_NODES = 200;
-    if (nodesRef.current.length >= MAX_TOTAL_NODES) {
-      console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping child nodes for ${parent.id}`);
-      return;
-    }
+    // No node limit - memory leak fixed, all content accessible
+    // Previous limit was blocking users from exploring full knowledge base
 
     const { methodologies } = mindMapData;
     const children = methodologies.filter(m => parent.children.includes(m.id));
@@ -1298,15 +1295,7 @@ const ForesightMindMap = () => {
     const parent = parentNode.userData;
     if (!parent.media || parent.media.length === 0) return;
 
-    // Safety check: prevent too many total nodes (browser crash protection)
-    // Fixed root cause: Vector3 memory leak in animation loop (was creating 6000+ objects/sec)
-    // Max scenario: 1 center + 6 pillars + 18 methods + 108 media (6 per method) = 133
-    // Set to 200 for comfortable exploration without limits
-    const MAX_TOTAL_NODES = 200;
-    if (nodesRef.current.length >= MAX_TOTAL_NODES) {
-      console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping media nodes for ${parent.id}`);
-      return;
-    }
+    // No node limit - memory leak fixed, all content accessible
 
     const parentPos = parentNode.position;
     const radius = 8;
@@ -1836,13 +1825,14 @@ const ForesightMindMap = () => {
           zIndex: 10,
         }}
       >
-        {/* Header Bar */}
+        {/* Header Bar with Toggle */}
         <h1
           id="control-panel-title"
+          onClick={() => setControlPanelOpen(!controlPanelOpen)}
           style={{
             background: COLORS.primary,
             padding: '12px 20px',
-            borderRadius: '20px 20px 0 0',
+            borderRadius: controlPanelOpen ? '20px 20px 0 0' : '20px',
             fontSize: '16px',
             fontWeight: '700',
             color: '#000000',
@@ -1850,13 +1840,20 @@ const ForesightMindMap = () => {
             textAlign: 'center',
             fontFamily: 'monospace',
             margin: 0,
+            cursor: 'pointer',
+            userSelect: 'none',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '10px',
           }}
         >
-          FUTURE STUDIES EXPLORER
+          <span style={{ fontSize: '20px' }}>{controlPanelOpen ? '▼' : '▶'}</span>
+          CONTROLS
         </h1>
 
         {/* Main Panel */}
-        <div style={{
+        {controlPanelOpen && <div style={{
           background: '#000000',
           border: `4px solid ${COLORS.primary}`,
           borderTop: 'none',
@@ -2141,7 +2138,7 @@ const ForesightMindMap = () => {
               SYSTEM ONLINE
             </span>
           </div>
-        </div>
+        </div>}
       </aside>
 
       {/* Info Panel */}
@@ -2153,7 +2150,7 @@ const ForesightMindMap = () => {
           style={{
             position: 'absolute',
             top: '0',
-            right: '0',
+            right: infoPanelOpen ? '0' : '-450px',
             width: '450px',
             height: '100vh',
             background: 'rgba(26, 26, 46, 0.98)',
@@ -2163,10 +2160,35 @@ const ForesightMindMap = () => {
             borderLeft: `2px solid ${selectedNode.color || COLORS.primary}`,
             color: COLORS.text,
             fontFamily: 'Inter, sans-serif',
-            animation: 'slideIn 0.3s ease',
+            transition: 'right 0.3s ease',
             boxShadow: `-10px 0 40px ${selectedNode.color || COLORS.primary}30`,
           }}
         >
+          {/* Collapse toggle button */}
+          <button
+            onClick={() => setInfoPanelOpen(!infoPanelOpen)}
+            aria-label={infoPanelOpen ? 'Close info panel' : 'Open info panel'}
+            style={{
+              position: 'absolute',
+              left: '-40px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '40px',
+              height: '80px',
+              background: selectedNode.color || COLORS.primary,
+              border: 'none',
+              borderRadius: '8px 0 0 8px',
+              color: '#000',
+              fontSize: '20px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 1,
+            }}
+          >
+            {infoPanelOpen ? '▶' : '◀'}
+          </button>
           {/* Live region for node selection announcements */}
           <div
             role="status"
