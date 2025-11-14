@@ -351,8 +351,8 @@ const ForesightMindMap = () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    // Enhanced graphics quality
-    renderer.outputEncoding = THREE.sRGBEncoding;
+    // Enhanced graphics quality (THREE.js r152+ API)
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.2;
     containerRef.current.appendChild(renderer.domElement);
@@ -3114,7 +3114,9 @@ const ForesightMindMap = () => {
                       fontFamily: 'monospace'
                     }}>
                       <div style={{ fontSize: '10px', letterSpacing: '1px', color: '#666', fontWeight: '600' }}>
-                        SOURCE: <span style={{ color: MEDIA_COLORS.image }}>{selectedMedia.source || new URL(selectedMedia.url).hostname.replace('www.', '').toUpperCase()}</span>
+                        SOURCE: <span style={{ color: MEDIA_COLORS.image }}>
+                          {selectedMedia.source || (selectedMedia.url.startsWith('/') ? 'LOCAL DIAGRAM' : new URL(selectedMedia.url).hostname.replace('www.', '').toUpperCase())}
+                        </span>
                       </div>
                       <a
                         href={selectedMedia.url}
@@ -3238,7 +3240,9 @@ const ForesightMindMap = () => {
                   fontFamily: 'monospace'
                 }}>
                   <div style={{ fontSize: '10px', letterSpacing: '1px', color: '#666', fontWeight: '600' }}>
-                    SOURCE: <span style={{ color: MEDIA_COLORS[selectedMedia.type] }}>{selectedMedia.source || new URL(selectedMedia.url).hostname.replace('www.', '').toUpperCase()}</span>
+                    SOURCE: <span style={{ color: MEDIA_COLORS[selectedMedia.type] }}>
+                      {selectedMedia.source || (selectedMedia.url.startsWith('/') ? 'LOCAL DIAGRAM' : new URL(selectedMedia.url).hostname.replace('www.', '').toUpperCase())}
+                    </span>
                   </div>
                   <a
                     href={selectedMedia.url}
