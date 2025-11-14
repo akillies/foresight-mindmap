@@ -1659,11 +1659,12 @@ const ForesightMindMap = () => {
     );
 
     // Auto-expand parent pillars if methodologies match but aren't visible
+    // BUG FIX: Use expandedNodesRef instead of expandedNodes to prevent infinite loop
     matchingMethodologies.forEach(method => {
       const parentPillarId = method.pillar;
       const parentPillar = nodesRef.current.find(n => n.userData.id === parentPillarId);
 
-      if (parentPillar && !expandedNodes.has(parentPillarId)) {
+      if (parentPillar && !expandedNodesRef.current.has(parentPillarId)) {
         // Auto-expand parent to reveal matched methodology
         setExpandedNodes(prev => new Set([...prev, parentPillarId]));
       }
@@ -1683,7 +1684,7 @@ const ForesightMindMap = () => {
         node.material.emissiveIntensity = matches ? 0.7 : 0.1;
       }
     });
-  }, [searchQuery, expandedNodes]);
+  }, [searchQuery]); // CRITICAL FIX: Removed expandedNodes from deps - was causing infinite loop!
 
   // Cross-Pillar Relationship Connections
   useEffect(() => {
