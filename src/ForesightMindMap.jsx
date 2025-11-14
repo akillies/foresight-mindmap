@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState, Component } from 'react';
 import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
@@ -6,6 +6,87 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import mindMapData from './mindMapData';
 import TimelineView from './TimelineView';
+
+// Error Boundary to catch React render crashes
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null, errorInfo: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('React Error Boundary caught error:', {
+      error: error.toString(),
+      errorInfo: errorInfo.componentStack,
+      timestamp: new Date().toISOString()
+    });
+    this.setState({ error, errorInfo });
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: '#000',
+          color: '#5C88DA',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          fontFamily: 'monospace',
+          padding: '40px'
+        }}>
+          <h1 style={{ color: '#FF6B9D', marginBottom: '20px' }}>SYSTEM ERROR</h1>
+          <p style={{ maxWidth: '600px', lineHeight: '1.6', marginBottom: '20px' }}>
+            A critical rendering error occurred. Please refresh the page to continue.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            style={{
+              background: '#5C88DA',
+              color: '#000',
+              border: 'none',
+              padding: '12px 24px',
+              borderRadius: '20px',
+              fontSize: '14px',
+              fontWeight: '700',
+              cursor: 'pointer',
+              fontFamily: 'monospace'
+            }}
+          >
+            RELOAD APPLICATION
+          </button>
+          <details style={{ marginTop: '40px', maxWidth: '800px' }}>
+            <summary style={{ cursor: 'pointer', color: '#FFCC66' }}>Technical Details</summary>
+            <pre style={{
+              background: '#111',
+              padding: '20px',
+              borderRadius: '10px',
+              overflow: 'auto',
+              marginTop: '10px',
+              fontSize: '12px'
+            }}>
+              {this.state.error && this.state.error.toString()}
+              {'\n\n'}
+              {this.state.errorInfo && this.state.errorInfo.componentStack}
+            </pre>
+          </details>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 const ForesightMindMap = () => {
   const containerRef = useRef(null);
@@ -3306,4 +3387,11 @@ const ForesightMindMap = () => {
   );
 };
 
-export default ForesightMindMap;
+// Wrap component with Error Boundary to catch render crashes
+const ForesightMindMapWithErrorBoundary = () => (
+  <ErrorBoundary>
+    <ForesightMindMap />
+  </ErrorBoundary>
+);
+
+export default ForesightMindMapWithErrorBoundary;
