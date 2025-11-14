@@ -1302,9 +1302,9 @@ const ForesightMindMap = () => {
 
     // CRITICAL FIX: Limit media items to prevent overload
     // Environmental Scanning has 58 items (outlier - average is 4-6)
-    // Set to 6: shows most methodologies fully, limits only extreme outliers
+    // Increased to 10: ensures all diagrams visible (scenarios has 9 items)
     // Memory leak fixed - safe to show more now
-    const MAX_MEDIA_PER_METHOD = 6;
+    const MAX_MEDIA_PER_METHOD = 10;
     const mediaToRender = parent.media.slice(0, MAX_MEDIA_PER_METHOD);
     const angleStep = (Math.PI * 2) / mediaToRender.length;
 

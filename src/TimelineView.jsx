@@ -74,6 +74,7 @@ const TimelineView = ({ onClose }) => {
 
   return (
     <div
+      className="timeline-container"
       style={{
         position: 'fixed',
         top: 0,
@@ -738,6 +739,17 @@ const TimelineView = ({ onClose }) => {
           }
         }
 
+        @keyframes slideInBottom {
+          from {
+            bottom: -100vh;
+            opacity: 0;
+          }
+          to {
+            bottom: 0;
+            opacity: 1;
+          }
+        }
+
         @keyframes pulse {
           0%, 100% {
             opacity: 0.3;
@@ -762,6 +774,27 @@ const TimelineView = ({ onClose }) => {
 
         ::-webkit-scrollbar-thumb:hover {
           background: #FFCC66;
+        }
+
+        /* Mobile Responsive Timeline */
+        @media (max-width: 768px) {
+          .timeline-container {
+            width: 100vw !important;
+            height: 85vh !important;
+            top: auto !important;
+            bottom: 0 !important;
+            right: 0 !important;
+            border-left: none !important;
+            border-top: 3px solid #5C88DA !important;
+            border-radius: 20px 20px 0 0 !important;
+            animation: slideInBottom 0.3s ease !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .timeline-container {
+            height: 90vh !important;
+          }
         }
       `}</style>
     </div>
