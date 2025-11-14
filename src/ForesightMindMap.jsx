@@ -1757,7 +1757,7 @@ const ForesightMindMap = () => {
           top: '20px',
           left: '50%',
           transform: 'translateX(-50%)',
-          zIndex: 10,
+          zIndex: 20,  // Higher than control panel (10) to prevent overlap on mobile
           display: 'flex',
           alignItems: 'center',
           gap: '0',
