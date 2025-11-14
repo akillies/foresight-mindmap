@@ -30,7 +30,7 @@ const mindMapData = {
       {
         type: 'image',
         title: 'Futures Cone (Joseph Voros)',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Futures_cone.svg/1200px-Futures_cone.svg.png',
+        url: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Futures_cone.svg',
         description: 'Visual representation of possible, plausible, probable, and preferable futures expanding from the present moment. This foundational diagram shows how uncertainty increases over time, with different categories of futures nested within each other - from the broadest cone of possible futures to the narrowest desired preferable futures.'
       },
       {
@@ -518,7 +518,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Stakeholder Power/Interest Grid',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Stakeholder_analysis.png/1200px-Stakeholder_analysis.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Stakeholder_analysis.png',
           description: 'Classic 2x2 framework for mapping stakeholder relationships based on their power (ability to influence) and interest (degree of concern) in an issue. This grid helps prioritize engagement strategies: manage closely (high power/high interest), keep satisfied (high power/low interest), keep informed (low power/high interest), or monitor (low power/low interest).'
         },
         {
@@ -1120,7 +1120,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Issue Lifecycle Diagram',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Technology-Adoption-Lifecycle.png/1200px-Technology-Adoption-Lifecycle.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Technology-Adoption-Lifecycle.png',
           description: 'Visual representation of issue maturation'
         },
         {
@@ -1298,7 +1298,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Braudel\'s Three Time Scales',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Braudel_time_scales.png/1200px-Braudel_time_scales.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/a/a1/Braudel_time_scales.png',
           description: 'Diagram showing Braudel\'s three overlapping time scales of historical change: événements (micro - events/individual actions), conjonctures (meso - social/economic cycles lasting decades), and longue durée (macro - deep structural patterns over centuries). This framework helps futurists see beyond surface events to underlying patterns.'
         },
         {
@@ -1504,7 +1504,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Kondratiev Wave Timeline',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Kondratieff_Wave.svg/1200px-Kondratieff_Wave.svg.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Kondratieff_Wave.svg',
           description: 'Historical timeline showing five Kondratiev waves of economic development from 1780s to present: Industrial Revolution (steam/textiles), Railway Age (steel/rail), Electrical Age (electricity/chemicals), Mass Production Age (automobiles/petrochemicals), and Information Age (computers/telecommunications). Each wave lasts 40-60 years with distinct innovation clusters.'
         },
         {
@@ -1830,7 +1830,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Scenario Cross Matrix (2x2)',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Scenario_matrix.png/1200px-Scenario_matrix.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Scenario_matrix.png',
           description: 'Classic 2x2 scenario matrix framework for generating four distinct scenarios by crossing two critical uncertainties. This tool helps explore the scenario space systematically, ensuring diversity of futures while keeping the number manageable. Widely used in Shell scenario planning and corporate foresight.'
         },
         {
@@ -1850,7 +1850,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Four Generic Futures Framework',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Eisenhower_matrix.svg/512px-Eisenhower_matrix.svg.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Eisenhower_matrix.svg',
           description: '2x2 matrix representing Dator\'s four future archetypes: Growth, Collapse, Steady State, and Transformation'
         },
         {
@@ -2248,7 +2248,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Morphological Box Example',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Morphological_box.png/1200px-Morphological_box.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/Morphological_box.png',
           description: 'Visual representation of a morphological box showing how parameters (rows) with multiple values (columns) can be systematically combined to generate comprehensive solution spaces. This multi-dimensional matrix approach helps explore all possible configurations, revealing novel combinations that might otherwise be missed.'
         },
         {
@@ -2359,7 +2359,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Delphi Process Flow Diagram',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Delphi_Method.png/1200px-Delphi_Method.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/0/0d/Delphi_Method.png',
           description: 'Visual flowchart showing the iterative process of Delphi method rounds: initial expert questionnaire, anonymous feedback distribution, expert revision based on group responses, further refinement, and final consensus. The diagram illustrates how multiple rounds reduce variance and build expert agreement while avoiding groupthink.'
         },
         {
@@ -2669,7 +2669,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Components of Effective Visions',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Vision_Framework.svg/1200px-Vision_Framework.svg.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Vision_Framework.svg',
           description: 'Framework showing the four essential components of effective vision statements: Aspirational (inspiring and motivating stakeholders), Concrete (specific and tangible outcomes), Inclusive (incorporates diverse perspectives and voices), and Actionable (suggests clear pathways forward). This model helps ensure visions are both compelling and implementable, balancing inspiration with practical guidance for strategic planning.'
         },
         {
@@ -2782,7 +2782,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Forecasting vs Backcasting Diagram',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Backcasting_vs_Forecasting.png/1200px-Backcasting_vs_Forecasting.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Backcasting_vs_Forecasting.png',
           description: 'Visual comparison of the two approaches'
         },
         {
@@ -3223,7 +3223,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Three Waves of Civilization Timeline',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Generation_timeline.svg/512px-Generation_timeline.svg.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Generation_timeline.svg',
           description: 'Timeline representing Toffler\'s three waves: Agricultural Age (~8000 BCE) → Industrial Age (~1750) → Information Age (~1950)'
         },
         {
@@ -3603,7 +3603,7 @@ const mindMapData = {
         {
           type: 'image',
           title: 'Futures Cone Diagram',
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Futures_cone.svg/1200px-Futures_cone.svg.png',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Futures_cone.svg',
           description: 'Visual diagram showing how uncertainty expands from the present moment into multiple nested cones representing different categories of futures: possible (physically conceivable), plausible (based on current knowledge), probable (trending trajectories), and preferable (desired outcomes). This foundational framework helps futurists explore the full range of potential futures while distinguishing between what could happen versus what we want to happen.'
         },
         {
