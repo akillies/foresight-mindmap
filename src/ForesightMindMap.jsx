@@ -1311,10 +1311,11 @@ const ForesightMindMap = () => {
     const parentPos = parentNode.position;
     const radius = 8;
 
-    // CRITICAL FIX: Limit media items to prevent crashes
-    // Environmental Scanning has 58 items → causes instant crash
-    // Reduced to 3 (ultra-conservative) after continued crash reports
-    const MAX_MEDIA_PER_METHOD = 3;
+    // CRITICAL FIX: Limit media items to prevent overload
+    // Environmental Scanning has 58 items (outlier - average is 4-6)
+    // Set to 6: shows most methodologies fully, limits only extreme outliers
+    // Memory leak fixed - safe to show more now
+    const MAX_MEDIA_PER_METHOD = 6;
     const mediaToRender = parent.media.slice(0, MAX_MEDIA_PER_METHOD);
     const angleStep = (Math.PI * 2) / mediaToRender.length;
 
