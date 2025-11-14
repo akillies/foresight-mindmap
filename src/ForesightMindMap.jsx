@@ -1764,12 +1764,58 @@ const ForesightMindMap = () => {
 
     const query = searchQuery.toLowerCase();
 
-    // Search ALL methodologies in data (not just rendered nodes)
-    const matchingMethodologies = mindMapData.methodologies.filter(method =>
-      (method.label && method.label.toLowerCase().includes(query)) ||
-      (method.description && method.description.toLowerCase().includes(query)) ||
-      (method.id && method.id.toLowerCase().includes(query))
-    );
+    // COMPREHENSIVE SEARCH: Search ALL text fields in methodologies
+    const matchingMethodologies = mindMapData.methodologies.filter(method => {
+      // Basic fields
+      if (method.label?.toLowerCase().includes(query)) return true;
+      if (method.description?.toLowerCase().includes(query)) return true;
+      if (method.id?.toLowerCase().includes(query)) return true;
+
+      // Historical context
+      if (method.historicalContext?.toLowerCase().includes(query)) return true;
+
+      // Media items (titles, descriptions, sources, organizations)
+      if (method.media?.some(m =>
+        m.title?.toLowerCase().includes(query) ||
+        m.description?.toLowerCase().includes(query) ||
+        m.source?.toLowerCase().includes(query) ||
+        m.organization?.toLowerCase().includes(query) ||
+        m.author?.toLowerCase().includes(query)
+      )) return true;
+
+      // Process guide steps
+      if (method.processGuide?.steps?.some(s =>
+        s.name?.toLowerCase().includes(query) ||
+        s.description?.toLowerCase().includes(query)
+      )) return true;
+
+      // Case studies
+      if (method.caseStudies?.some(cs =>
+        cs.title?.toLowerCase().includes(query) ||
+        cs.organization?.toLowerCase().includes(query) ||
+        cs.challenge?.toLowerCase().includes(query) ||
+        cs.approach?.toLowerCase().includes(query) ||
+        cs.outcome?.toLowerCase().includes(query)
+      )) return true;
+
+      // Pioneers
+      if (method.pioneers?.some(p => p.toLowerCase().includes(query))) return true;
+
+      // Related pillars
+      if (method.relatedPillars?.some(rp =>
+        rp.pillar?.toLowerCase().includes(query) ||
+        rp.relationship?.toLowerCase().includes(query)
+      )) return true;
+
+      // Common pitfalls
+      if (method.metadata?.commonPitfalls?.some(p => p.toLowerCase().includes(query))) return true;
+
+      // Best for / sectors
+      if (method.metadata?.bestFor?.some(b => b.toLowerCase().includes(query))) return true;
+      if (method.metadata?.sectors?.some(s => s.toLowerCase().includes(query))) return true;
+
+      return false;
+    });
 
     // Auto-expand parent pillars if methodologies match but aren't visible
     // BUG FIX: Use expandedNodesRef instead of expandedNodes to prevent infinite loop
@@ -1783,14 +1829,34 @@ const ForesightMindMap = () => {
       }
     });
 
-    // Highlight matching nodes (existing behavior)
+    // Highlight matching nodes (enhanced with deep search)
     nodesRef.current.forEach(node => {
       const data = node.userData;
-      const matches =
+
+      // Basic text match
+      let matches =
         (data.label && data.label.toLowerCase().includes(query)) ||
         (data.description && data.description.toLowerCase().includes(query)) ||
         (data.title && data.title.toLowerCase().includes(query)) ||
         (data.id && data.id.toLowerCase().includes(query));
+
+      // Check if this is a media node - search its content
+      if (data.isMedia && data.mediaData) {
+        matches = matches ||
+          (data.mediaData.title && data.mediaData.title.toLowerCase().includes(query)) ||
+          (data.mediaData.description && data.mediaData.description.toLowerCase().includes(query)) ||
+          (data.mediaData.source && data.mediaData.source.toLowerCase().includes(query)) ||
+          (data.mediaData.organization && data.mediaData.organization.toLowerCase().includes(query));
+      }
+
+      // Check if this is a methodology node - search deep fields
+      if (data.level === 2) {
+        const methodology = mindMapData.methodologies.find(m => m.id === data.id);
+        if (methodology) {
+          // Already checked in matchingMethodologies, but also highlight the node
+          matches = matches || matchingMethodologies.includes(methodology);
+        }
+      }
 
       if (node.material) {
         node.material.opacity = matches ? 1.0 : 0.2;
