@@ -2637,10 +2637,10 @@ const ForesightMindMap = () => {
                           return acc;
                         }, {});
                         const mediaTypes = [
-                          { type: 'video', icon: '📺', label: 'Videos' },
-                          { type: 'image', icon: '🖼️', label: 'Images' },
-                          { type: 'document', icon: '📄', label: 'Docs' },
-                          { type: 'article', icon: '📚', label: 'Articles' },
+                          { type: 'video', icon: '[VID]', label: 'Videos' },
+                          { type: 'image', icon: '[IMG]', label: 'Images' },
+                          { type: 'document', icon: '[DOC]', label: 'Docs' },
+                          { type: 'article', icon: '[ART]', label: 'Articles' },
                         ];
                         return mediaTypes.filter(mt => mediaCounts[mt.type]).map(mt => (
                           <div
@@ -2849,7 +2849,7 @@ const ForesightMindMap = () => {
                       fontSize: '64px',
                       marginBottom: '16px',
                       opacity: 0.8
-                    }}>📺</div>
+                    }}>[VID]</div>
                     <div style={{
                       fontSize: '14px',
                       color: '#b8c5d8',
@@ -2992,7 +2992,7 @@ const ForesightMindMap = () => {
                     textAlign: 'center',
                     color: COLORS.text
                   }}>
-                    <div style={{ fontSize: '48px', marginBottom: '20px', opacity: 0.5 }}>🖼️</div>
+                    <div style={{ fontSize: '24px', marginBottom: '20px', opacity: 0.5, fontFamily: 'monospace', fontWeight: '700' }}>[IMG]</div>
                     <div style={{
                       fontSize: '16px',
                       lineHeight: '1.8',
@@ -3048,7 +3048,7 @@ const ForesightMindMap = () => {
                   marginBottom: '20px'
                 }}>
                   <div style={{ fontSize: '48px', marginBottom: '15px', opacity: 0.6 }}>
-                    {selectedMedia.type === 'article' ? '📄' : '📚'}
+                    {selectedMedia.type === 'article' ? '[ART]' : '[DOC]'}
                   </div>
                   <div style={{
                     fontSize: '14px',
