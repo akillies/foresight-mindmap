@@ -1196,9 +1196,9 @@ const ForesightMindMap = () => {
     if (!parent.children) return;
 
     // Safety check: prevent too many total nodes (browser crash protection)
-    // History: 250 → 150 → 100 (each media node was actually 3 meshes!)
-    // 100 tracked nodes = ~150-200 actual mesh objects (safe range)
-    const MAX_TOTAL_NODES = 100;
+    // History: 250 → 150 → 100 → 40 (EMERGENCY - still crashing)
+    // Ultra-conservative limit until root cause fully resolved
+    const MAX_TOTAL_NODES = 40;
     if (nodesRef.current.length >= MAX_TOTAL_NODES) {
       console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping child nodes for ${parent.id}`);
       return;
@@ -1294,9 +1294,9 @@ const ForesightMindMap = () => {
     if (!parent.media || parent.media.length === 0) return;
 
     // Safety check: prevent too many total nodes (browser crash protection)
-    // History: 250 → 150 → 100 (each media node was actually 3 meshes!)
-    // 100 tracked nodes = ~150-200 actual mesh objects (safe range)
-    const MAX_TOTAL_NODES = 100;
+    // History: 250 → 150 → 100 → 40 (EMERGENCY - still crashing)
+    // Ultra-conservative limit until root cause fully resolved
+    const MAX_TOTAL_NODES = 40;
     if (nodesRef.current.length >= MAX_TOTAL_NODES) {
       console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping media nodes for ${parent.id}`);
       return;
@@ -1307,8 +1307,8 @@ const ForesightMindMap = () => {
 
     // CRITICAL FIX: Limit media items to prevent crashes
     // Environmental Scanning has 58 items → causes instant crash
-    // Only show first 6 items (user can view all in info panel)
-    const MAX_MEDIA_PER_METHOD = 6;
+    // Reduced to 3 (ultra-conservative) after continued crash reports
+    const MAX_MEDIA_PER_METHOD = 3;
     const mediaToRender = parent.media.slice(0, MAX_MEDIA_PER_METHOD);
     const angleStep = (Math.PI * 2) / mediaToRender.length;
 
