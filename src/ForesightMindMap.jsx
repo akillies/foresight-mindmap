@@ -214,7 +214,7 @@ const ForesightMindMap = () => {
 
         // Create gain node with fade in
         const gainNode = ctx.createGain();
-        const baseVolume = 0.075; // Reduced from 0.15 - more comfortable default volume
+        const baseVolume = 0.056; // Reduced 25% from 0.075 for subtler ambience
         gainNode.gain.setValueAtTime(0, ctx.currentTime);
         gainNode.gain.linearRampToValueAtTime(baseVolume, ctx.currentTime + 2);
         gainNode.connect(ctx.destination);
