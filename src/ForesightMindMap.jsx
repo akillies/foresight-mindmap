@@ -1588,16 +1588,16 @@ const ForesightMindMap = () => {
 
     const nodeData = node.userData;
 
-    // DEFENSIVE: Guard against missing ID
-    if (!nodeData.id) {
-      console.warn('handleNodeClick: Node missing ID', nodeData);
-      return;
-    }
-
-    // Handle media click
+    // Handle media click FIRST (media nodes use mediaId, not id)
     if (nodeData.isMedia) {
       setImageError(false); // Reset error state for new media
       setSelectedMedia(nodeData);
+      return;
+    }
+
+    // DEFENSIVE: Guard against missing ID (for regular nodes)
+    if (!nodeData.id) {
+      console.warn('handleNodeClick: Node missing ID', nodeData);
       return;
     }
 
