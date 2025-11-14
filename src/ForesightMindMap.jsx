@@ -1304,9 +1304,15 @@ const ForesightMindMap = () => {
 
     const parentPos = parentNode.position;
     const radius = 8;
-    const angleStep = (Math.PI * 2) / parent.media.length;
 
-    parent.media.forEach((mediaItem, index) => {
+    // CRITICAL FIX: Limit media items to prevent crashes
+    // Environmental Scanning has 58 items → causes instant crash
+    // Only show first 6 items (user can view all in info panel)
+    const MAX_MEDIA_PER_METHOD = 6;
+    const mediaToRender = parent.media.slice(0, MAX_MEDIA_PER_METHOD);
+    const angleStep = (Math.PI * 2) / mediaToRender.length;
+
+    mediaToRender.forEach((mediaItem, index) => {
       // Check if already exists
       const mediaId = `${parent.id}-media-${index}`;
       const existing = nodesRef.current.find(n => n.userData.mediaId === mediaId);
