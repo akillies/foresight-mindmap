@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <!-- Wild Card Probability × Impact Matrix -->
+  <!-- 2x2 framework for categorizing wild card events -->
+
+  <defs>
+    <style>
+      .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 13px; fill: #666; }
+      .quadrant-title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: white; }
+      .quadrant-desc { font-family: Arial, sans-serif; font-size: 11px; fill: white; }
+      .example-text { font-family: Arial, sans-serif; font-size: 10px; fill: white; font-style: italic; }
+      .axis-label { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #555; }
+      .label-text { font-family: Arial, sans-serif; font-size: 11px; fill: #333; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <text x="400" y="30" text-anchor="middle" class="header">Wild Card Event Matrix</text>
+  <text x="400" y="48" text-anchor="middle" class="subtitle">Probability vs. Impact framework for extreme scenarios</text>
+
+  <!-- Main 2x2 Matrix -->
+
+  <!-- Quadrant 1: High Impact, Low Probability (top left) - TRUE WILD CARDS -->
+  <rect x="100" y="100" width="300" height="300" fill="#E74C3C" rx="8"/>
+  <text x="250" y="135" text-anchor="middle" class="quadrant-title">TRUE WILD CARDS</text>
+  <text x="250" y="155" text-anchor="middle" class="quadrant-desc">High Impact × Low Probability</text>
+
+  <text x="250" y="185" text-anchor="middle" class="quadrant-desc" font-weight="bold">Characteristics:</text>
+  <text x="250" y="205" text-anchor="middle" class="quadrant-desc">• Unlikely to occur (< 10%)</text>
+  <text x="250" y="220" text-anchor="middle" class="quadrant-desc">• Transformative if they do</text>
+  <text x="250" y="235" text-anchor="middle" class="quadrant-desc">• No clear precursors</text>
+  <text x="250" y="250" text-anchor="middle" class="quadrant-desc">• System-changing</text>
+
+  <text x="250" y="280" text-anchor="middle" class="quadrant-desc" font-weight="bold">Examples:</text>
+  <text x="250" y="300" text-anchor="middle" class="example-text">• Alien contact</text>
+  <text x="250" y="315" text-anchor="middle" class="example-text">• AGI emergence</text>
+  <text x="250" y="330" text-anchor="middle" class="example-text">• Asteroid impact</text>
+  <text x="250" y="345" text-anchor="middle" class="example-text">• Fusion breakthrough</text>
+
+  <text x="250" y="375" text-anchor="middle" class="quadrant-desc" font-weight="bold">Strategy:</text>
+  <text x="250" y="393" text-anchor="middle" class="quadrant-desc">Monitor, imagine scenarios,</text>
+  <text x="250" y="408" text-anchor="middle" class="quadrant-desc">build adaptive capacity</text>
+
+  <!-- Quadrant 2: High Impact, High Probability (top right) - EMERGING CRISES -->
+  <rect x="420" y="100" width="300" height="300" fill="#F39C12" rx="8"/>
+  <text x="570" y="135" text-anchor="middle" class="quadrant-title">EMERGING CRISES</text>
+  <text x="570" y="155" text-anchor="middle" class="quadrant-desc">High Impact × High Probability</text>
+
+  <text x="570" y="185" text-anchor="middle" class="quadrant-desc" font-weight="bold">Characteristics:</text>
+  <text x="570" y="205" text-anchor="middle" class="quadrant-desc">• Likely to occur (> 30%)</text>
+  <text x="570" y="220" text-anchor="middle" class="quadrant-desc">• Major consequences</text>
+  <text x="570" y="235" text-anchor="middle" class="quadrant-desc">• Early signals visible</text>
+  <text x="570" y="250" text-anchor="middle" class="quadrant-desc">• Preventable or mitigable</text>
+
+  <text x="570" y="280" text-anchor="middle" class="quadrant-desc" font-weight="bold">Examples:</text>
+  <text x="570" y="300" text-anchor="middle" class="example-text">• Climate tipping points</text>
+  <text x="570" y="315" text-anchor="middle" class="example-text">• Pandemic (pre-2020)</text>
+  <text x="570" y="330" text-anchor="middle" class="example-text">• Cyberattack on infrastructure</text>
+  <text x="570" y="345" text-anchor="middle" class="example-text">• Financial system collapse</text>
+
+  <text x="570" y="375" text-anchor="middle" class="quadrant-desc" font-weight="bold">Strategy:</text>
+  <text x="570" y="393" text-anchor="middle" class="quadrant-desc">URGENT PRIORITY: Prepare,</text>
+  <text x="570" y="408" text-anchor="middle" class="quadrant-desc">prevent, build resilience NOW</text>
+
+  <!-- Quadrant 3: Low Impact, Low Probability (bottom left) - WEAK SIGNALS -->
+  <rect x="100" y="420" width="300" height="300" fill="#95A5A6" rx="8"/>
+  <text x="250" y="455" text-anchor="middle" class="quadrant-title">WEAK SIGNALS</text>
+  <text x="250" y="475" text-anchor="middle" class="quadrant-desc">Low Impact × Low Probability</text>
+
+  <text x="250" y="505" text-anchor="middle" class="quadrant-desc" font-weight="bold">Characteristics:</text>
+  <text x="250" y="525" text-anchor="middle" class="quadrant-desc">• Unlikely and minor</text>
+  <text x="250" y="540" text-anchor="middle" class="quadrant-desc">• May indicate larger patterns</text>
+  <text x="250" y="555" text-anchor="middle" class="quadrant-desc">• Edge cases and outliers</text>
+  <text x="250" y="570" text-anchor="middle" class="quadrant-desc">• Potential early indicators</text>
+
+  <text x="250" y="600" text-anchor="middle" class="quadrant-desc" font-weight="bold">Examples:</text>
+  <text x="250" y="620" text-anchor="middle" class="example-text">• Niche tech experiments</text>
+  <text x="250" y="635" text-anchor="middle" class="example-text">• Fringe social movements</text>
+  <text x="250" y="650" text-anchor="middle" class="example-text">• Novel research findings</text>
+
+  <text x="250" y="685" text-anchor="middle" class="quadrant-desc" font-weight="bold">Strategy:</text>
+  <text x="250" y="703" text-anchor="middle" class="quadrant-desc">Monitor, track for escalation</text>
+
+  <!-- Quadrant 4: Low Impact, High Probability (bottom right) - ROUTINE CHANGES -->
+  <rect x="420" y="420" width="300" height="300" fill="#3498DB" rx="8"/>
+  <text x="570" y="455" text-anchor="middle" class="quadrant-title">ROUTINE CHANGES</text>
+  <text x="570" y="475" text-anchor="middle" class="quadrant-desc">Low Impact × High Probability</text>
+
+  <text x="570" y="505" text-anchor="middle" class="quadrant-desc" font-weight="bold">Characteristics:</text>
+  <text x="570" y="525" text-anchor="middle" class="quadrant-desc">• Likely to occur</text>
+  <text x="570" y="540" text-anchor="middle" class="quadrant-desc">• Minor consequences</text>
+  <text x="570" y="555" text-anchor="middle" class="quadrant-desc">• Business as usual</text>
+  <text x="570" y="570" text-anchor="middle" class="quadrant-desc">• Manageable impacts</text>
+
+  <text x="570" y="600" text-anchor="middle" class="quadrant-desc" font-weight="bold">Examples:</text>
+  <text x="570" y="620" text-anchor="middle" class="example-text">• Incremental tech updates</text>
+  <text x="570" y="635" text-anchor="middle" class="example-text">• Gradual market shifts</text>
+  <text x="570" y="650" text-anchor="middle" class="example-text">• Routine policy changes</text>
+
+  <text x="570" y="685" text-anchor="middle" class="quadrant-desc" font-weight="bold">Strategy:</text>
+  <text x="570" y="703" text-anchor="middle" class="quadrant-desc">Standard planning, adapt</text>
+
+  <!-- Axis labels -->
+  <text x="50" y="260" text-anchor="middle" class="axis-label" transform="rotate(-90 50 260)">IMPACT →</text>
+  <text x="410" y="765" text-anchor="middle" class="axis-label">PROBABILITY →</text>
+
+  <!-- Axis markers -->
+  <text x="90" y="115" text-anchor="end" style="font-family: Arial; font-size: 11px; fill: #666;">High</text>
+  <text x="90" y="715" text-anchor="end" style="font-family: Arial; font-size: 11px; fill: #666;">Low</text>
+  <text x="115" y="745" text-anchor="middle" style="font-family: Arial; font-size: 11px; fill: #666;">Low</text>
+  <text x="705" y="745" text-anchor="middle" style="font-family: Arial; font-size: 11px; fill: #666;">High</text>
+
+  <!-- Footer note -->
+  <text x="400" y="785" text-anchor="middle" class="label-text" font-style="italic">Wild Cards reside in top-left: transformative impact but unlikely occurrence</text>
+
+  <!-- Footer -->
+  <text x="400" y="795" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #999;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

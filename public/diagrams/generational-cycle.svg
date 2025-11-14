@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+  <!-- Strauss-Howe Generational Cycle / Fourth Turning -->
+  <!-- 80-year cycle of four generational archetypes and turnings -->
+
+  <defs>
+    <style>
+      .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 13px; fill: #666; }
+      .turning-title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: white; }
+      .turning-desc { font-family: Arial, sans-serif; font-size: 11px; fill: white; }
+      .gen-label { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #333; }
+      .year-label { font-family: Arial, sans-serif; font-size: 10px; fill: #666; }
+      .note-text { font-family: Arial, sans-serif; font-size: 10px; fill: #555; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <text x="500" y="30" text-anchor="middle" class="header">Strauss-Howe Generational Cycle</text>
+  <text x="500" y="48" text-anchor="middle" class="subtitle">Four turnings repeating every 80-100 years (The Fourth Turning, 1997)</text>
+
+  <!-- Circular cycle -->
+  <circle cx="500" cy="350" r="250" fill="none" stroke="#999" stroke-width="2" stroke-dasharray="10,5"/>
+
+  <!-- Four Turnings (quadrants) -->
+
+  <!-- Turning 1: High (top) - Spring -->
+  <path d="M 500 100 A 250 250 0 0 1 750 350 L 500 350 Z" fill="#27AE60" opacity="0.3"/>
+  <rect x="560" y="170" width="160" height="130" fill="#27AE60" rx="8"/>
+  <text x="640" y="195" text-anchor="middle" class="turning-title">FIRST TURNING</text>
+  <text x="640" y="213" text-anchor="middle" class="turning-title">HIGH (Spring)</text>
+  <text x="640" y="235" text-anchor="middle" class="turning-desc">Institutions strong,</text>
+  <text x="640" y="250" text-anchor="middle" class="turning-desc">individualism weak</text>
+  <text x="640" y="270" text-anchor="middle" class="turning-desc">• Post-crisis optimism</text>
+  <text x="640" y="285" text-anchor="middle" class="turning-desc">• Community solidarity</text>
+
+  <!-- Turning 2: Awakening (right) - Summer -->
+  <path d="M 750 350 A 250 250 0 0 1 500 600 L 500 350 Z" fill="#F39C12" opacity="0.3"/>
+  <rect x="720" y="380" width="180" height="130" fill="#F39C12" rx="8"/>
+  <text x="810" y="405" text-anchor="middle" class="turning-title">SECOND TURNING</text>
+  <text x="810" y="423" text-anchor="middle" class="turning-title">AWAKENING (Summer)</text>
+  <text x="810" y="445" text-anchor="middle" class="turning-desc">Institutions attacked,</text>
+  <text x="810" y="460" text-anchor="middle" class="turning-desc">individualism flourishes</text>
+  <text x="810" y="480" text-anchor="middle" class="turning-desc">• Spiritual exploration</text>
+  <text x="810" y="495" text-anchor="middle" class="turning-desc">• Values revolution</text>
+
+  <!-- Turning 3: Unraveling (bottom) - Autumn -->
+  <path d="M 500 600 A 250 250 0 0 1 250 350 L 500 350 Z" fill="#E67E22" opacity="0.3"/>
+  <rect x="320" y="540" width="160" height="130" fill="#E67E22" rx="8"/>
+  <text x="400" y="565" text-anchor="middle" class="turning-title">THIRD TURNING</text>
+  <text x="400" y="583" text-anchor="middle" class="turning-title">UNRAVELING (Autumn)</text>
+  <text x="400" y="605" text-anchor="middle" class="turning-desc">Institutions weak,</text>
+  <text x="400" y="620" text-anchor="middle" class="turning-desc">individualism strong</text>
+  <text x="400" y="640" text-anchor="middle" class="turning-desc">• Civic decay</text>
+  <text x="400" y="655" text-anchor="middle" class="turning-desc">• Cultural wars</text>
+
+  <!-- Turning 4: Crisis (left) - Winter -->
+  <path d="M 250 350 A 250 250 0 0 1 500 100 L 500 350 Z" fill="#E74C3C" opacity="0.3"/>
+  <rect x="120" y="240" width="180" height="150" fill="#E74C3C" rx="8"/>
+  <text x="210" y="265" text-anchor="middle" class="turning-title">FOURTH TURNING</text>
+  <text x="210" y="283" text-anchor="middle" class="turning-title">CRISIS (Winter)</text>
+  <text x="210" y="305" text-anchor="middle" class="turning-desc">Institutional destruction</text>
+  <text x="210" y="320" text-anchor="middle" class="turning-desc">& rebuilding</text>
+  <text x="210" y="340" text-anchor="middle" class="turning-desc">• Existential threats</text>
+  <text x="210" y="355" text-anchor="middle" class="turning-desc">• Decisive action</text>
+  <text x="210" y="370" text-anchor="middle" class="turning-desc">• New civic order emerges</text>
+
+  <!-- Center: Current position indicator -->
+  <circle cx="500" cy="350" r="40" fill="white" stroke="#333" stroke-width="2"/>
+  <text x="500" y="345" text-anchor="middle" class="gen-label">~2025</text>
+  <text x="500" y="362" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #E74C3C; font-weight: bold;">Fourth Turning?</text>
+
+  <!-- Historical examples (outer ring) -->
+  <g id="historical-examples">
+    <text x="500" y="75" text-anchor="middle" class="year-label">1946-1964: Post-WWII High</text>
+    <text x="860" y="360" text-anchor="start" class="year-label">1964-1984: Consciousness Revolution</text>
+    <text x="500" y="685" text-anchor="middle" class="year-label">1984-2008: Culture Wars Era</text>
+    <text x="50" y="360" text-anchor="start" class="year-label">2008-2030?: Financial Crisis to ?</text>
+  </g>
+
+  <!-- Previous cycles -->
+  <text x="80" y="90" class="note-text" font-weight="bold">Previous Crisis Turnings:</text>
+  <text x="80" y="105" class="note-text">• 1929-1946: Great Depression & WWII</text>
+  <text x="80" y="120" class="note-text">• 1860-1865: Civil War</text>
+  <text x="80" y="135" class="note-text">• 1773-1794: American Revolution</text>
+
+  <!-- Four Generational Archetypes (right side) -->
+  <rect x="760" y="80" width="220" height="190" fill="rgba(255,255,255,0.9)" stroke="#666" stroke-width="2" rx="8"/>
+  <text x="870" y="105" text-anchor="middle" class="gen-label">Four Archetypes (rotating):</text>
+
+  <rect x="775" y="115" width="180" height="32" fill="#3498DB" rx="4"/>
+  <text x="865" y="135" text-anchor="middle" style="font-family: Arial; font-size: 11px; fill: white;">Prophet (Idealist)</text>
+
+  <rect x="775" y="152" width="180" height="32" fill="#9B59B6" rx="4"/>
+  <text x="865" y="172" text-anchor="middle" style="font-family: Arial; font-size: 11px; fill: white;">Nomad (Reactive)</text>
+
+  <rect x="775" y="189" width="180" height="32" fill="#E67E22" rx="4"/>
+  <text x="865" y="209" text-anchor="middle" style="font-family: Arial; font-size: 11px; fill: white;">Hero (Civic)</text>
+
+  <rect x="775" y="226" width="180" height="32" fill="#1ABC9C" rx="4"/>
+  <text x="865" y="246" text-anchor="middle" style="font-family: Arial; font-size: 11px; fill: white;">Artist (Adaptive)</text>
+
+  <!-- Key insight -->
+  <rect x="50" y="170" width="270" height="60" fill="rgba(255,248,220,0.95)" stroke="#999" stroke-width="2" rx="6"/>
+  <text x="65" y="190" class="note-text" font-weight="bold">The Pattern:</text>
+  <text x="65" y="205" class="note-text">Crisis → rebuilding (High) → awakening → decay</text>
+  <text x="65" y="220" class="note-text">(Unraveling) → Crisis. Each turning lasts ~20-25 years,</text>
+  <text x="65" y="235" class="note-text">full cycle ~80-100 years (human lifespan).</text>
+
+  <!-- Footer -->
+  <text x="500" y="695" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #999;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

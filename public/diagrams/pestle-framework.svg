@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <!-- PESTLE/STEEP Framework Diagram -->
+  <!-- Environmental Scanning Framework for Strategic Foresight -->
+
+  <defs>
+    <style>
+      .header { font-family: Arial, sans-serif; font-size: 26px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; fill: #666; }
+      .domain-title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: white; }
+      .domain-desc { font-family: Arial, sans-serif; font-size: 12px; fill: white; }
+      .center-label { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333; }
+      .arrow-line { fill: none; stroke: #666; stroke-width: 2; marker-end: url(#arrow); }
+    </style>
+
+    <!-- Arrow marker -->
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Header -->
+  <text x="450" y="35" text-anchor="middle" class="header">PESTLE / STEEP Framework</text>
+  <text x="450" y="55" text-anchor="middle" class="subtitle">Six domains for environmental scanning</text>
+
+  <!-- Center circle (Organization/Issue) -->
+  <circle cx="450" cy="320" r="70" fill="white" stroke="#333" stroke-width="3"/>
+  <text x="450" y="310" text-anchor="middle" class="center-label">Organization</text>
+  <text x="450" y="330" text-anchor="middle" class="center-label">or Issue</text>
+  <text x="450" y="350" text-anchor="middle" style="font-family: Arial; font-size: 12px; fill: #666;">Under Analysis</text>
+
+  <!-- Political (top left) -->
+  <g id="political">
+    <rect x="80" y="100" width="220" height="120" fill="#E74C3C" rx="8"/>
+    <text x="190" y="130" text-anchor="middle" class="domain-title">POLITICAL</text>
+    <text x="190" y="150" text-anchor="middle" class="domain-desc">Government policy, regulation,</text>
+    <text x="190" y="166" text-anchor="middle" class="domain-desc">political stability, trade rules,</text>
+    <text x="190" y="182" text-anchor="middle" class="domain-desc">taxation, elections, geopolitics</text>
+    <text x="190" y="205" text-anchor="middle" class="domain-desc" font-style="italic">e.g., climate policy, tech regulation</text>
+
+    <!-- Arrow to center -->
+    <path d="M 290 200 L 390 280" class="arrow-line"/>
+  </g>
+
+  <!-- Economic (top right) -->
+  <g id="economic">
+    <rect x="600" y="100" width="220" height="120" fill="#3498DB" rx="8"/>
+    <text x="710" y="130" text-anchor="middle" class="domain-title">ECONOMIC</text>
+    <text x="710" y="150" text-anchor="middle" class="domain-desc">Growth rates, inflation, interest rates,</text>
+    <text x="710" y="166" text-anchor="middle" class="domain-desc">employment, trade flows, market cycles,</text>
+    <text x="710" y="182" text-anchor="middle" class="domain-desc">income distribution, investments</text>
+    <text x="710" y="205" text-anchor="middle" class="domain-desc" font-style="italic">e.g., recession, crypto adoption</text>
+
+    <!-- Arrow to center -->
+    <path d="M 610 200 L 510 280" class="arrow-line"/>
+  </g>
+
+  <!-- Social (middle left) -->
+  <g id="social">
+    <rect x="80" y="270" width="220" height="120" fill="#9B59B6" rx="8"/>
+    <text x="190" y="300" text-anchor="middle" class="domain-title">SOCIAL</text>
+    <text x="190" y="320" text-anchor="middle" class="domain-desc">Demographics, lifestyle trends,</text>
+    <text x="190" y="336" text-anchor="middle" class="domain-desc">education, health, culture, values,</text>
+    <text x="190" y="352" text-anchor="middle" class="domain-desc">consumer attitudes, social movements</text>
+    <text x="190" y="375" text-anchor="middle" class="domain-desc" font-style="italic">e.g., remote work, generational shifts</text>
+
+    <!-- Arrow to center -->
+    <path d="M 300 330 L 380 320" class="arrow-line"/>
+  </g>
+
+  <!-- Technological (middle right) -->
+  <g id="technological">
+    <rect x="600" y="270" width="220" height="120" fill="#1ABC9C" rx="8"/>
+    <text x="710" y="300" text-anchor="middle" class="domain-title">TECHNOLOGICAL</text>
+    <text x="710" y="320" text-anchor="middle" class="domain-desc">Innovation, R&D, automation,</text>
+    <text x="710" y="336" text-anchor="middle" class="domain-desc">digital infrastructure, emerging tech,</text>
+    <text x="710" y="352" text-anchor="middle" class="domain-desc">tech adoption rates, disruptions</text>
+    <text x="710" y="375" text-anchor="middle" class="domain-desc" font-style="italic">e.g., AI, quantum computing, biotech</text>
+
+    <!-- Arrow to center -->
+    <path d="M 600 330 L 520 320" class="arrow-line"/>
+  </g>
+
+  <!-- Legal (bottom left) -->
+  <g id="legal">
+    <rect x="80" y="440" width="220" height="120" fill="#E67E22" rx="8"/>
+    <text x="190" y="470" text-anchor="middle" class="domain-title">LEGAL</text>
+    <text x="190" y="490" text-anchor="middle" class="domain-desc">Legislation, labor law, consumer rights,</text>
+    <text x="190" y="506" text-anchor="middle" class="domain-desc">intellectual property, compliance,</text>
+    <text x="190" y="522" text-anchor="middle" class="domain-desc">litigation, regulatory changes</text>
+    <text x="190" y="545" text-anchor="middle" class="domain-desc" font-style="italic">e.g., privacy laws, antitrust actions</text>
+
+    <!-- Arrow to center -->
+    <path d="M 290 460 L 390 360" class="arrow-line"/>
+  </g>
+
+  <!-- Environmental (bottom right) -->
+  <g id="environmental">
+    <rect x="600" y="440" width="220" height="120" fill="#27AE60" rx="8"/>
+    <text x="710" y="470" text-anchor="middle" class="domain-title">ENVIRONMENTAL</text>
+    <text x="710" y="490" text-anchor="middle" class="domain-desc">Climate change, sustainability,</text>
+    <text x="710" y="506" text-anchor="middle" class="domain-desc">resource scarcity, pollution, biodiversity,</text>
+    <text x="710" y="522" text-anchor="middle" class="domain-desc">natural disasters, ecological limits</text>
+    <text x="710" y="545" text-anchor="middle" class="domain-desc" font-style="italic">e.g., carbon neutrality, water stress</text>
+
+    <!-- Arrow to center -->
+    <path d="M 610 460 L 510 360" class="arrow-line"/>
+  </g>
+
+  <!-- Note about STEEP variant -->
+  <rect x="330" y="425" width="240" height="30" fill="rgba(255,255,255,0.9)" stroke="#999" stroke-width="1" rx="5"/>
+  <text x="450" y="445" text-anchor="middle" style="font-family: Arial; font-size: 11px; fill: #666;">
+    STEEP variant: Social, Tech, Economic, Environmental, Political
+  </text>
+
+  <!-- Footer -->
+  <text x="450" y="590" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #999;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

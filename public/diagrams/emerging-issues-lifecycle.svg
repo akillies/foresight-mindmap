@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+  <!-- Emerging Issues Lifecycle -->
+  <!-- Issue-attention cycle and emergence pattern -->
+
+  <defs>
+    <style>
+      .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 13px; fill: #666; }
+      .stage-title { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: white; }
+      .stage-desc { font-family: Arial, sans-serif; font-size: 10px; fill: white; }
+      .label-text { font-family: Arial, sans-serif; font-size: 11px; fill: #333; }
+      .axis-label { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <text x="450" y="30" text-anchor="middle" class="header">Emerging Issues Lifecycle</text>
+  <text x="450" y="48" text-anchor="middle" class="subtitle">From emergence to resolution or decline (Issue-Attention Cycle)</text>
+
+  <!-- Curve showing attention/visibility over time -->
+  <path d="M 80 500 L 120 480 Q 180 450, 240 380 T 360 200 T 480 150 T 600 180 T 700 300 T 800 450"
+        fill="none" stroke="#3498DB" stroke-width="4"/>
+
+  <!-- Axes -->
+  <line x1="80" y1="510" x2="820" y2="510" stroke="#333" stroke-width="2"/>
+  <text x="450" y="535" text-anchor="middle" class="axis-label">Time →</text>
+  <text x="40" y="300" text-anchor="middle" class="axis-label" transform="rotate(-90 40 300)">Public Attention / Visibility</text>
+
+  <!-- Stage markers and descriptions -->
+
+  <!-- Stage 1: Pre-problem -->
+  <circle cx="140" cy="475" r="6" fill="#95A5A6"/>
+  <rect x="80" y="340" width="140" height="120" fill="#95A5A6" rx="8"/>
+  <text x="150" y="365" text-anchor="middle" class="stage-title">1. PRE-PROBLEM</text>
+  <text x="150" y="385" text-anchor="middle" class="stage-desc">Issue exists but</text>
+  <text x="150" y="400" text-anchor="middle" class="stage-desc">unrecognized</text>
+  <text x="150" y="420" text-anchor="middle" class="stage-desc">• Experts notice</text>
+  <text x="150" y="435" text-anchor="middle" class="stage-desc">• Public unaware</text>
+  <text x="150" y="450" text-anchor="middle" class="stage-desc">• No political traction</text>
+
+  <!-- Stage 2: Alarmed Discovery -->
+  <circle cx="300" cy="290" r="6" fill="#F39C12"/>
+  <rect x="230" y="85" width="140" height="135" fill="#F39C12" rx="8"/>
+  <text x="300" y="110" text-anchor="middle" class="stage-title">2. ALARMED</text>
+  <text x="300" y="125" text-anchor="middle" class="stage-title">DISCOVERY</text>
+  <text x="300" y="145" text-anchor="middle" class="stage-desc">Dramatic event or</text>
+  <text x="300" y="160" text-anchor="middle" class="stage-desc">advocacy catalyzes</text>
+  <text x="300" y="180" text-anchor="middle" class="stage-desc">• Media coverage</text>
+  <text x="300" y="195" text-anchor="middle" class="stage-desc">• Public concern rises</text>
+  <text x="300" y="210" text-anchor="middle" class="stage-desc">• Political attention</text>
+
+  <!-- Stage 3: Peak Attention -->
+  <circle cx="460" cy="150" r="6" fill="#E74C3C"/>
+  <rect x="390" y="30" width="140" height="100" fill="#E74C3C" rx="8"/>
+  <text x="460" y="55" text-anchor="middle" class="stage-title">3. PEAK</text>
+  <text x="460" y="70" text-anchor="middle" class="stage-title">ATTENTION</text>
+  <text x="460" y="90" text-anchor="middle" class="stage-desc">Issue dominates</text>
+  <text x="460" y="105" text-anchor="middle" class="stage-desc">• Intense debate</text>
+  <text x="460" y="120" text-anchor="middle" class="stage-desc">• Policy proposals</text>
+
+  <!-- Stage 4: Declining Interest -->
+  <circle cx="650" cy="240" r="6" fill="#E67E22"/>
+  <rect x="580" y="85" width="140" height="135" fill="#E67E22" rx="8"/>
+  <text x="650" y="110" text-anchor="middle" class="stage-title">4. DECLINING</text>
+  <text x="650" y="125" text-anchor="middle" class="stage-title">INTEREST</text>
+  <text x="650" y="145" text-anchor="middle" class="stage-desc">Fatigue sets in or</text>
+  <text x="650" y="160" text-anchor="middle" class="stage-desc">new issues emerge</text>
+  <text x="650" y="180" text-anchor="middle" class="stage-desc">• Media moves on</text>
+  <text x="650" y="195" text-anchor="middle" class="stage-desc">• Public attention wanes</text>
+  <text x="650" y="210" text-anchor="middle" class="stage-desc">• Complexity apparent</text>
+
+  <!-- Stage 5: Post-problem -->
+  <circle cx="780" cy="430" r="6" fill="#95A5A6"/>
+  <rect x="720" y="340" width="140" height="150" fill="#95A5A6" rx="8"/>
+  <text x="790" y="365" text-anchor="middle" class="stage-title">5. POST-PROBLEM</text>
+  <text x="790" y="385" text-anchor="middle" class="stage-desc">Residual activity</text>
+  <text x="790" y="405" text-anchor="middle" class="stage-desc">• Institutionalized</text>
+  <text x="790" y="420" text-anchor="middle" class="stage-desc">• Specialized agencies</text>
+  <text x="790" y="435" text-anchor="middle" class="stage-desc">• Or forgotten entirely</text>
+  <text x="790" y="455" text-anchor="middle" class="stage-desc" font-style="italic">Issue may re-emerge</text>
+  <text x="790" y="470" text-anchor="middle" class="stage-desc" font-style="italic">if unresolved</text>
+
+  <!-- Strategic intervention zones -->
+  <rect x="100" y="540" width="300" height="60" fill="rgba(46,204,113,0.2)" stroke="#27AE60" stroke-width="2" stroke-dasharray="5,5" rx="5"/>
+  <text x="250" y="560" text-anchor="middle" class="label-text" fill="#27AE60" font-weight="bold">FORESIGHT ZONE</text>
+  <text x="250" y="575" text-anchor="middle" class="label-text" fill="#27AE60">Act during Pre-Problem and Alarmed Discovery</text>
+  <text x="250" y="590" text-anchor="middle" class="label-text" fill="#27AE60">when solutions still flexible and cost low</text>
+
+  <rect x="420" y="540" width="200" height="60" fill="rgba(241,196,15,0.2)" stroke="#F1C40F" stroke-width="2" stroke-dasharray="5,5" rx="5"/>
+  <text x="520" y="560" text-anchor="middle" class="label-text" fill="#F39C12" font-weight="bold">CRISIS ZONE</text>
+  <text x="520" y="575" text-anchor="middle" class="label-text" fill="#F39C12">Peak Attention demands action</text>
+  <text x="520" y="590" text-anchor="middle" class="label-text" fill="#F39C12">but options constrained</text>
+
+  <!-- Examples -->
+  <text x="80" y="625" class="label-text" font-weight="bold">Examples:</text>
+  <text x="80" y="640" class="label-text">Pre-problem (now): Microplastics in bloodstream • Peak: COVID-19 (2020) • Declined: Y2K (post-2000)</text>
+
+  <!-- Footer -->
+  <text x="450" y="645" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #999;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

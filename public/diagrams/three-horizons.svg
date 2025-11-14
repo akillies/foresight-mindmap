@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <!-- Three Horizons Framework -->
+  <!-- Pattern of innovation emergence and decline -->
+
+  <defs>
+    <style>
+      .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 13px; fill: #666; }
+      .horizon-label { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .desc-text { font-family: Arial, sans-serif; font-size: 11px; }
+      .axis-label { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555; }
+      .note-text { font-family: Arial, sans-serif; font-size: 10px; fill: #555; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <text x="450" y="30" text-anchor="middle" class="header">Three Horizons Framework</text>
+  <text x="450" y="48" text-anchor="middle" class="subtitle">Pattern of change from dominant systems to emergent futures</text>
+
+  <!-- Axes -->
+  <line x1="80" y1="480" x2="80" y2="100" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="480" x2="850" y2="480" stroke="#333" stroke-width="2"/>
+
+  <text x="30" y="290" text-anchor="middle" class="axis-label" transform="rotate(-90 30 290)">Prevalence / Dominance</text>
+  <text x="465" y="510" text-anchor="middle" class="axis-label">Time →</text>
+
+  <!-- Horizon 1 Curve (declining) -->
+  <path d="M 100 150 Q 250 160, 400 190 T 700 350 T 850 470"
+        fill="none" stroke="#E74C3C" stroke-width="4"/>
+
+  <!-- Horizon 2 Curve (rising then declining) -->
+  <path d="M 200 450 Q 350 380, 500 250 T 750 200 T 850 240"
+        fill="none" stroke="#F39C12" stroke-width="4"/>
+
+  <!-- Horizon 3 Curve (emerging) -->
+  <path d="M 400 470 Q 550 430, 650 320 T 800 180 T 850 140"
+        fill="none" stroke="#27AE60" stroke-width="4"/>
+
+  <!-- Horizon labels and descriptions -->
+
+  <!-- H1 -->
+  <rect x="100" y="120" width="200" height="110" fill="rgba(231,76,60,0.1)" stroke="#E74C3C" stroke-width="2" rx="6"/>
+  <text x="200" y="145" text-anchor="middle" class="horizon-label" fill="#E74C3C">HORIZON 1</text>
+  <text x="200" y="163" text-anchor="middle" class="desc-text" fill="#E74C3C">Business as Usual</text>
+  <text x="200" y="183" text-anchor="middle" class="desc-text">Current dominant system</text>
+  <text x="200" y="198" text-anchor="middle" class="desc-text">Mature, optimized</text>
+  <text x="200" y="213" text-anchor="middle" class="desc-text">Declining over time</text>
+
+  <!-- H2 -->
+  <rect x="450" y="210" width="200" height="110" fill="rgba(243,156,18,0.1)" stroke="#F39C12" stroke-width="2" rx="6"/>
+  <text x="550" y="235" text-anchor="middle" class="horizon-label" fill="#F39C12">HORIZON 2</text>
+  <text x="550" y="253" text-anchor="middle" class="desc-text" fill="#F39C12">Transition / Pockets of Future</text>
+  <text x="550" y="273" text-anchor="middle" class="desc-text">Entrepreneurial innovation</text>
+  <text x="550" y="288" text-anchor="middle" class="desc-text">Competes with H1</text>
+  <text x="550" y="303" text-anchor="middle" class="desc-text">Bridge to H3</text>
+
+  <!-- H3 -->
+  <rect x="680" y="100" width="200" height="110" fill="rgba(39,174,96,0.1)" stroke="#27AE60" stroke-width="2" rx="6"/>
+  <text x="780" y="125" text-anchor="middle" class="horizon-label" fill="#27AE60">HORIZON 3</text>
+  <text x="780" y="143" text-anchor="middle" class="desc-text" fill="#27AE60">Visionary Future</text>
+  <text x="780" y="163" text-anchor="middle" class="desc-text">Emerging alternatives</text>
+  <text x="780" y="178" text-anchor="middle" class="desc-text">Marginal today</text>
+  <text x="780" y="193" text-anchor="middle" class="desc-text">Transformative potential</text>
+
+  <!-- Transition zones -->
+  <ellipse cx="350" cy="320" rx="80" ry="120" fill="rgba(243,156,18,0.2)" stroke="none"/>
+  <text x="350" y="315" text-anchor="middle" class="note-text" font-weight="bold" fill="#F39C12">Disruption</text>
+  <text x="350" y="330" text-anchor="middle" class="note-text" fill="#F39C12">Zone</text>
+
+  <ellipse cx="650" cy="280" rx="80" ry="100" fill="rgba(46,204,113,0.2)" stroke="none"/>
+  <text x="650" y="275" text-anchor="middle" class="note-text" font-weight="bold" fill="#27AE60">Innovation</text>
+  <text x="650" y="290" text-anchor="middle" class="note-text" fill="#27AE60">Zone</text>
+
+  <!-- Example application -->
+  <rect x="80" y="520" width="770" height="65" fill="rgba(255,248,220,0.9)" stroke="#999" stroke-width="2" rx="6"/>
+  <text x="95" y="540" class="note-text" font-weight="bold">Example: Transportation (circa 2025)</text>
+  <text x="95" y="555" class="note-text"><tspan fill="#E74C3C" font-weight="bold">H1:</tspan> Internal combustion vehicles (dominant but declining) • <tspan fill="#F39C12" font-weight="bold">H2:</tspan> Electric vehicles (rapidly growing, competing)</text>
+  <text x="95" y="570" class="note-text"><tspan fill="#27AE60" font-weight="bold">H3:</tspan> Autonomous shared mobility / urban air taxis (marginal but transformative potential)</text>
+
+  <!-- Key insight -->
+  <text x="465" y="75" text-anchor="middle" class="note-text" font-weight="bold">Strategic Insight: Manage all three horizons simultaneously</text>
+
+  <!-- Footer -->
+  <text x="450" y="595" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #999;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

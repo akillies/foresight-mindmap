@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <!-- Weak Signals Detection Framework -->
+  <!-- Igor Ansoff's framework for detecting early indicators of change -->
+
+  <defs>
+    <style>
+      .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 13px; fill: #666; }
+      .zone-title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: white; }
+      .zone-desc { font-family: Arial, sans-serif; font-size: 11px; fill: white; }
+      .label-text { font-family: Arial, sans-serif; font-size: 11px; fill: #333; }
+      .arrow-label { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #666; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <text x="450" y="30" text-anchor="middle" class="header">Weak Signals Detection Framework</text>
+  <text x="450" y="48" text-anchor="middle" class="subtitle">From noise to strategic insight (Igor Ansoff, 1975)</text>
+
+  <!-- Signal Strength Spectrum (left to right) -->
+
+  <!-- Zone 1: Noise -->
+  <rect x="50" y="100" width="150" height="450" fill="#95A5A6" rx="8"/>
+  <text x="125" y="135" text-anchor="middle" class="zone-title">NOISE</text>
+  <text x="125" y="155" text-anchor="middle" class="zone-desc">Random data</text>
+  <text x="125" y="170" text-anchor="middle" class="zone-desc">No pattern</text>
+
+  <text x="125" y="200" text-anchor="middle" class="zone-desc" font-weight="bold">Characteristics:</text>
+  <text x="125" y="220" text-anchor="middle" class="zone-desc">• Unconnected events</text>
+  <text x="125" y="238" text-anchor="middle" class="zone-desc">• No coherence</text>
+  <text x="125" y="256" text-anchor="middle" class="zone-desc">• Impossible to act on</text>
+  <text x="125" y="274" text-anchor="middle" class="zone-desc">• High volume</text>
+
+  <text x="125" y="310" text-anchor="middle" class="zone-desc" font-weight="bold">Examples:</text>
+  <text x="125" y="330" text-anchor="middle" class="zone-desc">Social media chatter</text>
+  <text x="125" y="346" text-anchor="middle" class="zone-desc">Unverified rumors</text>
+  <text x="125" y="362" text-anchor="middle" class="zone-desc">Isolated incidents</text>
+
+  <text x="125" y="400" text-anchor="middle" class="zone-desc" font-weight="bold">Action:</text>
+  <text x="125" y="420" text-anchor="middle" class="zone-desc">Filter, ignore,</text>
+  <text x="125" y="436" text-anchor="middle" class="zone-desc">or watch for</text>
+  <text x="125" y="452" text-anchor="middle" class="zone-desc">emerging patterns</text>
+
+  <!-- Zone 2: Weak Signals -->
+  <rect x="220" y="100" width="150" height="450" fill="#F39C12" rx="8"/>
+  <text x="295" y="135" text-anchor="middle" class="zone-title">WEAK SIGNALS</text>
+  <text x="295" y="155" text-anchor="middle" class="zone-desc">Early indicators</text>
+  <text x="295" y="170" text-anchor="middle" class="zone-desc">Ambiguous patterns</text>
+
+  <text x="295" y="200" text-anchor="middle" class="zone-desc" font-weight="bold">Characteristics:</text>
+  <text x="295" y="220" text-anchor="middle" class="zone-desc">• Faint patterns</text>
+  <text x="295" y="238" text-anchor="middle" class="zone-desc">• Multiple interpretations</text>
+  <text x="295" y="256" text-anchor="middle" class="zone-desc">• Low data availability</text>
+  <text x="295" y="274" text-anchor="middle" class="zone-desc">• High uncertainty</text>
+
+  <text x="295" y="310" text-anchor="middle" class="zone-desc" font-weight="bold">Examples:</text>
+  <text x="295" y="330" text-anchor="middle" class="zone-desc">Niche innovations</text>
+  <text x="295" y="346" text-anchor="middle" class="zone-desc">Fringe behaviors</text>
+  <text x="295" y="362" text-anchor="middle" class="zone-desc">Edge case anomalies</text>
+  <text x="295" y="378" text-anchor="middle" class="zone-desc">Early research papers</text>
+
+  <text x="295" y="414" text-anchor="middle" class="zone-desc" font-weight="bold">Action:</text>
+  <text x="295" y="434" text-anchor="middle" class="zone-desc">Track, hypothesize,</text>
+  <text x="295" y="450" text-anchor="middle" class="zone-desc">build scenarios,</text>
+  <text x="295" y="466" text-anchor="middle" class="zone-desc">strategic options</text>
+
+  <!-- Zone 3: Emerging Issues -->
+  <rect x="390" y="100" width="150" height="450" fill="#E67E22" rx="8"/>
+  <text x="465" y="135" text-anchor="middle" class="zone-title">EMERGING ISSUES</text>
+  <text x="465" y="155" text-anchor="middle" class="zone-desc">Confirmed patterns</text>
+  <text x="465" y="170" text-anchor="middle" class="zone-desc">Growing evidence</text>
+
+  <text x="465" y="200" text-anchor="middle" class="zone-desc" font-weight="bold">Characteristics:</text>
+  <text x="465" y="220" text-anchor="middle" class="zone-desc">• Clear direction</text>
+  <text x="465" y="238" text-anchor="middle" class="zone-desc">• Growing data</text>
+  <text x="465" y="256" text-anchor="middle" class="zone-desc">• Expert consensus</text>
+  <text x="465" y="274" text-anchor="middle" class="zone-desc">• Medium uncertainty</text>
+
+  <text x="465" y="310" text-anchor="middle" class="zone-desc" font-weight="bold">Examples:</text>
+  <text x="465" y="330" text-anchor="middle" class="zone-desc">Early-stage trends</text>
+  <text x="465" y="346" text-anchor="middle" class="zone-desc">Policy debates</text>
+  <text x="465" y="362" text-anchor="middle" class="zone-desc">Tech demonstrations</text>
+  <text x="465" y="378" text-anchor="middle" class="zone-desc">Pilot programs</text>
+
+  <text x="465" y="414" text-anchor="middle" class="zone-desc" font-weight="bold">Action:</text>
+  <text x="465" y="434" text-anchor="middle" class="zone-desc">Analyze, prepare,</text>
+  <text x="465" y="450" text-anchor="middle" class="zone-desc">develop response</text>
+  <text x="465" y="466" text-anchor="middle" class="zone-desc">plans, invest</text>
+
+  <!-- Zone 4: Strong Trends -->
+  <rect x="560" y="100" width="150" height="450" fill="#E74C3C" rx="8"/>
+  <text x="635" y="135" text-anchor="middle" class="zone-title">STRONG TRENDS</text>
+  <text x="635" y="155" text-anchor="middle" class="zone-desc">Established patterns</text>
+  <text x="635" y="170" text-anchor="middle" class="zone-desc">High certainty</text>
+
+  <text x="635" y="200" text-anchor="middle" class="zone-desc" font-weight="bold">Characteristics:</text>
+  <text x="635" y="220" text-anchor="middle" class="zone-desc">• Abundant data</text>
+  <text x="635" y="238" text-anchor="middle" class="zone-desc">• Universal awareness</text>
+  <text x="635" y="256" text-anchor="middle" class="zone-desc">• Clear trajectory</text>
+  <text x="635" y="274" text-anchor="middle" class="zone-desc">• Low uncertainty</text>
+
+  <text x="635" y="310" text-anchor="middle" class="zone-desc" font-weight="bold">Examples:</text>
+  <text x="635" y="330" text-anchor="middle" class="zone-desc">Climate change</text>
+  <text x="635" y="346" text-anchor="middle" class="zone-desc">Aging populations</text>
+  <text x="635" y="362" text-anchor="middle" class="zone-desc">Urbanization</text>
+  <text x="635" y="378" text-anchor="middle" class="zone-desc">AI adoption</text>
+
+  <text x="635" y="414" text-anchor="middle" class="zone-desc" font-weight="bold">Action:</text>
+  <text x="635" y="434" text-anchor="middle" class="zone-desc">Execute strategy,</text>
+  <text x="635" y="450" text-anchor="middle" class="zone-desc">adapt operations,</text>
+  <text x="635" y="466" text-anchor="middle" class="zone-desc">mainstream action</text>
+
+  <!-- Zone 5: Megatrends -->
+  <rect x="730" y="100" width="150" height="450" fill="#C0392B" rx="8"/>
+  <text x="805" y="135" text-anchor="middle" class="zone-title">MEGATRENDS</text>
+  <text x="805" y="155" text-anchor="middle" class="zone-desc">Structural shifts</text>
+  <text x="805" y="170" text-anchor="middle" class="zone-desc">Undeniable forces</text>
+
+  <text x="805" y="200" text-anchor="middle" class="zone-desc" font-weight="bold">Characteristics:</text>
+  <text x="805" y="220" text-anchor="middle" class="zone-desc">• Decades-long</text>
+  <text x="805" y="238" text-anchor="middle" class="zone-desc">• System-level impact</text>
+  <text x="805" y="256" text-anchor="middle" class="zone-desc">• Irreversible (short-term)</text>
+  <text x="805" y="274" text-anchor="middle" class="zone-desc">• Universal recognition</text>
+
+  <text x="805" y="310" text-anchor="middle" class="zone-desc" font-weight="bold">Examples:</text>
+  <text x="805" y="330" text-anchor="middle" class="zone-desc">Globalization</text>
+  <text x="805" y="346" text-anchor="middle" class="zone-desc">Digitalization</text>
+  <text x="805" y="362" text-anchor="middle" class="zone-desc">Sustainability</text>
+  <text x="805" y="378" text-anchor="middle" class="zone-desc">Decentralization</text>
+
+  <text x="805" y="414" text-anchor="middle" class="zone-desc" font-weight="bold">Action:</text>
+  <text x="805" y="434" text-anchor="middle" class="zone-desc">Transform org,</text>
+  <text x="805" y="450" text-anchor="middle" class="zone-desc">fundamental</text>
+  <text x="805" y="466" text-anchor="middle" class="zone-desc">repositioning</text>
+
+  <!-- Arrow showing progression -->
+  <defs>
+    <marker id="arrow-weak" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <path d="M 125 580 L 805 580" fill="none" stroke="#666" stroke-width="3" marker-end="url(#arrow-weak)"/>
+  <text x="465" y="605" text-anchor="middle" class="arrow-label">Time / Signal Strength / Data Availability →</text>
+
+  <!-- Key insight box -->
+  <rect x="50" y="620" width="830" height="65" fill="rgba(255,248,220,0.9)" stroke="#999" stroke-width="2" rx="6"/>
+  <text x="65" y="642" class="label-text" font-weight="bold">Ansoff's Insight:</text>
+  <text x="65" y="660" class="label-text">Strategic advantage comes from acting on WEAK SIGNALS before competitors, when uncertainty is high</text>
+  <text x="65" y="676" class="label-text">but strategic options are still open. By the time signals become trends, first-mover advantage is lost.</text>
+
+  <!-- Footer -->
+  <text x="450" y="695" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #999;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

@@ -67,11 +67,12 @@ const ForesightMindMap = () => {
     document: '#99CC99'
   };
 
-  // Audio presets - all generative binaural frequencies for deep learning and healing
+  // Audio presets - optimized binaural frequencies for brain repair, focus, and deep relaxation
+  // Research: Theta (4-8Hz) for healing/creativity, Alpha (8-12Hz) for relaxed focus, Delta (1-4Hz) for deep rest
   const AUDIO_PRESETS = {
-    1: { type: 'generative', baseFreq: 528, binauralBeat: 14, label: 'STUDY FOCUS (528Hz + 14Hz Beta)', harmonics: false },    // Beta waves for focus
-    2: { type: 'generative', baseFreq: 432, binauralBeat: 10, label: 'CALM FLOW (432Hz + 10Hz Alpha)', harmonics: false },      // Alpha waves for flow
-    3: { type: 'generative', baseFreq: 174, binauralBeat: 3, label: 'WARP CORE (174Hz + 3Hz Delta)', harmonics: true }         // Deep ambient
+    1: { type: 'generative', baseFreq: 256, binauralBeat: 7.83, label: 'BRAIN REPAIR (256Hz + 7.83Hz Schumann)', harmonics: false },    // Schumann resonance for grounding & healing
+    2: { type: 'generative', baseFreq: 432, binauralBeat: 8, label: 'CALM FOCUS (432Hz + 8Hz Alpha)', harmonics: false },      // Alpha waves for relaxed concentration
+    3: { type: 'generative', baseFreq: 174, binauralBeat: 3, label: 'WARP CORE (174Hz + 3Hz Delta)', harmonics: true }         // Deep ambient regeneration
   };
 
   // Keep expandedNodesRef in sync with expandedNodes state (fixes stale closure in event handlers)
@@ -1118,7 +1119,7 @@ const ForesightMindMap = () => {
   // Create Level 1 Nodes (Six Pillars)
   const createLevel1Nodes = (scene) => {
     const { level1 } = mindMapData;
-    const radius = 20;
+    const radius = 25;
     const angleStep = (Math.PI * 2) / level1.length;
 
     level1.forEach((pillar, index) => {
@@ -1193,6 +1194,13 @@ const ForesightMindMap = () => {
   const createChildNodes = (scene, parentNode) => {
     const parent = parentNode.userData;
     if (!parent.children) return;
+
+    // Safety check: prevent too many total nodes (browser crash protection)
+    const MAX_TOTAL_NODES = 250;
+    if (nodesRef.current.length >= MAX_TOTAL_NODES) {
+      console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping child nodes for ${parent.id}`);
+      return;
+    }
 
     const { methodologies } = mindMapData;
     const children = methodologies.filter(m => parent.children.includes(m.id));
@@ -1282,6 +1290,13 @@ const ForesightMindMap = () => {
   const createMediaNodes = (scene, parentNode) => {
     const parent = parentNode.userData;
     if (!parent.media || parent.media.length === 0) return;
+
+    // Safety check: prevent too many total nodes (browser crash protection)
+    const MAX_TOTAL_NODES = 250;
+    if (nodesRef.current.length >= MAX_TOTAL_NODES) {
+      console.warn(`Node limit reached (${MAX_TOTAL_NODES}). Skipping media nodes for ${parent.id}`);
+      return;
+    }
 
     const parentPos = parentNode.position;
     const radius = 8;
@@ -1675,6 +1690,17 @@ const ForesightMindMap = () => {
 
   return (
     <div style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden' }}>
+      {/* SEO H1 Tag - Visually Hidden */}
+      <h1 style={{
+        position: 'absolute',
+        left: '-9999px',
+        width: '1px',
+        height: '1px',
+        overflow: 'hidden'
+      }}>
+        Strategic Foresight Mind Map - Interactive 3D Educational Visualization of Futures Thinking Methodologies
+      </h1>
+
       {/* 3D Canvas Container - Main Visualization */}
       <main
         ref={containerRef}

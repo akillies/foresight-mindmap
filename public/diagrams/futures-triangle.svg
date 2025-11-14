@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 700">
+  <!-- Futures Triangle Diagram -->
+  <!-- Educational visualization for Strategic Foresight methodology -->
+
+  <defs>
+    <style>
+      .triangle-line { fill: none; stroke: #333; stroke-width: 3; }
+      .force-arrow { fill: none; stroke: #FF6B35; stroke-width: 2.5; marker-end: url(#arrowhead); }
+      .pull-arrow { stroke: #4ECDC4; }
+      .weight-arrow { stroke: #95A3B3; }
+      .label-title { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #333; }
+      .label-subtitle { font-family: Arial, sans-serif; font-size: 14px; fill: #666; }
+      .label-example { font-family: Arial, sans-serif; font-size: 12px; fill: #888; font-style: italic; }
+      .zone-label { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #FF6B35; }
+      .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333; }
+    </style>
+
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#FF6B35" />
+    </marker>
+    <marker id="arrowhead-pull" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#4ECDC4" />
+    </marker>
+    <marker id="arrowhead-weight" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#95A3B3" />
+    </marker>
+  </defs>
+
+  <!-- Header -->
+  <text x="400" y="35" text-anchor="middle" class="header">The Futures Triangle</text>
+  <text x="400" y="58" text-anchor="middle" class="label-subtitle">Three forces shaping the future (Sohail Inayatullah, 2008)</text>
+
+  <!-- Main Triangle -->
+  <polygon points="400,150 150,550 650,550" class="triangle-line" fill="rgba(255,235,205,0.2)" />
+
+  <!-- Plausible Futures Zone (center) -->
+  <circle cx="400" cy="450" r="80" fill="rgba(255,107,53,0.1)" stroke="#FF6B35" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="400" y="445" text-anchor="middle" class="zone-label">Plausible</text>
+  <text x="400" y="465" text-anchor="middle" class="zone-label">Futures</text>
+
+  <!-- PULL OF THE FUTURE (top) -->
+  <g id="pull">
+    <!-- Arrow pointing up/forward -->
+    <path d="M 400 150 L 400 80" class="force-arrow pull-arrow" marker-end="url(#arrowhead-pull)" />
+
+    <text x="400" y="120" text-anchor="middle" class="label-title" fill="#4ECDC4">PULL of the Future</text>
+    <text x="400" y="140" text-anchor="middle" class="label-subtitle">Aspirations, visions, hopes</text>
+
+    <!-- Examples box -->
+    <rect x="430" y="60" width="220" height="80" fill="rgba(78,205,196,0.1)" stroke="#4ECDC4" stroke-width="1" rx="5"/>
+    <text x="540" y="80" text-anchor="middle" class="label-example">Examples:</text>
+    <text x="540" y="96" text-anchor="middle" class="label-example">• Sustainable world</text>
+    <text x="540" y="110" text-anchor="middle" class="label-example">• Technological utopia</text>
+    <text x="540" y="124" text-anchor="middle" class="label-example">• Equitable society</text>
+  </g>
+
+  <!-- PUSH OF THE PRESENT (bottom left) -->
+  <g id="push">
+    <!-- Arrow pushing from bottom left -->
+    <path d="M 150 550 L 80 620" class="force-arrow" marker-end="url(#arrowhead)" />
+
+    <text x="150" y="590" text-anchor="middle" class="label-title" fill="#FF6B35">PUSH of the Present</text>
+    <text x="150" y="606" text-anchor="middle" class="label-subtitle">Current trends, drivers, momentum</text>
+
+    <!-- Examples box -->
+    <rect x="20" y="630" width="240" height="65" fill="rgba(255,107,53,0.1)" stroke="#FF6B35" stroke-width="1" rx="5"/>
+    <text x="140" y="648" text-anchor="middle" class="label-example">Examples:</text>
+    <text x="140" y="662" text-anchor="middle" class="label-example">• AI acceleration • Climate change</text>
+    <text x="140" y="676" text-anchor="middle" class="label-example">• Urbanization • Aging populations</text>
+  </g>
+
+  <!-- WEIGHT OF THE PAST (bottom right) -->
+  <g id="weight">
+    <!-- Arrow pulling down from bottom right -->
+    <path d="M 650 550 L 720 620" class="force-arrow weight-arrow" marker-end="url(#arrowhead-weight)" />
+
+    <text x="650" y="590" text-anchor="middle" class="label-title" fill="#95A3B3">WEIGHT of the Past</text>
+    <text x="650" y="606" text-anchor="middle" class="label-subtitle">Inertia, barriers, resistance</text>
+
+    <!-- Examples box -->
+    <rect x="540" y="630" width="240" height="65" fill="rgba(149,163,179,0.1)" stroke="#95A3B3" stroke-width="1" rx="5"/>
+    <text x="660" y="648" text-anchor="middle" class="label-example">Examples:</text>
+    <text x="660" y="662" text-anchor="middle" class="label-example">• Legacy infrastructure • Vested interests</text>
+    <text x="660" y="676" text-anchor="middle" class="label-example">• Cultural habits • Sunk costs</text>
+  </g>
+
+  <!-- Footer attribution -->
+  <text x="400" y="695" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #999;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

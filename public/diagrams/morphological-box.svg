@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750">
+  <!-- Morphological Analysis Box (Zwicky Method) -->
+  <!-- Systematic exploration of solution space -->
+
+  <defs>
+    <style>
+      .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 13px; fill: #666; }
+      .param-label { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #333; }
+      .option-text { font-family: Arial, sans-serif; font-size: 10px; fill: #333; text-anchor: middle; }
+      .note-text { font-family: Arial, sans-serif; font-size: 11px; fill: #555; }
+      .path-line { fill: none; stroke: #E74C3C; stroke-width: 3; stroke-dasharray: 8,4; }
+      .dot { fill: #E74C3C; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <text x="500" y="30" text-anchor="middle" class="header">Morphological Box Analysis</text>
+  <text x="500" y="48" text-anchor="middle" class="subtitle">Example: Future of Work 2025-2040 (Fritz Zwicky Method)</text>
+
+  <!-- Parameter labels (left side) -->
+  <g id="parameters">
+    <text x="30" y="125" class="param-label">Parameter 1:</text>
+    <text x="30" y="140" class="param-label">Employment Type</text>
+
+    <text x="30" y="215" class="param-label">Parameter 2:</text>
+    <text x="30" y="230" class="param-label">Work Location</text>
+
+    <text x="30" y="305" class="param-label">Parameter 3:</text>
+    <text x="30" y="320" class="param-label">Skill Development</text>
+
+    <text x="30" y="395" class="param-label">Parameter 4:</text>
+    <text x="30" y="410" class="param-label">Income Model</text>
+
+    <text x="30" y="485" class="param-label">Parameter 5:</text>
+    <text x="30" y="500" class="param-label">Social Safety Net</text>
+
+    <text x="30" y="575" class="param-label">Parameter 6:</text>
+    <text x="30" y="590" class="param-label">Career Pattern</text>
+  </g>
+
+  <!-- Morphological Box Grid -->
+  <g id="morph-box">
+    <!-- Row 1: Employment Type -->
+    <rect x="200" y="105" width="150" height="50" fill="#E3F2FD" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="275" y="128" class="option-text">Traditional</text>
+    <text x="275" y="142" class="option-text">Full-Time</text>
+
+    <rect x="360" y="105" width="150" height="50" fill="#FFF3E0" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="435" y="128" class="option-text">Gig/Platform</text>
+    <text x="435" y="142" class="option-text">Work</text>
+
+    <rect x="520" y="105" width="150" height="50" fill="#E8F5E9" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="595" y="128" class="option-text">Portfolio</text>
+    <text x="595" y="142" class="option-text">Careers</text>
+
+    <rect x="680" y="105" width="150" height="50" fill="#FCE4EC" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="755" y="128" class="option-text">AI-Augmented</text>
+    <text x="755" y="142" class="option-text">Hybrid</text>
+
+    <rect x="840" y="105" width="150" height="50" fill="#F3E5F5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="915" y="128" class="option-text">Post-Work</text>
+    <text x="915" y="142" class="option-text">(UBI funded)</text>
+
+    <!-- Row 2: Work Location -->
+    <rect x="200" y="195" width="150" height="50" fill="#E3F2FD" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="275" y="218" class="option-text">Office-Based</text>
+    <text x="275" y="232" class="option-text">(5 days)</text>
+
+    <rect x="360" y="195" width="150" height="50" fill="#FFF3E0" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="435" y="218" class="option-text">Hybrid</text>
+    <text x="435" y="232" class="option-text">(2-3 days)</text>
+
+    <rect x="520" y="195" width="150" height="50" fill="#E8F5E9" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="595" y="218" class="option-text">Fully Remote</text>
+    <text x="595" y="232" class="option-text">(anywhere)</text>
+
+    <rect x="680" y="195" width="150" height="50" fill="#FCE4EC" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="755" y="218" class="option-text">Virtual/Meta</text>
+    <text x="755" y="232" class="option-text">(VR/AR)</text>
+
+    <!-- Row 3: Skill Development -->
+    <rect x="200" y="285" width="150" height="50" fill="#E3F2FD" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="275" y="308" class="option-text">Traditional</text>
+    <text x="275" y="322" class="option-text">Degrees</text>
+
+    <rect x="360" y="285" width="150" height="50" fill="#FFF3E0" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="435" y="308" class="option-text">Micro-</text>
+    <text x="435" y="322" class="option-text">credentials</text>
+
+    <rect x="520" y="285" width="150" height="50" fill="#E8F5E9" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="595" y="308" class="option-text">Continuous</text>
+    <text x="595" y="322" class="option-text">Learning</text>
+
+    <rect x="680" y="285" width="150" height="50" fill="#FCE4EC" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="755" y="308" class="option-text">AI-Assisted</text>
+    <text x="755" y="322" class="option-text">Upskilling</text>
+
+    <!-- Row 4: Income Model -->
+    <rect x="200" y="375" width="150" height="50" fill="#E3F2FD" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="275" y="398" class="option-text">Fixed Salary</text>
+    <text x="275" y="412" class="option-text">(monthly)</text>
+
+    <rect x="360" y="375" width="150" height="50" fill="#FFF3E0" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="435" y="398" class="option-text">Project-Based</text>
+    <text x="435" y="412" class="option-text">(variable)</text>
+
+    <rect x="520" y="375" width="150" height="50" fill="#E8F5E9" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="595" y="398" class="option-text">Equity/Profit</text>
+    <text x="595" y="412" class="option-text">Sharing</text>
+
+    <rect x="680" y="375" width="150" height="50" fill="#FCE4EC" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="755" y="398" class="option-text">UBI + Top-Up</text>
+    <text x="755" y="412" class="option-text">(hybrid)</text>
+
+    <!-- Row 5: Social Safety Net -->
+    <rect x="200" y="465" width="150" height="50" fill="#E3F2FD" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="275" y="488" class="option-text">Employer-Based</text>
+    <text x="275" y="502" class="option-text">(traditional)</text>
+
+    <rect x="360" y="465" width="150" height="50" fill="#FFF3E0" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="435" y="488" class="option-text">Portable</text>
+    <text x="435" y="502" class="option-text">Benefits</text>
+
+    <rect x="520" y="465" width="150" height="50" fill="#E8F5E9" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="595" y="488" class="option-text">Government</text>
+    <text x="595" y="502" class="option-text">Universal</text>
+
+    <rect x="680" y="465" width="150" height="50" fill="#FCE4EC" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="755" y="488" class="option-text">Platform Co-op</text>
+    <text x="755" y="502" class="option-text">Model</text>
+
+    <!-- Row 6: Career Pattern -->
+    <rect x="200" y="555" width="150" height="50" fill="#E3F2FD" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="275" y="578" class="option-text">Linear (single</text>
+    <text x="275" y="592" class="option-text">company)</text>
+
+    <rect x="360" y="555" width="150" height="50" fill="#FFF3E0" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="435" y="578" class="option-text">Multi-Employer</text>
+    <text x="435" y="592" class="option-text">(job hopping)</text>
+
+    <rect x="520" y="555" width="150" height="50" fill="#E8F5E9" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="595" y="578" class="option-text">Parallel</text>
+    <text x="595" y="592" class="option-text">(multi-role)</text>
+
+    <rect x="680" y="555" width="150" height="50" fill="#FCE4EC" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="755" y="578" class="option-text">Sabbatical</text>
+    <text x="755" y="592" class="option-text">Cycles</text>
+  </g>
+
+  <!-- Example pathway (red dashed line) -->
+  <g id="example-path">
+    <circle cx="435" cy="130" r="6" class="dot"/>
+    <circle cx="595" cy="220" r="6" class="dot"/>
+    <circle cx="595" cy="310" r="6" class="dot"/>
+    <circle cx="435" cy="400" r="6" class="dot"/>
+    <circle cx="595" cy="490" r="6" class="dot"/>
+    <circle cx="595" cy="580" r="6" class="dot"/>
+
+    <path d="M 435 130 L 595 220 L 595 310 L 435 400 L 595 490 L 595 580" class="path-line"/>
+  </g>
+
+  <!-- Insights box -->
+  <rect x="30" y="630" width="940" height="100" fill="rgba(255,248,220,0.9)" stroke="#999" stroke-width="2" rx="6"/>
+
+  <text x="50" y="655" class="note-text" font-weight="bold">Example Scenario Path (red dots):</text>
+  <text x="50" y="675" class="note-text">Gig/Platform Work + Fully Remote + Continuous Learning + Project Income + Government Universal + Parallel Careers</text>
+  <text x="50" y="695" class="note-text">= "Distributed freelance knowledge worker with UBI safety net and multi-stream portfolio"</text>
+  <text x="50" y="715" class="note-text" font-style="italic">Total possible combinations: 5 × 4 × 4 × 4 × 4 × 4 = 5,120 distinct future-of-work scenarios</text>
+
+  <!-- Footer -->
+  <text x="500" y="745" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #999;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>

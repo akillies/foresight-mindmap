@@ -621,7 +621,7 @@ const TimelineView = ({ onClose }) => {
               fontFamily: 'monospace',
             }}
           >
-            POSITIVE FUTURES 2025-2099 🚀
+            POSITIVE FUTURES 2025-2099
           </h3>
           <div
             style={{

@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <!-- Signal Strength Over Time Curve -->
+  <!-- S-curve showing signal evolution from emergence to mainstream -->
+
+  <defs>
+    <style>
+      .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 13px; fill: #666; }
+      .axis-label { font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #555; }
+      .phase-label { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #333; }
+      .note-text { font-family: Arial, sans-serif; font-size: 10px; fill: #555; }
+      .curve-label { font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #E74C3C; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <text x="450" y="30" text-anchor="middle" class="header">Signal Strength Over Time</text>
+  <text x="450" y="48" text-anchor="middle" class="subtitle">How weak signals evolve into mainstream trends</text>
+
+  <!-- Axes -->
+  <line x1="100" y1="500" x2="100" y2="100" stroke="#333" stroke-width="2"/>
+  <line x1="100" y1="500" x2="850" y2="500" stroke="#333" stroke-width="2"/>
+
+  <text x="40" y="300" text-anchor="middle" class="axis-label" transform="rotate(-90 40 300)">Signal Strength</text>
+  <text x="475" y="535" text-anchor="middle" class="axis-label">Time →</text>
+
+  <!-- Y-axis labels -->
+  <line x1="95" y1="450" x2="100" y2="450" stroke="#666" stroke-width="1"/>
+  <text x="85" y="455" text-anchor="end" class="note-text">Low</text>
+
+  <line x1="95" y1="300" x2="100" y2="300" stroke="#666" stroke-width="1"/>
+  <text x="85" y="305" text-anchor="end" class="note-text">Medium</text>
+
+  <line x1="95" y1="150" x2="100" y2="150" stroke="#666" stroke-width="1"/>
+  <text x="85" y="155" text-anchor="end" class="note-text">High</text>
+
+  <!-- S-Curve -->
+  <path d="M 120 480 Q 180 475, 220 460 T 300 400 T 380 300 T 500 180 T 650 130 T 800 120"
+        fill="none" stroke="#E74C3C" stroke-width="4"/>
+
+  <!-- Phase regions (vertical bands) -->
+  <rect x="105" y="105" width="145" height="390" fill="rgba(149,165,179,0.15)" stroke="none"/>
+  <rect x="250" y="105" width="150" height="390" fill="rgba(243,156,18,0.15)" stroke="none"/>
+  <rect x="400" y="105" width="180" height="390" fill="rgba(230,126,34,0.15)" stroke="none"/>
+  <rect x="580" y="105" width="220" height="390" fill="rgba(231,76,60,0.15)" stroke="none"/>
+
+  <!-- Phase labels at bottom -->
+  <text x="177" y="520" text-anchor="middle" class="phase-label" fill="#95A5A6">1. NOISE</text>
+  <text x="325" y="520" text-anchor="middle" class="phase-label" fill="#F39C12">2. WEAK SIGNAL</text>
+  <text x="490" y="520" text-anchor="middle" class="phase-label" fill="#E67E22">3. EMERGING</text>
+  <text x="690" y="520" text-anchor="middle" class="phase-label" fill="#E74C3C">4. MAINSTREAM</text>
+
+  <!-- Annotation points on curve -->
+
+  <!-- Point 1: Noise -->
+  <circle cx="160" cy="472" r="5" fill="#95A5A6"/>
+  <line x1="160" y1="467" x2="160" y2="430" stroke="#95A5A6" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="160" y="420" text-anchor="middle" class="note-text" fill="#95A5A6">Scattered data</text>
+  <text x="160" y="433" text-anchor="middle" class="note-text" fill="#95A5A6">No pattern yet</text>
+
+  <!-- Point 2: Weak Signal Detection -->
+  <circle cx="260" cy="445" r="5" fill="#F39C12"/>
+  <line x1="260" y1="440" x2="260" y2="380" stroke="#F39C12" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="260" y="370" text-anchor="middle" class="note-text" fill="#F39C12" font-weight="bold">Foresight Zone</text>
+  <text x="260" y="383" text-anchor="middle" class="note-text" fill="#F39C12">Pattern emerges</text>
+  <text x="260" y="396" text-anchor="middle" class="note-text" fill="#F39C12">Strategic advantage</text>
+
+  <!-- Point 3: Inflection Point -->
+  <circle cx="430" cy="260" r="6" fill="#E67E22"/>
+  <line x1="430" y1="254" x2="430" y2="210" stroke="#E67E22" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="430" y="200" text-anchor="middle" class="note-text" fill="#E67E22" font-weight="bold">Inflection Point</text>
+  <text x="430" y="213" text-anchor="middle" class="note-text" fill="#E67E22">Rapid growth</text>
+  <text x="430" y="226" text-anchor="middle" class="note-text" fill="#E67E22">Issue validated</text>
+
+  <!-- Point 4: Mainstream Saturation -->
+  <circle cx="750" cy="125" r="5" fill="#E74C3C"/>
+  <line x1="750" y1="120" x2="750" y2="85" stroke="#E74C3C" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="750" y="75" text-anchor="middle" class="note-text" fill="#E74C3C">Saturation</text>
+  <text x="750" y="88" text-anchor="middle" class="note-text" fill="#E74C3C">Universal awareness</text>
+
+  <!-- Key strategic windows -->
+  <rect x="230" y="350" width="90" height="50" fill="rgba(46,204,113,0.2)" stroke="#27AE60" stroke-width="2" rx="5"/>
+  <text x="275" y="370" text-anchor="middle" class="note-text" fill="#27AE60" font-weight="bold">STRATEGIC</text>
+  <text x="275" y="383" text-anchor="middle" class="note-text" fill="#27AE60" font-weight="bold">WINDOW</text>
+  <text x="275" y="396" text-anchor="middle" class="note-text" fill="#27AE60" font-style="italic">Act here!</text>
+
+  <!-- Arrow showing action timing -->
+  <path d="M 320 375 L 400 280" fill="none" stroke="#27AE60" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <defs>
+    <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#27AE60" />
+    </marker>
+  </defs>
+
+  <!-- Insights box -->
+  <rect x="50" y="545" width="800" height="45" fill="rgba(255,248,220,0.9)" stroke="#999" stroke-width="2" rx="6"/>
+  <text x="65" y="563" class="note-text" font-weight="bold">Key Insight:</text>
+  <text x="65" y="578" class="note-text">Strategic value is highest during the Weak Signal phase (low visibility, high uncertainty, open options).</text>
+  <text x="65" y="591" class="note-text">By the Mainstream phase, competitive advantage is gone—everyone knows and is already acting.</text>
+
+  <!-- Footer -->
+  <text x="450" y="595" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #999;">
+    Strategic Foresight Mind Map • CC BY-SA 4.0 • Alexander Kline Consulting
+  </text>
+</svg>
