@@ -6,6 +6,10 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import mindMapData from './mindMapData';
 import TimelineView from './TimelineView';
+import { audioManager } from './AudioManager';
+import TourUI, { TourSelectionModal, TourHUD } from './TourUI';
+import { tourManager, TOUR_STATES } from './TourManager';
+import { getTour } from './tourData';
 
 // Error Boundary to catch React render crashes
 class ErrorBoundary extends Component {
@@ -117,6 +121,16 @@ const ForesightMindMap = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [audioPreset, setAudioPreset] = useState(1);
   const [showRelationships, setShowRelationships] = useState(false);
+
+  // Tour audio state
+  const [tourMusicVolume, setTourMusicVolume] = useState(30);
+  const [tourNarrationVolume, setTourNarrationVolume] = useState(100);
+  const [tourAudioMuted, setTourAudioMuted] = useState(false);
+
+  // Tour UI state
+  const [showTourSelection, setShowTourSelection] = useState(false);
+  const [tourActive, setTourActive] = useState(false);
+  const controlsRef = useRef(null);
 
   // Mobile responsiveness
   const [controlPanelOpen, setControlPanelOpen] = useState(true);
@@ -367,6 +381,10 @@ const ForesightMindMap = () => {
     controls.maxPolarAngle = Math.PI; // Allow full rotation including looking from above
     controls.minPolarAngle = 0;
     controls.enablePan = false; // Disable panning to keep focus on center
+    controlsRef.current = controls;
+
+    // Initialize TourManager with camera and controls
+    tourManager.initialize(camera, controls);
 
     // Post-Processing: Bloom Effect for Cinematic Glow
     const composer = new EffectComposer(renderer);
@@ -2024,6 +2042,42 @@ const ForesightMindMap = () => {
           borderRadius: '0 0 20px 20px',
           padding: '20px',
         }}>
+          {/* Tour Launcher Button */}
+          <button
+            onClick={() => setShowTourSelection(true)}
+            aria-label="Start guided tour of Strategic Foresight"
+            style={{
+              width: '100%',
+              background: `linear-gradient(135deg, ${COLORS.secondary}20 0%, ${COLORS.highlight}20 100%)`,
+              border: `2px solid ${COLORS.secondary}`,
+              color: COLORS.secondary,
+              padding: '12px',
+              borderRadius: '12px',
+              fontSize: '11px',
+              fontWeight: '700',
+              letterSpacing: '2px',
+              cursor: 'pointer',
+              fontFamily: 'monospace',
+              transition: 'all 0.3s',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              marginBottom: '15px',
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = `linear-gradient(135deg, ${COLORS.secondary}40 0%, ${COLORS.highlight}40 100%)`;
+              e.target.style.transform = 'scale(1.02)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = `linear-gradient(135deg, ${COLORS.secondary}20 0%, ${COLORS.highlight}20 100%)`;
+              e.target.style.transform = 'scale(1)';
+            }}
+          >
+            <span style={{ fontSize: '14px' }}>🚀</span>
+            GUIDED TOUR
+          </button>
+
           {/* Status Bars */}
           <div style={{ marginBottom: '15px' }}>
             <div style={{
@@ -2273,6 +2327,164 @@ const ForesightMindMap = () => {
                 </label>
               ))}
             </fieldset>
+
+            {/* Tour Audio Volume Controls */}
+            <div style={{
+              marginTop: '12px',
+              paddingTop: '12px',
+              borderTop: `1px solid ${COLORS.pink}40`,
+            }}>
+              <h3 style={{
+                color: COLORS.pink,
+                fontSize: '9px',
+                fontWeight: '700',
+                letterSpacing: '1.5px',
+                marginBottom: '10px',
+                fontFamily: 'monospace',
+                margin: '0 0 10px 0',
+                opacity: 0.8,
+              }}>
+                TOUR VOLUME
+              </h3>
+
+              {/* Music Volume */}
+              <div style={{ marginBottom: '8px' }}>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '4px',
+                }}>
+                  <label
+                    htmlFor="music-volume"
+                    style={{
+                      color: COLORS.pink,
+                      fontSize: '9px',
+                      fontWeight: '600',
+                      letterSpacing: '1px',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    MUSIC
+                  </label>
+                  <span style={{
+                    color: COLORS.pink,
+                    fontSize: '9px',
+                    fontFamily: 'monospace',
+                    opacity: 0.7,
+                  }}>
+                    {tourMusicVolume}%
+                  </span>
+                </div>
+                <input
+                  id="music-volume"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={tourMusicVolume}
+                  onChange={(e) => {
+                    const vol = parseInt(e.target.value);
+                    setTourMusicVolume(vol);
+                    audioManager.setMusicVolume(vol / 100);
+                  }}
+                  style={{
+                    width: '100%',
+                    height: '4px',
+                    borderRadius: '2px',
+                    background: `linear-gradient(to right, ${COLORS.pink} 0%, ${COLORS.pink} ${tourMusicVolume}%, #333 ${tourMusicVolume}%, #333 100%)`,
+                    WebkitAppearance: 'none',
+                    cursor: 'pointer',
+                  }}
+                  aria-label="Tour background music volume"
+                />
+              </div>
+
+              {/* Narration Volume */}
+              <div style={{ marginBottom: '8px' }}>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '4px',
+                }}>
+                  <label
+                    htmlFor="narration-volume"
+                    style={{
+                      color: COLORS.pink,
+                      fontSize: '9px',
+                      fontWeight: '600',
+                      letterSpacing: '1px',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    NARRATION
+                  </label>
+                  <span style={{
+                    color: COLORS.pink,
+                    fontSize: '9px',
+                    fontFamily: 'monospace',
+                    opacity: 0.7,
+                  }}>
+                    {tourNarrationVolume}%
+                  </span>
+                </div>
+                <input
+                  id="narration-volume"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={tourNarrationVolume}
+                  onChange={(e) => {
+                    const vol = parseInt(e.target.value);
+                    setTourNarrationVolume(vol);
+                    audioManager.setNarrationVolume(vol / 100);
+                  }}
+                  style={{
+                    width: '100%',
+                    height: '4px',
+                    borderRadius: '2px',
+                    background: `linear-gradient(to right, ${COLORS.pink} 0%, ${COLORS.pink} ${tourNarrationVolume}%, #333 ${tourNarrationVolume}%, #333 100%)`,
+                    WebkitAppearance: 'none',
+                    cursor: 'pointer',
+                  }}
+                  aria-label="Tour narration volume"
+                />
+              </div>
+
+              {/* Mute Toggle */}
+              <button
+                onClick={() => {
+                  const newMuted = !tourAudioMuted;
+                  setTourAudioMuted(newMuted);
+                  audioManager.setMuted(newMuted);
+                }}
+                aria-label={tourAudioMuted ? 'Unmute tour audio' : 'Mute tour audio'}
+                aria-pressed={tourAudioMuted}
+                style={{
+                  width: '100%',
+                  background: tourAudioMuted ? `${COLORS.pink}30` : 'transparent',
+                  border: `1px solid ${COLORS.pink}60`,
+                  color: COLORS.pink,
+                  padding: '6px',
+                  borderRadius: '6px',
+                  fontSize: '9px',
+                  fontWeight: '600',
+                  letterSpacing: '1px',
+                  cursor: 'pointer',
+                  fontFamily: 'monospace',
+                  transition: 'all 0.2s',
+                  opacity: tourAudioMuted ? 1 : 0.7,
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = `${COLORS.pink}20`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = tourAudioMuted ? `${COLORS.pink}30` : 'transparent';
+                }}
+              >
+                {tourAudioMuted ? '🔇 MUTED' : '🔊 MUTE'}
+              </button>
+            </div>
           </section>
 
           {/* System Status Indicator */}
@@ -3453,6 +3665,28 @@ const ForesightMindMap = () => {
         <p>Developer: Alexander Kline Consulting</p>
         <p>Contact: Alexander Kline Consulting</p>
       </div>
+
+      {/* Tour Selection Modal */}
+      <TourSelectionModal
+        isOpen={showTourSelection}
+        onClose={() => setShowTourSelection(false)}
+        onSelectTour={async (tourId) => {
+          setShowTourSelection(false);
+          const tourData = getTour(tourId);
+          if (tourData) {
+            setTourActive(true);
+            await tourManager.loadTour(tourData);
+            await tourManager.start();
+          }
+        }}
+      />
+
+      {/* Tour HUD - Active during tour */}
+      {tourActive && (
+        <TourHUD
+          onClose={() => setTourActive(false)}
+        />
+      )}
     </div>
   );
 };

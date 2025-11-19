@@ -3390,6 +3390,57 @@ const mindMapData = {
       ]
     },
     {
+      id: 'roddenberry',
+      type: 'sci-fi-writer',
+      label: 'Gene\nRoddenberry',
+      lifespan: '1921-1991',
+      color: '#FFD700',
+      level: 3,
+      description: 'Created Star Trek as a template for a positive, inclusive future humanity could actually build toward',
+      details: {
+        overview: 'Envisioned post-scarcity society where humanity overcame racism, poverty, and war. IDIC philosophy (Infinite Diversity in Infinite Combinations) promoted inclusion decades before mainstream. Predicted communicators (cell phones), PADDs (tablets), universal translators (AI translation), and replicators (3D printing).',
+        influence: 'Inspired generations of scientists, engineers, and astronauts. Martin Luther King Jr. convinced Nichelle Nichols to stay on show for representation. First interracial kiss on US TV. Influenced NASA, cell phone design, tablet computers, and voice interfaces.',
+        methodology: 'Optimistic futurism, social commentary through allegory, aspirational worldbuilding',
+        accuracyRating: 'very-high'
+      },
+      majorWorks: [
+        { title: 'Star Trek (Original Series)', year: 1966 },
+        { title: 'Star Trek: The Motion Picture', year: 1979 },
+        { title: 'Star Trek: The Next Generation', year: 1987 }
+      ],
+      keyPredictions: [
+        'Communicators → Cell phones and flip phones',
+        'PADDs → Tablet computers (iPad)',
+        'Universal Translator → Google Translate, AI translation',
+        'Replicators → 3D printing technology',
+        'Voice-activated computers → Siri, Alexa',
+        'Hyposprays → Needle-free injection systems',
+        'Tricorders → Portable medical diagnostics'
+      ],
+      media: [
+        {
+          type: 'video',
+          title: 'Gene Roddenberry on Creating Star Trek',
+          url: 'https://www.youtube.com/watch?v=8PbcA3sYHXc',
+          description: 'Roddenberry discussing his vision for humanity\'s future',
+          year: 1988
+        },
+        {
+          type: 'article',
+          title: 'Gene Roddenberry - Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Gene_Roddenberry',
+          source: 'Wikipedia',
+          description: 'Complete biography covering Roddenberry\'s life from WWII pilot to TV producer who created Star Trek. Documents his vision of an optimistic future, IDIC philosophy promoting diversity and inclusion, influence on technology development (communicators, PADDs, tricorders), social commentary through science fiction allegory, and lasting cultural impact inspiring scientists, astronauts, and engineers.'
+        },
+        {
+          type: 'image',
+          title: 'Gene Roddenberry Portrait',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/1/16/Gene_Roddenberry_in_1976.jpg',
+          description: 'American television producer (1921-1991), creator of Star Trek and visionary of an optimistic human future'
+        }
+      ]
+    },
+    {
       id: 'crichton',
       type: 'sci-fi-writer',
       label: 'Michael\nCrichton',
