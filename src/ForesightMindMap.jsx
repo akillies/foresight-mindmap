@@ -172,12 +172,13 @@ const ForesightMindMap = () => {
     document: '#99CC99'
   };
 
-  // Audio presets - optimized binaural frequencies for brain repair, focus, and deep relaxation
-  // Research: Theta (4-8Hz) for healing/creativity, Alpha (8-12Hz) for relaxed focus, Delta (1-4Hz) for deep rest
+  // Audio presets - scientifically-backed frequencies for grounding, focus, and deep relaxation
+  // Carrier frequencies: 136.1Hz (Earth), 210.42Hz (Moon), 174Hz (Solfeggio) - warmer, more grounding than high frequencies
+  // Binaural beats: 7.83Hz (Schumann), 8Hz (Alpha focus), 3Hz (Delta deep state)
   const AUDIO_PRESETS = {
-    1: { type: 'generative', baseFreq: 256, binauralBeat: 7.83, label: 'BRAIN REPAIR (256Hz + 7.83Hz Schumann)', harmonics: false },    // Schumann resonance for grounding & healing
-    2: { type: 'generative', baseFreq: 432, binauralBeat: 8, label: 'CALM FOCUS (432Hz + 8Hz Alpha)', harmonics: false },      // Alpha waves for relaxed concentration
-    3: { type: 'generative', baseFreq: 174, binauralBeat: 3, label: 'WARP CORE (174Hz + 3Hz Delta)', harmonics: true }         // Deep ambient regeneration
+    1: { type: 'generative', baseFreq: 136.1, binauralBeat: 7.83, label: 'GROUNDING (136.1Hz + 7.83Hz Schumann)', harmonics: false },
+    2: { type: 'generative', baseFreq: 210.42, binauralBeat: 8, label: 'CALM FLOW (210.42Hz + 8Hz Alpha)', harmonics: false },
+    3: { type: 'generative', baseFreq: 174, binauralBeat: 3, label: 'DEEP FOCUS (174Hz + 3Hz Delta)', harmonics: true }
   };
 
   // CRITICAL FIX: Reusable Vector3 objects to prevent memory leak in animation loop
@@ -2387,7 +2388,7 @@ const ForesightMindMap = () => {
                     letterSpacing: '1px',
                     fontFamily: 'monospace',
                   }}>
-                    MUSIC {presetNum}: {AUDIO_PRESETS[presetNum].label}
+                    AMBIENT {presetNum}: {AUDIO_PRESETS[presetNum].label}
                   </span>
                 </label>
               ))}
