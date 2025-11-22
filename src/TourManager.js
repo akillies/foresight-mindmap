@@ -156,16 +156,31 @@ class TourManager {
 
     // Move camera to segment position
     if (segment.cameraPosition && segment.lookAt) {
-      const cameraPromise = this.cameraController.moveTo(
+      // Create cinematic arc path instead of straight line
+      const waypoints = this._generateArcPath(
+        this.cameraController.camera.position,
         segment.cameraPosition,
-        segment.lookAt,
-        {
-          duration: segment.transitionDuration || 3000,
-          onUpdate: (progress) => {
-            this.emit('cameraProgress', { progress });
-          }
-        }
+        segment.lookAt
       );
+
+      const cameraPromise = waypoints.length > 2
+        ? this.cameraController.moveAlongPath(waypoints, {
+            duration: segment.transitionDuration || 3000,
+            lookAt: segment.lookAt,
+            onUpdate: (progress) => {
+              this.emit('cameraProgress', { progress });
+            }
+          })
+        : this.cameraController.moveTo(
+            segment.cameraPosition,
+            segment.lookAt,
+            {
+              duration: segment.transitionDuration || 3000,
+              onUpdate: (progress) => {
+                this.emit('cameraProgress', { progress });
+              }
+            }
+          );
 
       // Start narration after camera begins moving (with optional delay)
       const narrationDelay = segment.narrationDelay || 500;
@@ -370,6 +385,70 @@ class TourManager {
         console.error(`[TourManager] Error in ${event} listener:`, error);
       }
     }
+  }
+
+  /**
+   * Generate cinematic arc path between two positions
+   * Creates waypoints that orbit around the look-at target
+   */
+  _generateArcPath(fromPos, toPos, lookAt) {
+    const from = { x: fromPos.x, y: fromPos.y, z: fromPos.z };
+    const to = { x: toPos.x, y: toPos.y, z: toPos.z };
+    const target = { x: lookAt.x, y: lookAt.y, z: lookAt.z };
+
+    // Calculate distance to determine if arc is needed
+    const dx = to.x - from.x;
+    const dy = to.y - from.y;
+    const dz = to.z - from.z;
+    const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+    // Short movements don't need arcs
+    if (distance < 30) {
+      return [from, to];
+    }
+
+    // Create arc with 2-3 intermediate waypoints
+    const waypoints = [from];
+
+    // Calculate number of arc points based on distance
+    const numPoints = distance > 60 ? 3 : 2;
+
+    for (let i = 1; i <= numPoints; i++) {
+      const t = i / (numPoints + 1);
+
+      // Linear interpolation
+      const baseX = from.x + (to.x - from.x) * t;
+      const baseY = from.y + (to.y - from.y) * t;
+      const baseZ = from.z + (to.z - from.z) * t;
+
+      // Add orbital offset perpendicular to movement direction
+      // This creates the "swoop" effect
+      const arcHeight = Math.sin(t * Math.PI) * (distance * 0.2);
+
+      // Vector from waypoint to target
+      const toTargetX = target.x - baseX;
+      const toTargetY = target.y - baseY;
+      const toTargetZ = target.z - baseZ;
+      const toTargetDist = Math.sqrt(toTargetX * toTargetX + toTargetY * toTargetY + toTargetZ * toTargetZ);
+
+      // Normalize and scale by arc height
+      if (toTargetDist > 0.1) {
+        const normalX = toTargetX / toTargetDist;
+        const normalY = toTargetY / toTargetDist;
+        const normalZ = toTargetZ / toTargetDist;
+
+        waypoints.push({
+          x: baseX + normalX * arcHeight,
+          y: baseY + normalY * arcHeight + arcHeight * 0.5, // Extra Y lift for drama
+          z: baseZ + normalZ * arcHeight
+        });
+      } else {
+        waypoints.push({ x: baseX, y: baseY + arcHeight, z: baseZ });
+      }
+    }
+
+    waypoints.push(to);
+    return waypoints;
   }
 
   /**
