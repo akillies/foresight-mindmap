@@ -1800,8 +1800,8 @@ const ForesightMindMap = () => {
     const scene = sceneRef.current;
     if (!scene) return;
 
-    // Reset opacity if no search query
-    if (!searchQuery.trim()) {
+    // Ensure searchQuery is a string and has content
+    if (!searchQuery || typeof searchQuery !== 'string' || !searchQuery.trim()) {
       nodesRef.current.forEach(node => {
         if (node.material) {
           node.material.opacity = 0.9;
@@ -1847,8 +1847,8 @@ const ForesightMindMap = () => {
         cs.outcome?.toLowerCase().includes(query)
       )) return true;
 
-      // Pioneers
-      if (method.pioneers?.some(p => p.toLowerCase().includes(query))) return true;
+      // Pioneers (ensure each pioneer is a string)
+      if (method.pioneers?.some(p => typeof p === 'string' && p.toLowerCase().includes(query))) return true;
 
       // Related pillars
       if (method.relatedPillars?.some(rp =>
@@ -1856,12 +1856,12 @@ const ForesightMindMap = () => {
         rp.relationship?.toLowerCase().includes(query)
       )) return true;
 
-      // Common pitfalls
-      if (method.metadata?.commonPitfalls?.some(p => p.toLowerCase().includes(query))) return true;
+      // Common pitfalls (ensure each pitfall is a string)
+      if (method.metadata?.commonPitfalls?.some(p => typeof p === 'string' && p.toLowerCase().includes(query))) return true;
 
-      // Best for / sectors
-      if (method.metadata?.bestFor?.some(b => b.toLowerCase().includes(query))) return true;
-      if (method.metadata?.sectors?.some(s => s.toLowerCase().includes(query))) return true;
+      // Best for / sectors (ensure each is a string)
+      if (method.metadata?.bestFor?.some(b => typeof b === 'string' && b.toLowerCase().includes(query))) return true;
+      if (method.metadata?.sectors?.some(s => typeof s === 'string' && s.toLowerCase().includes(query))) return true;
 
       return false;
     });
@@ -2002,7 +2002,7 @@ const ForesightMindMap = () => {
         aria-label="Search foresight methodologies and content"
         style={{
           position: 'absolute',
-          top: window.innerWidth <= 768 ? '90px' : '20px',  // Move down on mobile
+          top: window.innerWidth <= 768 ? '120px' : '20px',  // Move down more on mobile to avoid control panel
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 20,
