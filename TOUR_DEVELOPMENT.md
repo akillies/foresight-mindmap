@@ -3,8 +3,8 @@
 ## Current State (v2.0 Museum Experience)
 
 **Branch:** `feature/v2-museum-experience`
-**Status:** Functional prototype with browser TTS
-**Build:** 327 KB gzipped
+**Status:** Fully functional with enriched content + auto-opening nodes
+**Build:** ~330 KB gzipped
 
 ---
 
@@ -147,6 +147,31 @@
    - SKIP: Jump to next segment
    - EXIT: Return to free exploration
 5. **Complete**: Progress bar fills, "TOUR COMPLETE" message
+
+---
+
+## Recent Updates (2025-11-21)
+
+### Bug Fixes
+- ✅ Fixed segment ID mismatch causing tour failure
+- ✅ Primary tour now works with TTS narration
+- ✅ Both tours verified working
+
+### Content Enrichment
+- ✅ Added Pierre Wack's Shell oil crisis story (1972 scenarios, 1973 vindication)
+- ✅ Added Sohail Inayatullah background (UNESCO Chair, East/West bridge)
+- ✅ Added Herman Kahn "think the unthinkable" at RAND
+- ✅ Added Motorola scanning success/failure case study
+- ✅ Added Sweden 2005 Oil Independence Commission backcasting
+- ✅ Added Elise Boulding "remembering the future"
+- ✅ Added Buckminster Fuller quote
+- ✅ Added Jim Dator's Law on ridiculous futures
+
+### Interactive Features
+- ✅ Nodes auto-open when tour focuses on them
+- ✅ Info panels display methodology details during narration
+- ✅ Changed "SKIP" button to "NEXT"
+- ✅ Full museum experience: camera + narration + node interaction
 
 ---
 
