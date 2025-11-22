@@ -26,7 +26,7 @@ export const tours = {
     segments: [
       // SEGMENT 0: Opening - Wide view of entire cosmos
       {
-        id: 'intro-wide',
+        id: '00-intro-wide',
         title: 'Welcome to the Cosmos',
         nodeId: null, // No specific node
         cameraPosition: { x: 0, y: 80, z: 120 },
@@ -40,7 +40,7 @@ export const tours = {
 
       // SEGMENT 1: Zoom to Strategic Foresight center
       {
-        id: 'intro-center',
+        id: '01-strategic-foresight',
         title: 'Strategic Foresight',
         nodeId: 'strategic-foresight',
         cameraPosition: { x: 0, y: 30, z: 50 },
@@ -54,7 +54,7 @@ export const tours = {
 
       // SEGMENT 2: Pan to show Six Pillars
       {
-        id: 'six-pillars-overview',
+        id: '02-six-pillars',
         title: 'The Six Pillars',
         nodeId: null,
         cameraPosition: { x: 40, y: 40, z: 60 },
@@ -68,7 +68,7 @@ export const tours = {
 
       // SEGMENT 3: Mapping the Future
       {
-        id: 'pillar-mapping',
+        id: '03-mapping',
         title: 'Mapping the Future',
         nodeId: 'mapping',
         cameraPosition: { x: -50, y: 25, z: 20 },
@@ -82,7 +82,7 @@ export const tours = {
 
       // SEGMENT 4: Futures Triangle (under Mapping)
       {
-        id: 'method-futures-triangle',
+        id: '04-futures-triangle',
         title: 'Futures Triangle',
         nodeId: 'futures-triangle',
         cameraPosition: { x: -55, y: 15, z: 15 },
@@ -96,7 +96,7 @@ export const tours = {
 
       // SEGMENT 5: Anticipating
       {
-        id: 'pillar-anticipating',
+        id: '05-anticipating',
         title: 'Anticipating Change',
         nodeId: 'anticipating',
         cameraPosition: { x: -30, y: 25, z: 45 },
@@ -110,7 +110,7 @@ export const tours = {
 
       // SEGMENT 6: Environmental Scanning (key method)
       {
-        id: 'method-env-scanning',
+        id: '06-env-scanning',
         title: 'Environmental Scanning',
         nodeId: 'env-scanning',
         cameraPosition: { x: -35, y: 12, z: 55 },
@@ -124,7 +124,7 @@ export const tours = {
 
       // SEGMENT 7: Timing
       {
-        id: 'pillar-timing',
+        id: '07-timing',
         title: 'Timing the Future',
         nodeId: 'timing',
         cameraPosition: { x: 10, y: 25, z: 55 },
@@ -138,7 +138,7 @@ export const tours = {
 
       // SEGMENT 8: Deepening
       {
-        id: 'pillar-deepening',
+        id: '08-deepening',
         title: 'Deepening Understanding',
         nodeId: 'deepening',
         cameraPosition: { x: 50, y: 25, z: 30 },
@@ -152,7 +152,7 @@ export const tours = {
 
       // SEGMENT 9: Causal Layered Analysis (key method)
       {
-        id: 'method-cla',
+        id: '09-cla',
         title: 'Causal Layered Analysis',
         nodeId: 'cla',
         cameraPosition: { x: 55, y: 12, z: 20 },
@@ -166,7 +166,7 @@ export const tours = {
 
       // SEGMENT 10: Creating Alternatives
       {
-        id: 'pillar-creating',
+        id: '10-creating',
         title: 'Creating Alternatives',
         nodeId: 'creating',
         cameraPosition: { x: 45, y: 25, z: -25 },
@@ -180,7 +180,7 @@ export const tours = {
 
       // SEGMENT 11: Scenario Planning (flagship method)
       {
-        id: 'method-scenarios',
+        id: '11-scenarios',
         title: 'Scenario Planning',
         nodeId: 'scenarios',
         cameraPosition: { x: 50, y: 12, z: -35 },
@@ -194,7 +194,7 @@ export const tours = {
 
       // SEGMENT 12: Transforming
       {
-        id: 'pillar-transforming',
+        id: '12-transforming',
         title: 'Transforming the Future',
         nodeId: 'transforming',
         cameraPosition: { x: -10, y: 25, z: -45 },
@@ -208,7 +208,7 @@ export const tours = {
 
       // SEGMENT 13: Backcasting (key method)
       {
-        id: 'method-backcasting',
+        id: '13-backcasting',
         title: 'Backcasting',
         nodeId: 'backcasting',
         cameraPosition: { x: -15, y: 12, z: -55 },
@@ -222,7 +222,7 @@ export const tours = {
 
       // SEGMENT 14: Final overview - pull back
       {
-        id: 'closing-overview',
+        id: '14-closing',
         title: 'The Journey Continues',
         nodeId: null,
         cameraPosition: { x: 20, y: 60, z: 80 },
