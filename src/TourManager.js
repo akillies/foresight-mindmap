@@ -52,7 +52,6 @@ class TourManager {
    */
   initialize(camera, controls) {
     this.cameraController = new TourCameraController(camera, controls);
-    console.log('[TourManager] Initialized');
   }
 
   /**
@@ -450,7 +449,6 @@ class TourManager {
     this.cameraController?.dispose();
     audioManager.dispose();
     this.listeners.clear();
-    console.log('[TourManager] Disposed');
   }
 }
 

@@ -1,15 +1,18 @@
-import React, { useEffect, useLayoutEffect, useRef, useState, Component } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState, Component, lazy, Suspense } from 'react';
 import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import mindMapData from './mindMapData';
-import TimelineView from './TimelineView';
 import { audioManager } from './AudioManager';
-import TourUI, { TourSelectionModal, TourHUD } from './TourUI';
 import { tourManager, TOUR_STATES } from './TourManager';
 import { getTour } from './tourData';
+
+// Lazy load heavy components - only load when user needs them (~70 KB savings)
+const TimelineView = lazy(() => import('./TimelineView'));
+const TourSelectionModal = lazy(() => import('./TourUI').then(m => ({ default: m.TourSelectionModal })));
+const TourHUD = lazy(() => import('./TourUI').then(m => ({ default: m.TourHUD })));
 
 // Error Boundary to catch React render crashes
 class ErrorBoundary extends Component {
@@ -113,6 +116,8 @@ const ForesightMindMap = () => {
 
   const [selectedNode, setSelectedNode] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchInput, setSearchInput] = useState(''); // Immediate input value
+  const searchDebounceRef = useRef(null); // Debounce timeout
   const [expandedNodes, setExpandedNodes] = useState(new Set());
   const [hoveredNode, setHoveredNode] = useState(null);
   const [selectedMedia, setSelectedMedia] = useState(null);
@@ -178,6 +183,30 @@ const ForesightMindMap = () => {
   // Creating new Vector3 every frame (60 FPS × nodes) causes browser crashes
   const SCALE_SELECTED = new THREE.Vector3(1.4, 1.4, 1.4);
   const SCALE_NORMAL = new THREE.Vector3(1, 1, 1);
+
+  // Debounced search handler - waits 300ms after user stops typing
+  const handleSearchInput = (value) => {
+    setSearchInput(value); // Update input immediately for responsive UI
+
+    // Clear previous timeout
+    if (searchDebounceRef.current) {
+      clearTimeout(searchDebounceRef.current);
+    }
+
+    // Set new timeout to update search query
+    searchDebounceRef.current = setTimeout(() => {
+      setSearchQuery(value);
+    }, 300);
+  };
+
+  // Cleanup debounce timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (searchDebounceRef.current) {
+        clearTimeout(searchDebounceRef.current);
+      }
+    };
+  }, []);
 
   // Keep expandedNodesRef in sync with expandedNodes state (fixes stale closure in event handlers)
   useEffect(() => {
@@ -1997,8 +2026,8 @@ const ForesightMindMap = () => {
         <input
           type="search"
           placeholder="ENTER QUERY..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          value={searchInput}
+          onChange={(e) => handleSearchInput(e.target.value)}
           aria-label="Search for Strategic Foresight pillars, methodologies, and educational resources"
           aria-describedby="search-results-status"
           style={{
@@ -3677,7 +3706,9 @@ const ForesightMindMap = () => {
       {/* Timeline View */}
       {timelineVisible && (
         <div id="timeline-panel">
-          <TimelineView onClose={() => setTimelineVisible(false)} />
+          <Suspense fallback={<div style={{ padding: '20px', color: '#fff' }}>Loading timeline...</div>}>
+            <TimelineView onClose={() => setTimelineVisible(false)} />
+          </Suspense>
         </div>
       )}
 
@@ -3701,20 +3732,18 @@ const ForesightMindMap = () => {
       </div>
 
       {/* Tour Selection Modal */}
-      <TourSelectionModal
-        isOpen={showTourSelection}
-        onClose={() => setShowTourSelection(false)}
+      <Suspense fallback={null}>
+        <TourSelectionModal
+          isOpen={showTourSelection}
+          onClose={() => setShowTourSelection(false)}
         onSelectTour={async (tourId) => {
           setShowTourSelection(false);
           const tourData = getTour(tourId);
           if (tourData) {
-            console.log('[Tour] Starting tour:', tourId, tourData);
             setTourActive(true);
             try {
               await tourManager.loadTour(tourData);
-              console.log('[Tour] Tour loaded successfully');
               await tourManager.start();
-              console.log('[Tour] Tour started');
             } catch (error) {
               console.error('[Tour] Failed to start:', error);
               alert(`Tour failed to start: ${error.message}\n\nCheck browser console for details.`);
@@ -3723,12 +3752,15 @@ const ForesightMindMap = () => {
           }
         }}
       />
+      </Suspense>
 
       {/* Tour HUD - Active during tour */}
       {tourActive && (
-        <TourHUD
-          onClose={() => setTourActive(false)}
-        />
+        <Suspense fallback={null}>
+          <TourHUD
+            onClose={() => setTourActive(false)}
+          />
+        </Suspense>
       )}
     </div>
   );
