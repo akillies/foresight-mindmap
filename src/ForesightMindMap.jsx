@@ -1904,6 +1904,41 @@ const ForesightMindMap = () => {
     };
   }, [showRelationships, selectedNode, hoveredNode]);
 
+  // Tour: Auto-open nodes when segment changes
+  useEffect(() => {
+    const handleSegment = ({ segment }) => {
+      if (!segment.nodeId || !sceneRef.current) return;
+
+      // Find the node in the scene by its ID
+      let targetNode = null;
+      sceneRef.current.traverse((obj) => {
+        if (obj.userData && obj.userData.id === segment.nodeId) {
+          targetNode = obj;
+        }
+      });
+
+      if (targetNode) {
+        const isExpanded = expandedNodesRef.current.has(segment.nodeId);
+
+        if (!isExpanded) {
+          // Expand the node
+          handleNodeClick(targetNode);
+        } else {
+          // Already expanded, just set as selected to show info panel
+          setSelectedNode(targetNode.userData);
+        }
+      }
+    };
+
+    // Register tour event listener
+    const unsubscribe = tourManager.on('segment', handleSegment);
+
+    // Cleanup on unmount
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
+  }, [expandedNodes]); // Re-run if expandedNodes changes
+
   return (
     <div style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden' }}>
       {/* SEO H1 Tag - Visually Hidden */}

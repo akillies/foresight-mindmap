@@ -387,10 +387,10 @@ export function TourHUD({ onClose }) {
               {isPaused ? 'RESUME' : 'PAUSE'}
             </button>
 
-            {/* Skip Button */}
+            {/* Next Button */}
             <button
               onClick={() => tourManager.skip()}
-              aria-label="Skip to next segment"
+              aria-label="Go to next segment"
               style={{
                 background: 'transparent',
                 border: `2px solid ${COLORS.secondary}`,
@@ -405,7 +405,7 @@ export function TourHUD({ onClose }) {
                 transition: 'all 0.2s',
               }}
             >
-              SKIP
+              NEXT
             </button>
 
             {/* Exit Button */}

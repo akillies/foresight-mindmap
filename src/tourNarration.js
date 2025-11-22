@@ -41,15 +41,21 @@ What is probable? What is possible? And what is preferable?`,
   // SEGMENT 2: Six Pillars Overview
   '02-six-pillars': `Surrounding the center, you see six pillars.
 
-This framework was developed by Professor Sohail Inayatullah,
-one of the most influential futures scholars of our time.
+This framework was developed by Professor Sohail Inayatullah—
+a Malaysian-Pakistani futurist who holds the UNESCO Chair in Futures Studies.
 
-Each pillar represents a different cognitive mode,
-a different way of engaging with uncertainty.
+Born between cultures, Inayatullah built his career
+bridging Eastern wisdom traditions and Western systems thinking.
+He saw that futures work had become too narrow,
+too dominated by quantitative forecasting.
 
-Together, they form a complete system—
+The Six Pillars emerged from this frustration.
+A complete cognitive architecture for engaging uncertainty—
 from mapping our current assumptions,
 to transforming our preferred futures into reality.
+
+Each pillar represents a different way of knowing,
+a different mode of consciousness.
 
 Let's explore each one.`,
 
@@ -103,19 +109,23 @@ when it was still just a whisper.`,
   // SEGMENT 6: Environmental Scanning
   '06-env-scanning': `Environmental Scanning is systematic vigilance.
 
-Imagine radar sweeping across the landscape of change—
-monitoring technologies, societies, economies, environments.
+Consider Motorola in the nineteen-eighties.
+Their scanning team monitored Japanese electronics firms religiously.
+When Sony and Panasonic shifted strategies,
+Motorola's scanners caught it early. They adapted. They survived.
 
-The scanning process looks for:
-Trends that are accelerating.
-Wild cards that could disrupt everything.
-And most crucially, those weak signals—
-faint indicators of possible futures that haven't crystallized yet.
+But a decade later, those same scanners missed the digital revolution
+happening in Silicon Valley—right in their own backyard.
+They were watching the wrong periphery.
 
-Dator's Law applies here: Any useful statement about the future
-should at first appear ridiculous.
+The scanning process looks for trends, wild cards, and weak signals—
+those faint indicators of possible futures that haven't crystallized yet.
 
-The future always arrives from the periphery.`,
+Jim Dator, the legendary Hawaiian futurist, put it perfectly:
+Any useful statement about the future should at first appear ridiculous.
+
+The future always arrives from the periphery.
+The question is: which periphery are you watching?`,
 
   // SEGMENT 7: Timing
   '07-timing': `The third pillar: Timing the Future.
@@ -153,7 +163,10 @@ To change the future, we must change the story.`,
   // SEGMENT 9: Causal Layered Analysis
   '09-cla': `Causal Layered Analysis—CLA—is Inayatullah's most powerful tool.
 
-It examines any issue at four levels:
+Developed in the nineteen-nineties, it emerged from his frustration
+with futures work that never questioned its own assumptions.
+
+CLA examines any issue at four levels:
 
 The Litany: headlines, surface events, reactive noise.
 
@@ -165,11 +178,14 @@ the paradigms that make certain futures seem rational.
 And finally, Myth and Metaphor: the deep unconscious,
 the archetypes and narratives that shape civilization itself.
 
-Surface solutions address the litany.
-Transformative solutions address the myth.
+Most policy addresses only the litany—treating symptoms.
+Structural reform addresses social causes.
+Transformative change addresses the myth.
 
 CLA doesn't just analyze problems.
-It reveals the epistemological foundations that created them.`,
+It reveals the epistemological foundations that created them.
+And in doing so, it opens pathways to futures
+that were previously unthinkable.`,
 
   // SEGMENT 10: Creating Alternatives
   '10-creating': `The fifth pillar: Creating Alternatives.
@@ -191,24 +207,32 @@ By creating alternative futures, we expand the range
 of what we're prepared to encounter.`,
 
   // SEGMENT 11: Scenario Planning
-  '11-scenarios': `Scenario Planning emerged at RAND in the fifties,
-but was perfected at Royal Dutch Shell in the seventies.
+  '11-scenarios': `Scenario Planning emerged at RAND in the nineteen-fifties,
+where Herman Kahn taught military strategists to "think the unthinkable"—
+nuclear war scenarios that felt obscene to imagine, yet essential to prevent.
 
-When Shell's planners asked "What if oil prices collapse?"
-it seemed absurd. Oil had only ever risen.
+But the method was perfected at Royal Dutch Shell in the seventies
+by Pierre Wack, a Frenchman who'd studied Zen meditation in Japan.
 
-But they built the scenario anyway.
-When the 1973 oil crisis hit, Shell was the only major oil company
-that had mentally rehearsed that future.
+In nineteen seventy-two, Wack's team built scenarios
+exploring what would happen if oil prices collapsed—or exploded.
+Oil was two dollars a barrel. It had only ever risen slowly.
+The scenarios seemed absurd.
 
-They thrived while competitors scrambled.
+But Wack's team imagined ten-dollar oil. Fifteen-dollar oil.
+
+When the Arab oil embargo hit in nineteen seventy-three,
+oil spiked to sixteen dollars overnight.
+
+Every major oil company panicked. Except Shell.
+They'd already mentally rehearsed that future.
+While competitors scrambled, Shell calmly executed plans
+they'd war-gamed months earlier.
 
 Scenarios aren't predictions.
-They're wind tunnels for testing strategies
-against multiple plausible futures.
+They're wind tunnels for testing strategies against multiple plausible futures.
 
-The goal isn't accuracy.
-It's preparedness, resilience, strategic flexibility.`,
+The goal isn't accuracy. It's preparedness.`,
 
   // SEGMENT 12: Transforming
   '12-transforming': `The sixth pillar: Transforming the Future.
@@ -229,21 +253,25 @@ and then building the pathway to reach it.`,
   // SEGMENT 13: Backcasting
   '13-backcasting': `Backcasting inverts the planning process.
 
-Traditional forecasting asks:
-Given where we are, where will we end up?
+Traditional forecasting asks: Given where we are, where will we end up?
 
-Backcasting asks:
-Given where we want to be, how do we get there?
+Backcasting asks: Given where we want to be, how do we get there?
 
-You start with a vision of a preferred future—
-not what's likely, but what's desirable.
+In two thousand and five, Sweden's government convened the Commission
+on Oil Independence. Their question wasn't "When will oil run out?"
+but rather "What does a thriving, fossil-free Sweden look like in twenty fifty?"
 
-Then you work backward, identifying
-the decisions, innovations, and transformations
-required to make that future real.
+They imagined that future in vivid detail.
+Then worked backward, year by year, identifying every decision,
+every infrastructure change, every innovation required
+to make that future real.
 
-It's how Sweden planned to eliminate fossil fuels.
-It's how we designed the pathway to the moon.
+The sociologist Elise Boulding called this "remembering the future"—
+making preferred futures so tangible, so detailed,
+that they feel like memories we're working to fulfill.
+
+It's how Sweden planned their energy transition.
+It's how we designed the pathway to the moon in the nineteen-sixties.
 
 Backcasting is how impossible futures become inevitable ones.`,
 
@@ -252,6 +280,12 @@ Backcasting is how impossible futures become inevitable ones.`,
 
 But this isn't merely an intellectual framework.
 It's a practice, a discipline, a way of engaging with radical uncertainty.
+
+Buckminster Fuller once said:
+"You never change things by fighting the existing reality.
+To change something, build a new model that makes the existing model obsolete."
+
+That's what these methodologies enable.
 
 The future will arrive whether we think about it or not.
 The question is: Will we be conscious participants in its creation,
