@@ -73,25 +73,10 @@ class TourManager {
       // Initialize audio manager
       await audioManager.initialize();
 
-      // Preload audio assets
-      const audioUrls = [];
-
-      // Add music track
-      if (tourData.musicUrl) {
-        audioUrls.push({ url: tourData.musicUrl, type: 'music' });
-      }
-
-      // Add narration files
-      for (const segment of this.segments) {
-        if (segment.narrationUrl) {
-          audioUrls.push({ url: segment.narrationUrl, type: 'narration' });
-        }
-      }
-
-      if (audioUrls.length > 0) {
-        this.emit('loading', { phase: 'audio', total: audioUrls.length });
-        await audioManager.preloadAll(audioUrls);
-      }
+      // SKIP preload for now - using browser TTS fallback
+      // Audio files don't exist yet, will be generated later with ElevenLabs
+      // The AudioManager.playNarration() will gracefully fall back to TTS
+      console.log('[TourManager] Skipping audio preload - using TTS fallback');
 
       this.emit('loaded', { tourId: tourData.id, segmentCount: this.segments.length });
       this.setState(TOUR_STATES.IDLE);
@@ -125,10 +110,9 @@ class TourManager {
 
     this.emit('start', { tourId: this.tourData.id });
 
-    // Start background music
-    if (this.tourData.musicUrl) {
-      await audioManager.playMusic(this.tourData.musicUrl, { loop: true });
-    }
+    // SKIP background music for now - file doesn't exist yet
+    // Will add when Yagya track is available
+    console.log('[TourManager] Skipping background music - file not available yet');
 
     // Begin first segment
     await this.nextSegment();
