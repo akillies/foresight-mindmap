@@ -227,9 +227,9 @@ class AudioManager {
   }
 
   /**
-   * Play narration audio
+   * Play narration audio (file or TTS)
    */
-  async playNarration(url) {
+  async playNarration(url, ttsText = null) {
     if (!this.isInitialized) {
       await this.initialize();
     }
@@ -240,16 +240,82 @@ class AudioManager {
       this.narrationElement.currentTime = 0;
     }
 
-    this.narrationElement.src = url;
-    this.narrationElement.volume = this.isMuted ? 0 : this.narrationVolume;
-
-    try {
-      await this.narrationElement.play();
-      this.currentNarration = url;
-    } catch (error) {
-      this.onError('Failed to play narration:', error);
-      throw error;
+    // Stop any active TTS
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
     }
+
+    // Try audio file first, fall back to TTS if it fails
+    if (url) {
+      this.narrationElement.src = url;
+      this.narrationElement.volume = this.isMuted ? 0 : this.narrationVolume;
+
+      try {
+        await this.narrationElement.play();
+        this.currentNarration = url;
+        return;
+      } catch (error) {
+        console.warn('[AudioManager] Audio file failed, falling back to TTS:', error);
+      }
+    }
+
+    // Fallback to browser TTS if audio fails or no URL provided
+    if (ttsText && window.speechSynthesis) {
+      return this.speakText(ttsText);
+    } else {
+      this.onError('No audio file or TTS text available');
+    }
+  }
+
+  /**
+   * Speak text using browser TTS (fallback)
+   */
+  async speakText(text) {
+    if (!window.speechSynthesis) {
+      console.warn('[AudioManager] Browser TTS not supported');
+      return;
+    }
+
+    return new Promise((resolve, reject) => {
+      const utterance = new SpeechSynthesisUtterance(text);
+
+      // Configure voice (prefer higher quality voices)
+      const voices = window.speechSynthesis.getVoices();
+      const preferredVoice = voices.find(v =>
+        v.name.includes('Daniel') || // UK English
+        v.name.includes('Alex') ||   // macOS enhanced
+        v.name.includes('Google UK') ||
+        v.lang.startsWith('en-')
+      );
+      if (preferredVoice) {
+        utterance.voice = preferredVoice;
+      }
+
+      utterance.rate = 0.9;  // Slightly slower for clarity
+      utterance.pitch = 1.0;
+      utterance.volume = this.isMuted ? 0 : this.narrationVolume;
+
+      utterance.onstart = () => {
+        this._duckMusic();
+        this.currentNarration = 'tts';
+        this.onNarrationStart();
+      };
+
+      utterance.onend = () => {
+        this._unduckMusic();
+        this.currentNarration = null;
+        this.onNarrationEnd();
+        resolve();
+      };
+
+      utterance.onerror = (error) => {
+        this._unduckMusic();
+        this.onError('TTS error:', error);
+        reject(error);
+      };
+
+      window.speechSynthesis.speak(utterance);
+    });
   }
 
   /**

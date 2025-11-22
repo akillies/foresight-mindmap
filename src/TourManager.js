@@ -1,5 +1,6 @@
 import { audioManager } from './AudioManager';
 import TourCameraController from './TourCameraController';
+import { getNarrationScript } from './tourNarration';
 
 /**
  * TourManager - Orchestrates the guided tour experience
@@ -169,8 +170,9 @@ class TourManager {
       // Start narration after camera begins moving (with optional delay)
       const narrationDelay = segment.narrationDelay || 500;
       setTimeout(async () => {
-        if (segment.narrationUrl && this.state === TOUR_STATES.PLAYING) {
-          await audioManager.playNarration(segment.narrationUrl);
+        if (this.state === TOUR_STATES.PLAYING) {
+          const narrationText = getNarrationScript(segment.id);
+          await audioManager.playNarration(segment.narrationUrl, narrationText);
         }
       }, narrationDelay);
 
@@ -184,9 +186,10 @@ class TourManager {
       }
       // Otherwise, handleNarrationEnd will call nextSegment
 
-    } else if (segment.narrationUrl) {
+    } else if (segment.narrationUrl || segment.id) {
       // Just narration, no camera movement
-      await audioManager.playNarration(segment.narrationUrl);
+      const narrationText = getNarrationScript(segment.id);
+      await audioManager.playNarration(segment.narrationUrl, narrationText);
     } else {
       // No camera or narration, just dwell
       const dwellTime = segment.dwellTime || 3000;

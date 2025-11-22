@@ -2074,7 +2074,6 @@ const ForesightMindMap = () => {
               e.target.style.transform = 'scale(1)';
             }}
           >
-            <span style={{ fontSize: '14px' }}>🚀</span>
             GUIDED TOUR
           </button>
 
@@ -2482,7 +2481,7 @@ const ForesightMindMap = () => {
                   e.target.style.background = tourAudioMuted ? `${COLORS.pink}30` : 'transparent';
                 }}
               >
-                {tourAudioMuted ? '🔇 MUTED' : '🔊 MUTE'}
+                {tourAudioMuted ? 'MUTED' : 'MUTE'}
               </button>
             </div>
           </section>

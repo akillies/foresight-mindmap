@@ -168,10 +168,10 @@ export function TourSelectionModal({ isOpen, onClose, onSelectTour }) {
                 fontFamily: 'monospace',
               }}>
                 <span style={{ color: COLORS.secondary }}>
-                  ⏱ {tour.estimatedDuration}
+                  {tour.estimatedDuration}
                 </span>
                 <span style={{ color: COLORS.primary }}>
-                  📍 {tour.segmentCount} stops
+                  {tour.segmentCount} stops
                 </span>
               </div>
             </button>
@@ -384,7 +384,7 @@ export function TourHUD({ onClose }) {
                 transition: 'all 0.2s',
               }}
             >
-              {isPaused ? '▶ RESUME' : '⏸ PAUSE'}
+              {isPaused ? 'RESUME' : 'PAUSE'}
             </button>
 
             {/* Skip Button */}
@@ -405,7 +405,7 @@ export function TourHUD({ onClose }) {
                 transition: 'all 0.2s',
               }}
             >
-              ⏭ SKIP
+              SKIP
             </button>
 
             {/* Exit Button */}
@@ -429,7 +429,7 @@ export function TourHUD({ onClose }) {
                 transition: 'all 0.2s',
               }}
             >
-              ✕ EXIT
+              EXIT
             </button>
           </div>
         </>
