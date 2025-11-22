@@ -279,20 +279,47 @@ class AudioManager {
     return new Promise((resolve, reject) => {
       const utterance = new SpeechSynthesisUtterance(text);
 
-      // Configure voice (prefer higher quality voices)
+      // Configure voice (prefer natural-sounding older male voices)
       const voices = window.speechSynthesis.getVoices();
-      const preferredVoice = voices.find(v =>
-        v.name.includes('Daniel') || // UK English
-        v.name.includes('Alex') ||   // macOS enhanced
-        v.name.includes('Google UK') ||
-        v.lang.startsWith('en-')
-      );
-      if (preferredVoice) {
-        utterance.voice = preferredVoice;
+
+      // Priority order: older male voices with natural sound
+      const voicePreferences = [
+        // macOS high quality voices
+        (v) => v.name === 'Daniel' && v.lang.startsWith('en-GB'), // UK English, mature
+        (v) => v.name === 'Alex' && v.lang.startsWith('en-US'),   // US English, deep
+        (v) => v.name === 'Fred' && v.lang.startsWith('en-US'),   // US English, warm
+
+        // Google natural voices
+        (v) => v.name.includes('Google UK English Male'),
+        (v) => v.name.includes('Google US English Male'),
+
+        // Microsoft natural voices
+        (v) => v.name.includes('Microsoft David'),    // US mature male
+        (v) => v.name.includes('Microsoft Mark'),     // US deep male
+        (v) => v.name.includes('Microsoft George'),   // UK mature
+
+        // Any male English voice
+        (v) => v.lang.startsWith('en') && v.name.toLowerCase().includes('male'),
+
+        // Fallback to any en-US or en-GB
+        (v) => v.lang === 'en-US' || v.lang === 'en-GB',
+      ];
+
+      let selectedVoice = null;
+      for (const preference of voicePreferences) {
+        selectedVoice = voices.find(preference);
+        if (selectedVoice) break;
       }
 
-      utterance.rate = 0.9;  // Slightly slower for clarity
-      utterance.pitch = 1.0;
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+        console.log('[AudioManager] Using voice:', selectedVoice.name, selectedVoice.lang);
+      } else {
+        console.warn('[AudioManager] No preferred voice found, using default');
+      }
+
+      utterance.rate = 0.85;  // Slower, more contemplative (Sagan pace)
+      utterance.pitch = 0.9;  // Slightly lower for mature/authoritative sound
       utterance.volume = this.isMuted ? 0 : this.narrationVolume;
 
       utterance.onstart = () => {

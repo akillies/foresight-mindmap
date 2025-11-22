@@ -3673,9 +3673,18 @@ const ForesightMindMap = () => {
           setShowTourSelection(false);
           const tourData = getTour(tourId);
           if (tourData) {
+            console.log('[Tour] Starting tour:', tourId, tourData);
             setTourActive(true);
-            await tourManager.loadTour(tourData);
-            await tourManager.start();
+            try {
+              await tourManager.loadTour(tourData);
+              console.log('[Tour] Tour loaded successfully');
+              await tourManager.start();
+              console.log('[Tour] Tour started');
+            } catch (error) {
+              console.error('[Tour] Failed to start:', error);
+              alert(`Tour failed to start: ${error.message}\n\nCheck browser console for details.`);
+              setTourActive(false);
+            }
           }
         }}
       />
