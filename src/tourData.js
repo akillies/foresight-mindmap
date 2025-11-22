@@ -43,7 +43,7 @@ export const tours = {
         id: '01-strategic-foresight',
         title: 'Strategic Foresight',
         nodeId: 'strategic-foresight',
-        cameraPosition: { x: 0, y: 30, z: 50 },
+        cameraPosition: { x: 25, y: 20, z: 15 },
         lookAt: { x: 0, y: 0, z: 0 },
         transitionDuration: 3000,
         narrationUrl: '/audio/narration/01-strategic-foresight.mp3',
@@ -57,7 +57,7 @@ export const tours = {
         id: '02-six-pillars',
         title: 'The Six Pillars',
         nodeId: null,
-        cameraPosition: { x: 40, y: 40, z: 60 },
+        cameraPosition: { x: 30, y: 35, z: 50 },
         lookAt: { x: 0, y: 0, z: 0 },
         transitionDuration: 3500,
         narrationUrl: '/audio/narration/02-six-pillars.mp3',
@@ -66,13 +66,13 @@ export const tours = {
         subtitle: 'Sohail Inayatullah\'s framework for organizing foresight methods.'
       },
 
-      // SEGMENT 3: Mapping the Future
+      // SEGMENT 3: Mapping the Future (pillar at x: 25, z: 0)
       {
         id: '03-mapping',
         title: 'Mapping the Future',
         nodeId: 'mapping',
-        cameraPosition: { x: -50, y: 25, z: 20 },
-        lookAt: { x: -35, y: 0, z: 0 },
+        cameraPosition: { x: 45, y: 18, z: 5 },
+        lookAt: { x: 25, y: 0, z: 0 },
         transitionDuration: 3000,
         narrationUrl: '/audio/narration/03-mapping.mp3',
         narrationDelay: 500,
@@ -80,13 +80,13 @@ export const tours = {
         subtitle: 'Understanding our current assumptions about the future.'
       },
 
-      // SEGMENT 4: Futures Triangle (under Mapping)
+      // SEGMENT 4: Futures Triangle (at x: 34.2, z: -3.8 under Mapping)
       {
         id: '04-futures-triangle',
         title: 'Futures Triangle',
         nodeId: 'futures-triangle',
-        cameraPosition: { x: -55, y: 15, z: 15 },
-        lookAt: { x: -45, y: 5, z: -10 },
+        cameraPosition: { x: 52, y: 12, z: -5 },
+        lookAt: { x: 34, y: 0, z: -4 },
         transitionDuration: 2500,
         narrationUrl: '/audio/narration/04-futures-triangle.mp3',
         narrationDelay: 300,
@@ -94,13 +94,13 @@ export const tours = {
         subtitle: 'Balancing the push of the present, pull of the future, and weight of the past.'
       },
 
-      // SEGMENT 5: Anticipating
+      // SEGMENT 5: Anticipating (pillar at x: 12.5, z: 21.7)
       {
         id: '05-anticipating',
         title: 'Anticipating Change',
         nodeId: 'anticipating',
-        cameraPosition: { x: -30, y: 25, z: 45 },
-        lookAt: { x: -20, y: 0, z: 25 },
+        cameraPosition: { x: 25, y: 18, z: 38 },
+        lookAt: { x: 12.5, y: 0, z: 21.7 },
         transitionDuration: 3000,
         narrationUrl: '/audio/narration/05-anticipating.mp3',
         narrationDelay: 500,
@@ -108,13 +108,13 @@ export const tours = {
         subtitle: 'Detecting early signs of emerging change.'
       },
 
-      // SEGMENT 6: Environmental Scanning (key method)
+      // SEGMENT 6: Environmental Scanning (at x: 20.4, z: 27.8 under Anticipating)
       {
         id: '06-env-scanning',
         title: 'Environmental Scanning',
         nodeId: 'env-scanning',
-        cameraPosition: { x: -35, y: 12, z: 55 },
-        lookAt: { x: -25, y: 0, z: 35 },
+        cameraPosition: { x: 32, y: 12, z: 44 },
+        lookAt: { x: 20, y: 0, z: 28 },
         transitionDuration: 2500,
         narrationUrl: '/audio/narration/06-env-scanning.mp3',
         narrationDelay: 300,
@@ -122,13 +122,13 @@ export const tours = {
         subtitle: 'Systematic monitoring of the external environment.'
       },
 
-      // SEGMENT 7: Timing
+      // SEGMENT 7: Timing (pillar at x: -12.5, z: 21.7)
       {
         id: '07-timing',
         title: 'Timing the Future',
         nodeId: 'timing',
-        cameraPosition: { x: 10, y: 25, z: 55 },
-        lookAt: { x: 5, y: 0, z: 35 },
+        cameraPosition: { x: -20, y: 18, z: 38 },
+        lookAt: { x: -12.5, y: 0, z: 21.7 },
         transitionDuration: 3000,
         narrationUrl: '/audio/narration/07-timing.mp3',
         narrationDelay: 500,
@@ -136,13 +136,13 @@ export const tours = {
         subtitle: 'Understanding temporal patterns and cycles.'
       },
 
-      // SEGMENT 8: Deepening
+      // SEGMENT 8: Deepening (pillar at x: -25, z: 0)
       {
         id: '08-deepening',
         title: 'Deepening Understanding',
         nodeId: 'deepening',
-        cameraPosition: { x: 50, y: 25, z: 30 },
-        lookAt: { x: 35, y: 0, z: 15 },
+        cameraPosition: { x: -45, y: 18, z: -5 },
+        lookAt: { x: -25, y: 0, z: 0 },
         transitionDuration: 3000,
         narrationUrl: '/audio/narration/08-deepening.mp3',
         narrationDelay: 500,
@@ -150,13 +150,13 @@ export const tours = {
         subtitle: 'Examining underlying worldviews and assumptions.'
       },
 
-      // SEGMENT 9: Causal Layered Analysis (key method)
+      // SEGMENT 9: Causal Layered Analysis (at x: -34.2, z: 3.8 under Deepening)
       {
         id: '09-cla',
         title: 'Causal Layered Analysis',
         nodeId: 'cla',
-        cameraPosition: { x: 55, y: 12, z: 20 },
-        lookAt: { x: 45, y: 0, z: 10 },
+        cameraPosition: { x: -52, y: 12, z: 6 },
+        lookAt: { x: -34, y: 0, z: 4 },
         transitionDuration: 2500,
         narrationUrl: '/audio/narration/09-cla.mp3',
         narrationDelay: 300,
@@ -164,13 +164,13 @@ export const tours = {
         subtitle: 'Four layers: litany, social causes, worldview, myth.'
       },
 
-      // SEGMENT 10: Creating Alternatives
+      // SEGMENT 10: Creating Alternatives (pillar at x: -12.5, z: -21.7)
       {
         id: '10-creating',
         title: 'Creating Alternatives',
         nodeId: 'creating',
-        cameraPosition: { x: 45, y: 25, z: -25 },
-        lookAt: { x: 30, y: 0, z: -15 },
+        cameraPosition: { x: -20, y: 18, z: -38 },
+        lookAt: { x: -12.5, y: 0, z: -21.7 },
         transitionDuration: 3000,
         narrationUrl: '/audio/narration/10-creating.mp3',
         narrationDelay: 500,
@@ -178,13 +178,13 @@ export const tours = {
         subtitle: 'Generating diverse possible futures.'
       },
 
-      // SEGMENT 11: Scenario Planning (flagship method)
+      // SEGMENT 11: Scenario Planning (at x: -20.4, z: -27.8 under Creating)
       {
         id: '11-scenarios',
         title: 'Scenario Planning',
         nodeId: 'scenarios',
-        cameraPosition: { x: 50, y: 12, z: -35 },
-        lookAt: { x: 40, y: 0, z: -25 },
+        cameraPosition: { x: -32, y: 12, z: -44 },
+        lookAt: { x: -20, y: 0, z: -28 },
         transitionDuration: 2500,
         narrationUrl: '/audio/narration/11-scenarios.mp3',
         narrationDelay: 300,
@@ -192,13 +192,13 @@ export const tours = {
         subtitle: 'Exploring multiple plausible futures through narrative.'
       },
 
-      // SEGMENT 12: Transforming
+      // SEGMENT 12: Transforming (pillar at x: 12.5, z: -21.7)
       {
         id: '12-transforming',
         title: 'Transforming the Future',
         nodeId: 'transforming',
-        cameraPosition: { x: -10, y: 25, z: -45 },
-        lookAt: { x: -5, y: 0, z: -30 },
+        cameraPosition: { x: 25, y: 18, z: -38 },
+        lookAt: { x: 12.5, y: 0, z: -21.7 },
         transitionDuration: 3000,
         narrationUrl: '/audio/narration/12-transforming.mp3',
         narrationDelay: 500,
@@ -206,13 +206,13 @@ export const tours = {
         subtitle: 'Creating and achieving preferred futures.'
       },
 
-      // SEGMENT 13: Backcasting (key method)
+      // SEGMENT 13: Backcasting (at x: 13.8, z: -31.6 under Transforming)
       {
         id: '13-backcasting',
         title: 'Backcasting',
         nodeId: 'backcasting',
-        cameraPosition: { x: -15, y: 12, z: -55 },
-        lookAt: { x: -10, y: 0, z: -40 },
+        cameraPosition: { x: 24, y: 12, z: -48 },
+        lookAt: { x: 14, y: 0, z: -32 },
         transitionDuration: 2500,
         narrationUrl: '/audio/narration/13-backcasting.mp3',
         narrationDelay: 300,
@@ -225,7 +225,7 @@ export const tours = {
         id: '14-closing',
         title: 'The Journey Continues',
         nodeId: null,
-        cameraPosition: { x: 20, y: 60, z: 80 },
+        cameraPosition: { x: -20, y: 60, z: 80 },
         lookAt: { x: 0, y: 0, z: 0 },
         transitionDuration: 4000,
         narrationUrl: '/audio/narration/14-closing.mp3',
