@@ -90,7 +90,11 @@ class AudioManager {
     const audio = new Audio();
     audio.id = `audio-manager-${id}`;
     audio.preload = 'auto';
-    audio.crossOrigin = 'anonymous';
+
+    // Skip crossOrigin for now - not needed for TTS and can cause errors in Safari
+    // Will re-enable when loading actual audio files from server
+    // audio.crossOrigin = 'anonymous';
+
     return audio;
   }
 
@@ -105,7 +109,8 @@ class AudioManager {
     return new Promise((resolve, reject) => {
       const audio = new Audio();
       audio.preload = 'auto';
-      audio.crossOrigin = 'anonymous';
+      // Skip crossOrigin - not needed for TTS, can cause Safari errors
+      // audio.crossOrigin = 'anonymous';
 
       audio.addEventListener('canplaythrough', () => {
         this.preloadedAudio.set(url, { url, type, duration: audio.duration });
