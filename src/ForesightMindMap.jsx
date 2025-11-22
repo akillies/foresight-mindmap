@@ -2001,23 +2001,24 @@ const ForesightMindMap = () => {
         aria-label="Search foresight methodologies and content"
         style={{
           position: 'absolute',
-          top: '20px',
+          top: window.innerWidth <= 768 ? '90px' : '20px',  // Move down on mobile
           left: '50%',
           transform: 'translateX(-50%)',
-          zIndex: 20,  // Higher than control panel (10) to prevent overlap on mobile
+          zIndex: 20,
           display: 'flex',
           alignItems: 'center',
           gap: '0',
+          maxWidth: '95vw',  // Prevent overflow on small screens
         }}
       >
         <div style={{
           background: COLORS.secondary,
-          padding: '14px 20px',
+          padding: window.innerWidth <= 768 ? '10px 12px' : '14px 20px',
           borderRadius: '20px 0 0 20px',
-          fontSize: '14px',
+          fontSize: window.innerWidth <= 768 ? '11px' : '14px',
           fontWeight: '700',
           color: '#000000',
-          letterSpacing: '2px',
+          letterSpacing: window.innerWidth <= 768 ? '1px' : '2px',
           fontFamily: 'monospace',
         }}
         aria-hidden="true"
@@ -2026,21 +2027,21 @@ const ForesightMindMap = () => {
         </div>
         <input
           type="search"
-          placeholder="ENTER QUERY..."
+          placeholder={window.innerWidth <= 768 ? 'QUERY...' : 'ENTER QUERY...'}
           value={searchInput}
           onChange={(e) => handleSearchInput(e.target.value)}
           aria-label="Search for Strategic Foresight pillars, methodologies, and educational resources"
           aria-describedby="search-results-status"
           style={{
-            padding: '14px 24px',
-            fontSize: '14px',
+            padding: window.innerWidth <= 768 ? '10px 16px' : '14px 24px',
+            fontSize: window.innerWidth <= 768 ? '12px' : '14px',
             fontWeight: '600',
             border: `3px solid ${COLORS.primary}`,
             borderLeft: 'none',
             borderRadius: '0 20px 20px 0',
             background: '#000000',
             color: COLORS.secondary,
-            width: '300px',
+            width: window.innerWidth <= 768 ? '180px' : window.innerWidth <= 1024 ? '220px' : '300px',
             outline: 'none',
             fontFamily: 'monospace',
             letterSpacing: '1px',
@@ -2140,38 +2141,6 @@ const ForesightMindMap = () => {
             }}
           >
             GUIDED TOUR
-          </button>
-
-          {/* About Button */}
-          <button
-            onClick={() => setShowAbout(true)}
-            aria-label="About this application"
-            style={{
-              width: '100%',
-              background: `linear-gradient(135deg, ${COLORS.primary}15 0%, ${COLORS.accent}15 100%)`,
-              border: `1px solid ${COLORS.primary}80`,
-              color: COLORS.primary,
-              padding: '8px',
-              borderRadius: '8px',
-              fontSize: '9px',
-              fontWeight: '600',
-              letterSpacing: '1.5px',
-              cursor: 'pointer',
-              fontFamily: 'monospace',
-              transition: 'all 0.3s',
-              marginBottom: '15px',
-              opacity: 0.7,
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.opacity = '1';
-              e.target.style.background = `linear-gradient(135deg, ${COLORS.primary}30 0%, ${COLORS.accent}30 100%)`;
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.opacity = '0.7';
-              e.target.style.background = `linear-gradient(135deg, ${COLORS.primary}15 0%, ${COLORS.accent}15 100%)`;
-            }}
-          >
-            ABOUT v0.1
           </button>
 
           {/* Status Bars */}
@@ -2610,6 +2579,40 @@ const ForesightMindMap = () => {
               SYSTEM ONLINE
             </span>
           </div>
+
+          {/* About Button - Bottom of panel */}
+          <button
+            onClick={() => setShowAbout(true)}
+            aria-label="About this application"
+            style={{
+              width: '100%',
+              background: `linear-gradient(135deg, ${COLORS.primary}15 0%, ${COLORS.accent}15 100%)`,
+              border: `1px solid ${COLORS.primary}60`,
+              color: COLORS.primary,
+              padding: '8px',
+              borderRadius: '8px',
+              fontSize: '9px',
+              fontWeight: '600',
+              letterSpacing: '1.5px',
+              cursor: 'pointer',
+              fontFamily: 'monospace',
+              transition: 'all 0.3s',
+              marginTop: '15px',
+              opacity: 0.6,
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.opacity = '1';
+              e.target.style.background = `linear-gradient(135deg, ${COLORS.primary}30 0%, ${COLORS.accent}30 100%)`;
+              e.target.style.borderColor = COLORS.primary;
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.opacity = '0.6';
+              e.target.style.background = `linear-gradient(135deg, ${COLORS.primary}15 0%, ${COLORS.accent}15 100%)`;
+              e.target.style.borderColor = `${COLORS.primary}60`;
+            }}
+          >
+            ABOUT v0.1
+          </button>
         </div>}
       </aside>
 
