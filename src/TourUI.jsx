@@ -212,7 +212,8 @@ export function TourHUD({ onClose }) {
 
   useEffect(() => {
     // Subscribe to tour events
-    const unsubState = tourManager.on('stateChange', ({ to }) => {
+    const unsubState = tourManager.on('stateChange', ({ to, from }) => {
+      console.log('[TourHUD] State change:', from, '→', to);
       setState(to);
     });
 
@@ -229,7 +230,9 @@ export function TourHUD({ onClose }) {
     });
 
     // Initial state
-    setState(tourManager.getState());
+    const initialState = tourManager.getState();
+    console.log('[TourHUD] Initial state:', initialState);
+    setState(initialState);
     const currentSeg = tourManager.getCurrentSegment();
     if (currentSeg) {
       setSegment(currentSeg);
@@ -243,8 +246,11 @@ export function TourHUD({ onClose }) {
     };
   }, [onClose]);
 
-  // Don't show HUD if not in tour
-  if (state === TOUR_STATES.IDLE) return null;
+  // Don't show HUD if not in tour (but keep visible during loading)
+  if (state === TOUR_STATES.IDLE) {
+    console.log('[TourHUD] Hiding HUD - state is IDLE');
+    return null;
+  }
 
   const isPaused = state === TOUR_STATES.PAUSED;
   const isComplete = state === TOUR_STATES.COMPLETED;
