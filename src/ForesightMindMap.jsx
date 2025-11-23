@@ -333,6 +333,18 @@ const ForesightMindMap = () => {
         }
 
         const ctx = audioContextRef.current;
+
+        // Resume AudioContext if suspended (required for mobile browsers like iOS Safari)
+        if (ctx.state === 'suspended') {
+          try {
+            await ctx.resume();
+            console.log('[Audio] AudioContext resumed for mobile');
+          } catch (error) {
+            console.error('[Audio] Failed to resume AudioContext:', error);
+            return; // Don't try to play audio if resume failed
+          }
+        }
+
         const preset = AUDIO_PRESETS[audioPreset];
 
         // Stop any existing audio

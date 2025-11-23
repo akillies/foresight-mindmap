@@ -281,11 +281,11 @@ class AudioManager {
       return;
     }
 
+    // Wait for voices to load (required for iOS Safari)
+    const voices = await this._getVoices();
+
     return new Promise((resolve, reject) => {
       const utterance = new SpeechSynthesisUtterance(text);
-
-      // Configure voice (prefer natural-sounding older male voices)
-      const voices = window.speechSynthesis.getVoices();
 
       // Priority order: older male voices with natural sound
       const voicePreferences = [
@@ -593,6 +593,38 @@ class AudioManager {
       narrationDuration: this.getNarrationDuration(),
       preloadedCount: this.preloadedAudio.size
     };
+  }
+
+  /**
+   * Get available voices, waiting for them to load on iOS Safari
+   */
+  async _getVoices() {
+    return new Promise((resolve) => {
+      let voices = window.speechSynthesis.getVoices();
+
+      // If voices are already loaded, return immediately
+      if (voices.length > 0) {
+        resolve(voices);
+        return;
+      }
+
+      // Wait for voiceschanged event (required for iOS Safari)
+      const voicesChangedHandler = () => {
+        voices = window.speechSynthesis.getVoices();
+        if (voices.length > 0) {
+          window.speechSynthesis.removeEventListener('voiceschanged', voicesChangedHandler);
+          resolve(voices);
+        }
+      };
+
+      window.speechSynthesis.addEventListener('voiceschanged', voicesChangedHandler);
+
+      // Timeout fallback after 2 seconds
+      setTimeout(() => {
+        window.speechSynthesis.removeEventListener('voiceschanged', voicesChangedHandler);
+        resolve(window.speechSynthesis.getVoices()); // Return whatever is available
+      }, 2000);
+    });
   }
 
   /**
