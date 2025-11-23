@@ -1996,7 +1996,8 @@ const ForesightMindMap = () => {
         }}
       />
 
-      {/* LCARS Search Box */}
+      {/* LCARS Search Box - TEMPORARILY DISABLED for v0.1 */}
+      {/* TODO: Re-enable after fixing mobile UX and type safety issues
       <nav
         role="search"
         aria-label="Search foresight methodologies and content"
@@ -2049,7 +2050,6 @@ const ForesightMindMap = () => {
             textTransform: 'uppercase',
           }}
         />
-        {/* Screen reader announcement for search results */}
         <div
           id="search-results-status"
           role="status"
@@ -2060,6 +2060,7 @@ const ForesightMindMap = () => {
           {searchQuery && `Filtering results for: ${searchQuery}`}
         </div>
       </nav>
+      */}
 
       {/* LCARS Control Panel */}
       <aside
