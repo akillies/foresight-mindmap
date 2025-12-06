@@ -13,6 +13,7 @@ import { getTour } from './tourData';
 const TimelineView = lazy(() => import('./TimelineView'));
 const TourSelectionModal = lazy(() => import('./TourUI').then(m => ({ default: m.TourSelectionModal })));
 const TourHUD = lazy(() => import('./TourUI').then(m => ({ default: m.TourHUD })));
+const FeaturedContentDashboard = lazy(() => import('./FeaturedContentDashboard'));
 
 // Error Boundary to catch React render crashes
 class ErrorBoundary extends Component {
@@ -3995,6 +3996,16 @@ const ForesightMindMap = () => {
         <Suspense fallback={null}>
           <TourHUD
             onClose={() => setTourActive(false)}
+          />
+        </Suspense>
+      )}
+
+      {/* Featured Content Dashboard - Showcases rich media library */}
+      {!tourActive && (
+        <Suspense fallback={null}>
+          <FeaturedContentDashboard
+            onMediaClick={(media) => setSelectedMedia(media)}
+            isVisible={!selectedMedia}
           />
         </Suspense>
       )}
