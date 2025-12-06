@@ -15,6 +15,7 @@ const TourSelectionModal = lazy(() => import('./TourUI').then(m => ({ default: m
 const TourHUD = lazy(() => import('./TourUI').then(m => ({ default: m.TourHUD })));
 const FeaturedContentDashboard = lazy(() => import('./FeaturedContentDashboard'));
 const EnhancedInfoPanel = lazy(() => import('./EnhancedInfoPanel'));
+const GlobalMediaBrowser = lazy(() => import('./GlobalMediaBrowser'));
 
 // Error Boundary to catch React render crashes
 class ErrorBoundary extends Component {
@@ -138,6 +139,7 @@ const ForesightMindMap = () => {
   const [showTourSelection, setShowTourSelection] = useState(false);
   const [tourActive, setTourActive] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const [showMediaBrowser, setShowMediaBrowser] = useState(false);
   const controlsRef = useRef(null);
 
   // Mobile responsiveness
@@ -2214,6 +2216,41 @@ const ForesightMindMap = () => {
             </div>
           </div>
 
+          {/* Media Browser Button */}
+          <button
+            onClick={() => setShowMediaBrowser(true)}
+            aria-label="Browse all media resources in the knowledge base"
+            style={{
+              width: '100%',
+              background: `linear-gradient(135deg, ${COLORS.secondary}20 0%, ${COLORS.accent}20 100%)`,
+              border: `2px solid ${COLORS.accent}`,
+              color: COLORS.accent,
+              padding: '12px',
+              borderRadius: '12px',
+              fontSize: '11px',
+              fontWeight: '700',
+              letterSpacing: '2px',
+              cursor: 'pointer',
+              fontFamily: 'monospace',
+              transition: 'all 0.3s',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              marginBottom: '15px',
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = `linear-gradient(135deg, ${COLORS.secondary}40 0%, ${COLORS.accent}40 100%)`;
+              e.target.style.transform = 'scale(1.02)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = `linear-gradient(135deg, ${COLORS.secondary}20 0%, ${COLORS.accent}20 100%)`;
+              e.target.style.transform = 'scale(1)';
+            }}
+          >
+            <span>🎬</span> BROWSE MEDIA
+          </button>
+
           {/* Timeline Toggle Button */}
           <button
             onClick={() => setTimelineVisible(!timelineVisible)}
@@ -3378,6 +3415,15 @@ const ForesightMindMap = () => {
         </Suspense>
       )}
     </div>
+
+      {/* Global Media Browser - Browse all 142+ media items */}
+      <Suspense fallback={null}>
+        <GlobalMediaBrowser
+          isOpen={showMediaBrowser}
+          onClose={() => setShowMediaBrowser(false)}
+          onMediaClick={(media) => setSelectedMedia(media)}
+        />
+      </Suspense>
   );
 };
 
