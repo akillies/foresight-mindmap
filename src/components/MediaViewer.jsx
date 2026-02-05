@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 
 // Lazy load embed components for code splitting
-const YouTubeEmbed = lazy(() => import('./embeds/YouTubeEmbed'));
+const VideoEmbed = lazy(() => import('./embeds/VideoEmbed'));
 const PodcastEmbed = lazy(() => import('./embeds/PodcastEmbed'));
 const ArticleEmbed = lazy(() => import('./embeds/ArticleEmbed'));
 const ImageViewer = lazy(() => import('./embeds/ImageViewer'));
@@ -35,10 +35,11 @@ const MediaViewer = ({ media, onClose }) => {
     switch (media.type) {
       case 'video':
         return (
-          <YouTubeEmbed
+          <VideoEmbed
             url={media.url}
             sourceUrl={media.sourceUrl}
             title={media.title}
+            description={media.description}
             source={media.source}
             year={media.year}
           />
