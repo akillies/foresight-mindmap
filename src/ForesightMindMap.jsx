@@ -16,6 +16,8 @@ const TourHUD = lazy(() => import('./TourUI').then(m => ({ default: m.TourHUD })
 const FeaturedContentDashboard = lazy(() => import('./FeaturedContentDashboard'));
 const EnhancedInfoPanel = lazy(() => import('./EnhancedInfoPanel'));
 const GlobalMediaBrowser = lazy(() => import('./GlobalMediaBrowser'));
+const DiagramGallery = lazy(() => import('./DiagramGallery'));
+const WelcomeModal = lazy(() => import('./WelcomeModal'));
 
 // Error Boundary to catch React render crashes
 class ErrorBoundary extends Component {
@@ -140,6 +142,7 @@ const ForesightMindMap = () => {
   const [tourActive, setTourActive] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showMediaBrowser, setShowMediaBrowser] = useState(false);
+  const [showDiagramGallery, setShowDiagramGallery] = useState(false);
   const controlsRef = useRef(null);
 
   // Mobile responsiveness
@@ -2251,6 +2254,41 @@ const ForesightMindMap = () => {
             <span>🎬</span> BROWSE MEDIA
           </button>
 
+          {/* Diagram Gallery Button */}
+          <button
+            onClick={() => setShowDiagramGallery(true)}
+            aria-label="View all framework diagrams in a gallery"
+            style={{
+              width: '100%',
+              background: `linear-gradient(135deg, ${COLORS.primary}20 0%, ${COLORS.secondary}20 100%)`,
+              border: `2px solid ${COLORS.primary}`,
+              color: COLORS.primary,
+              padding: '12px',
+              borderRadius: '12px',
+              fontSize: '11px',
+              fontWeight: '700',
+              letterSpacing: '2px',
+              cursor: 'pointer',
+              fontFamily: 'monospace',
+              transition: 'all 0.3s',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              marginBottom: '15px',
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = `linear-gradient(135deg, ${COLORS.primary}40 0%, ${COLORS.secondary}40 100%)`;
+              e.target.style.transform = 'scale(1.02)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = `linear-gradient(135deg, ${COLORS.primary}20 0%, ${COLORS.secondary}20 100%)`;
+              e.target.style.transform = 'scale(1)';
+            }}
+          >
+            <span>📊</span> DIAGRAM GALLERY
+          </button>
+
           {/* Timeline Toggle Button */}
           <button
             onClick={() => setTimelineVisible(!timelineVisible)}
@@ -3414,7 +3452,6 @@ const ForesightMindMap = () => {
           />
         </Suspense>
       )}
-    </div>
 
       {/* Global Media Browser - Browse all 142+ media items */}
       <Suspense fallback={null}>
@@ -3424,6 +3461,26 @@ const ForesightMindMap = () => {
           onMediaClick={(media) => setSelectedMedia(media)}
         />
       </Suspense>
+
+      {/* Diagram Gallery - Dedicated viewer for framework diagrams */}
+      <Suspense fallback={null}>
+        <DiagramGallery
+          isOpen={showDiagramGallery}
+          onClose={() => setShowDiagramGallery(false)}
+          onDiagramClick={(diagram) => setSelectedMedia(diagram)}
+        />
+      </Suspense>
+
+      {/* Welcome Modal - First-time user onboarding */}
+      {!tourActive && (
+        <Suspense fallback={null}>
+          <WelcomeModal
+            onStartTour={() => setShowTourSelection(true)}
+            onExplore={() => {/* Just close the modal */}}
+          />
+        </Suspense>
+      )}
+    </div>
   );
 };
 

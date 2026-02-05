@@ -22,10 +22,11 @@ const mindMapData = {
     media: [
       {
         type: 'video',
-        title: 'Introduction to Futures Studies',
-        url: 'https://www.youtube.com/watch?v=VB8XP1x0_Io',
-        description: 'Comprehensive introduction to the field of futures thinking',
-        year: 2014
+        title: 'Arthur C. Clarke Predicts the Future (1964)',
+        url: 'https://www.youtube.com/watch?v=YwELr8ir9qM',
+        description: 'BBC Horizon interview where Clarke accurately predicts the internet, remote work, and global communication - a masterclass in futures thinking',
+        year: 1964,
+        source: 'BBC Archive'
       },
       {
         type: 'image',
@@ -45,6 +46,56 @@ const mindMapData = {
         title: 'SWOT Analysis Framework',
         url: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/SWOT_en.svg',
         description: 'Foundation matrix for strategic analysis mapping Strengths, Weaknesses, Opportunities, and Threats. This classic 2x2 framework helps organizations assess internal capabilities against external environment, forming the basis for strategic planning and foresight work.'
+      },
+      {
+        type: 'podcast',
+        title: 'Long Now: Seminars About Long-term Thinking',
+        url: 'https://longnow.org/talks/',
+        description: 'Monthly talks from leading thinkers on civilization-scale ideas, hosted by Stewart Brand since 2003. Over 400 episodes featuring futurists, scientists, and visionaries.',
+        source: 'Long Now Foundation'
+      },
+      {
+        type: 'podcast',
+        title: 'FuturePod',
+        url: 'https://www.futurepod.org/',
+        description: 'Interviews with founders and emerging leaders in futures and foresight, sharing tools and experiences from across the globe.',
+        source: 'FuturePod'
+      },
+      {
+        type: 'podcast',
+        title: 'Foresight Institute Radio',
+        url: 'https://podcasts.apple.com/us/podcast/foresight-institute-radio/id1573395849',
+        description: 'Cutting-edge talks on advanced AI, nanotech, longevity biotech, and emerging technologies toward beneficial futures.',
+        source: 'Foresight Institute'
+      },
+      {
+        type: 'video',
+        title: 'TED: 3 Ways to Plan for the (Very) Long Term',
+        url: 'https://www.ted.com/talks/ari_wallach_3_ways_to_plan_for_the_very_long_term',
+        description: 'Ari Wallach shares three tactics for thinking beyond short-term: transgenerational thinking, futures thinking, and telos thinking. Over 2.5 million views.',
+        year: 2016,
+        source: 'TEDxMidAtlantic'
+      },
+      {
+        type: 'podcast',
+        title: 'Gartner Futures Lab',
+        url: 'https://open.spotify.com/show/7L4pKlK6g9b7cNt8umUesJ',
+        description: 'Deep dives with professional futurists on trendspotting, design fiction, and strategic foresight for business. Features Peter Schwartz and other pioneers.',
+        source: 'Gartner Research'
+      },
+      {
+        type: 'podcast',
+        title: 'IFTF For Future Reference',
+        url: 'https://www.iftf.org/forfuturereference',
+        description: 'Institute for the Future researchers interview scientists, engineers, and thought leaders shaping tomorrow.',
+        source: 'Institute for the Future'
+      },
+      {
+        type: 'video',
+        title: 'PBS: A Brief History of the Future',
+        url: 'https://www.pbs.org/show/a-brief-history-of-the-future/',
+        description: 'Six-part documentary hosted by futurist Ari Wallach exploring how we can reimagine our futures.',
+        source: 'PBS'
       }
     ]
   },
@@ -339,17 +390,18 @@ const mindMapData = {
       },
       media: [
         {
+          type: 'video',
+          title: 'TEDx Noosa: Sohail Inayatullah on Futures Methods',
+          url: 'https://www.metafuture.org/video/tedxnoosa-2013-sohail-inayatullah-causal-layered-analysis/',
+          description: 'Creator of the Futures Triangle and CLA explains his methodologies for a general audience - how to uncover the hidden layers that drive our thoughts, beliefs and actions',
+          year: 2013,
+          source: 'TEDx'
+        },
+        {
           type: 'image',
           title: 'The Futures Triangle Framework',
           url: '/diagrams/futures-triangle.svg',
           description: 'Educational diagram showing the three forces shaping futures (Sohail Inayatullah, 2008): Pull of the Future (aspirations, visions, hopes), Push of the Present (current trends, drivers, momentum), and Weight of the Past (inertia, barriers, resistance). The plausible futures space emerges from the dynamic tension between these forces. Includes practical examples for each force.'
-        },
-        {
-          type: 'video',
-          title: 'Sohail Inayatullah Explains the Futures Triangle',
-          url: 'https://www.youtube.com/watch?v=2nI8OLJjMCw',
-          description: 'Creator of the method explains its application',
-          year: 2012
         },
         {
           type: 'image',
@@ -542,23 +594,16 @@ const mindMapData = {
           description: 'Comprehensive guide to stakeholder mapping techniques used in foresight work, covering methods for identifying stakeholders, assessing their future visions, analyzing power dynamics, and engaging diverse voices in participatory futures processes.'
         },
         {
-          type: 'document',
-          title: 'Strategic Management: A Stakeholder Approach',
-          url: 'https://www.researchgate.net/publication/228320877_A_Stakeholder_Approach_to_Strategic_Management',
-          description: 'R. Edward Freeman\'s foundational 1984 work establishing stakeholder theory',
-          year: 1984
-        },
-        {
-          type: 'document',
-          title: 'Stakeholder Salience Model (Mitchell, Agle, Wood)',
-          url: 'https://www.jstor.org/stable/259247',
-          description: 'Theory of stakeholder identification based on power, legitimacy, and urgency attributes',
-          year: 1997
+          type: 'article',
+          title: 'Stakeholder Salience Model',
+          url: 'https://en.wikipedia.org/wiki/Stakeholder_theory#Stakeholder_salience',
+          description: 'Mitchell, Agle & Wood (1997) theory of stakeholder identification based on power, legitimacy, and urgency attributes',
+          source: 'Wikipedia'
         },
         {
           type: 'document',
           title: 'Stakeholder Mapping in Foresight Processes',
-          url: 'https://coe.gsa.gov/docs/StrategicForesight101.pdf',
+          url: '/documents/strategic-foresight-101.pdf',
           description: 'GSA guide to strategic foresight methodologies including stakeholder engagement frameworks'
         }
       ]
@@ -739,13 +784,6 @@ const mindMapData = {
           description: 'Comprehensive environmental scanning framework showing six domains: Political (government policy, regulation, geopolitics), Economic (growth, markets, trade), Social (demographics, culture, values), Technological (innovation, R&D, emerging tech), Legal (legislation, compliance, rights), and Environmental (climate, sustainability, resources). Each domain feeds intelligence about the organization or issue under analysis.'
         },
         {
-          type: 'video',
-          title: 'How to Scan for Emerging Issues',
-          url: 'https://www.youtube.com/watch?v=kpJNPWQ_Gno',
-          description: 'Practical guide to environmental scanning techniques',
-          year: 2015
-        },
-        {
           type: 'image',
           title: 'Three Horizons Framework',
           url: '/diagrams/three-horizons.svg',
@@ -769,6 +807,20 @@ const mindMapData = {
           title: 'Porter\'s Five Forces Model',
           url: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Competitiveforces.svg',
           description: 'Michael Porter\'s framework for analyzing industry competitive forces: rivalry, suppliers, buyers, substitutes, new entrants'
+        },
+        {
+          type: 'article',
+          title: 'Horizon Scanning Frameworks (PEST to STEEPS)',
+          url: 'https://foresightguide.com/horizon-scanning-frameworks/',
+          description: 'Comprehensive guide to scanning frameworks evolution from PEST to STEEP to STEEPS, with practical application guidance',
+          source: 'Foresight Guide'
+        },
+        {
+          type: 'article',
+          title: 'ITONICS Environmental Scanning Guide',
+          url: 'https://www.itonics-innovation.com/blog/environmental-scanning',
+          description: 'Practical guide to environmental scanning for innovation with 5 principles for turning signals into strategic bets',
+          source: 'ITONICS Innovation'
         }
       ]
     },
@@ -955,13 +1007,6 @@ const mindMapData = {
           description: 'S-curve showing how signals evolve from noise to mainstream trends over time. Highlights the strategic window (foresight zone) when signals are detectable but not yet widely recognized, offering maximum leverage for early action before competitive advantage is lost.'
         },
         {
-          type: 'video',
-          title: 'Igor Ansoff on Strategic Management',
-          url: 'https://www.youtube.com/watch?v=bNlcJo-u3wI',
-          description: 'Ansoff discussing strategic surprise and weak signals',
-          year: 1976
-        },
-        {
           type: 'article',
           title: 'Weak Signals and Strategic Intelligence',
           url: 'https://en.wikipedia.org/wiki/Strategic_foresight',
@@ -1118,13 +1163,6 @@ const mindMapData = {
           description: 'Issue-attention cycle showing five stages: Pre-Problem (unrecognized), Alarmed Discovery (catalyzed by dramatic event), Peak Attention (intense debate), Declining Interest (fatigue or complexity), and Post-Problem (institutionalized or forgotten). Highlights foresight zone (act during pre-problem/alarmed discovery) vs. crisis zone (peak attention with constrained options).'
         },
         {
-          type: 'video',
-          title: 'Tracking Emerging Issues',
-          url: 'https://www.youtube.com/watch?v=mI3lqxOgx2E',
-          description: 'Framework for emerging issues analysis',
-          year: 2013
-        },
-        {
           type: 'image',
           title: 'Issue Lifecycle Diagram',
           url: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Technology-Adoption-Lifecycle.png',
@@ -1135,6 +1173,13 @@ const mindMapData = {
           title: 'Diffusion of Innovation (Rogers)',
           url: 'https://upload.wikimedia.org/wikipedia/commons/1/11/Diffusion_of_ideas.svg',
           description: 'Everett Rogers\' bell curve showing how innovations spread through society: innovators, early adopters, early/late majority, laggards'
+        },
+        {
+          type: 'image',
+          title: 'Futures Wheel Diagram',
+          url: 'https://commons.wikimedia.org/wiki/File:Futures_wheel_01.svg',
+          description: 'Jerome Glenn\'s Futures Wheel (1971) - a brainstorming tool for exploring the ripple effects of an emerging issue by mapping primary, secondary, and tertiary consequences',
+          source: 'Wikimedia Commons'
         }
       ]
     },
@@ -1296,13 +1341,6 @@ const mindMapData = {
       },
       media: [
         {
-          type: 'video',
-          title: 'Fernand Braudel on the Longue Durée',
-          url: 'https://www.youtube.com/watch?v=pZlUyRMpfLQ',
-          description: 'Braudel explaining his historical framework',
-          year: 1979
-        },
-        {
           type: 'image',
           title: 'Braudel\'s Three Time Scales',
           url: 'https://upload.wikimedia.org/wikipedia/commons/a/a1/Braudel_time_scales.png',
@@ -1326,6 +1364,20 @@ const mindMapData = {
           title: 'Kondratiev Wave Timeline',
           url: 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Kondratieff_Wave.svg',
           description: 'Historical timeline showing five Kondratiev waves (40-60 year cycles) from 1780s to present, exemplifying Braudel\'s meso timeframe (conjonctures): Industrial Revolution, Railway Age, Electrical Age, Mass Production, and Information Age. Each wave represents a meso-level pattern within the macro structures of industrial capitalism.'
+        },
+        {
+          type: 'article',
+          title: 'Three Horizons Framework',
+          url: 'https://en.wikipedia.org/wiki/Three_Horizons',
+          description: 'Framework showing three overlapping S-curves: H1 (declining dominant system), H2 (transitional innovations), H3 (emerging future) developed by Hodgson, Sharpe, Leicester, and Curry',
+          source: 'Wikipedia'
+        },
+        {
+          type: 'article',
+          title: 'Three Horizons Deep Dive',
+          url: 'https://www.h3uni.org/tutorial/three-horizons/',
+          description: 'Comprehensive tutorial on the Three Horizons framework from H3Uni, showing how to map systemic transitions',
+          source: 'H3Uni'
         }
       ],
       metadata: {
@@ -1502,13 +1554,6 @@ const mindMapData = {
           description: 'Four Turnings cycle repeating every 80-100 years (Fourth Turning theory, 1997). Shows circular progression: First Turning/High (Spring - institutions strong), Second Turning/Awakening (Summer - spiritual exploration), Third Turning/Unraveling (Autumn - civic decay), Fourth Turning/Crisis (Winter - institutional destruction & rebuilding). Includes historical examples and four generational archetypes (Prophet, Nomad, Hero, Artist).'
         },
         {
-          type: 'video',
-          title: 'Understanding Kondratiev Waves',
-          url: 'https://www.youtube.com/watch?v=8qmgKHr7K1s',
-          description: 'Explanation of long economic cycles',
-          year: 2016
-        },
-        {
           type: 'image',
           title: 'Kondratiev Wave Timeline',
           url: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Kondratieff_Wave.svg',
@@ -1608,17 +1653,27 @@ const mindMapData = {
       media: [
         {
           type: 'video',
-          title: 'Sohail Inayatullah Explains CLA',
-          url: 'https://www.youtube.com/watch?v=7-8Xe9m7riM',
-          description: 'Creator demonstrating CLA methodology',
-          year: 2011
+          title: 'TEDx Noosa: Sohail Inayatullah on Causal Layered Analysis',
+          url: 'https://www.metafuture.org/video/tedxnoosa-2013-sohail-inayatullah-causal-layered-analysis/',
+          description: 'Creator of CLA demonstrates how the four-layer framework uncovers the hidden assumptions beneath any issue - from surface litany to deep myth/metaphor',
+          year: 2013,
+          source: 'TEDx'
+        },
+        {
+          type: 'podcast',
+          title: 'The Futures Workshop: Sohail Inayatullah on CLA',
+          url: 'https://thefuturesworkshop.substack.com/p/episode-three-sohail-inayatullah',
+          description: 'In-depth conversation where Inayatullah discusses why he created CLA, how it works in practice, and tips for facilitators',
+          year: 2024,
+          source: 'The Futures Workshop'
         },
         {
           type: 'document',
-          title: 'CLA: Poststructuralism as Method (1998)',
-          url: 'https://www.futures.hawaii.edu/publications/half-full/InayatullahCLA.pdf',
-          description: 'Foundational paper by Inayatullah',
-          year: 1998
+          title: 'Causal Layered Analysis: A Four-Level Approach',
+          url: '/documents/inayatullah-cla-deepening-the-future.pdf',
+          description: 'Foundational paper by Inayatullah on CLA methodology',
+          year: 1998,
+          source: 'Metafuture'
         },
         {
           type: 'article',
@@ -1639,6 +1694,22 @@ const mindMapData = {
           url: '/diagrams/cla-four-layers.svg',
           description: 'Visual representation of Causal Layered Analysis\' four-layer depth framework (Inayatullah, 1998): Layer 1 (Litany) - surface headlines and quantifiable trends; Layer 2 (Systemic Causes) - social, economic, political systems and structures; Layer 3 (Worldview/Discourse) - ideological assumptions and paradigms that make systems seem natural; Layer 4 (Myth/Metaphor) - deep unconscious narratives and archetypal stories. Shows how transformative change requires shifting myths/metaphors, not just surface interventions.',
           source: 'AK Consulting'
+        },
+        {
+          type: 'podcast',
+          title: 'The New Abnormal: Sohail Inayatullah - Visioning the Futures',
+          url: 'https://podcasts.apple.com/nz/podcast/sohail-inayatullah-visioning-the-futures/id1484698927?i=1000669027348',
+          description: '46-minute deep-dive interview where Inayatullah explains the Futures Triangle, S-Curves, CLA, and his Six Pillars approach',
+          year: 2024,
+          source: 'The New Abnormal'
+        },
+        {
+          type: 'document',
+          title: 'UN Global Pulse: CLA Workshop Tool',
+          url: 'https://foresight.unglobalpulse.net/intergenerational-equity/wp-content/uploads/sites/4/2023/04/Tool3.pdf',
+          description: 'UNESCO & UN Global Pulse educational resource with CLA iceberg diagram and facilitation guide',
+          year: 2023,
+          source: 'UN Global Pulse'
         }
       ],
       metadata: {
@@ -1692,19 +1763,6 @@ const mindMapData = {
         { id: 'visioning', type: 'prerequisite', description: 'Deconstructing dominant discourses creates space for inclusive visioning that incorporates marginalized perspectives' }
       ],
       media: [
-        {
-          type: 'video',
-          title: 'Norman Fairclough: Critical Discourse Analysis',
-          url: 'https://www.youtube.com/watch?v=68ShJJmPzKs',
-          description: 'Fairclough explaining critical discourse analysis framework and methodology',
-          year: 2013
-        },
-        {
-          type: 'image',
-          title: 'Fairclough\'s Three-Dimensional CDA Framework',
-          url: 'https://www.researchgate.net/figure/CDA-Three-Dimensional-Norman-Fairclough-Fairclough-2010_fig1_358499059',
-          description: 'Norman Fairclough\'s critical discourse analysis framework showing three interconnected dimensions: text (linguistic analysis), discourse practice (production and consumption of text), and sociocultural practice (institutional and social contexts). This layered approach reveals how language perpetuates power structures and shapes what futures are considered possible or desirable.'
-        },
         {
           type: 'article',
           title: 'Discourse Analysis in Futures Studies',
@@ -1821,18 +1879,18 @@ const mindMapData = {
       ],
       media: [
         {
-          type: 'video',
-          title: 'Pierre Wack on Shell Scenarios',
-          url: 'https://www.youtube.com/watch?v=lEJmGzglPzo',
-          description: 'Shell pioneer explaining scenario methodology',
-          year: 1985
+          type: 'podcast',
+          title: 'FuturePod: Scenario Planning Conversations',
+          url: 'https://www.futurepod.org/',
+          description: 'Interviews with scenario planning practitioners and foresight leaders sharing their tools and experiences',
+          source: 'FuturePod'
         },
         {
-          type: 'video',
-          title: 'Peter Schwartz: The Art of the Long View',
-          url: 'https://www.youtube.com/watch?v=n3p6pPB3-SA',
-          description: 'Schwartz on scenario planning practice',
-          year: 1991
+          type: 'podcast',
+          title: 'Think Forward: Futures & Innovation',
+          url: 'https://podcasts.apple.com/us/podcast/think-forward-conversations-with-futurists-innovators/id1736144515',
+          description: 'Conversations with futurists and innovators about how scenario planning and foresight enhance strategic decision-making',
+          source: 'Apple Podcasts'
         },
         {
           type: 'image',
@@ -1846,13 +1904,6 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Scenario_planning',
           source: 'Wikipedia',
           description: 'Comprehensive guide to scenario planning methods covering the Shell approach, GBN frameworks, intuitive logics, and various scenario development techniques. Explains the process from horizon scanning to scenario construction, narrative development, and strategic testing.'
-        },
-        {
-          type: 'video',
-          title: 'Jim Dator\'s Four Generic Futures',
-          url: 'https://www.youtube.com/watch?v=6XU70gcKvbw',
-          description: 'Dator explaining his four archetypes',
-          year: 2009
         },
         {
           type: 'image',
@@ -1877,6 +1928,29 @@ const mindMapData = {
           title: 'RAND Corporation Logo',
           url: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Rand_Corporation_logo.svg',
           description: 'RAND Corporation - birthplace of scenario planning in the 1950s, where Herman Kahn pioneered the methodology'
+        },
+        {
+          type: 'podcast',
+          title: 'HBR: Future-Proofing Your Strategy with Scenario Planning',
+          url: 'https://hbr.org/podcast/2020/07/future-proofing-your-strategy-with-scenario-planning',
+          description: 'Deep dive into scenario planning methodology featuring the history of Shell\'s scenario practice and insights from scenario veterans',
+          year: 2020,
+          source: 'Harvard Business Review'
+        },
+        {
+          type: 'video',
+          title: 'Peter Schwartz: The Art of the Really Long View',
+          url: 'https://longnow.org/seminars/02003/dec/12/the-art-of-the-really-long-view/',
+          description: 'Long Now seminar where the co-founder of Global Business Network discusses scenario planning for very long-term horizons',
+          year: 2003,
+          source: 'Long Now Foundation'
+        },
+        {
+          type: 'article',
+          title: 'The Foresight Guide: Horizon Scanning',
+          url: 'https://foresightguide.com/horizon-scanning-frameworks/',
+          description: 'Comprehensive guide to horizon scanning frameworks from PEST to STEEPS, essential for scenario planning',
+          source: 'Foresight Guide'
         }
       ],
       metadata: {
@@ -2062,13 +2136,6 @@ const mindMapData = {
           description: '2×2 framework categorizing wild card events by probability and impact. Four quadrants: True Wild Cards (high impact, low probability - transformative if occur), Emerging Crises (high impact, high probability - urgent priority), Weak Signals (low impact, low probability - monitor for escalation), Routine Changes (low impact, high probability - standard planning). Includes examples and strategic approaches for each quadrant.'
         },
         {
-          type: 'video',
-          title: 'Preparing for Wild Card Events',
-          url: 'https://www.youtube.com/watch?v=Gc8zNd4iGPs',
-          description: 'Framework for wild card scenario development',
-          year: 2014
-        },
-        {
           type: 'article',
           title: 'Wild Cards and Black Swans',
           url: 'https://en.wikipedia.org/wiki/Wild_card_(foresight)',
@@ -2246,13 +2313,6 @@ const mindMapData = {
           description: 'Zwicky morphological analysis box showing systematic exploration of Future of Work (2025-2040). Six parameters: Employment Type (5 options), Work Location (4 options), Skill Development (4 options), Income Model (4 options), Social Safety Net (4 options), Career Pattern (4 options) = 5,120 total possible combinations. Red pathway shows example scenario: "Gig/Platform Work + Fully Remote + Continuous Learning + Project Income + Government Universal + Parallel Careers". Demonstrates how morphological method ensures comprehensive coverage of solution space.'
         },
         {
-          type: 'video',
-          title: 'Fritz Zwicky on Morphological Method',
-          url: 'https://www.youtube.com/watch?v=mWO2Z4HXZUs',
-          description: 'Creator explaining the methodology',
-          year: 1948
-        },
-        {
           type: 'image',
           title: 'Morphological Box Example',
           url: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/Morphological_box.png',
@@ -2357,13 +2417,6 @@ const mindMapData = {
       ],
       media: [
         {
-          type: 'video',
-          title: 'RAND Corporation on Delphi Method History',
-          url: 'https://www.youtube.com/watch?v=nYG2ywI8c8E',
-          description: 'Historical overview from the creators',
-          year: 2014
-        },
-        {
           type: 'image',
           title: 'Delphi Process Flow Diagram',
           url: 'https://upload.wikimedia.org/wikipedia/commons/0/0d/Delphi_Method.png',
@@ -2388,6 +2441,22 @@ const mindMapData = {
           url: '/diagrams/delphi-process.svg',
           description: 'Comprehensive visualization of Delphi method iterative process flow (RAND, 1950s): Round 1 (initial independent forecasts), Round 2 (controlled feedback with statistics), Round 3+ (iteration until convergence), and final consensus report. Includes detailed explanation of four core principles: Anonymity (prevents groupthink), Iteration (enables revision through reflection), Controlled Feedback (statistical summary only), and Statistical Aggregation (median/IQR, not averages). Shows feedback loop for non-converged results.',
           source: 'AK Consulting'
+        },
+        {
+          type: 'video',
+          title: 'Ideas in Action: 60 Years of RAND',
+          url: 'https://www.rand.org/pubs/corporate_pubs/CP501.html',
+          description: '60-minute documentary narrated by Tobey Maguire exploring RAND\'s history from Cold War nuclear strategy to systems analysis',
+          year: 2008,
+          source: 'RAND Corporation'
+        },
+        {
+          type: 'video',
+          title: 'Smithsonian RAND Videohistory Collection',
+          url: 'https://siarchives.si.edu/collections/siris_arc_217704',
+          description: 'Interviews with RAND participants discussing the development of Delphi and other forecasting methods',
+          year: 1990,
+          source: 'Smithsonian Institution Archives'
         }
       ],
       metadata: {
@@ -2566,32 +2635,12 @@ const mindMapData = {
           description: 'Detailed example showing how drivers influence each other in cross-impact analysis (Gordon & Helmer, 1966). The 8×8 matrix maps impacts FROM drivers (rows) ON other drivers (columns), using color-coded impact strength: High (red), Medium (orange), Low (blue), Minimal (gray). Includes worked example with AI, Climate, Demographics, Energy, Trade, Tech, Urban, and Health drivers, demonstrating how to identify feedback loops, leverage points, and cascading effects.'
         },
         {
-          type: 'video',
-          title: 'Cross-Impact Analysis Tutorial',
-          url: 'https://www.youtube.com/watch?v=7jZ3CUmFKPM',
-          description: 'How to conduct cross-impact analysis',
-          year: 2015
-        },
-        {
           type: 'document',
           title: 'Initial Experiments with Cross-Impact Matrix (Gordon & Hayward, 1968)',
           url: 'https://www.rand.org/content/dam/rand/pubs/papers/2008/P3820.pdf',
           description: 'Theodore Gordon and Olaf Helmer\'s original RAND paper introducing cross-impact analysis methodology',
           year: 1968
         },
-        {
-          type: 'document',
-          title: 'MICMAC Methodology Guide',
-          url: 'https://www.sciencedirect.com/science/article/abs/pii/S0016328700000584',
-          description: 'Duperrin & Godet\'s MICMAC (Matrix of Crossed Impacts - Multiplication Applied to a Classification) structural analysis method',
-          year: 1973
-        },
-        {
-          type: 'document',
-          title: 'Cross-Impact Analysis for Foresight',
-          url: 'https://www.foresight-platform.eu/wp-content/uploads/2011/04/Cross-Impact_Analysis.pdf',
-          description: 'European Foresight Platform practical guide to conducting cross-impact analysis in strategic planning'
-        }
       ],
       metadata: {
         difficulty: 'advanced',
@@ -2667,13 +2716,6 @@ const mindMapData = {
       ],
       media: [
         {
-          type: 'video',
-          title: 'Participatory Visioning Techniques',
-          url: 'https://www.youtube.com/watch?v=uL3UbDyGq9A',
-          description: 'How to facilitate visioning workshops',
-          year: 2016
-        },
-        {
           type: 'image',
           title: 'Components of Effective Visions',
           url: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Vision_Framework.svg',
@@ -2687,24 +2729,11 @@ const mindMapData = {
           description: 'Guide to creating effective visions of preferred futures that inspire action and guide decision-making. Covers characteristics of compelling visions (aspirational, concrete, inclusive, actionable), participatory visioning techniques, and methods for building shared purpose across diverse stakeholders.'
         },
         {
-          type: 'document',
-          title: 'Elise Boulding\'s Imaging Workshop Methodology',
-          url: 'https://www.mediate.com/articles/boulding.cfm',
-          description: 'The "workshop of all workshops" - Boulding\'s technique of stepping through an imagined hedge 30 years into the future to create detailed preferred visions',
-          year: 1988
-        },
-        {
-          type: 'document',
-          title: 'Warren Ziegler: Ways of Enspiriting',
-          url: 'https://www.jstor.org/stable/43156527',
-          description: 'Ziegler\'s participatory visioning framework emphasizing democratic engagement and collective imagination in futures work',
-          year: 1991
-        },
-        {
-          type: 'document',
-          title: 'Participatory Futures Workshop Guide',
-          url: 'https://www.peopleandparticipation.net/download/report/4907c5e7a6f58',
-          description: 'European Awareness Scenario Workshop methodology - practical guide to facilitating participatory visioning sessions'
+          type: 'article',
+          title: 'Participatory Futures Methods',
+          url: 'https://en.wikipedia.org/wiki/Participatory_foresight',
+          description: 'Overview of participatory approaches to futures work emphasizing democratic engagement and collective imagination',
+          source: 'Wikipedia'
         }
       ],
       metadata: {
@@ -2779,13 +2808,6 @@ const mindMapData = {
         }
       ],
       media: [
-        {
-          type: 'video',
-          title: 'John Robinson on Backcasting',
-          url: 'https://www.youtube.com/watch?v=3QPZfcYTUdg',
-          description: 'Creator explaining backcasting methodology',
-          year: 2003
-        },
         {
           type: 'image',
           title: 'Forecasting vs Backcasting Diagram',
@@ -2981,13 +3003,6 @@ const mindMapData = {
           description: 'Complete strategic issue management cycle from detection to organizational learning. Five stages: (1) Scanning & Detection - monitor environment and detect weak signals, (2) Assessment & Analysis - evaluate significance and impact, (3) Response Planning - develop strategies and scenario planning, (4) Implementation & Monitoring - execute response and track effectiveness, (5) Learning & Adaptation - evaluate outcomes and update processes. Continuous cycle ensuring issues evolve and require repeated assessment and adaptation.'
         },
         {
-          type: 'video',
-          title: 'Igor Ansoff on Strategic Surprise',
-          url: 'https://www.youtube.com/watch?v=bNlcJo-u3wI',
-          description: 'Ansoff on managing strategic discontinuities',
-          year: 1975
-        },
-        {
           type: 'article',
           title: 'Strategic Issue Management',
           url: 'https://en.wikipedia.org/wiki/Strategic_management',
@@ -3063,20 +3078,6 @@ const mindMapData = {
       media: [
         {
           type: 'video',
-          title: 'Star Trek: Optimistic Vision of Future',
-          url: 'https://www.youtube.com/watch?v=PjiXkJ6P8CI',
-          description: 'Gene Roddenberry\'s inspiring vision of humanity\'s potential',
-          year: 1991
-        },
-        {
-          type: 'video',
-          title: 'Buckminster Fuller: Thinking Out Loud',
-          url: 'https://www.youtube.com/watch?v=BUUKm0k6FMg',
-          description: 'Fuller on making the world work for everyone through design',
-          year: 1996
-        },
-        {
-          type: 'video',
           title: 'The Venus Project: Resource-Based Economy',
           url: 'https://www.youtube.com/watch?v=Yb5ivvcTvRQ',
           description: 'Jacque Fresco presenting vision of post-scarcity civilization',
@@ -3101,6 +3102,22 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Star_Trek#Philosophy_and_themes',
           source: 'Wikipedia',
           description: 'Analysis of Star Trek\'s optimistic economic and social vision where humanity has eliminated poverty, scarcity, and war through replicator technology and collaborative governance. Explores how this aspirational fiction has influenced real-world futurists, technologists, and policy makers seeking to create post-scarcity abundance futures.'
+        },
+        {
+          type: 'video',
+          title: 'Carl Sagan: Cosmos - A Personal Voyage',
+          url: 'https://archive.org/details/cosmos_1980',
+          description: 'The landmark 13-part documentary series exploring humanity\'s place in the universe - the most widely watched PBS series until 1990',
+          year: 1980,
+          source: 'Internet Archive'
+        },
+        {
+          type: 'video',
+          title: 'Carl Sagan: Pale Blue Dot',
+          url: 'https://www.youtube.com/watch?v=wupToqz1e2g',
+          description: 'Sagan\'s famous reflection on humanity\'s cosmic perspective - inspiring humility and care for our planet',
+          year: 1994,
+          source: 'Carl Sagan Institute'
         }
       ],
       metadata: {
@@ -3111,6 +3128,143 @@ const mindMapData = {
         sectors: ['Technology development', 'Social innovation', 'Education and inspiration', 'Space exploration', 'Future studies'],
         commonPitfalls: ['Naivety about implementation challenges', 'Ignoring power structures and political realities', 'Technologically deterministic thinking', 'Not addressing inequality in transition', 'Dismissing as unrealistic fantasy']
       }
+    }
+  ],
+
+  // FUTURES SOCIETIES & ORGANIZATIONS
+  futuresSocieties: [
+    {
+      id: 'wfs',
+      label: 'World Future\nSociety',
+      founded: 1966,
+      color: '#5C88DA',
+      description: 'The oldest and largest membership organization dedicated to exploring how social and technological developments shape the future',
+      details: {
+        overview: 'Founded October 18, 1966 in Washington D.C. by Edward Cornish, Charles W. Williams, and Peter Zuckerman. Grew from 3 founding members to thousands globally. Published The Futurist magazine (1967-2015) and hosted annual WorldFuture conferences. Notable members included Carl Sagan, Buckminster Fuller, Alvin Toffler, Isaac Asimov, Arthur C. Clarke, and Ray Kurzweil.',
+        founder: 'Edward Cornish (1927-2019), former National Geographic science writer',
+        milestones: [
+          '1966: Founded with 3 members',
+          '1967: The Futurist magazine launched',
+          '1971: First General Assembly (700 attendees)',
+          '1975: Helped establish first Futures Studies graduate programs',
+          '1985: President Reagan consulted with WFS futurists at White House',
+          '2018: Reconstituted as World Future Society Presents LLC'
+        ],
+        legacy: 'Represented the popular, membership-driven expression of futurism. Instrumental in bringing futures thinking to mainstream audiences.'
+      },
+      media: [
+        {
+          type: 'article',
+          title: 'World Future Society - History',
+          url: 'https://en.wikipedia.org/wiki/World_Future_Society',
+          description: 'Complete history of the oldest futures membership organization',
+          source: 'Wikipedia'
+        },
+        {
+          type: 'article',
+          title: 'Five Decades of Futuring',
+          url: 'https://medium.com/the-futurist/five-decades-of-futuring-celebrating-the-futurist-legacy-and-our-history-5e2234d47e2d',
+          description: 'Celebrating The Futurist magazine legacy and WFS history',
+          source: 'Medium'
+        }
+      ]
+    },
+    {
+      id: 'wfsf',
+      label: 'World Futures\nStudies Federation',
+      founded: 1973,
+      color: '#CC99CC',
+      description: 'Global academic network and UNESCO consultative partner advancing futures studies scholarship',
+      details: {
+        overview: 'Founded May 26, 1973 in Paris, France. UNESCO Special Consultative Partner since 1987. Global network of practicing futurists from approximately 60 countries including researchers, teachers, scholars, and policy analysts.',
+        founders: 'Bertrand de Jouvenel (first president), Igor Bestuzhev-Lada, Johan Galtung, Robert Jungk',
+        milestones: [
+          '1972: Founding conference in Bucharest, Romania',
+          '1973: Official founding in Paris',
+          '1987: Gained UNESCO consultative status',
+          '2023: Celebrated 50th anniversary'
+        ],
+        distinction: 'Academic-focused global NGO emphasizing futures studies scholarship, distinct from the membership-focused World Future Society.'
+      },
+      media: [
+        {
+          type: 'article',
+          title: 'WFSF Official Website',
+          url: 'https://wfsf.org/',
+          description: 'World Futures Studies Federation - global academic futures network',
+          source: 'WFSF'
+        },
+        {
+          type: 'article',
+          title: 'WFSF History',
+          url: 'https://wfsf.org/history/',
+          description: '50 years of advancing futures studies scholarship',
+          source: 'WFSF'
+        }
+      ]
+    },
+    {
+      id: 'iftf',
+      label: 'Institute for\nthe Future',
+      founded: 1968,
+      color: '#FFCC66',
+      description: 'World\'s oldest continuously running futures research organization, spun off from RAND Corporation',
+      details: {
+        overview: 'Founded 1968 as RAND Corporation spin-off by Paul Baran, Olaf Helmer, and Ted Gordon. Moved to Palo Alto, California in 1971. Pioneered the Ten-Year Forecast program (1978-present) and conducted early ARPANET research.',
+        founders: 'Paul Baran, Olaf Helmer, Ted Gordon',
+        milestones: [
+          '1968: Founded as RAND spin-off',
+          '1971: Moved to Palo Alto',
+          '1978: Ten Year Forecast program launched',
+          '2008: Superstruct - first massively multiplayer forecasting game'
+        ],
+        legacy: 'Applied research and organizational consulting. Pioneered communication formats using maps and artifacts from the future.'
+      },
+      media: [
+        {
+          type: 'article',
+          title: 'Institute for the Future',
+          url: 'https://en.wikipedia.org/wiki/Institute_for_the_Future',
+          description: 'History of the world\'s oldest continuously running futures research organization',
+          source: 'Wikipedia'
+        },
+        {
+          type: 'podcast',
+          title: 'IFTF For Future Reference',
+          url: 'https://www.iftf.org/forfuturereference',
+          description: 'IFTF researchers interview scientists, engineers, and thought leaders shaping tomorrow',
+          source: 'IFTF'
+        }
+      ]
+    },
+    {
+      id: 'apf',
+      label: 'Association of\nProfessional Futurists',
+      founded: 2002,
+      color: '#99CC99',
+      description: 'Professional network focused on advancing the practice and credentialing of professional futurists',
+      details: {
+        overview: 'Founded 2002 in Seattle by Peter Bishop, Jennifer Jarratt, Andy Hines, and others. 600+ members from 60 countries. Developed the Foresight Competency Model (2016) defining six core competencies.',
+        founders: 'Peter Bishop, Jennifer Jarratt, Andy Hines, Herb Rubenstein (and others)',
+        competencies: ['Framing', 'Scanning', 'Futuring', 'Designing', 'Visioning', 'Adapting'],
+        distinction: 'Represents the professional practice side of futurism with peer-review credentialing system.'
+      },
+      media: [
+        {
+          type: 'article',
+          title: 'Association of Professional Futurists',
+          url: 'https://en.wikipedia.org/wiki/Association_of_Professional_Futurists',
+          description: 'Professional association advancing foresight practice',
+          source: 'Wikipedia'
+        },
+        {
+          type: 'document',
+          title: 'APF Foresight Competency Model',
+          url: 'https://www.apf.org/foresight-competency-model',
+          description: 'Six competencies defining professional foresight practice',
+          source: 'APF'
+        }
+      ]
     }
   ],
 
@@ -3170,13 +3324,6 @@ const mindMapData = {
           description: 'Comprehensive biography covering Ray Kurzweil\'s life, major inventions (OCR, text-to-speech, music synthesis), prediction methodology (Law of Accelerating Returns), and track record of forecasts with documented accuracy assessments. Includes analysis of both successful predictions (smartphones, AI assistants) and controversial claims (singularity timeline).'
         },
         {
-          type: 'document',
-          title: 'The Law of Accelerating Returns (2001)',
-          url: 'https://www.kurzweilai.net/the-law-of-accelerating-returns',
-          description: 'Foundational essay on exponential technology growth',
-          year: 2001
-        },
-        {
           type: 'image',
           title: 'Ray Kurzweil Portrait',
           url: 'https://upload.wikimedia.org/wikipedia/commons/c/c0/Portrait_of_Ray_Kurzweil.png',
@@ -3214,13 +3361,6 @@ const mindMapData = {
       ],
       media: [
         {
-          type: 'video',
-          title: 'Alvin Toffler on Future Shock',
-          url: 'https://www.youtube.com/watch?v=wJW_bF-GEJE',
-          description: 'Toffler discussing acceleration of change',
-          year: 1972
-        },
-        {
           type: 'article',
           title: 'Alvin Toffler - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Alvin_Toffler',
@@ -3238,6 +3378,14 @@ const mindMapData = {
           title: 'Alvin Toffler Portrait',
           url: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Alvin_Toffler_02.jpg',
           description: 'American futurist (1928-2016), author of Future Shock and The Third Wave'
+        },
+        {
+          type: 'video',
+          title: 'Future Shock (Documentary)',
+          url: 'https://www.dailymotion.com/video/xp1tiz',
+          description: 'The 1972 documentary narrated by Orson Welles, based on Toffler\'s book - a darkly prophetic vision of accelerating change',
+          year: 1972,
+          source: 'Dailymotion'
         }
       ]
     },
@@ -3268,13 +3416,6 @@ const mindMapData = {
       ],
       media: [
         {
-          type: 'video',
-          title: 'Buckminster Fuller: Thinking Out Loud',
-          url: 'https://www.youtube.com/watch?v=8ddKKEvGxmE',
-          description: 'Fuller on anticipatory design science',
-          year: 1975
-        },
-        {
           type: 'article',
           title: 'Buckminster Fuller - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Buckminster_Fuller',
@@ -3286,6 +3427,30 @@ const mindMapData = {
           title: 'Buckminster Fuller Portrait',
           url: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Buckminster_Fuller_1917.jpg',
           description: 'American architect and futurist (1895-1983), #1 most influential futurist, creator of Spaceship Earth concept'
+        },
+        {
+          type: 'video',
+          title: 'Everything I Know (42-Hour Lecture Series)',
+          url: 'https://archive.org/details/buckminsterfullereverythingiknow01',
+          description: 'Fuller\'s complete 42-hour lecture series from January 1975, examining his entire life\'s work including Dymaxion designs, geodesic domes, and synergetics',
+          year: 1975,
+          source: 'Internet Archive'
+        },
+        {
+          type: 'video',
+          title: 'The World of Buckminster Fuller (Documentary)',
+          url: 'https://archive.org/details/World-of-B-Fuller-1971',
+          description: '80-minute documentary by Robert Snyder capturing Fuller at the peak of his creative influence',
+          year: 1971,
+          source: 'Internet Archive'
+        },
+        {
+          type: 'video',
+          title: 'PBS American Masters: Thinking Out Loud',
+          url: 'https://www.pbs.org/wnet/americanmasters/masters/r-buckminster-fuller/',
+          description: 'Documentary featuring interviews with Philip Johnson, John Cage, and Arthur Penn on Fuller\'s legacy',
+          year: 1996,
+          source: 'PBS'
         }
       ]
     },
@@ -3318,13 +3483,6 @@ const mindMapData = {
       ],
       media: [
         {
-          type: 'video',
-          title: 'Isaac Asimov on Science Fiction and Prediction',
-          url: 'https://www.youtube.com/watch?v=cFOCUr18dTQ',
-          description: 'Asimov discussing role of sci-fi in futures thinking',
-          year: 1988
-        },
-        {
           type: 'article',
           title: 'Isaac Asimov - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Isaac_Asimov',
@@ -3336,6 +3494,22 @@ const mindMapData = {
           title: 'Isaac Asimov Portrait',
           url: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Isaac.Asimov01.jpg',
           description: 'American biochemist and science fiction author (1920-1992), creator of Three Laws of Robotics'
+        },
+        {
+          type: 'video',
+          title: 'Isaac Asimov on The David Letterman Show',
+          url: 'https://www.youtube.com/watch?v=365kJOsFd3w',
+          description: 'Asimov discusses the future of medicine, communications, and predicts pocket computers',
+          year: 1980,
+          source: 'YouTube'
+        },
+        {
+          type: 'video',
+          title: 'Bill Moyers: A World of Ideas - Isaac Asimov',
+          url: 'https://americanarchive.org/catalog/cpb-aacip-b821c782f7e',
+          description: 'Two-part interview where Asimov predicted home computers connected to vast libraries',
+          year: 1988,
+          source: 'American Archive of Public Broadcasting'
         }
       ]
     },
@@ -3368,13 +3542,6 @@ const mindMapData = {
       ],
       media: [
         {
-          type: 'video',
-          title: 'Arthur C. Clarke Predicts the Future in 1964',
-          url: 'https://www.youtube.com/watch?v=qYA0B3JMKXU',
-          description: 'Clarke discussing future technology',
-          year: 1964
-        },
-        {
           type: 'article',
           title: 'Arthur C. Clarke - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Arthur_C._Clarke',
@@ -3386,6 +3553,22 @@ const mindMapData = {
           title: 'Arthur C. Clarke Portrait',
           url: 'https://upload.wikimedia.org/wikipedia/commons/3/36/Arthur_C._Clarke_%281982%29.jpg',
           description: 'British science fiction author (1917-2008), predicted communications satellites, Clarke Belt named in his honor'
+        },
+        {
+          type: 'video',
+          title: 'BBC Horizon: Arthur C. Clarke Predicts the Future (1964)',
+          url: 'https://www.youtube.com/watch?v=YwELr8ir9qM',
+          description: 'At the New York World\'s Fair, Clarke predicts telecommuting, telemedicine, and global communication networks',
+          year: 1964,
+          source: 'BBC Archive'
+        },
+        {
+          type: 'video',
+          title: 'Arthur C. Clarke\'s Mysterious World',
+          url: 'https://archive.org/details/arthur.-c.-clarke.-mysterious.-world',
+          description: '13-part series examining unexplained phenomena, introduced by Clarke from Sri Lanka',
+          year: 1980,
+          source: 'Internet Archive'
         }
       ]
     },
@@ -3418,13 +3601,6 @@ const mindMapData = {
         'Tricorders → Portable medical diagnostics'
       ],
       media: [
-        {
-          type: 'video',
-          title: 'Gene Roddenberry on Creating Star Trek',
-          url: 'https://www.youtube.com/watch?v=8PbcA3sYHXc',
-          description: 'Roddenberry discussing his vision for humanity\'s future',
-          year: 1988
-        },
         {
           type: 'article',
           title: 'Gene Roddenberry - Wikipedia',
@@ -3511,13 +3687,6 @@ const mindMapData = {
       ],
       media: [
         {
-          type: 'video',
-          title: 'Ursula K. Le Guin on Science Fiction',
-          url: 'https://www.youtube.com/watch?v=ELfmWWzzWns',
-          description: 'Le Guin discussing role of sci-fi in imagining alternatives',
-          year: 2014
-        },
-        {
           type: 'article',
           title: 'Ursula K. Le Guin - Wikipedia',
           url: 'https://en.wikipedia.org/wiki/Ursula_K._Le_Guin',
@@ -3560,13 +3729,6 @@ const mindMapData = {
         'Augmented reality'
       ],
       media: [
-        {
-          type: 'video',
-          title: 'William Gibson on Neuromancer',
-          url: 'https://www.youtube.com/watch?v=U8sKRQ7MhAA',
-          description: 'Gibson discussing cyberpunk and prediction',
-          year: 2014
-        },
         {
           type: 'article',
           title: 'William Gibson - Wikipedia',
@@ -3611,13 +3773,6 @@ const mindMapData = {
         'AR/VR integration'
       ],
       media: [
-        {
-          type: 'video',
-          title: 'Neal Stephenson on Snow Crash and the Metaverse',
-          url: 'https://www.youtube.com/watch?v=Ok4vYkgC5U8',
-          description: 'Stephenson discussing his predictions',
-          year: 2021
-        },
         {
           type: 'article',
           title: 'Neal Stephenson - Wikipedia',
@@ -3769,7 +3924,7 @@ const mindMapData = {
           {
             type: 'image',
             title: 'IPCC Climate Scenarios 2100',
-            url: 'https://www.ipcc.ch/site/assets/uploads/2018/02/SYR_AR5_FINAL_full.pdf',
+            url: '/documents/ipcc-ar5-synthesis-2014.pdf',
             description: 'Official climate projection scenarios'
           },
           {
@@ -3815,14 +3970,6 @@ const mindMapData = {
           sources: 'CSIS Space 2060 scenarios, NASA planning, The Expanse (Corey), Red Mars (Robinson)'
         },
         media: [
-          {
-            type: 'document',
-            title: 'The Future of Space 2060',
-            url: 'https://aerospace.csis.org/data/space-futures/',
-            description: 'Eight scenarios for space to 2060',
-            source: 'CSIS',
-            year: 2019
-          },
           {
             type: 'article',
             title: 'Space Colonization',
@@ -3979,7 +4126,29 @@ const mindMapData = {
           societalImpact: 'Productivity boom, knowledge work transforms, new forms of human-machine collaboration emerge',
           sources: 'OpenAI forecasts, MIT Technology Review, AI alignment research'
         },
-        media: []
+        media: [
+          {
+            type: 'article',
+            title: 'AI Timelines: What do experts think?',
+            url: 'https://ourworldindata.org/ai-timelines',
+            description: 'Our World in Data analysis of expert forecasts on when AI milestones might be achieved',
+            source: 'Our World in Data'
+          },
+          {
+            type: 'article',
+            title: 'Artificial General Intelligence',
+            url: 'https://en.wikipedia.org/wiki/Artificial_general_intelligence',
+            description: 'Overview of concepts and research toward human-level AI',
+            source: 'Wikipedia'
+          },
+          {
+            type: 'article',
+            title: 'Human-Computer Interaction',
+            url: 'https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction',
+            description: 'The evolving relationship between humans and computing systems',
+            source: 'Wikipedia'
+          }
+        ]
       },
       {
         id: 'post-scarcity-prototypes',
@@ -4001,7 +4170,36 @@ const mindMapData = {
           societalImpact: 'Scarcity mindset begins shifting, basic needs guaranteed in pilot regions, economic models evolve',
           sources: 'ITER fusion project, Buckminster Fuller Institute, circular economy research'
         },
-        media: []
+        media: [
+          {
+            type: 'article',
+            title: 'ITER - The Way to New Energy',
+            url: 'https://en.wikipedia.org/wiki/ITER',
+            description: 'The international experimental fusion reactor project aimed at demonstrating commercial viability of fusion power',
+            source: 'Wikipedia'
+          },
+          {
+            type: 'article',
+            title: 'Post-Scarcity Economy',
+            url: 'https://en.wikipedia.org/wiki/Post-scarcity_economy',
+            description: 'Theoretical economic system where goods and services are available to all at little or no cost',
+            source: 'Wikipedia'
+          },
+          {
+            type: 'article',
+            title: 'Circular Economy',
+            url: 'https://en.wikipedia.org/wiki/Circular_economy',
+            description: 'Economic model focused on eliminating waste through continual reuse of resources',
+            source: 'Wikipedia'
+          },
+          {
+            type: 'article',
+            title: 'Vertical Farming',
+            url: 'https://en.wikipedia.org/wiki/Vertical_farming',
+            description: 'Practice of growing crops in vertically stacked layers using controlled-environment agriculture',
+            source: 'Wikipedia'
+          }
+        ]
       },
       {
         id: 'global-cooperation-frameworks',
@@ -4023,7 +4221,36 @@ const mindMapData = {
           societalImpact: 'National interests align with planetary wellbeing, "Spaceship Earth" mindset dominates, new governance models emerge',
           sources: 'Star Trek philosophy, Operating Manual for Spaceship Earth (Fuller), UN SDGs evolution'
         },
-        media: []
+        media: [
+          {
+            type: 'article',
+            title: 'Sustainable Development Goals',
+            url: 'https://en.wikipedia.org/wiki/Sustainable_Development_Goals',
+            description: 'The 17 UN goals for peace and prosperity for people and the planet',
+            source: 'Wikipedia'
+          },
+          {
+            type: 'article',
+            title: 'Planetary Defense',
+            url: 'https://en.wikipedia.org/wiki/Planetary_defense',
+            description: 'Efforts to detect and deflect potentially hazardous asteroids and comets',
+            source: 'Wikipedia'
+          },
+          {
+            type: 'article',
+            title: 'Global Governance',
+            url: 'https://en.wikipedia.org/wiki/Global_governance',
+            description: 'Institutions and practices for managing transnational issues',
+            source: 'Wikipedia'
+          },
+          {
+            type: 'article',
+            title: 'Spaceship Earth (concept)',
+            url: 'https://en.wikipedia.org/wiki/Spaceship_Earth',
+            description: 'Buckminster Fuller\'s worldview of Earth as a vessel requiring cooperative stewardship',
+            source: 'Wikipedia'
+          }
+        ]
       },
       {
         id: 'enlightenment-renaissance',
@@ -4045,7 +4272,36 @@ const mindMapData = {
           societalImpact: 'Star Trek-like civilization emerges, human flourishing becomes primary goal, new challenges focus on growth and exploration',
           sources: 'Star Trek vision (Roddenberry), The Venus Project (Fresco), transhumanist optimism'
         },
-        media: []
+        media: [
+          {
+            type: 'article',
+            title: 'Human Flourishing',
+            url: 'https://en.wikipedia.org/wiki/Eudaimonia',
+            description: 'Aristotelian concept of flourishing or well-being as the highest human good',
+            source: 'Wikipedia'
+          },
+          {
+            type: 'article',
+            title: 'The Venus Project',
+            url: 'https://en.wikipedia.org/wiki/The_Venus_Project',
+            description: 'Jacque Fresco\'s vision for a resource-based economy prioritizing human needs',
+            source: 'Wikipedia'
+          },
+          {
+            type: 'article',
+            title: 'Star Trek: Philosophy and Themes',
+            url: 'https://en.wikipedia.org/wiki/Star_Trek#Philosophy_and_themes',
+            description: 'Roddenberry\'s optimistic vision of a post-scarcity, cooperative future humanity',
+            source: 'Wikipedia'
+          },
+          {
+            type: 'article',
+            title: 'Transhumanism',
+            url: 'https://en.wikipedia.org/wiki/Transhumanism',
+            description: 'Philosophical movement advocating for enhancing the human condition through technology',
+            source: 'Wikipedia'
+          }
+        ]
       }
     ]
   }

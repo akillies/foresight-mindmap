@@ -195,8 +195,11 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
             textAlign: 'center',
           }}
         >
-          <div style={{ fontSize: '32px', fontWeight: '700', color: COLORS.highlight }}>{contentStats.total}</div>
-          <div style={{ fontSize: '10px', color: COLORS.highlight, opacity: 0.8, letterSpacing: '1px' }}>TOTAL RESOURCES</div>
+          <div style={{ fontSize: '32px', fontWeight: '700', color: COLORS.highlight }}>{contentStats.total}+</div>
+          <div style={{ fontSize: '10px', color: COLORS.highlight, opacity: 0.8, letterSpacing: '1px' }}>RESOURCES TO EXPLORE</div>
+          <div style={{ fontSize: '9px', color: COLORS.highlight, opacity: 0.6, marginTop: '4px', fontStyle: 'italic' }}>
+            Click any node to discover more
+          </div>
         </div>
       </div>
 

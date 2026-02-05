@@ -21,7 +21,7 @@ export const tours = {
     title: 'Journey Through Strategic Foresight',
     description: 'A guided exploration of futures thinking methodologies, from mapping the present to transforming the future.',
     estimatedDuration: '15-20 minutes',
-    musicUrl: '/audio/music/ambient-futures.aiff', // Placeholder - will be Yagya track
+    musicUrl: '/audio/music/ambient-futures.mp3', // Placeholder - will be Yagya track
 
     segments: [
       // SEGMENT 0: Opening - Wide view of entire cosmos
@@ -32,7 +32,7 @@ export const tours = {
         cameraPosition: { x: 0, y: 80, z: 120 },
         lookAt: { x: 0, y: 0, z: 0 },
         transitionDuration: 4000,
-        narrationUrl: '/audio/narration/00-intro-wide.aiff',
+        narrationUrl: '/audio/narration/00-intro-wide.mp3',
         narrationDelay: 1000,
         postNarrationDwell: 1500,
         subtitle: 'The future is not a destination to be predicted, but a landscape to be explored.'
@@ -46,7 +46,7 @@ export const tours = {
         cameraPosition: { x: 35, y: 28, z: 20 },
         lookAt: { x: 0, y: 0, z: 0 },
         transitionDuration: 3000,
-        narrationUrl: '/audio/narration/01-strategic-foresight.aiff',
+        narrationUrl: '/audio/narration/01-strategic-foresight.mp3',
         narrationDelay: 500,
         postNarrationDwell: 1000,
         subtitle: 'A disciplined framework for exploring alternative futures.'
@@ -60,7 +60,7 @@ export const tours = {
         cameraPosition: { x: 40, y: 45, z: 60 },
         lookAt: { x: 0, y: 0, z: 0 },
         transitionDuration: 3500,
-        narrationUrl: '/audio/narration/02-six-pillars.aiff',
+        narrationUrl: '/audio/narration/02-six-pillars.mp3',
         narrationDelay: 500,
         postNarrationDwell: 1500,
         subtitle: 'Sohail Inayatullah\'s framework for organizing foresight methods.'
@@ -74,7 +74,7 @@ export const tours = {
         cameraPosition: { x: 55, y: 25, z: 5 },
         lookAt: { x: 25, y: 0, z: 0 },
         transitionDuration: 3000,
-        narrationUrl: '/audio/narration/03-mapping.aiff',
+        narrationUrl: '/audio/narration/03-mapping.mp3',
         narrationDelay: 500,
         postNarrationDwell: 1000,
         subtitle: 'Understanding our current assumptions about the future.'
@@ -88,7 +88,7 @@ export const tours = {
         cameraPosition: { x: 60, y: 20, z: -6 },
         lookAt: { x: 34, y: 0, z: -4 },
         transitionDuration: 2500,
-        narrationUrl: '/audio/narration/04-futures-triangle.aiff',
+        narrationUrl: '/audio/narration/04-futures-triangle.mp3',
         narrationDelay: 300,
         postNarrationDwell: 1000,
         subtitle: 'Balancing the push of the present, pull of the future, and weight of the past.'
@@ -102,7 +102,7 @@ export const tours = {
         cameraPosition: { x: 30, y: 25, z: 48 },
         lookAt: { x: 12.5, y: 0, z: 21.7 },
         transitionDuration: 3000,
-        narrationUrl: '/audio/narration/05-anticipating.aiff',
+        narrationUrl: '/audio/narration/05-anticipating.mp3',
         narrationDelay: 500,
         postNarrationDwell: 1000,
         subtitle: 'Detecting early signs of emerging change.'
@@ -116,7 +116,7 @@ export const tours = {
         cameraPosition: { x: 40, y: 20, z: 54 },
         lookAt: { x: 20, y: 0, z: 28 },
         transitionDuration: 2500,
-        narrationUrl: '/audio/narration/06-env-scanning.aiff',
+        narrationUrl: '/audio/narration/06-env-scanning.mp3',
         narrationDelay: 300,
         postNarrationDwell: 1000,
         subtitle: 'Systematic monitoring of the external environment.'
@@ -130,7 +130,7 @@ export const tours = {
         cameraPosition: { x: -30, y: 25, z: 48 },
         lookAt: { x: -12.5, y: 0, z: 21.7 },
         transitionDuration: 3000,
-        narrationUrl: '/audio/narration/07-timing.aiff',
+        narrationUrl: '/audio/narration/07-timing.mp3',
         narrationDelay: 500,
         postNarrationDwell: 1000,
         subtitle: 'Understanding temporal patterns and cycles.'
@@ -144,7 +144,7 @@ export const tours = {
         cameraPosition: { x: -55, y: 25, z: -5 },
         lookAt: { x: -25, y: 0, z: 0 },
         transitionDuration: 3000,
-        narrationUrl: '/audio/narration/08-deepening.aiff',
+        narrationUrl: '/audio/narration/08-deepening.mp3',
         narrationDelay: 500,
         postNarrationDwell: 1000,
         subtitle: 'Examining underlying worldviews and assumptions.'
@@ -158,7 +158,7 @@ export const tours = {
         cameraPosition: { x: -60, y: 20, z: 8 },
         lookAt: { x: -34, y: 0, z: 4 },
         transitionDuration: 2500,
-        narrationUrl: '/audio/narration/09-cla.aiff',
+        narrationUrl: '/audio/narration/09-cla.mp3',
         narrationDelay: 300,
         postNarrationDwell: 1000,
         subtitle: 'Four layers: litany, social causes, worldview, myth.'
@@ -172,7 +172,7 @@ export const tours = {
         cameraPosition: { x: -30, y: 25, z: -48 },
         lookAt: { x: -12.5, y: 0, z: -21.7 },
         transitionDuration: 3000,
-        narrationUrl: '/audio/narration/10-creating.aiff',
+        narrationUrl: '/audio/narration/10-creating.mp3',
         narrationDelay: 500,
         postNarrationDwell: 1000,
         subtitle: 'Generating diverse possible futures.'
@@ -186,7 +186,7 @@ export const tours = {
         cameraPosition: { x: -40, y: 20, z: -54 },
         lookAt: { x: -20, y: 0, z: -28 },
         transitionDuration: 2500,
-        narrationUrl: '/audio/narration/11-scenarios.aiff',
+        narrationUrl: '/audio/narration/11-scenarios.mp3',
         narrationDelay: 300,
         postNarrationDwell: 1500,
         subtitle: 'Exploring multiple plausible futures through narrative.'
@@ -200,7 +200,7 @@ export const tours = {
         cameraPosition: { x: 30, y: 25, z: -48 },
         lookAt: { x: 12.5, y: 0, z: -21.7 },
         transitionDuration: 3000,
-        narrationUrl: '/audio/narration/12-transforming.aiff',
+        narrationUrl: '/audio/narration/12-transforming.mp3',
         narrationDelay: 500,
         postNarrationDwell: 1000,
         subtitle: 'Creating and achieving preferred futures.'
@@ -214,7 +214,7 @@ export const tours = {
         cameraPosition: { x: 32, y: 20, z: -58 },
         lookAt: { x: 14, y: 0, z: -32 },
         transitionDuration: 2500,
-        narrationUrl: '/audio/narration/13-backcasting.aiff',
+        narrationUrl: '/audio/narration/13-backcasting.mp3',
         narrationDelay: 300,
         postNarrationDwell: 1000,
         subtitle: 'Working backward from desired futures to present actions.'
@@ -228,7 +228,7 @@ export const tours = {
         cameraPosition: { x: -20, y: 60, z: 80 },
         lookAt: { x: 0, y: 0, z: 0 },
         transitionDuration: 4000,
-        narrationUrl: '/audio/narration/14-closing.aiff',
+        narrationUrl: '/audio/narration/14-closing.mp3',
         narrationDelay: 1000,
         postNarrationDwell: 2000,
         subtitle: 'The future is not something we enter, but something we create.'
@@ -246,7 +246,7 @@ export const tours = {
     title: 'Quick Overview',
     description: 'A brief introduction to the core concepts of strategic foresight.',
     estimatedDuration: '5 minutes',
-    musicUrl: '/audio/music/ambient-futures.aiff',
+    musicUrl: '/audio/music/ambient-futures.mp3',
 
     segments: [
       {
@@ -256,7 +256,7 @@ export const tours = {
         cameraPosition: { x: 0, y: 40, z: 60 },
         lookAt: { x: 0, y: 0, z: 0 },
         transitionDuration: 3000,
-        narrationUrl: '/audio/narration/quick-intro.aiff',
+        narrationUrl: '/audio/narration/quick-intro.mp3',
         postNarrationDwell: 1000
       },
       {
@@ -266,7 +266,7 @@ export const tours = {
         cameraPosition: { x: 30, y: 50, z: 50 },
         lookAt: { x: 0, y: 0, z: 0 },
         transitionDuration: 3000,
-        narrationUrl: '/audio/narration/quick-pillars.aiff',
+        narrationUrl: '/audio/narration/quick-pillars.mp3',
         postNarrationDwell: 1000
       },
       {
@@ -276,7 +276,7 @@ export const tours = {
         cameraPosition: { x: 50, y: 20, z: -30 },
         lookAt: { x: 40, y: 0, z: -20 },
         transitionDuration: 2500,
-        narrationUrl: '/audio/narration/quick-scenarios.aiff',
+        narrationUrl: '/audio/narration/quick-scenarios.mp3',
         postNarrationDwell: 1000
       },
       {
@@ -286,7 +286,7 @@ export const tours = {
         cameraPosition: { x: 0, y: 60, z: 80 },
         lookAt: { x: 0, y: 0, z: 0 },
         transitionDuration: 3000,
-        narrationUrl: '/audio/narration/quick-close.aiff',
+        narrationUrl: '/audio/narration/quick-close.mp3',
         postNarrationDwell: 1500
       }
     ]

@@ -1,0 +1,531 @@
+{
+  "youtube": {
+    "working": [
+      {
+        "url": "https://www.youtube.com/watch?v=YwELr8ir9qM",
+        "videoId": "YwELr8ir9qM",
+        "line": 3423
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Yb5ivvcTvRQ",
+        "videoId": "Yb5ivvcTvRQ",
+        "line": 3082
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=wupToqz1e2g",
+        "videoId": "wupToqz1e2g",
+        "line": 3117
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=1uIzS1uCOcE",
+        "videoId": "1uIzS1uCOcE",
+        "line": 3732
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=IfbOyw3CT6A",
+        "videoId": "IfbOyw3CT6A",
+        "line": 3178
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=365kJOsFd3w",
+        "videoId": "365kJOsFd3w",
+        "line": 3364
+      }
+    ],
+    "broken": []
+  },
+  "external": {
+    "working": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Futures_cone.svg",
+        "line": 3682
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Futures_studies",
+        "line": 40
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/SWOT_en.svg",
+        "line": 47
+      },
+      {
+        "url": "https://longnow.org/talks/",
+        "line": 53
+      },
+      {
+        "url": "https://www.futurepod.org/",
+        "line": 1884
+      },
+      {
+        "url": "https://podcasts.apple.com/us/podcast/foresight-institute-radio/id1573395849",
+        "line": 67
+      },
+      {
+        "url": "https://www.ted.com/talks/ari_wallach_3_ways_to_plan_for_the_very_long_term",
+        "line": 74
+      },
+      {
+        "url": "https://open.spotify.com/show/7L4pKlK6g9b7cNt8umUesJ",
+        "line": 82
+      },
+      {
+        "url": "https://www.iftf.org/forfuturereference",
+        "line": 89
+      },
+      {
+        "url": "https://www.pbs.org/show/a-brief-history-of-the-future/",
+        "line": 96
+      },
+      {
+        "url": "https://www.metafuture.org/video/tedxnoosa-2013-sohail-inayatullah-causal-layered-analysis/",
+        "line": 1657
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/UNESCO_logo.svg",
+        "line": 1688
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Stakeholder_analysis.png",
+        "line": 580
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Stakeholders_matrix.svg",
+        "line": 586
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Stakeholder_analysis",
+        "line": 592
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Stakeholder_theory#Stakeholder_salience",
+        "line": 599
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Environmental_scanning",
+        "line": 795
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Harvard_business_school_baker_library_2009a.JPG",
+        "line": 802
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Competitiveforces.svg",
+        "line": 808
+      },
+      {
+        "url": "https://foresightguide.com/horizon-scanning-frameworks/",
+        "line": 1951
+      },
+      {
+        "url": "https://www.itonics-innovation.com/blog/environmental-scanning",
+        "line": 821
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Strategic_foresight",
+        "line": 1012
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Igor_Ansoff%2C_1971.jpg",
+        "line": 1019
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Technology-Adoption-Lifecycle.png",
+        "line": 1168
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Diffusion_of_ideas.svg",
+        "line": 1174
+      },
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Futures_wheel_01.svg",
+        "line": 1180
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Braudel_time_scales.png",
+        "line": 1346
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Longue_dur%C3%A9e",
+        "line": 1352
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Fernand_Braudel_%281902-1985%29.jpg",
+        "line": 1359
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Kondratieff_Wave.svg",
+        "line": 1365
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Three_Horizons",
+        "line": 1371
+      },
+      {
+        "url": "https://www.h3uni.org/tutorial/three-horizons/",
+        "line": 1378
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Kondratieff_Wave.svg",
+        "line": 1559
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Kondratiev_wave",
+        "line": 1565
+      },
+      {
+        "url": "https://thefuturesworkshop.substack.com/p/episode-three-sohail-inayatullah",
+        "line": 1665
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Causal_layered_analysis",
+        "line": 1681
+      },
+      {
+        "url": "https://podcasts.apple.com/nz/podcast/sohail-inayatullah-visioning-the-futures/id1484698927?i=1000669027348",
+        "line": 1701
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Discourse_analysis",
+        "line": 1769
+      },
+      {
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S0016328719303556",
+        "line": 1776
+      },
+      {
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S0016328715001160",
+        "line": 1782
+      },
+      {
+        "url": "https://podcasts.apple.com/us/podcast/think-forward-conversations-with-futurists-innovators/id1736144515",
+        "line": 1891
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Scenario_matrix.png",
+        "line": 1898
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Scenario_planning",
+        "line": 1904
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Eisenhower_matrix.svg",
+        "line": 1911
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Herman_Kahn.jpg",
+        "line": 1917
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Peter_Schwartz_in_2022.jpg",
+        "line": 1923
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Rand_Corporation_logo.svg",
+        "line": 2435
+      },
+      {
+        "url": "https://hbr.org/podcast/2020/07/future-proofing-your-strategy-with-scenario-planning",
+        "line": 1935
+      },
+      {
+        "url": "https://longnow.org/seminars/02003/dec/12/the-art-of-the-really-long-view/",
+        "line": 1943
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Wild_card_(foresight)",
+        "line": 2141
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/FAA_8040.4B_Risk_matrix.svg",
+        "line": 2148
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Morphological_box.png",
+        "line": 2318
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Morphological_analysis_(problem-solving)",
+        "line": 2324
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/ETH-BIB-Zwicky%2C_Fritz_%281898-1974%29-Portrait_Schinz_B_0099_%28cropped%29.jpg",
+        "line": 2331
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Delphi_Method.png",
+        "line": 2422
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Delphi_method",
+        "line": 2428
+      },
+      {
+        "url": "https://www.rand.org/pubs/corporate_pubs/CP501.html",
+        "line": 2448
+      },
+      {
+        "url": "https://siarchives.si.edu/collections/siris_arc_217704",
+        "line": 2456
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Vision_Framework.svg",
+        "line": 2721
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Vision_statement",
+        "line": 2727
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Participatory_foresight",
+        "line": 2734
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Backcasting_vs_Forecasting.png",
+        "line": 2814
+      },
+      {
+        "url": "https://www.naturalstep.org/approach",
+        "line": 2820
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Backcasting",
+        "line": 2827
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Strategic_management",
+        "line": 3008
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Ansoff_Matrix.jpg",
+        "line": 3015
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Milky_Way_IR_Spitzer.jpg",
+        "line": 3089
+      },
+      {
+        "url": "https://www.bfi.org/about-fuller/resources/operating-manual",
+        "line": 3095
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Star_Trek#Philosophy_and_themes",
+        "line": 4156
+      },
+      {
+        "url": "https://archive.org/details/cosmos_1980",
+        "line": 3109
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Ray_Kurzweil",
+        "line": 3185
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Portrait_of_Ray_Kurzweil.png",
+        "line": 3192
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Alvin_Toffler",
+        "line": 3229
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Generation_timeline.svg",
+        "line": 3236
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Alvin_Toffler_02.jpg",
+        "line": 3242
+      },
+      {
+        "url": "https://www.dailymotion.com/video/xp1tiz",
+        "line": 3248
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Buckminster_Fuller",
+        "line": 3284
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Buckminster_Fuller_1917.jpg",
+        "line": 3291
+      },
+      {
+        "url": "https://archive.org/details/buckminsterfullereverythingiknow01",
+        "line": 3297
+      },
+      {
+        "url": "https://archive.org/details/World-of-B-Fuller-1971",
+        "line": 3305
+      },
+      {
+        "url": "https://www.pbs.org/wnet/americanmasters/masters/r-buckminster-fuller/",
+        "line": 3313
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Isaac_Asimov",
+        "line": 3351
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/34/Isaac.Asimov01.jpg",
+        "line": 3358
+      },
+      {
+        "url": "https://americanarchive.org/catalog/cpb-aacip-b821c782f7e",
+        "line": 3372
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Arthur_C._Clarke",
+        "line": 3410
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/Arthur_C._Clarke_%281982%29.jpg",
+        "line": 3417
+      },
+      {
+        "url": "https://archive.org/details/arthur.-c.-clarke.-mysterious.-world",
+        "line": 3431
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Gene_Roddenberry",
+        "line": 3470
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/16/Gene_Roddenberry_in_1976.jpg",
+        "line": 3477
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Michael_Crichton",
+        "line": 3514
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/MichaelCrichton.jpg",
+        "line": 3521
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Ursula_K._Le_Guin",
+        "line": 3555
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Ursula_K_Le_Guin.JPG",
+        "line": 3562
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/William_Gibson",
+        "line": 3598
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/William_Gibson_60th_birthday_portrait.jpg",
+        "line": 3605
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Neal_Stephenson",
+        "line": 3642
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Neal_Stephenson_2008_crop.jpg",
+        "line": 3649
+      },
+      {
+        "url": "https://thevoroscope.com/2017/02/24/the-futures-cone-use-and-history/",
+        "line": 3688
+      },
+      {
+        "url": "https://ourworldindata.org/ai-timelines",
+        "line": 3996
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/The_Singularity_Is_Near",
+        "line": 3746
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Representative_Concentration_Pathway",
+        "line": 3796
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Space_colonization",
+        "line": 3839
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/CRISPR",
+        "line": 3883
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Genetic_engineering#Ethics",
+        "line": 3890
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Societal_collapse",
+        "line": 3934
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Resilience_(ecology)",
+        "line": 3941
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Artificial_general_intelligence",
+        "line": 4003
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction",
+        "line": 4010
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/ITER",
+        "line": 4040
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Post-scarcity_economy",
+        "line": 4047
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Circular_economy",
+        "line": 4054
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Vertical_farming",
+        "line": 4061
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Sustainable_Development_Goals",
+        "line": 4091
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Planetary_defense",
+        "line": 4098
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Global_governance",
+        "line": 4105
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Spaceship_Earth",
+        "line": 4112
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Eudaimonia",
+        "line": 4142
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/The_Venus_Project",
+        "line": 4149
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Transhumanism",
+        "line": 4163
+      }
+    ],
+    "broken": []
+  },
+  "pdfs": {
+    "working": [
+      {
+        "url": "https://foresight.unglobalpulse.net/intergenerational-equity/wp-content/uploads/sites/4/2023/04/Tool3.pdf",
+        "line": 1709
+      },
+      {
+        "url": "https://www.rand.org/content/dam/rand/pubs/papers/2008/P3820.pdf",
+        "line": 2640
+      }
+    ],
+    "broken": []
+  }
+}
