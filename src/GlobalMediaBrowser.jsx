@@ -386,7 +386,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
           padding: '30px',
         }}>
           {filteredMedia.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 20px', color: '#888' }}>
+            <div style={{ textAlign: 'center', padding: '60px 20px', color: '#9AA5B8' }}>
               <div style={{ fontSize: '64px', marginBottom: '20px' }}>🔍</div>
               <div style={{ fontSize: '16px' }}>No media found matching your filters</div>
             </div>

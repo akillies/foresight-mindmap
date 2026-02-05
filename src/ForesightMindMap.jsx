@@ -2473,7 +2473,7 @@ const ForesightMindMap = () => {
                     }}
                   />
                   <span style={{
-                    color: audioEnabled ? COLORS.pink : '#666',
+                    color: audioEnabled ? COLORS.pink : '#8899AA',
                     fontSize: '10px',
                     fontWeight: '600',
                     letterSpacing: '1px',

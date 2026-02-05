@@ -361,7 +361,7 @@ const OverviewTab = ({ selectedNode }) => (
 const MediaTab = ({ selectedNode, onMediaClick }) => {
   if (!selectedNode.media || selectedNode.media.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '40px 20px', color: '#888' }}>
+      <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9AA5B8' }}>
         <div style={{ fontSize: '48px', marginBottom: '16px' }}>📭</div>
         <div style={{ fontSize: '14px' }}>No media items available for this node.</div>
       </div>
@@ -480,7 +480,7 @@ const ProcessTab = ({ selectedNode }) => {
 
   if (!processGuide) {
     return (
-      <div style={{ textAlign: 'center', padding: '40px 20px', color: '#888' }}>
+      <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9AA5B8' }}>
         <div style={{ fontSize: '48px', marginBottom: '16px' }}>📝</div>
         <div style={{ fontSize: '14px' }}>No process guide available for this methodology.</div>
       </div>
@@ -584,7 +584,7 @@ const ProcessTab = ({ selectedNode }) => {
 const CasesTab = ({ selectedNode }) => {
   if (!selectedNode.caseStudies || selectedNode.caseStudies.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '40px 20px', color: '#888' }}>
+      <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9AA5B8' }}>
         <div style={{ fontSize: '48px', marginBottom: '16px' }}>💼</div>
         <div style={{ fontSize: '14px' }}>No case studies available for this methodology.</div>
       </div>
