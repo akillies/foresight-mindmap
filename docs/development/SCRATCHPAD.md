@@ -9,19 +9,35 @@ This document serves as the **quick-reference continuity scratchpad** for ongoin
 ## Current Status
 
 ### Version & Branch
-- **Version**: v0.1 (Content Richness Overhaul Complete)
+- **Version**: v0.2 (Infrastructure & Refactor In Progress)
 - **Current Branch**: `main`
-- **Last Merged Feature**: `feature/content-richness-overhaul` (merged Dec 5, 2025)
-- **Build Status**: Production-ready, 324.65 KB gzipped
+- **Build Status**: Passing, 325 KB gzipped (Three.js chunked separately)
 - **Production URL**: https://futures.alexanderkline.com
-- **Hosting**: Vercel (already deployed)
+- **Hosting**: Vercel
 - **ElevenLabs Voice ID**: `kxiHSAoBC3AYooCDRGAY` (custom trained voice)
 
 ### Last Session
-- **Date**: February 5, 2025
-- **Focus**: v0.2 Content Polish - Media fixes, LCARS consistency, academic papers
+- **Date**: February 5, 2025 (Session 2)
+- **Focus**: Infrastructure setup, CTO review, component refactor
 - **Branch**: `main`
-- **Key Activity**: Bug fixes, content expansion, UI polish
+- **Key Activity**: CI/CD, security, testing, analytics, component split
+
+### Infrastructure Added (This Session)
+- **CI/CD**: GitHub Actions (`.github/workflows/ci.yml`)
+- **Security**: CSP headers, X-Frame-Options (`vercel.json`)
+- **Analytics**: Plausible (privacy-focused)
+- **Performance**: web-vitals (CLS, INP, LCP, FCP, TTFB)
+- **Error Tracking**: Sentry (ready, needs DSN in `.env.local`)
+- **Testing**: Vitest + 14 data integrity tests
+- **Bundle**: Chunked (Three.js + React vendor separate)
+
+### Component Refactor (In Progress)
+CTO agent splitting 3,184-line `ForesightMindMap.jsx` into:
+```
+src/scene/     - Three.js utilities (5 files)
+src/hooks/     - React hooks (5 files)
+src/ui/        - UI components (4 files)
+```
 
 ---
 
