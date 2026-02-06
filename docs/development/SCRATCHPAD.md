@@ -18,10 +18,10 @@ This document serves as the **quick-reference continuity scratchpad** for ongoin
 - **ElevenLabs Voice ID**: `kxiHSAoBC3AYooCDRGAY` (custom trained voice)
 
 ### Last Session
-- **Date**: January 28, 2026
-- **Focus**: Documentation audit and scratchpad creation
+- **Date**: February 5, 2025
+- **Focus**: v0.2 Content Polish - Media fixes, LCARS consistency, academic papers
 - **Branch**: `main`
-- **Key Activity**: Information architecture assessment
+- **Key Activity**: Bug fixes, content expansion, UI polish
 
 ---
 
@@ -48,8 +48,9 @@ This document serves as the **quick-reference continuity scratchpad** for ongoin
 - ✅ All 18 methodologies have enriched content
 - ✅ All have metadata (difficulty, time, group size, sectors, pitfalls)
 - ✅ All have process guides and case studies
-- ✅ 142+ media items curated and categorized
+- ✅ 108 total media items curated and categorized (19 videos, 24 diagrams, 38 articles, 16 papers, 11 podcasts)
 - ✅ 15 custom SVG diagrams created
+- ✅ 10 foundational academic papers added (Delphi, Scenarios, Weak Signals, Six Pillars, Backcasting, etc.)
 - ✅ Historical context and pioneers documented
 - ✅ Cross-pillar relationships mapped
 
@@ -189,7 +190,7 @@ npm run build
 
 ### Core Application
 - **Main Component**: `/src/ForesightMindMap.jsx` (3,744 lines)
-- **Data Structure**: `/src/mindMapData.js` (4,054 lines, 142+ media items)
+- **Data Structure**: `/src/mindMapData.js` (4,054 lines, 108 media items)
 - **App Entry**: `/src/App.jsx`, `/src/main.jsx`
 - **Styles**: `/src/index.css`
 
@@ -208,14 +209,38 @@ npm run build
 - **Narration Scripts**: `/src/tourNarration.js`
 - **Audio Files**: `/public/audio/narration/*.aiff` (19 files)
 
-### Documentation
+### Documentation (Restructured Feb 5, 2025)
+- **Master Index**: `/docs/00-INDEX.md` - Start here for navigation
 - **Master Spec**: `/Users/adminster/foresight/PROJECT_MASTER.md` (parent directory)
-- **Roadmap**: `/ROADMAP.md`
-- **README**: `/README.md`
-- **Content Guide**: `/CONTENT_STRUCTURE.md`
-- **Tour Docs**: `/TOUR_DEVELOPMENT.md`
-- **Session Notes**: `/SESSION_SUMMARY.md`
-- **This File**: `/SCRATCHPAD.md`
+- **README**: `/README.md` (project root)
+- **Session Notes**: `/SESSION_SUMMARY.md` (project root)
+- **This File**: `/docs/development/SCRATCHPAD.md`
+
+#### Vision
+- **Roadmap**: `/docs/vision/ROADMAP.md`
+
+#### Technical
+- **Architecture**: `/docs/technical/ARCHITECTURE.md`
+- **Content Structure**: `/docs/technical/CONTENT_STRUCTURE.md`
+- **Tour Development**: `/docs/technical/TOUR_DEVELOPMENT.md`
+
+#### Development
+- **Test Plan**: `/docs/development/TEST_PLAN.md`
+
+#### Content
+- **Narration Scripts**: `/docs/content/NARRATION_SCRIPTS.md`
+- **Custom Diagrams**: `/docs/content/CUSTOM_DIAGRAMS.md`
+
+#### Decisions
+- **ADR Index**: `/docs/decisions/README.md`
+
+#### Sessions
+- **Session Log Index**: `/docs/sessions/README.md`
+- **Latest Session**: `/docs/sessions/2025-02-05-v02-content-polish.md`
+
+#### Archive
+- **QA Reports**: `/docs/archive/qa/` (5 files)
+- **Audit Data**: `/docs/archive/data/MEDIA_AUDIT_REPORT.json`
 
 ---
 
@@ -252,11 +277,49 @@ npm run build
 
 ---
 
+## Session History
+
+### February 5, 2025 - v0.2 Content Polish
+**Commits**: e187b52, 44db347, 337988b
+
+**Accomplishments**:
+1. **Fixed FeaturedContentDashboard counter bug** - Was looking for `level2` key instead of `methodologies`, now shows correct counts: 19 VIDEOS, 24 DIAGRAMS, 38 ARTICLES, 16 PAPERS, 11 PODCASTS, 108 TOTAL
+
+2. **Removed all emojis for LCARS consistency** - Updated DiagramGallery.jsx, GlobalMediaBrowser.jsx, TourUI.jsx, EnhancedInfoPanel.jsx, ForesightMindMap.jsx. Replaced with text labels (VID, IMG, ART, DOC, POD) or LCARS-style [NO RESULTS] messages
+
+3. **Added 10 foundational academic papers** (documents went from 6 to 16):
+   - Dalkey & Helmer: Delphi Method (RAND Corporation, 1963)
+   - Pierre Wack: Scenarios: Uncharted Waters Ahead & Shooting the Rapids (HBR, 1985)
+   - Igor Ansoff: Managing Strategic Surprise by Response to Weak Signals (1975)
+   - Sohail Inayatullah: Six Pillars: Futures Thinking for Transforming (Foresight, 2008)
+   - John Robinson: Future Under Glass: Backcasting (Futures, 1990)
+   - Jim Dator: Alternative Futures at the Manoa School (Journal of Futures Studies, 2009)
+   - Jerome Glenn: The Futures Wheel (2009)
+
+4. **LCARS design pass on GlobalMediaBrowser**:
+   - Added podcast color (orange: #FF9966)
+   - Redesigned cards with type badge headers
+   - Added left accent borders
+   - Fixed methodologies key reference
+
+5. **Fixed DiagramGallery** - Was empty because of same `level2` bug, now shows all 15 diagrams correctly
+
+6. **Updated About modal**:
+   - Added "Best experienced on desktop browser" note
+   - Added audio player placeholder (Track 1/Track 2 buttons, coming soon)
+
+7. **Added LCARS loading spinner** for diagram images in FeaturedContentDashboard
+
+8. **Documentation audit completed** - Identified need for /docs restructure
+
+**Status**: Build passing, 108 total media items, all 15 diagrams displaying, ready for documentation restructure
+
+---
+
 ## Known Issues
 
 ### Active Bugs
-- **Dead Links / Broken Videos**: Many media items have broken YouTube links or dead URLs (needs full audit)
-- **Asset Shortage**: Content feels thin in places, need more compelling media
+- **None identified** - Previous media counter and diagram display bugs resolved
 - **Tour Controls Disappearing**: Known intermittent bug (see TEST_PLAN.md)
 
 ### Technical Debt
@@ -408,7 +471,7 @@ ForesightMindMap.jsx (3,437 lines) - Main orchestrator
 | `AudioManager.js` | Binaural audio, TTS, volume | Singleton |
 | `TourManager.js` | Tour state machine, segments | Singleton |
 | `TourCameraController.js` | Camera animation paths | Utility |
-| `mindMapData.js` | 18 methodologies, 142+ media | Static data |
+| `mindMapData.js` | 18 methodologies, 108 media | Static data |
 | `tourData.js` | Tour segments, camera positions | Static data |
 
 ### State Management
@@ -429,7 +492,7 @@ ForesightMindMap.jsx (3,437 lines) - Main orchestrator
 4. **20+ useState hooks** - Consider useReducer or Zustand
 
 ### Full Architecture Details
-See **ARCHITECTURE.md** for comprehensive diagrams, data flow, and recommendations.
+See `/docs/technical/ARCHITECTURE.md` for comprehensive diagrams, data flow, and recommendations.
 
 ---
 
@@ -452,14 +515,22 @@ See **ARCHITECTURE.md** for comprehensive diagrams, data flow, and recommendatio
 ## Resources & References
 
 ### Documentation Hierarchy
+**Note**: Documentation was restructured on Feb 5, 2025. See `/docs/00-INDEX.md` for complete navigation.
+
 1. **PROJECT_MASTER.md** (parent dir) - Complete vision, technical spec, philosophy (2,868 lines)
-2. **ARCHITECTURE.md** - System architecture, components, data flow, tech debt (NEW)
-3. **ROADMAP.md** - Development phases, feature planning (456 lines)
-4. **SCRATCHPAD.md** (this file) - Day-to-day continuity and quick reference
-5. **SESSION_SUMMARY.md** - Detailed last session notes (432 lines)
-6. **README.md** - User-facing project overview (358 lines)
-7. **TOUR_DEVELOPMENT.md** - Tour system technical details (423 lines)
-8. **CONTENT_STRUCTURE.md** - Data structure guide for methodologies (239 lines)
+2. **README.md** (project root) - User-facing project overview (358 lines)
+3. **SESSION_SUMMARY.md** (project root) - Detailed last session notes (432 lines)
+4. `/docs/00-INDEX.md` - Master documentation index and navigation
+5. `/docs/vision/ROADMAP.md` - Development phases, feature planning (456 lines)
+6. `/docs/technical/ARCHITECTURE.md` - System architecture, components, data flow, tech debt
+7. `/docs/technical/CONTENT_STRUCTURE.md` - Data structure guide for methodologies (239 lines)
+8. `/docs/technical/TOUR_DEVELOPMENT.md` - Tour system technical details (423 lines)
+9. `/docs/development/SCRATCHPAD.md` (this file) - Day-to-day continuity and quick reference
+10. `/docs/development/TEST_PLAN.md` - QA strategy and test cases
+11. `/docs/content/NARRATION_SCRIPTS.md` - Tour audio scripts
+12. `/docs/content/CUSTOM_DIAGRAMS.md` - SVG diagram specifications
+13. `/docs/decisions/` - Architecture Decision Records (ADRs)
+14. `/docs/sessions/` - Development session logs
 
 ### External Links
 - **The Boundary Layer**: https://theboundarylayer.substack.com
@@ -470,6 +541,6 @@ See **ARCHITECTURE.md** for comprehensive diagrams, data flow, and recommendatio
 
 ---
 
-**Last Updated**: January 28, 2026
+**Last Updated**: February 5, 2025
 **Updated By**: Documentation Architect AI
 **Next Review**: End of next development session
