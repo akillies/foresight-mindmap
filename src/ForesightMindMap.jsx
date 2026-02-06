@@ -62,30 +62,34 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: '#000',
-          color: '#5C88DA',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          fontFamily: 'monospace',
-          padding: '40px',
-        }}>
-          <h1 style={{ color: '#FF6B9D', marginBottom: '20px' }}>SYSTEM ERROR</h1>
+        <div
+          role="alert"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: COLORS.background,
+            color: COLORS.primary,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            fontFamily: 'monospace',
+            padding: '40px',
+          }}
+        >
+          <h1 style={{ color: COLORS.pink, marginBottom: '20px' }}>SYSTEM ERROR</h1>
           <p style={{ maxWidth: '600px', lineHeight: '1.6', marginBottom: '20px' }}>
             A critical rendering error occurred. Please refresh the page to continue.
           </p>
           <button
             onClick={() => window.location.reload()}
+            aria-label="Reload the application"
             style={{
-              background: '#5C88DA',
-              color: '#000',
+              background: COLORS.primary,
+              color: COLORS.background,
               border: 'none',
               padding: '12px 24px',
               borderRadius: '20px',
@@ -93,14 +97,23 @@ class ErrorBoundary extends Component {
               fontWeight: '700',
               cursor: 'pointer',
               fontFamily: 'monospace',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.02)';
+              e.currentTarget.style.boxShadow = `0 0 20px ${COLORS.primary}60`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = 'none';
             }}
           >
             RELOAD APPLICATION
           </button>
           <details style={{ marginTop: '40px', maxWidth: '800px' }}>
-            <summary style={{ cursor: 'pointer', color: '#FFCC66' }}>Technical Details</summary>
+            <summary style={{ cursor: 'pointer', color: COLORS.secondary }}>Technical Details</summary>
             <pre style={{
-              background: '#111',
+              background: COLORS.panel,
               padding: '20px',
               borderRadius: '10px',
               overflow: 'auto',
@@ -159,9 +172,11 @@ const ForesightMindMap = () => {
     selectedMedia,
     imageError,
     setImageError,
+    warningToast,
     handleNodeClick,
     updateHoveredNode,
     closeMedia,
+    dismissWarning,
   } = useNodeInteraction();
 
   // Three.js scene hook
@@ -307,7 +322,7 @@ const ForesightMindMap = () => {
           width: '100%',
           height: '100%',
           cursor: 'grab',
-          background: '#000000',
+          background: COLORS.background,
         }}
       />
 
@@ -365,10 +380,74 @@ const ForesightMindMap = () => {
       {/* Global Styles */}
       <GlobalStyles />
 
+      {/* Performance Warning Toast - LCARS styled */}
+      {warningToast && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          onClick={dismissWarning}
+          style={{
+            position: 'fixed',
+            bottom: '24px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 10000,
+            display: 'flex',
+            alignItems: 'stretch',
+            fontFamily: '"Courier New", monospace',
+            cursor: 'pointer',
+            animation: 'lcars-toast-in 0.3s ease-out',
+            maxWidth: '90vw',
+          }}
+        >
+          {/* LCARS left bar accent */}
+          <div style={{
+            width: '8px',
+            borderRadius: '4px 0 0 4px',
+            background: warningToast.level === 'error' ? COLORS.pink : COLORS.warning,
+          }} />
+          <div style={{
+            background: COLORS.panel,
+            border: `1px solid ${warningToast.level === 'error' ? COLORS.pink : COLORS.warning}`,
+            borderLeft: 'none',
+            borderRadius: '0 8px 8px 0',
+            padding: '12px 20px 12px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+          }}>
+            <span style={{
+              color: warningToast.level === 'error' ? COLORS.pink : COLORS.warning,
+              fontSize: '11px',
+              fontWeight: '700',
+              letterSpacing: '1.5px',
+              textTransform: 'uppercase',
+              whiteSpace: 'nowrap',
+            }}>
+              {warningToast.level === 'error' ? 'ALERT' : 'ADVISORY'}
+            </span>
+            <span style={{
+              color: COLORS.text,
+              fontSize: '12px',
+              lineHeight: '1.4',
+              letterSpacing: '0.5px',
+            }}>
+              {warningToast.message}
+            </span>
+          </div>
+          <style>{`
+            @keyframes lcars-toast-in {
+              from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+              to { opacity: 1; transform: translateX(-50%) translateY(0); }
+            }
+          `}</style>
+        </div>
+      )}
+
       {/* Timeline View */}
       {timelineVisible && (
         <div id="timeline-panel">
-          <Suspense fallback={<div style={{ padding: '20px', color: '#fff' }}>Loading timeline...</div>}>
+          <Suspense fallback={<div style={{ padding: '20px', color: COLORS.text }}>Loading timeline...</div>}>
             <TimelineView onClose={() => setTimelineVisible(false)} />
           </Suspense>
         </div>

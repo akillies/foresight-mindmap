@@ -1,18 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import mindMapData from './mindMapData';
-
-// LCARS color palette
-const COLORS = {
-  primary: '#5C88DA',
-  secondary: '#FF6B9D',
-  accent: '#FFCC66',
-  highlight: '#99CCFF',
-  pink: '#CC99CC',
-  success: '#77DD77',
-  warning: '#FFB366',
-  text: '#E8F1FF',
-  panel: '#1A1A2E',
-};
+import { COLORS } from './constants';
 
 /**
  * Diagram Gallery
@@ -143,7 +131,7 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
           maxWidth: '1400px',
           height: '90vh',
           background: COLORS.panel,
-          border: `3px solid ${COLORS.accent}`,
+          border: `3px solid ${COLORS.secondary}`,
           borderRadius: '20px',
           display: 'flex',
           flexDirection: 'column',
@@ -152,7 +140,7 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
       >
         {/* Header */}
         <div style={{
-          background: `linear-gradient(135deg, ${COLORS.accent} 0%, ${COLORS.secondary} 100%)`,
+          background: `linear-gradient(135deg, ${COLORS.secondary} 0%, ${COLORS.pink} 100%)`,
           padding: '20px 30px',
           display: 'flex',
           justifyContent: 'space-between',
@@ -162,7 +150,7 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
             <h2 style={{
               margin: '0 0 8px 0',
               fontSize: '28px',
-              color: '#000',
+              color: COLORS.background,
               letterSpacing: '3px',
               fontWeight: '700',
               fontFamily: 'monospace',
@@ -171,7 +159,7 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
             </h2>
             <div style={{
               fontSize: '13px',
-              color: '#00000080',
+              color: `${COLORS.background}80`,
               fontWeight: '600',
               letterSpacing: '1px',
             }}>
@@ -180,15 +168,17 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
           </div>
           <button
             onClick={onClose}
+            aria-label="Close diagram gallery"
             style={{
-              background: '#000',
+              background: COLORS.background,
               border: 'none',
-              color: '#fff',
+              color: COLORS.text,
               fontSize: '24px',
               width: '40px',
               height: '40px',
               borderRadius: '50%',
               cursor: 'pointer',
+              transition: 'all 0.2s',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -201,8 +191,8 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
         {/* Filters */}
         <div style={{
           padding: '20px 30px',
-          background: '#00000040',
-          borderBottom: `2px solid ${COLORS.accent}40`,
+          background: `${COLORS.background}40`,
+          borderBottom: `2px solid ${COLORS.secondary}40`,
           display: 'flex',
           gap: '20px',
           alignItems: 'flex-end',
@@ -211,7 +201,7 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
           <div style={{ flex: 1 }}>
             <label style={{
               fontSize: '10px',
-              color: COLORS.accent,
+              color: COLORS.secondary,
               fontWeight: '700',
               letterSpacing: '1.5px',
               marginBottom: '8px',
@@ -226,9 +216,9 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
                   key={key}
                   onClick={() => setSelectedCategory(key)}
                   style={{
-                    background: selectedCategory === key ? COLORS.accent : 'transparent',
-                    border: `2px solid ${COLORS.accent}`,
-                    color: selectedCategory === key ? '#000' : COLORS.accent,
+                    background: selectedCategory === key ? COLORS.secondary : 'transparent',
+                    border: `2px solid ${COLORS.secondary}`,
+                    color: selectedCategory === key ? COLORS.background : COLORS.secondary,
                     padding: '8px 16px',
                     borderRadius: '8px',
                     fontSize: '11px',
@@ -249,7 +239,7 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
           <div style={{ width: '300px' }}>
             <label style={{
               fontSize: '10px',
-              color: COLORS.accent,
+              color: COLORS.secondary,
               fontWeight: '700',
               letterSpacing: '1.5px',
               marginBottom: '8px',
@@ -265,9 +255,9 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 width: '100%',
-                background: '#000',
+                background: COLORS.background,
                 border: `2px solid ${COLORS.primary}`,
-                color: '#fff',
+                color: COLORS.text,
                 padding: '10px 12px',
                 borderRadius: '8px',
                 fontSize: '12px',
@@ -284,8 +274,8 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
           padding: '30px',
         }}>
           {filteredDiagrams.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '80px 20px', color: '#9AA5B8' }}>
-              <div style={{ fontSize: '48px', marginBottom: '20px', color: COLORS.accent, fontFamily: 'monospace', fontWeight: '700' }}>[NO RESULTS]</div>
+            <div style={{ textAlign: 'center', padding: '80px 20px', color: COLORS.textMuted }}>
+              <div style={{ fontSize: '48px', marginBottom: '20px', color: COLORS.secondary, fontFamily: 'monospace', fontWeight: '700' }}>[NO RESULTS]</div>
               <div style={{ fontSize: '18px', fontWeight: '600' }}>No diagrams found</div>
               <div style={{ fontSize: '13px', marginTop: '8px' }}>Try adjusting your filters</div>
             </div>
@@ -310,25 +300,25 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
                     onClose();
                   }}
                   style={{
-                    background: `${COLORS.accent}10`,
-                    border: `3px solid ${COLORS.accent}40`,
+                    background: `${COLORS.secondary}10`,
+                    border: `3px solid ${COLORS.secondary}40`,
                     borderRadius: '15px',
                     padding: '0',
                     cursor: 'pointer',
                     transition: 'all 0.3s',
-                    color: '#fff',
+                    color: COLORS.text,
                     fontFamily: 'inherit',
                     overflow: 'hidden',
                     display: 'flex',
                     flexDirection: 'column',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = COLORS.accent;
+                    e.currentTarget.style.borderColor = COLORS.secondary;
                     e.currentTarget.style.transform = 'translateY(-6px)';
-                    e.currentTarget.style.boxShadow = `0 12px 30px ${COLORS.accent}40`;
+                    e.currentTarget.style.boxShadow = `0 12px 30px ${COLORS.secondary}40`;
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = `${COLORS.accent}40`;
+                    e.currentTarget.style.borderColor = `${COLORS.secondary}40`;
                     e.currentTarget.style.transform = 'translateY(0)';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
@@ -342,7 +332,7 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     padding: '20px',
-                    borderBottom: `3px solid ${COLORS.accent}40`,
+                    borderBottom: `3px solid ${COLORS.secondary}40`,
                   }}>
                     <img
                       src={diagram.url}
@@ -360,7 +350,7 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
                     <div style={{
                       fontSize: '16px',
                       fontWeight: '700',
-                      color: COLORS.accent,
+                      color: COLORS.secondary,
                       marginBottom: '10px',
                       lineHeight: '1.3',
                       letterSpacing: '0.5px',
@@ -371,7 +361,7 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
                     {diagram.description && (
                       <div style={{
                         fontSize: '12px',
-                        color: '#b8c5d8',
+                        color: COLORS.textDim,
                         lineHeight: '1.5',
                         marginBottom: '12px',
                         display: '-webkit-box',
@@ -399,9 +389,9 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
                       </span>
 
                       <span style={{
-                        background: `${COLORS.success}30`,
-                        border: `1px solid ${COLORS.success}60`,
-                        color: COLORS.success,
+                        background: `${COLORS.successBright}30`,
+                        border: `1px solid ${COLORS.successBright}60`,
+                        color: COLORS.successBright,
                         padding: '4px 10px',
                         borderRadius: '6px',
                         fontSize: '10px',
@@ -416,13 +406,13 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
                     <div style={{
                       marginTop: '15px',
                       padding: '10px',
-                      background: `${COLORS.accent}20`,
+                      background: `${COLORS.secondary}20`,
                       borderRadius: '8px',
                       textAlign: 'center',
                       fontSize: '11px',
                       fontWeight: '700',
                       letterSpacing: '1.5px',
-                      color: COLORS.accent,
+                      color: COLORS.secondary,
                     }}>
                       CLICK TO VIEW FULL SIZE
                     </div>

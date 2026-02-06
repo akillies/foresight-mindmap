@@ -295,31 +295,40 @@ export function createMediaNodes(scene, parentNode, nodesRef, connectionsRef) {
 export function removeChildNodes(scene, parentNode, nodesRef, connectionsRef) {
   const parent = parentNode.userData;
 
-  // Find all child nodes and media nodes
-  const nodesToRemove = nodesRef.filter(node => {
-    return node.userData.parent === parent.id ||
-           node.userData.parentId === parent.id ||
-           (node.userData.isMedia && node.userData.parentNodeId === parent.id);
+  // Iteratively collect all descendants (prevents stack overflow on deep trees)
+  const idsToRemove = new Set();
+  const queue = [parent.id];
+
+  while (queue.length > 0) {
+    const currentId = queue.shift();
+    for (let i = 0; i < nodesRef.length; i++) {
+      const data = nodesRef[i].userData;
+      if (data.parent === currentId || data.parentId === currentId) {
+        const childId = data.id || data.mediaId;
+        if (childId && !idsToRemove.has(childId)) {
+          idsToRemove.add(childId);
+          queue.push(childId);
+        }
+      }
+    }
+  }
+
+  const uniqueNodesToRemove = nodesRef.filter(node => {
+    const id = node.userData.id || node.userData.mediaId;
+    return idsToRemove.has(id);
   });
-
-  // Also remove children of children recursively
-  const getDescendants = (parentId) => {
-    return nodesRef.filter(node =>
-      node.userData.parent === parentId || node.userData.parentId === parentId
-    );
-  };
-
-  // Collect all descendants
-  const allNodesToRemove = [...nodesToRemove];
-  nodesToRemove.forEach(node => {
-    const descendants = getDescendants(node.userData.id);
-    allNodesToRemove.push(...descendants);
-  });
-
-  // Remove duplicates
-  const uniqueNodesToRemove = [...new Set(allNodesToRemove)];
 
   uniqueNodesToRemove.forEach(node => {
+    // Dispose child meshes (core, inner glow, outer glow) before removing parent
+    if (node.children && node.children.length > 0) {
+      // Iterate in reverse since removal modifies the array
+      for (let i = node.children.length - 1; i >= 0; i--) {
+        const child = node.children[i];
+        if (child.geometry) child.geometry.dispose();
+        if (child.material) child.material.dispose();
+        node.remove(child);
+      }
+    }
     scene.remove(node);
     if (node.geometry) node.geometry.dispose();
     if (node.material) node.material.dispose();
@@ -330,11 +339,10 @@ export function removeChildNodes(scene, parentNode, nodesRef, connectionsRef) {
   nodesRef.length = 0;
   nodesRef.push(...nodesToKeep);
 
-  // Remove connections by checking node IDs instead of positions
-  const removedNodeIds = new Set(uniqueNodesToRemove.map(node => node.userData.id));
+  // Remove connections by checking node IDs (uses idsToRemove which includes mediaIds)
   const connectionsToRemove = connectionsRef.filter(conn => {
     const { parentId, childId } = conn.userData;
-    return removedNodeIds.has(parentId) || removedNodeIds.has(childId);
+    return idsToRemove.has(parentId) || idsToRemove.has(childId);
   });
 
   connectionsToRemove.forEach(conn => {
@@ -357,22 +365,60 @@ export function removeChildNodes(scene, parentNode, nodesRef, connectionsRef) {
 }
 
 /**
- * Helper to get all descendant node IDs recursively
+ * Helper to get all descendant node IDs iteratively (prevents stack overflow on deep trees)
  * @param {string} nodeId - The parent node ID
  * @param {THREE.Mesh[]} nodesRef - Array of node references
  * @returns {string[]} Array of descendant IDs
  */
 export function getDescendantIds(nodeId, nodesRef) {
   const descendantIds = [];
-  const collectDescendants = (parentId) => {
-    nodesRef.forEach(node => {
-      const data = node.userData;
-      if (data.parent === parentId || data.parentId === parentId) {
-        descendantIds.push(data.id);
-        collectDescendants(data.id);
+  const queue = [nodeId];
+  const visited = new Set();
+
+  while (queue.length > 0) {
+    const currentId = queue.shift();
+    if (visited.has(currentId)) continue;
+    visited.add(currentId);
+
+    for (let i = 0; i < nodesRef.length; i++) {
+      const data = nodesRef[i].userData;
+      const childId = data.id || data.mediaId;
+      if ((data.parent === currentId || data.parentId === currentId) && childId && !visited.has(childId)) {
+        descendantIds.push(childId);
+        queue.push(childId);
       }
-    });
-  };
-  collectDescendants(nodeId);
+    }
+  }
+
   return descendantIds;
+}
+
+/**
+ * Compute the depth of a node by walking its parent chain.
+ * Returns 0 for root/level1, 1 for their children, etc.
+ * Uses iterative approach to prevent stack overflow.
+ * @param {string} nodeId - Node ID to check
+ * @param {THREE.Mesh[]} nodesRef - Array of node references
+ * @returns {number} Depth of the node
+ */
+export function getNodeDepth(nodeId, nodesRef) {
+  let depth = 0;
+  let currentId = nodeId;
+  const visited = new Set();
+
+  while (currentId) {
+    if (visited.has(currentId)) break; // circular reference guard
+    visited.add(currentId);
+
+    const node = nodesRef.find(n => (n.userData.id === currentId || n.userData.mediaId === currentId));
+    if (!node) break;
+
+    const parentId = node.userData.parent || node.userData.parentId;
+    if (!parentId) break;
+
+    depth++;
+    currentId = parentId;
+  }
+
+  return depth;
 }

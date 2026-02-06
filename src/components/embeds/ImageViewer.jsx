@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-
-const COLORS = {
-  image: '#FFCC66',
-  text: '#E8F1FF',
-  muted: '#8899AA',
-};
+import { COLORS } from '../../constants';
 
 /**
  * Image Viewer Component
@@ -26,8 +21,8 @@ const ImageViewer = ({
     return (
       <div
         style={{
-          background: `${COLORS.image}15`,
-          border: `2px solid ${COLORS.image}40`,
+          background: `${COLORS.secondary}15`,
+          border: `2px solid ${COLORS.secondary}40`,
           borderRadius: '12px',
           padding: '40px',
           textAlign: 'center',
@@ -39,7 +34,7 @@ const ImageViewer = ({
         <div style={{ color: COLORS.text, marginBottom: '8px', fontSize: '16px' }}>
           {title}
         </div>
-        <div style={{ color: COLORS.muted, fontSize: '13px' }}>
+        <div style={{ color: COLORS.textMuted, fontSize: '13px' }}>
           Image could not be loaded
         </div>
       </div>
@@ -77,7 +72,7 @@ const ImageViewer = ({
       {description && (
         <div
           style={{
-            color: COLORS.muted,
+            color: COLORS.textMuted,
             fontSize: '13px',
             lineHeight: '1.5',
             marginTop: '12px',
@@ -96,14 +91,14 @@ const ImageViewer = ({
           alignItems: 'center',
           marginTop: '12px',
           paddingTop: '12px',
-          borderTop: `1px solid ${COLORS.image}30`,
+          borderTop: `1px solid ${COLORS.secondary}30`,
           fontFamily: 'monospace',
           fontSize: '11px',
         }}
       >
-        <span style={{ color: COLORS.muted, letterSpacing: '1px' }}>
+        <span style={{ color: COLORS.textMuted, letterSpacing: '1px' }}>
           SOURCE:{' '}
-          <span style={{ color: COLORS.image }}>
+          <span style={{ color: COLORS.secondary }}>
             {source?.toUpperCase() || 'LOCAL DIAGRAM'}
           </span>
         </span>
@@ -111,8 +106,8 @@ const ImageViewer = ({
           onClick={() => setIsZoomed(!isZoomed)}
           style={{
             background: 'transparent',
-            border: `1px solid ${COLORS.image}`,
-            color: COLORS.image,
+            border: `1px solid ${COLORS.secondary}`,
+            color: COLORS.secondary,
             padding: '6px 12px',
             borderRadius: '6px',
             fontSize: '10px',

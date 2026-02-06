@@ -25,6 +25,7 @@ export {
   createMediaNodes,
   removeChildNodes,
   getDescendantIds,
+  getNodeDepth,
 } from './NodeFactory';
 
 export {

@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import { COLORS } from '../constants';
-import AudioControls from './AudioControls';
+import MusicSelectionPanel from './MusicSelectionPanel';
 
 /**
  * Control Panel Component
@@ -63,7 +63,7 @@ export function ControlPanel({
           borderRadius: isOpen ? '20px 20px 0 0' : '20px',
           fontSize: '16px',
           fontWeight: '700',
-          color: '#000000',
+          color: COLORS.background,
           letterSpacing: '3px',
           textAlign: 'center',
           fontFamily: 'monospace',
@@ -83,7 +83,7 @@ export function ControlPanel({
       {/* Main Panel */}
       {isOpen && (
         <div style={{
-          background: '#000000',
+          background: COLORS.background,
           border: `4px solid ${COLORS.primary}`,
           borderTop: 'none',
           borderRadius: '0 0 20px 20px',
@@ -132,7 +132,7 @@ export function ControlPanel({
               borderRadius: '15px',
               fontSize: '11px',
               fontWeight: '700',
-              color: '#000000',
+              color: COLORS.background,
               letterSpacing: '1px',
               marginBottom: '6px',
               fontFamily: 'monospace',
@@ -145,7 +145,7 @@ export function ControlPanel({
               borderRadius: '15px',
               fontSize: '11px',
               fontWeight: '700',
-              color: '#000000',
+              color: COLORS.background,
               letterSpacing: '1px',
               marginBottom: '6px',
               fontFamily: 'monospace',
@@ -158,7 +158,7 @@ export function ControlPanel({
               borderRadius: '15px',
               fontSize: '11px',
               fontWeight: '700',
-              color: '#000000',
+              color: COLORS.background,
               letterSpacing: '1px',
               marginBottom: '6px',
               fontFamily: 'monospace',
@@ -171,7 +171,7 @@ export function ControlPanel({
               borderRadius: '15px',
               fontSize: '11px',
               fontWeight: '700',
-              color: '#000000',
+              color: COLORS.background,
               letterSpacing: '1px',
               fontFamily: 'monospace',
             }}>
@@ -259,7 +259,7 @@ export function ControlPanel({
               width: '100%',
               background: timelineVisible ? COLORS.accent : 'transparent',
               border: `3px solid ${COLORS.accent}`,
-              color: timelineVisible ? '#000000' : COLORS.accent,
+              color: timelineVisible ? COLORS.background : COLORS.accent,
               padding: '12px',
               borderRadius: '15px',
               fontSize: '12px',
@@ -294,7 +294,7 @@ export function ControlPanel({
               width: '100%',
               background: showRelationships ? COLORS.success : 'transparent',
               border: `3px solid ${COLORS.success}`,
-              color: showRelationships ? '#000000' : COLORS.success,
+              color: showRelationships ? COLORS.background : COLORS.success,
               padding: '12px',
               borderRadius: '15px',
               fontSize: '12px',
@@ -325,8 +325,8 @@ export function ControlPanel({
             Display connections between methodologies across different strategic foresight pillars
           </div>
 
-          {/* Audio Controls */}
-          <AudioControls
+          {/* Music Selection Panel */}
+          <MusicSelectionPanel
             audioEnabled={audioEnabled}
             setAudioEnabled={setAudioEnabled}
             audioPreset={audioPreset}
@@ -345,7 +345,7 @@ export function ControlPanel({
             alignItems: 'center',
             gap: '10px',
             padding: '8px 12px',
-            background: 'rgba(92, 136, 218, 0.1)',
+            background: `${COLORS.primary}1A`,
             borderRadius: '10px',
             border: `1px solid ${COLORS.primary}`,
           }}>

@@ -1,17 +1,5 @@
 import React, { useState } from 'react';
-
-// LCARS color palette
-const COLORS = {
-  primary: '#5C88DA',
-  secondary: '#FF6B9D',
-  accent: '#FFCC66',
-  highlight: '#99CCFF',
-  pink: '#CC99CC',
-  success: '#77DD77',
-  warning: '#FFB366',
-  text: '#E8F1FF',
-  panel: '#1A1A2E',
-};
+import { COLORS } from './constants';
 
 /**
  * Enhanced Info Panel with Tabs
@@ -50,7 +38,7 @@ const EnhancedInfoPanel = ({ selectedNode, isOpen, onClose, onToggle, onMediaCli
         overflowY: 'auto',
         borderLeft: `2px solid ${selectedNode.color || COLORS.primary}`,
         color: COLORS.text,
-        fontFamily: 'Inter, sans-serif',
+        fontFamily: 'monospace',
         transition: 'right 0.3s ease',
         boxShadow: `-10px 0 40px ${selectedNode.color || COLORS.primary}30`,
         zIndex: 100,
@@ -70,7 +58,7 @@ const EnhancedInfoPanel = ({ selectedNode, isOpen, onClose, onToggle, onMediaCli
           background: selectedNode.color || COLORS.primary,
           border: 'none',
           borderRadius: '8px 0 0 8px',
-          color: '#000',
+          color: COLORS.background,
           fontSize: '20px',
           cursor: 'pointer',
           display: 'flex',
@@ -158,7 +146,7 @@ const EnhancedInfoPanel = ({ selectedNode, isOpen, onClose, onToggle, onMediaCli
         <p style={{
           fontSize: '16px',
           lineHeight: '1.6',
-          color: '#b8c5d8',
+          color: COLORS.textDim,
           marginBottom: '20px',
         }}>
           {selectedNode.description}
@@ -181,7 +169,7 @@ const EnhancedInfoPanel = ({ selectedNode, isOpen, onClose, onToggle, onMediaCli
                   : 'transparent',
                 border: 'none',
                 borderBottom: activeTab === tab.id ? `3px solid ${selectedNode.color || COLORS.primary}` : '3px solid transparent',
-                color: activeTab === tab.id ? selectedNode.color || COLORS.primary : '#888',
+                color: activeTab === tab.id ? selectedNode.color || COLORS.primary : COLORS.textMuted,
                 padding: '12px 16px',
                 fontSize: '11px',
                 fontWeight: '700',
@@ -201,7 +189,7 @@ const EnhancedInfoPanel = ({ selectedNode, isOpen, onClose, onToggle, onMediaCli
               }}
               onMouseLeave={(e) => {
                 if (activeTab !== tab.id) {
-                  e.target.style.color = '#888';
+                  e.target.style.color = COLORS.textMuted;
                   e.target.style.background = 'transparent';
                 }
               }}
@@ -211,7 +199,7 @@ const EnhancedInfoPanel = ({ selectedNode, isOpen, onClose, onToggle, onMediaCli
               {tab.count > 0 && (
                 <span style={{
                   background: selectedNode.color || COLORS.primary,
-                  color: '#000',
+                  color: COLORS.background,
                   borderRadius: '10px',
                   padding: '2px 6px',
                   fontSize: '10px',
@@ -243,7 +231,7 @@ const OverviewTab = ({ selectedNode }) => (
     {selectedNode.pioneers && selectedNode.pioneers.length > 0 && (
       <section aria-labelledby="pioneers-heading" style={{ marginBottom: '24px' }}>
         <h3 style={{
-          color: COLORS.secondary,
+          color: COLORS.pink,
           fontSize: '12px',
           letterSpacing: '2px',
           marginBottom: '12px',
@@ -274,7 +262,7 @@ const OverviewTab = ({ selectedNode }) => (
               </div>
               <div style={{
                 fontSize: '11px',
-                color: COLORS.secondary,
+                color: COLORS.pink,
                 marginBottom: '6px',
                 fontStyle: 'italic',
               }}>
@@ -282,7 +270,7 @@ const OverviewTab = ({ selectedNode }) => (
               </div>
               <div style={{
                 fontSize: '12px',
-                color: '#b8c5d8',
+                color: COLORS.textDim,
                 lineHeight: '1.5',
               }}>
                 {pioneer.contribution}
@@ -297,7 +285,7 @@ const OverviewTab = ({ selectedNode }) => (
     {selectedNode.historicalContext && (
       <section style={{ marginBottom: '24px' }}>
         <h3 style={{
-          color: COLORS.accent,
+          color: COLORS.secondary,
           fontSize: '12px',
           letterSpacing: '2px',
           marginBottom: '12px',
@@ -306,7 +294,7 @@ const OverviewTab = ({ selectedNode }) => (
         }}>
           HISTORICAL CONTEXT
         </h3>
-        <p style={{ fontSize: '13px', lineHeight: '1.7', color: '#b8c5d8' }}>
+        <p style={{ fontSize: '13px', lineHeight: '1.7', color: COLORS.textDim }}>
           {selectedNode.historicalContext}
         </p>
       </section>
@@ -318,7 +306,7 @@ const OverviewTab = ({ selectedNode }) => (
         {selectedNode.details.overview && (
           <>
             <h3 style={{
-              color: COLORS.highlight,
+              color: COLORS.info,
               fontSize: '12px',
               letterSpacing: '2px',
               marginBottom: '12px',
@@ -327,7 +315,7 @@ const OverviewTab = ({ selectedNode }) => (
             }}>
               OVERVIEW
             </h3>
-            <p style={{ fontSize: '13px', lineHeight: '1.7', color: '#b8c5d8', marginBottom: '20px' }}>
+            <p style={{ fontSize: '13px', lineHeight: '1.7', color: COLORS.textDim, marginBottom: '20px' }}>
               {selectedNode.details.overview}
             </p>
           </>
@@ -336,7 +324,7 @@ const OverviewTab = ({ selectedNode }) => (
         {selectedNode.details.philosophy && Array.isArray(selectedNode.details.philosophy) && (
           <>
             <h3 style={{
-              color: COLORS.pink,
+              color: COLORS.accent,
               fontSize: '12px',
               letterSpacing: '2px',
               marginBottom: '12px',
@@ -345,7 +333,7 @@ const OverviewTab = ({ selectedNode }) => (
             }}>
               CORE PRINCIPLES
             </h3>
-            <ul style={{ marginLeft: '20px', fontSize: '13px', lineHeight: '1.8', color: '#b8c5d8' }}>
+            <ul style={{ marginLeft: '20px', fontSize: '13px', lineHeight: '1.8', color: COLORS.textDim }}>
               {selectedNode.details.philosophy.map((item, idx) => (
                 <li key={idx} style={{ marginBottom: '8px' }}>{item}</li>
               ))}
@@ -361,7 +349,7 @@ const OverviewTab = ({ selectedNode }) => (
 const MediaTab = ({ selectedNode, onMediaClick }) => {
   if (!selectedNode.media || selectedNode.media.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9AA5B8' }}>
+      <div style={{ textAlign: 'center', padding: '40px 20px', color: COLORS.textMuted }}>
         <div style={{ fontSize: '24px', marginBottom: '16px', fontFamily: 'monospace', fontWeight: '700', color: COLORS.primary }}>[NO MEDIA]</div>
         <div style={{ fontSize: '14px' }}>No media items available for this node.</div>
       </div>
@@ -376,10 +364,10 @@ const MediaTab = ({ selectedNode, onMediaClick }) => {
   };
 
   const typeColors = {
-    video: COLORS.secondary,
-    image: COLORS.accent,
-    article: COLORS.pink,
-    document: COLORS.success,
+    video: COLORS.pink,
+    image: COLORS.secondary,
+    article: COLORS.accent,
+    document: COLORS.successBright,
   };
 
   const typeIcons = {
@@ -424,7 +412,7 @@ const MediaTab = ({ selectedNode, onMediaClick }) => {
                     textAlign: 'left',
                     cursor: 'pointer',
                     transition: 'all 0.2s',
-                    color: '#fff',
+                    color: COLORS.text,
                     fontFamily: 'inherit',
                   }}
                   onMouseEnter={(e) => {
@@ -449,7 +437,7 @@ const MediaTab = ({ selectedNode, onMediaClick }) => {
                   {item.description && (
                     <div style={{
                       fontSize: '11px',
-                      color: '#b8c5d8',
+                      color: COLORS.textDim,
                       lineHeight: '1.5',
                       marginBottom: '8px',
                     }}>
@@ -481,7 +469,7 @@ const ProcessTab = ({ selectedNode }) => {
 
   if (!processGuide) {
     return (
-      <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9AA5B8' }}>
+      <div style={{ textAlign: 'center', padding: '40px 20px', color: COLORS.textMuted }}>
         <div style={{ fontSize: '24px', marginBottom: '16px', fontFamily: 'monospace', fontWeight: '700', color: COLORS.primary }}>[NO PROCESS]</div>
         <div style={{ fontSize: '14px' }}>No process guide available for this methodology.</div>
       </div>
@@ -512,7 +500,7 @@ const ProcessTab = ({ selectedNode }) => {
               height: '32px',
               borderRadius: '50%',
               background: selectedNode.color || COLORS.primary,
-              color: '#000',
+              color: COLORS.background,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -531,7 +519,7 @@ const ProcessTab = ({ selectedNode }) => {
           </div>
           <div style={{
             fontSize: '12px',
-            color: '#b8c5d8',
+            color: COLORS.textDim,
             lineHeight: '1.6',
             paddingLeft: '44px',
           }}>
@@ -540,7 +528,7 @@ const ProcessTab = ({ selectedNode }) => {
           {step.duration && (
             <div style={{
               fontSize: '10px',
-              color: COLORS.accent,
+              color: COLORS.secondary,
               marginTop: '8px',
               paddingLeft: '44px',
               fontWeight: '600',
@@ -553,14 +541,14 @@ const ProcessTab = ({ selectedNode }) => {
 
       {processGuide.tips && processGuide.tips.length > 0 && (
         <div style={{
-          background: `${COLORS.warning}15`,
-          border: `1px solid ${COLORS.warning}40`,
+          background: `${COLORS.warningLight}15`,
+          border: `1px solid ${COLORS.warningLight}40`,
           borderRadius: '8px',
           padding: '16px',
           marginTop: '10px',
         }}>
           <h4 style={{
-            color: COLORS.warning,
+            color: COLORS.warningLight,
             fontSize: '11px',
             letterSpacing: '1.5px',
             marginBottom: '10px',
@@ -570,7 +558,7 @@ const ProcessTab = ({ selectedNode }) => {
           }}>
             FACILITATOR TIPS
           </h4>
-          <ul style={{ marginLeft: '20px', fontSize: '12px', lineHeight: '1.7', color: '#b8c5d8' }}>
+          <ul style={{ marginLeft: '20px', fontSize: '12px', lineHeight: '1.7', color: COLORS.textDim }}>
             {processGuide.tips.map((tip, idx) => (
               <li key={idx} style={{ marginBottom: '6px' }}>{tip}</li>
             ))}
@@ -585,7 +573,7 @@ const ProcessTab = ({ selectedNode }) => {
 const CasesTab = ({ selectedNode }) => {
   if (!selectedNode.caseStudies || selectedNode.caseStudies.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9AA5B8' }}>
+      <div style={{ textAlign: 'center', padding: '40px 20px', color: COLORS.textMuted }}>
         <div style={{ fontSize: '24px', marginBottom: '16px', fontFamily: 'monospace', fontWeight: '700', color: COLORS.primary }}>[NO CASES]</div>
         <div style={{ fontSize: '14px' }}>No case studies available for this methodology.</div>
       </div>
@@ -615,7 +603,7 @@ const CasesTab = ({ selectedNode }) => {
           </h4>
           <div style={{
             fontSize: '11px',
-            color: COLORS.secondary,
+            color: COLORS.pink,
             marginBottom: '12px',
             fontStyle: 'italic',
           }}>
@@ -623,7 +611,7 @@ const CasesTab = ({ selectedNode }) => {
           </div>
           <p style={{
             fontSize: '12px',
-            color: '#b8c5d8',
+            color: COLORS.textDim,
             lineHeight: '1.7',
             marginBottom: '12px',
           }}>
@@ -649,7 +637,7 @@ const CasesTab = ({ selectedNode }) => {
               </div>
               <div style={{
                 fontSize: '11px',
-                color: '#b8c5d8',
+                color: COLORS.textDim,
                 lineHeight: '1.6',
               }}>
                 {caseStudy.outcome}

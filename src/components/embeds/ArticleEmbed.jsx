@@ -1,11 +1,5 @@
 import React from 'react';
-
-const COLORS = {
-  article: '#CC99CC',
-  document: '#77DD77',
-  text: '#E8F1FF',
-  muted: '#8899AA',
-};
+import { COLORS } from '../../constants';
 
 /**
  * Article/Document Preview Component
@@ -22,7 +16,7 @@ const ArticleEmbed = ({
   year,
 }) => {
   const linkUrl = sourceUrl || url;
-  const color = type === 'document' ? COLORS.document : COLORS.article;
+  const color = type === 'document' ? COLORS.successBright : COLORS.accent;
   const icon = type === 'document' ? '\u25A0' : '\u25CF';
   const actionText = type === 'document' ? 'DOWNLOAD PDF' : 'READ ARTICLE';
 
@@ -82,7 +76,7 @@ const ArticleEmbed = ({
               <span
                 style={{
                   background: color,
-                  color: '#000',
+                  color: COLORS.background,
                   padding: '3px 10px',
                   borderRadius: '10px',
                   fontSize: '11px',
@@ -113,7 +107,7 @@ const ArticleEmbed = ({
           {description && (
             <div
               style={{
-                color: COLORS.muted,
+                color: COLORS.textMuted,
                 fontSize: '13px',
                 lineHeight: '1.6',
                 marginBottom: '16px',
@@ -133,7 +127,7 @@ const ArticleEmbed = ({
               gap: '8px',
               padding: '12px 24px',
               background: color,
-              color: '#000',
+              color: COLORS.background,
               textDecoration: 'none',
               borderRadius: '8px',
               fontWeight: '700',
@@ -161,13 +155,13 @@ const ArticleEmbed = ({
           fontSize: '11px',
         }}
       >
-        <span style={{ color: COLORS.muted, letterSpacing: '1px' }}>
+        <span style={{ color: COLORS.textMuted, letterSpacing: '1px' }}>
           SOURCE:{' '}
           <span style={{ color }}>
             {source?.toUpperCase() || extractDomain(linkUrl)}
           </span>
         </span>
-        <span style={{ color: COLORS.muted }}>
+        <span style={{ color: COLORS.textMuted }}>
           {type === 'document' ? 'PDF DOCUMENT' : 'EXTERNAL LINK'}
         </span>
       </div>

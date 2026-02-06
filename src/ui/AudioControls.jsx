@@ -69,7 +69,7 @@ export function AudioControls({
           width: '100%',
           background: audioEnabled ? COLORS.pink : 'transparent',
           border: `2px solid ${COLORS.pink}`,
-          color: audioEnabled ? '#000000' : COLORS.pink,
+          color: audioEnabled ? COLORS.background : COLORS.pink,
           padding: '10px',
           borderRadius: '10px',
           fontSize: '11px',
@@ -139,7 +139,7 @@ export function AudioControls({
               }}
             />
             <span style={{
-              color: audioEnabled ? COLORS.pink : '#8899AA',
+              color: audioEnabled ? COLORS.pink : COLORS.textMuted,
               fontSize: '10px',
               fontWeight: '600',
               letterSpacing: '1px',
@@ -214,7 +214,7 @@ export function AudioControls({
               width: '100%',
               height: '4px',
               borderRadius: '2px',
-              background: `linear-gradient(to right, ${COLORS.pink} 0%, ${COLORS.pink} ${tourMusicVolume}%, #333 ${tourMusicVolume}%, #333 100%)`,
+              background: `linear-gradient(to right, ${COLORS.pink} 0%, ${COLORS.pink} ${tourMusicVolume}%, ${COLORS.panel} ${tourMusicVolume}%, ${COLORS.panel} 100%)`,
               WebkitAppearance: 'none',
               cursor: 'pointer',
             }}
@@ -266,7 +266,7 @@ export function AudioControls({
               width: '100%',
               height: '4px',
               borderRadius: '2px',
-              background: `linear-gradient(to right, ${COLORS.pink} 0%, ${COLORS.pink} ${tourNarrationVolume}%, #333 ${tourNarrationVolume}%, #333 100%)`,
+              background: `linear-gradient(to right, ${COLORS.pink} 0%, ${COLORS.pink} ${tourNarrationVolume}%, ${COLORS.panel} ${tourNarrationVolume}%, ${COLORS.panel} 100%)`,
               WebkitAppearance: 'none',
               cursor: 'pointer',
             }}

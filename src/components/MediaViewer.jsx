@@ -1,4 +1,5 @@
 import React, { Suspense, lazy } from 'react';
+import { COLORS } from '../constants';
 
 // Lazy load embed components for code splitting
 const VideoEmbed = lazy(() => import('./embeds/VideoEmbed'));
@@ -6,18 +7,12 @@ const PodcastEmbed = lazy(() => import('./embeds/PodcastEmbed'));
 const ArticleEmbed = lazy(() => import('./embeds/ArticleEmbed'));
 const ImageViewer = lazy(() => import('./embeds/ImageViewer'));
 
-const COLORS = {
-  panel: '#1A1A2E',
-  text: '#E8F1FF',
-  muted: '#8899AA',
-};
-
 const MEDIA_COLORS = {
-  video: '#FF6B9D',
-  podcast: '#CC99CC',
-  article: '#CC99CC',
-  document: '#77DD77',
-  image: '#FFCC66',
+  video: COLORS.pink,
+  podcast: COLORS.accent,
+  article: COLORS.accent,
+  document: COLORS.successBright,
+  image: COLORS.secondary,
 };
 
 /**
@@ -149,7 +144,7 @@ const MediaViewer = ({ media, onClose }) => {
           onMouseEnter={(e) => {
             e.target.style.background = color;
             e.target.style.borderColor = color;
-            e.target.style.color = '#000';
+            e.target.style.color = COLORS.background;
           }}
           onMouseLeave={(e) => {
             e.target.style.background = 'transparent';
@@ -181,7 +176,7 @@ const MediaViewer = ({ media, onClose }) => {
                 display: 'inline-block',
                 padding: '4px 14px',
                 background: color,
-                color: '#000',
+                color: COLORS.background,
                 borderRadius: '14px',
                 fontSize: '12px',
                 fontWeight: '700',
@@ -197,7 +192,7 @@ const MediaViewer = ({ media, onClose }) => {
             <p
               id="media-viewer-description"
               style={{
-                color: COLORS.muted,
+                color: COLORS.textMuted,
                 margin: 0,
                 fontSize: '14px',
                 lineHeight: '1.6',
@@ -217,7 +212,7 @@ const MediaViewer = ({ media, onClose }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: COLORS.muted,
+                color: COLORS.textMuted,
                 fontFamily: 'monospace',
                 letterSpacing: '2px',
               }}

@@ -1,11 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-
-const COLORS = {
-  video: '#FF6B9D',
-  text: '#E8F1FF',
-  muted: '#8899AA',
-  panel: '#1A1A2E',
-};
+import { COLORS } from '../../constants';
 
 // Platform detection and configuration
 const PLATFORMS = {
@@ -154,7 +148,7 @@ const YouTubePlayer = ({ videoId, title, watchUrl, source, year }) => {
           height: 0,
           overflow: 'hidden',
           borderRadius: '8px',
-          background: '#000',
+          background: COLORS.background,
         }}
       >
         {!isLoaded ? (
@@ -170,7 +164,7 @@ const YouTubePlayer = ({ videoId, title, watchUrl, source, year }) => {
               border: 'none',
               padding: 0,
               cursor: 'pointer',
-              background: '#000',
+              background: COLORS.background,
             }}
           >
             {isInView && (
@@ -198,15 +192,15 @@ const YouTubePlayer = ({ videoId, title, watchUrl, source, year }) => {
                 transform: 'translate(-50%, -50%)',
                 width: '80px',
                 height: '80px',
-                background: COLORS.video,
+                background: COLORS.pink,
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: `0 4px 20px ${COLORS.video}60`,
+                boxShadow: `0 4px 20px ${COLORS.pink}60`,
               }}
             >
-              <span style={{ fontSize: '32px', color: '#000', marginLeft: '4px' }}>
+              <span style={{ fontSize: '32px', color: COLORS.background, marginLeft: '4px' }}>
                 &#9658;
               </span>
             </div>
@@ -217,7 +211,7 @@ const YouTubePlayer = ({ videoId, title, watchUrl, source, year }) => {
                   bottom: '12px',
                   right: '12px',
                   background: 'rgba(0,0,0,0.8)',
-                  color: COLORS.video,
+                  color: COLORS.pink,
                   padding: '4px 10px',
                   borderRadius: '4px',
                   fontSize: '12px',
@@ -260,8 +254,8 @@ const VideoCard = ({ title, description, url, platform, source, year }) => (
   <div>
     <div
       style={{
-        background: `${COLORS.video}12`,
-        border: `2px solid ${COLORS.video}40`,
+        background: `${COLORS.pink}12`,
+        border: `2px solid ${COLORS.pink}40`,
         borderRadius: '12px',
         padding: '30px',
       }}
@@ -272,14 +266,14 @@ const VideoCard = ({ title, description, url, platform, source, year }) => (
             width: '80px',
             height: '80px',
             borderRadius: '12px',
-            background: `${COLORS.video}25`,
+            background: `${COLORS.pink}25`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
           }}
         >
-          <span style={{ fontSize: '32px', color: COLORS.video }}>&#9658;</span>
+          <span style={{ fontSize: '32px', color: COLORS.pink }}>&#9658;</span>
         </div>
 
         <div style={{ flex: 1, minWidth: 0 }}>
@@ -299,8 +293,8 @@ const VideoCard = ({ title, description, url, platform, source, year }) => (
             {year && (
               <span
                 style={{
-                  background: COLORS.video,
-                  color: '#000',
+                  background: COLORS.pink,
+                  color: COLORS.background,
                   padding: '3px 10px',
                   borderRadius: '10px',
                   fontSize: '11px',
@@ -313,8 +307,8 @@ const VideoCard = ({ title, description, url, platform, source, year }) => (
             )}
             <span
               style={{
-                background: `${COLORS.video}30`,
-                color: COLORS.video,
+                background: `${COLORS.pink}30`,
+                color: COLORS.pink,
                 padding: '3px 10px',
                 borderRadius: '10px',
                 fontSize: '11px',
@@ -329,7 +323,7 @@ const VideoCard = ({ title, description, url, platform, source, year }) => (
           {description && (
             <div
               style={{
-                color: COLORS.muted,
+                color: COLORS.textMuted,
                 fontSize: '13px',
                 lineHeight: '1.5',
                 marginBottom: '16px',
@@ -348,8 +342,8 @@ const VideoCard = ({ title, description, url, platform, source, year }) => (
               alignItems: 'center',
               gap: '8px',
               padding: '14px 28px',
-              background: COLORS.video,
-              color: '#000',
+              background: COLORS.pink,
+              color: COLORS.background,
               textDecoration: 'none',
               borderRadius: '8px',
               fontWeight: '700',
@@ -377,20 +371,20 @@ const SourceFooter = ({ watchUrl, source }) => (
       alignItems: 'center',
       marginTop: '12px',
       paddingTop: '12px',
-      borderTop: `1px solid ${COLORS.video}30`,
+      borderTop: `1px solid ${COLORS.pink}30`,
       fontFamily: 'monospace',
       fontSize: '11px',
     }}
   >
-    <span style={{ color: COLORS.muted, letterSpacing: '1px' }}>
-      SOURCE: <span style={{ color: COLORS.video }}>{source?.toUpperCase()}</span>
+    <span style={{ color: COLORS.textMuted, letterSpacing: '1px' }}>
+      SOURCE: <span style={{ color: COLORS.pink }}>{source?.toUpperCase()}</span>
     </span>
     <a
       href={watchUrl}
       target="_blank"
       rel="noopener noreferrer"
       style={{
-        color: COLORS.video,
+        color: COLORS.pink,
         textDecoration: 'none',
         display: 'flex',
         alignItems: 'center',

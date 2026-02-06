@@ -31,7 +31,7 @@ export function HoverTooltip({ hoveredNode, selectedNode }) {
         borderRadius: '8px',
         border: `1px solid ${hoveredNode.color || COLORS.primary}`,
         color: COLORS.text,
-        fontFamily: 'Inter, sans-serif',
+        fontFamily: 'monospace',
         fontSize: '14px',
         maxWidth: '400px',
         textAlign: 'center',
@@ -41,7 +41,7 @@ export function HoverTooltip({ hoveredNode, selectedNode }) {
     >
       <strong>{hoveredNode.title || hoveredNode.label?.replace(/\\n/g, ' ')}</strong>
       {hoveredNode.description && (
-        <div style={{ fontSize: '12px', marginTop: '5px', color: '#b8c5d8' }}>
+        <div style={{ fontSize: '12px', marginTop: '5px', color: COLORS.textDim }}>
           {hoveredNode.description}
         </div>
       )}

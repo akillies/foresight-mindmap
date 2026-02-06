@@ -1,16 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-// LCARS color palette (matching other components)
-const COLORS = {
-  primary: '#5C88DA',
-  secondary: '#FF6B9D',
-  accent: '#FFCC66',
-  highlight: '#99CCFF',
-  pink: '#CC99CC',
-  success: '#77DD77',
-  text: '#E8F1FF',
-  panel: '#1A1A2E',
-};
+import { COLORS } from './constants';
 
 const STORAGE_KEY = 'foresight-welcome-dismissed';
 
@@ -56,6 +45,9 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
 
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="welcome-title"
       style={{
         position: 'fixed',
         top: 0,
@@ -79,26 +71,27 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
           width: '100%',
           maxWidth: '540px',
           background: COLORS.panel,
-          border: `3px solid ${COLORS.accent}`,
+          border: `3px solid ${COLORS.secondary}`,
           borderRadius: '24px',
           overflow: 'hidden',
-          boxShadow: `0 0 60px ${COLORS.accent}30`,
+          boxShadow: `0 0 60px ${COLORS.secondary}30`,
           animation: 'slideUp 0.4s ease-out',
         }}
       >
         {/* Header */}
         <div
           style={{
-            background: `linear-gradient(135deg, ${COLORS.accent} 0%, ${COLORS.secondary} 100%)`,
+            background: `linear-gradient(135deg, ${COLORS.secondary} 0%, ${COLORS.pink} 100%)`,
             padding: '24px 30px',
             textAlign: 'center',
           }}
         >
           <h1
+            id="welcome-title"
             style={{
               margin: '0 0 8px 0',
               fontSize: '24px',
-              color: '#000',
+              color: COLORS.background,
               letterSpacing: '3px',
               fontWeight: '700',
               fontFamily: 'monospace',
@@ -109,7 +102,7 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
           <div
             style={{
               fontSize: '13px',
-              color: '#00000090',
+              color: `${COLORS.background}90`,
               fontWeight: '600',
               letterSpacing: '1px',
             }}
@@ -130,7 +123,7 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
               textAlign: 'center',
             }}
           >
-            An interactive 3D visualization of <strong style={{ color: COLORS.accent }}>18 foresight methodologies</strong> for
+            An interactive 3D visualization of <strong style={{ color: COLORS.secondary }}>18 foresight methodologies</strong> for
             exploring and shaping alternative futures.
           </p>
 
@@ -165,7 +158,7 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
                     width: '36px',
                     height: '36px',
                     borderRadius: '50%',
-                    background: COLORS.accent,
+                    background: COLORS.secondary,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -194,7 +187,7 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
                     width: '36px',
                     height: '36px',
                     borderRadius: '50%',
-                    background: COLORS.secondary,
+                    background: COLORS.pink,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -223,7 +216,7 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
                     width: '36px',
                     height: '36px',
                     borderRadius: '50%',
-                    background: COLORS.pink,
+                    background: COLORS.accent,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -251,13 +244,14 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
           <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
             <button
               onClick={() => handleDismiss('tour')}
+              aria-label="Start the guided tour of Strategic Foresight"
               style={{
                 flex: 1,
                 padding: '14px 20px',
-                background: `linear-gradient(135deg, ${COLORS.accent} 0%, ${COLORS.secondary} 100%)`,
+                background: `linear-gradient(135deg, ${COLORS.secondary} 0%, ${COLORS.pink} 100%)`,
                 border: 'none',
                 borderRadius: '12px',
-                color: '#000',
+                color: COLORS.background,
                 fontSize: '14px',
                 fontWeight: '700',
                 letterSpacing: '1px',
@@ -267,7 +261,7 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
               }}
               onMouseEnter={(e) => {
                 e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = `0 4px 20px ${COLORS.accent}50`;
+                e.target.style.boxShadow = `0 4px 20px ${COLORS.secondary}50`;
               }}
               onMouseLeave={(e) => {
                 e.target.style.transform = 'translateY(0)';
@@ -279,6 +273,7 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
 
             <button
               onClick={() => handleDismiss('explore')}
+              aria-label="Dismiss welcome and explore freely"
               style={{
                 flex: 1,
                 padding: '14px 20px',
@@ -295,7 +290,7 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
               }}
               onMouseEnter={(e) => {
                 e.target.style.background = COLORS.primary;
-                e.target.style.color = '#000';
+                e.target.style.color = COLORS.background;
               }}
               onMouseLeave={(e) => {
                 e.target.style.background = 'transparent';
@@ -326,7 +321,7 @@ const WelcomeModal = ({ onStartTour, onExplore, isVisible: externalVisibility })
                 width: '16px',
                 height: '16px',
                 cursor: 'pointer',
-                accentColor: COLORS.accent,
+                accentColor: COLORS.secondary,
               }}
             />
             Don't show this again

@@ -171,64 +171,6 @@ export function AboutModal({ isOpen, onClose }) {
             </p>
           </div>
 
-          {/* Audio Player Placeholder */}
-          <div style={{
-            background: `${COLORS.primary}10`,
-            border: `1px dashed ${COLORS.primary}40`,
-            borderRadius: '10px',
-            padding: '15px',
-            marginBottom: '20px',
-          }}>
-            <h3 style={{ color: COLORS.primary, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', marginBottom: '10px', textAlign: 'center' }}>
-              AMBIENT AUDIO
-            </h3>
-            <div style={{
-              display: 'flex',
-              gap: '10px',
-              justifyContent: 'center',
-            }}>
-              <button
-                disabled
-                style={{
-                  background: `${COLORS.primary}20`,
-                  border: `1px solid ${COLORS.primary}40`,
-                  color: COLORS.primary,
-                  padding: '8px 16px',
-                  borderRadius: '6px',
-                  fontSize: '10px',
-                  fontWeight: '600',
-                  letterSpacing: '1px',
-                  fontFamily: 'monospace',
-                  opacity: 0.5,
-                  cursor: 'not-allowed',
-                }}
-              >
-                TRACK 1
-              </button>
-              <button
-                disabled
-                style={{
-                  background: `${COLORS.primary}20`,
-                  border: `1px solid ${COLORS.primary}40`,
-                  color: COLORS.primary,
-                  padding: '8px 16px',
-                  borderRadius: '6px',
-                  fontSize: '10px',
-                  fontWeight: '600',
-                  letterSpacing: '1px',
-                  fontFamily: 'monospace',
-                  opacity: 0.5,
-                  cursor: 'not-allowed',
-                }}
-              >
-                TRACK 2
-              </button>
-            </div>
-            <p style={{ margin: '10px 0 0 0', opacity: 0.5, fontSize: '10px', textAlign: 'center', fontStyle: 'italic' }}>
-              Coming soon
-            </p>
-          </div>
-
           <div style={{
             background: `${COLORS.pink}15`,
             border: `1px solid ${COLORS.pink}40`,
@@ -250,7 +192,7 @@ export function AboutModal({ isOpen, onClose }) {
             width: '100%',
             background: `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.accent} 100%)`,
             border: 'none',
-            color: '#000',
+            color: COLORS.background,
             padding: '12px',
             borderRadius: '12px',
             fontSize: '11px',

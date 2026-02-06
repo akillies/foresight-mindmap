@@ -19,7 +19,7 @@ import {
   checkEasterEggSpawn,
   animateEasterEgg,
 } from '../scene';
-import { SCALE_SELECTED, SCALE_NORMAL, SCENE_CONFIG, ANIMATION_CONFIG } from '../constants';
+import { SCALE_SELECTED, SCALE_NORMAL, SCENE_CONFIG, ANIMATION_CONFIG, PERFORMANCE_LIMITS } from '../constants';
 
 /**
  * Custom hook for Three.js scene management
@@ -85,101 +85,135 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
     createCenterNode(scene, nodesRef.current);
     createLevel1Nodes(scene, nodesRef.current, connectionsRef.current);
 
-    // Animation Loop
+    // Animation Loop (optimized: frustum culling, batched operations, try/catch guard)
     let frameId;
+    const frustum = new THREE.Frustum();
+    const projScreenMatrix = new THREE.Matrix4();
+    // Reusable sphere for frustum check - avoids per-frame allocation
+    const boundingSphere = new THREE.Sphere();
+    const FRUSTUM_MARGIN = PERFORMANCE_LIMITS.ANIMATION_FRUSTUM_MARGIN;
+
     const animate = () => {
       frameId = requestAnimationFrame(animate);
 
-      // Gentle scene rotation
-      scene.rotation.y += ANIMATION_CONFIG.sceneRotationSpeed;
+      try {
+        // Gentle scene rotation
+        scene.rotation.y += ANIMATION_CONFIG.sceneRotationSpeed;
 
-      // Animate nodes (use ref for fresh value in animation loop)
-      const currentSelectedNode = selectedNodeRef.current;
-      nodesRef.current.forEach((node, index) => {
-        const isSelected = currentSelectedNode && node.userData.id === currentSelectedNode.id;
+        // Update frustum from camera for visibility culling
+        camera.updateMatrixWorld();
+        projScreenMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+        frustum.setFromProjectionMatrix(projScreenMatrix);
 
-        // Floating motion
-        if (node.originalY !== undefined) {
-          node.position.y = node.originalY + Math.sin(Date.now() * ANIMATION_CONFIG.nodeFloatSpeed + index) * ANIMATION_CONFIG.nodeFloatAmplitude;
-        }
+        const currentTime = Date.now();
 
-        // Pulse effect - enhanced for selected node
-        if (node.material && node.material.emissive) {
-          let baseIntensity;
-          let pulseAmplitude;
+        // Animate nodes (use ref for fresh value in animation loop)
+        const currentSelectedNode = selectedNodeRef.current;
+        const nodes = nodesRef.current;
+        const nodeCount = nodes.length;
 
-          if (isSelected) {
-            baseIntensity = 0.9;
-            pulseAmplitude = 0.2;
-          } else if (node.isHovered) {
-            baseIntensity = 0.6;
-            pulseAmplitude = 0.1;
-          } else {
-            baseIntensity = 0.3;
-            pulseAmplitude = 0.1;
+        for (let i = 0; i < nodeCount; i++) {
+          const node = nodes[i];
+
+          // Quick visibility check - skip detailed animation for off-screen nodes
+          // but always process selected/hovered nodes
+          const isSelected = currentSelectedNode && node.userData.id === currentSelectedNode.id;
+          const isHovered = node.isHovered;
+
+          if (!isSelected && !isHovered) {
+            // Frustum cull: check if node is within camera view (with margin)
+            boundingSphere.center.copy(node.position);
+            boundingSphere.radius = FRUSTUM_MARGIN;
+            if (!frustum.intersectsSphere(boundingSphere)) {
+              continue; // skip animation for this off-screen node
+            }
           }
 
-          node.material.emissiveIntensity = baseIntensity + Math.sin(Date.now() * ANIMATION_CONFIG.nodePulseSpeed + index) * pulseAmplitude;
+          // Floating motion
+          if (node.originalY !== undefined) {
+            node.position.y = node.originalY + Math.sin(currentTime * ANIMATION_CONFIG.nodeFloatSpeed + i) * ANIMATION_CONFIG.nodeFloatAmplitude;
+          }
+
+          // Pulse effect - enhanced for selected node
+          if (node.material && node.material.emissive) {
+            let baseIntensity;
+            let pulseAmplitude;
+
+            if (isSelected) {
+              baseIntensity = 0.9;
+              pulseAmplitude = 0.2;
+            } else if (isHovered) {
+              baseIntensity = 0.6;
+              pulseAmplitude = 0.1;
+            } else {
+              baseIntensity = 0.3;
+              pulseAmplitude = 0.1;
+            }
+
+            node.material.emissiveIntensity = baseIntensity + Math.sin(currentTime * ANIMATION_CONFIG.nodePulseSpeed + i) * pulseAmplitude;
+          }
+
+          // Scale effect for selected node (using reusable Vector3 to prevent memory leak)
+          if (isSelected) {
+            node.scale.lerp(SCALE_SELECTED, ANIMATION_CONFIG.scaleLerpSelected);
+          } else if (!isHovered && node.scale.x > 1.0) {
+            node.scale.lerp(SCALE_NORMAL, ANIMATION_CONFIG.scaleLerpNormal);
+          }
         }
 
-        // Scale effect for selected node (using reusable Vector3 to prevent memory leak)
-        if (isSelected) {
-          node.scale.lerp(SCALE_SELECTED, ANIMATION_CONFIG.scaleLerpSelected);
-        } else if (!node.isHovered && node.scale.x > 1.0) {
-          node.scale.lerp(SCALE_NORMAL, ANIMATION_CONFIG.scaleLerpNormal);
+        // Animate connections
+        animateConnections(connectionsRef.current, currentSelectedNode);
+
+        // Animate starfield
+        animateStarfield(particlesRef.current);
+
+        // Animate nebulas
+        animateNebulas(nebulasRef.current);
+
+        // Easter Egg spawn system (check every 10 seconds)
+        if (currentTime - lastEasterEggCheckRef.current > SCENE_CONFIG.easterEggCheckInterval) {
+          lastEasterEggCheckRef.current = currentTime;
+
+          if (!easterEggRef.current) {
+            easterEggRef.current = checkEasterEggSpawn(scene, easterEggRef.current);
+          }
         }
-      });
 
-      // Animate connections
-      animateConnections(connectionsRef.current, currentSelectedNode);
-
-      // Animate starfield
-      animateStarfield(particlesRef.current);
-
-      // Animate nebulas
-      animateNebulas(nebulasRef.current);
-
-      // Easter Egg spawn system (check every 10 seconds)
-      const currentTime = Date.now();
-      if (currentTime - lastEasterEggCheckRef.current > SCENE_CONFIG.easterEggCheckInterval) {
-        lastEasterEggCheckRef.current = currentTime;
-
-        if (!easterEggRef.current) {
-          easterEggRef.current = checkEasterEggSpawn(scene, easterEggRef.current);
+        // Animate active easter egg
+        if (easterEggRef.current) {
+          const stillActive = animateEasterEgg(easterEggRef.current, scene);
+          if (!stillActive) {
+            easterEggRef.current = null;
+          }
         }
+
+        // Raycasting for hover effects
+        raycasterRef.current.setFromCamera(mouseRef.current, camera);
+        const intersects = raycasterRef.current.intersectObjects(nodes, false);
+
+        // Reset all hover states
+        for (let i = 0; i < nodeCount; i++) {
+          nodes[i].isHovered = false;
+        }
+
+        if (intersects.length > 0) {
+          const hoveredObj = intersects[0].object;
+          hoveredObj.isHovered = true;
+          hoveredObj.scale.setScalar(1.1);
+          onHoverChange(hoveredObj.userData);
+        } else {
+          onHoverChange(null);
+        }
+
+        // Update OrbitControls
+        controls.update();
+
+        // Render with bloom post-processing
+        composer.render();
+      } catch (error) {
+        console.error('Animation loop error (non-fatal):', error.message);
+        // Continue rendering - do not crash the entire app for a single frame error
       }
-
-      // Animate active easter egg
-      if (easterEggRef.current) {
-        const stillActive = animateEasterEgg(easterEggRef.current, scene);
-        if (!stillActive) {
-          easterEggRef.current = null;
-        }
-      }
-
-      // Raycasting for hover effects
-      raycasterRef.current.setFromCamera(mouseRef.current, camera);
-      const intersects = raycasterRef.current.intersectObjects(nodesRef.current, false);
-
-      // Reset all hover states
-      nodesRef.current.forEach(node => {
-        node.isHovered = false;
-      });
-
-      if (intersects.length > 0) {
-        const hoveredObj = intersects[0].object;
-        hoveredObj.isHovered = true;
-        hoveredObj.scale.setScalar(1.1);
-        onHoverChange(hoveredObj.userData);
-      } else {
-        onHoverChange(null);
-      }
-
-      // Update OrbitControls
-      controls.update();
-
-      // Render with bloom post-processing
-      composer.render();
     };
 
     animate();

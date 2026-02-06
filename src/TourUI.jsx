@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { tourManager, TOUR_STATES } from './TourManager';
 import { getAllTours, getTour } from './tourData';
+import { COLORS } from './constants';
 
 /**
  * TourUI - LCARS-styled tour launcher and HUD
@@ -9,19 +10,6 @@ import { getAllTours, getTour } from './tourData';
  * - Tour Launcher: Button to open tour selection
  * - Tour HUD: Overlay during tour with controls and progress
  */
-
-// LCARS Color Palette (matching main app)
-const COLORS = {
-  primary: '#5C88DA',
-  secondary: '#FFCC66',
-  accent: '#CC99CC',
-  highlight: '#FF9966',
-  success: '#99CC99',
-  pink: '#FF6B9D',
-  background: '#000000',
-  panel: '#1a1a2e',
-  text: '#E8F1FF',
-};
 
 /**
  * Tour Launcher Button - Shows in control panel
@@ -180,6 +168,7 @@ export function TourSelectionModal({ isOpen, onClose, onSelectTour }) {
 
         <button
           onClick={onClose}
+          aria-label="Cancel tour selection"
           style={{
             width: '100%',
             background: 'transparent',
@@ -193,6 +182,15 @@ export function TourSelectionModal({ isOpen, onClose, onSelectTour }) {
             cursor: 'pointer',
             fontFamily: 'monospace',
             marginTop: '20px',
+            transition: 'all 0.2s',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = `${COLORS.pink}20`;
+            e.currentTarget.style.transform = 'scale(1.02)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'transparent';
+            e.currentTarget.style.transform = 'scale(1)';
           }}
         >
           CANCEL
@@ -314,7 +312,7 @@ export function TourHUD({ onClose }) {
           {/* Progress Bar */}
           <div style={{
             height: '4px',
-            background: '#333',
+            background: COLORS.panel,
             borderRadius: '2px',
             marginBottom: '12px',
             overflow: 'hidden',
@@ -376,7 +374,7 @@ export function TourHUD({ onClose }) {
               style={{
                 background: isPaused ? COLORS.success : 'transparent',
                 border: `2px solid ${isPaused ? COLORS.success : COLORS.primary}`,
-                color: isPaused ? '#000' : COLORS.primary,
+                color: isPaused ? COLORS.background : COLORS.primary,
                 padding: '8px 16px',
                 borderRadius: '8px',
                 fontSize: '10px',
@@ -407,6 +405,14 @@ export function TourHUD({ onClose }) {
                 fontFamily: 'monospace',
                 transition: 'all 0.2s',
               }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = `${COLORS.secondary}20`;
+                e.currentTarget.style.transform = 'scale(1.02)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
             >
               NEXT
             </button>
@@ -430,6 +436,14 @@ export function TourHUD({ onClose }) {
                 cursor: 'pointer',
                 fontFamily: 'monospace',
                 transition: 'all 0.2s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = `${COLORS.pink}20`;
+                e.currentTarget.style.transform = 'scale(1.02)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.transform = 'scale(1)';
               }}
             >
               EXIT

@@ -1,11 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-
-const COLORS = {
-  video: '#FF6B9D',
-  text: '#E8F1FF',
-  muted: '#8899AA',
-  panel: '#1A1A2E',
-};
+import { COLORS } from '../../constants';
 
 /**
  * YouTube Embed Component
@@ -69,8 +63,8 @@ const YouTubeEmbed = ({
     return (
       <div
         style={{
-          background: `${COLORS.video}15`,
-          border: `2px solid ${COLORS.video}40`,
+          background: `${COLORS.pink}15`,
+          border: `2px solid ${COLORS.pink}40`,
           borderRadius: '12px',
           padding: '40px',
           textAlign: 'center',
@@ -82,13 +76,13 @@ const YouTubeEmbed = ({
             height: '80px',
             margin: '0 auto 20px',
             borderRadius: '50%',
-            background: `${COLORS.video}30`,
+            background: `${COLORS.pink}30`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          <span style={{ fontSize: '32px', color: COLORS.video }}>&#9658;</span>
+          <span style={{ fontSize: '32px', color: COLORS.pink }}>&#9658;</span>
         </div>
         <div
           style={{
@@ -102,7 +96,7 @@ const YouTubeEmbed = ({
         </div>
         <div
           style={{
-            color: COLORS.muted,
+            color: COLORS.textMuted,
             marginBottom: '20px',
             fontSize: '13px',
           }}
@@ -118,8 +112,8 @@ const YouTubeEmbed = ({
             alignItems: 'center',
             gap: '8px',
             padding: '14px 28px',
-            background: COLORS.video,
-            color: '#000',
+            background: COLORS.pink,
+            color: COLORS.background,
             textDecoration: 'none',
             borderRadius: '8px',
             fontWeight: '700',
@@ -144,7 +138,7 @@ const YouTubeEmbed = ({
           height: 0,
           overflow: 'hidden',
           borderRadius: '8px',
-          background: '#000',
+          background: COLORS.background,
         }}
       >
         {!isLoaded ? (
@@ -161,7 +155,7 @@ const YouTubeEmbed = ({
               border: 'none',
               padding: 0,
               cursor: 'pointer',
-              background: '#000',
+              background: COLORS.background,
             }}
           >
             {isInView && (
@@ -191,19 +185,19 @@ const YouTubeEmbed = ({
                 transform: 'translate(-50%, -50%)',
                 width: '80px',
                 height: '80px',
-                background: COLORS.video,
+                background: COLORS.pink,
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: `0 4px 20px ${COLORS.video}60`,
+                boxShadow: `0 4px 20px ${COLORS.pink}60`,
                 transition: 'transform 0.2s, box-shadow 0.2s',
               }}
             >
               <span
                 style={{
                   fontSize: '32px',
-                  color: '#000',
+                  color: COLORS.background,
                   marginLeft: '4px',
                 }}
               >
@@ -218,7 +212,7 @@ const YouTubeEmbed = ({
                   bottom: '12px',
                   right: '12px',
                   background: 'rgba(0,0,0,0.8)',
-                  color: COLORS.video,
+                  color: COLORS.pink,
                   padding: '4px 10px',
                   borderRadius: '4px',
                   fontSize: '12px',
@@ -258,14 +252,14 @@ const YouTubeEmbed = ({
           alignItems: 'center',
           marginTop: '12px',
           paddingTop: '12px',
-          borderTop: `1px solid ${COLORS.video}30`,
+          borderTop: `1px solid ${COLORS.pink}30`,
           fontFamily: 'monospace',
           fontSize: '11px',
         }}
       >
-        <span style={{ color: COLORS.muted, letterSpacing: '1px' }}>
+        <span style={{ color: COLORS.textMuted, letterSpacing: '1px' }}>
           SOURCE:{' '}
-          <span style={{ color: COLORS.video }}>
+          <span style={{ color: COLORS.pink }}>
             {source?.toUpperCase() || 'YOUTUBE'}
           </span>
         </span>
@@ -274,7 +268,7 @@ const YouTubeEmbed = ({
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            color: COLORS.video,
+            color: COLORS.pink,
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',

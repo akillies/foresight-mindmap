@@ -1,25 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import mindMapData from './mindMapData';
-
-// LCARS color palette
-const COLORS = {
-  primary: '#5C88DA',
-  secondary: '#FF6B9D',
-  accent: '#FFCC66',
-  highlight: '#99CCFF',
-  pink: '#CC99CC',
-  success: '#77DD77',
-  warning: '#FFB366',
-  text: '#E8F1FF',
-  panel: '#1A1A2E',
-};
+import { COLORS } from './constants';
 
 const MEDIA_TYPE_COLORS = {
-  video: COLORS.secondary,    // Pink
-  image: COLORS.accent,       // Gold
-  article: COLORS.pink,       // Lavender
+  video: COLORS.pink,         // Pink
+  image: COLORS.secondary,    // Gold
+  article: COLORS.secondary,     // Lavender
   document: COLORS.primary,   // Blue
-  podcast: COLORS.warning,    // Orange
+  podcast: COLORS.warningLight, // Orange
 };
 
 const MEDIA_TYPE_LABELS = {
@@ -190,7 +178,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
       >
         {/* Header */}
         <div style={{
-          background: `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.accent} 100%)`,
+          background: `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.secondary} 100%)`,
           padding: '20px 30px',
           display: 'flex',
           justifyContent: 'space-between',
@@ -200,7 +188,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
             <h2 style={{
               margin: '0 0 8px 0',
               fontSize: '24px',
-              color: '#000',
+              color: COLORS.background,
               letterSpacing: '2px',
               fontWeight: '700',
               fontFamily: 'monospace',
@@ -209,7 +197,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
             </h2>
             <div style={{
               fontSize: '12px',
-              color: '#00000080',
+              color: `${COLORS.background}80`,
               fontWeight: '600',
               letterSpacing: '1px',
             }}>
@@ -218,10 +206,11 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
           </div>
           <button
             onClick={onClose}
+            aria-label="Close media browser"
             style={{
-              background: '#000',
+              background: COLORS.background,
               border: 'none',
-              color: '#fff',
+              color: COLORS.text,
               fontSize: '24px',
               width: '40px',
               height: '40px',
@@ -239,7 +228,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
         {/* Filters */}
         <div style={{
           padding: '20px 30px',
-          background: '#00000040',
+          background: `${COLORS.background}40`,
           borderBottom: `2px solid ${COLORS.primary}40`,
         }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '15px', marginBottom: '15px' }}>
@@ -247,7 +236,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
             <div>
               <label style={{
                 fontSize: '10px',
-                color: COLORS.accent,
+                color: COLORS.secondary,
                 fontWeight: '700',
                 letterSpacing: '1.5px',
                 marginBottom: '6px',
@@ -261,9 +250,9 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                 onChange={(e) => setFilterType(e.target.value)}
                 style={{
                   width: '100%',
-                  background: '#000',
+                  background: COLORS.background,
                   border: `2px solid ${COLORS.primary}`,
-                  color: '#fff',
+                  color: COLORS.text,
                   padding: '10px',
                   borderRadius: '8px',
                   fontSize: '12px',
@@ -284,7 +273,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
             <div>
               <label style={{
                 fontSize: '10px',
-                color: COLORS.accent,
+                color: COLORS.secondary,
                 fontWeight: '700',
                 letterSpacing: '1.5px',
                 marginBottom: '6px',
@@ -298,9 +287,9 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                 onChange={(e) => setFilterYear(e.target.value)}
                 style={{
                   width: '100%',
-                  background: '#000',
-                  border: `2px solid ${COLORS.pink}`,
-                  color: '#fff',
+                  background: COLORS.background,
+                  border: `2px solid ${COLORS.accent}`,
+                  color: COLORS.text,
                   padding: '10px',
                   borderRadius: '8px',
                   fontSize: '12px',
@@ -320,7 +309,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
             <div>
               <label style={{
                 fontSize: '10px',
-                color: COLORS.accent,
+                color: COLORS.secondary,
                 fontWeight: '700',
                 letterSpacing: '1.5px',
                 marginBottom: '6px',
@@ -334,9 +323,9 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                 onChange={(e) => setSortBy(e.target.value)}
                 style={{
                   width: '100%',
-                  background: '#000',
-                  border: `2px solid ${COLORS.highlight}`,
-                  color: '#fff',
+                  background: COLORS.background,
+                  border: `2px solid ${COLORS.info}`,
+                  color: COLORS.text,
                   padding: '10px',
                   borderRadius: '8px',
                   fontSize: '12px',
@@ -354,7 +343,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
             <div>
               <label style={{
                 fontSize: '10px',
-                color: COLORS.accent,
+                color: COLORS.secondary,
                 fontWeight: '700',
                 letterSpacing: '1.5px',
                 marginBottom: '6px',
@@ -370,9 +359,9 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{
                   width: '100%',
-                  background: '#000',
-                  border: `2px solid ${COLORS.secondary}`,
-                  color: '#fff',
+                  background: COLORS.background,
+                  border: `2px solid ${COLORS.pink}`,
+                  color: COLORS.text,
                   padding: '10px',
                   borderRadius: '8px',
                   fontSize: '12px',
@@ -390,7 +379,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
           padding: '30px',
         }}>
           {filteredMedia.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 20px', color: '#9AA5B8' }}>
+            <div style={{ textAlign: 'center', padding: '60px 20px', color: COLORS.textMuted }}>
               <div style={{ fontSize: '36px', marginBottom: '20px', fontFamily: 'monospace', fontWeight: '700', color: COLORS.primary }}>[NO RESULTS]</div>
               <div style={{ fontSize: '16px' }}>No media found matching your filters</div>
             </div>
@@ -412,7 +401,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                     textAlign: 'left',
                     cursor: 'pointer',
                     transition: 'all 0.2s',
-                    color: '#fff',
+                    color: COLORS.text,
                     fontFamily: 'inherit',
                     overflow: 'hidden',
                   }}
@@ -436,7 +425,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                     alignItems: 'center',
                   }}>
                     <span style={{
-                      color: '#000',
+                      color: COLORS.background,
                       fontSize: '10px',
                       fontWeight: '700',
                       letterSpacing: '1.5px',
@@ -446,7 +435,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                     </span>
                     {item.year && (
                       <span style={{
-                        color: '#000',
+                        color: COLORS.background,
                         fontSize: '10px',
                         fontWeight: '700',
                         fontFamily: 'monospace',
@@ -470,7 +459,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                     {item.description && (
                       <div style={{
                         fontSize: '11px',
-                        color: '#9AA5B8',
+                        color: COLORS.textMuted,
                         lineHeight: '1.5',
                         marginBottom: '12px',
                         display: '-webkit-box',

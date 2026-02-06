@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-
-const COLORS = {
-  podcast: '#CC99CC',
-  text: '#E8F1FF',
-  muted: '#8899AA',
-  panel: '#1A1A2E',
-};
+import { COLORS } from '../../constants';
 
 /**
  * Podcast Embed Component
@@ -72,14 +66,14 @@ const PodcastEmbed = ({
           alignItems: 'center',
           marginTop: '12px',
           paddingTop: '12px',
-          borderTop: `1px solid ${COLORS.podcast}30`,
+          borderTop: `1px solid ${COLORS.accent}30`,
           fontFamily: 'monospace',
           fontSize: '11px',
         }}
       >
-        <span style={{ color: COLORS.muted, letterSpacing: '1px' }}>
+        <span style={{ color: COLORS.textMuted, letterSpacing: '1px' }}>
           SOURCE:{' '}
-          <span style={{ color: COLORS.podcast }}>
+          <span style={{ color: COLORS.accent }}>
             {source?.toUpperCase() || platform.type?.toUpperCase() || 'PODCAST'}
           </span>
         </span>
@@ -88,7 +82,7 @@ const PodcastEmbed = ({
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            color: COLORS.podcast,
+            color: COLORS.accent,
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',
@@ -129,7 +123,7 @@ const SpotifyEmbed = ({ embedId, embedType = 'show', title, sourceUrl }) => {
         onError={() => setHasError(true)}
         style={{
           borderRadius: '12px',
-          background: '#000',
+          background: COLORS.background,
         }}
       />
     </div>
@@ -162,7 +156,7 @@ const ApplePodcastsEmbed = ({ embedUrl, title, sourceUrl }) => {
         onError={() => setHasError(true)}
         style={{
           borderRadius: '12px',
-          background: '#282828',
+          background: COLORS.panel,
         }}
       />
     </div>
@@ -175,8 +169,8 @@ const ApplePodcastsEmbed = ({ embedUrl, title, sourceUrl }) => {
 const PodcastCard = ({ title, description, sourceUrl, source, year }) => (
   <div
     style={{
-      background: `${COLORS.podcast}15`,
-      border: `2px solid ${COLORS.podcast}40`,
+      background: `${COLORS.accent}15`,
+      border: `2px solid ${COLORS.accent}40`,
       borderRadius: '12px',
       padding: '30px',
     }}
@@ -188,14 +182,14 @@ const PodcastCard = ({ title, description, sourceUrl, source, year }) => (
           width: '70px',
           height: '70px',
           borderRadius: '12px',
-          background: `${COLORS.podcast}30`,
+          background: `${COLORS.accent}30`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0,
         }}
       >
-        <span style={{ fontSize: '28px', color: COLORS.podcast }}>&#9835;</span>
+        <span style={{ fontSize: '28px', color: COLORS.accent }}>&#9835;</span>
       </div>
 
       {/* Content */}
@@ -216,8 +210,8 @@ const PodcastCard = ({ title, description, sourceUrl, source, year }) => (
           <span
             style={{
               display: 'inline-block',
-              background: COLORS.podcast,
-              color: '#000',
+              background: COLORS.accent,
+              color: COLORS.background,
               padding: '3px 10px',
               borderRadius: '10px',
               fontSize: '11px',
@@ -233,7 +227,7 @@ const PodcastCard = ({ title, description, sourceUrl, source, year }) => (
         {description && (
           <div
             style={{
-              color: COLORS.muted,
+              color: COLORS.textMuted,
               fontSize: '13px',
               lineHeight: '1.5',
               marginBottom: '16px',
@@ -252,8 +246,8 @@ const PodcastCard = ({ title, description, sourceUrl, source, year }) => (
             alignItems: 'center',
             gap: '8px',
             padding: '12px 24px',
-            background: COLORS.podcast,
-            color: '#000',
+            background: COLORS.accent,
+            color: COLORS.background,
             textDecoration: 'none',
             borderRadius: '8px',
             fontWeight: '700',

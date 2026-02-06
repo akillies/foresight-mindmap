@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import mindMapData from './mindMapData';
-
-// LCARS color palette
-const COLORS = {
-  primary: '#5C88DA',
-  secondary: '#FF6B9D',
-  accent: '#FFCC66',
-  highlight: '#99CCFF',
-  pink: '#CC99CC',
-  success: '#77DD77',
-  warning: '#FFB366',
-};
+import { COLORS } from './constants';
 
 /**
  * Featured Content Dashboard - Showcases the rich media library
  * Makes 142+ media items discoverable and prominent
  */
 // LCARS Loading Spinner Component
-const LCARSSpinner = ({ color = COLORS.accent }) => (
+const LCARSSpinner = ({ color = COLORS.secondary }) => (
   <div style={{
     display: 'flex',
     flexDirection: 'column',
@@ -172,24 +162,24 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
         right: '20px',
         width: '320px',
         zIndex: 10,
-        background: '#000000',
-        border: `4px solid ${COLORS.accent}`,
+        background: COLORS.background,
+        border: `4px solid ${COLORS.secondary}`,
         borderRadius: '20px',
         padding: '20px',
         maxHeight: 'calc(100vh - 40px)',
         overflowY: 'auto',
-        boxShadow: `0 0 30px ${COLORS.accent}40`,
+        boxShadow: `0 0 30px ${COLORS.secondary}40`,
       }}
     >
       {/* Header */}
       <h2
         style={{
-          background: `linear-gradient(135deg, ${COLORS.accent} 0%, ${COLORS.highlight} 100%)`,
+          background: `linear-gradient(135deg, ${COLORS.secondary} 0%, ${COLORS.info} 100%)`,
           padding: '12px',
           borderRadius: '12px',
           fontSize: '14px',
           fontWeight: '700',
-          color: '#000',
+          color: COLORS.background,
           letterSpacing: '2px',
           textAlign: 'center',
           fontFamily: 'monospace',
@@ -214,24 +204,24 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.secondary }}>{contentStats.videos}</div>
-            <div style={{ fontSize: '9px', color: COLORS.secondary, opacity: 0.8 }}>VIDEOS</div>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.pink }}>{contentStats.videos}</div>
+            <div style={{ fontSize: '9px', color: COLORS.pink, opacity: 0.8 }}>VIDEOS</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.accent }}>{contentStats.images}</div>
-            <div style={{ fontSize: '9px', color: COLORS.accent, opacity: 0.8 }}>DIAGRAMS</div>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.secondary }}>{contentStats.images}</div>
+            <div style={{ fontSize: '9px', color: COLORS.secondary, opacity: 0.8 }}>DIAGRAMS</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.pink }}>{contentStats.articles}</div>
-            <div style={{ fontSize: '9px', color: COLORS.pink, opacity: 0.8 }}>ARTICLES</div>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.accent }}>{contentStats.articles}</div>
+            <div style={{ fontSize: '9px', color: COLORS.accent, opacity: 0.8 }}>ARTICLES</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.success }}>{contentStats.documents}</div>
-            <div style={{ fontSize: '9px', color: COLORS.success, opacity: 0.8 }}>PAPERS</div>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.successBright }}>{contentStats.documents}</div>
+            <div style={{ fontSize: '9px', color: COLORS.successBright, opacity: 0.8 }}>PAPERS</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.warning }}>{contentStats.podcasts}</div>
-            <div style={{ fontSize: '9px', color: COLORS.warning, opacity: 0.8 }}>PODCASTS</div>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.warningLight }}>{contentStats.podcasts}</div>
+            <div style={{ fontSize: '9px', color: COLORS.warningLight, opacity: 0.8 }}>PODCASTS</div>
           </div>
         </div>
         <div
@@ -242,9 +232,9 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
             textAlign: 'center',
           }}
         >
-          <div style={{ fontSize: '32px', fontWeight: '700', color: COLORS.highlight }}>{contentStats.total}+</div>
-          <div style={{ fontSize: '10px', color: COLORS.highlight, opacity: 0.8, letterSpacing: '1px' }}>RESOURCES TO EXPLORE</div>
-          <div style={{ fontSize: '9px', color: COLORS.highlight, opacity: 0.6, marginTop: '4px', fontStyle: 'italic' }}>
+          <div style={{ fontSize: '32px', fontWeight: '700', color: COLORS.info }}>{contentStats.total}+</div>
+          <div style={{ fontSize: '10px', color: COLORS.info, opacity: 0.8, letterSpacing: '1px' }}>RESOURCES TO EXPLORE</div>
+          <div style={{ fontSize: '9px', color: COLORS.info, opacity: 0.6, marginTop: '4px', fontStyle: 'italic' }}>
             Click any node to discover more
           </div>
         </div>
@@ -254,29 +244,29 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
       {featuredVideo && (
         <div
           style={{
-            background: `${COLORS.secondary}15`,
-            border: `2px solid ${COLORS.secondary}60`,
+            background: `${COLORS.pink}15`,
+            border: `2px solid ${COLORS.pink}60`,
             borderRadius: '12px',
             padding: '15px',
             marginBottom: '20px',
           }}
         >
-          <div style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '2px', color: COLORS.secondary, marginBottom: '10px' }}>
+          <div style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '2px', color: COLORS.pink, marginBottom: '10px' }}>
             FEATURED VIDEO
           </div>
-          <div style={{ fontSize: '13px', fontWeight: '600', color: '#fff', marginBottom: '8px', lineHeight: '1.3' }}>
+          <div style={{ fontSize: '13px', fontWeight: '600', color: COLORS.text, marginBottom: '8px', lineHeight: '1.3' }}>
             {featuredVideo.title}
           </div>
-          <div style={{ fontSize: '10px', color: '#aaa', marginBottom: '10px', lineHeight: '1.4' }}>
+          <div style={{ fontSize: '10px', color: COLORS.textMuted, marginBottom: '10px', lineHeight: '1.4' }}>
             {featuredVideo.description}
           </div>
           <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
             {featuredVideo.year && (
               <span
                 style={{
-                  background: `${COLORS.warning}30`,
-                  border: `1px solid ${COLORS.warning}60`,
-                  color: COLORS.warning,
+                  background: `${COLORS.warningLight}30`,
+                  border: `1px solid ${COLORS.warningLight}60`,
+                  color: COLORS.warningLight,
                   padding: '4px 8px',
                   borderRadius: '6px',
                   fontSize: '10px',
@@ -288,9 +278,9 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
             )}
             <span
               style={{
-                background: `${COLORS.pink}30`,
-                border: `1px solid ${COLORS.pink}60`,
-                color: COLORS.pink,
+                background: `${COLORS.accent}30`,
+                border: `1px solid ${COLORS.accent}60`,
+                color: COLORS.accent,
                 padding: '4px 8px',
                 borderRadius: '6px',
                 fontSize: '10px',
@@ -304,9 +294,9 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
             onClick={() => onMediaClick && onMediaClick(featuredVideo)}
             style={{
               width: '100%',
-              background: `linear-gradient(135deg, ${COLORS.secondary}40 0%, ${COLORS.pink}40 100%)`,
-              border: `2px solid ${COLORS.secondary}`,
-              color: COLORS.secondary,
+              background: `linear-gradient(135deg, ${COLORS.pink}40 0%, ${COLORS.pink}40 100%)`,
+              border: `2px solid ${COLORS.pink}`,
+              color: COLORS.pink,
               padding: '10px',
               borderRadius: '10px',
               fontSize: '10px',
@@ -318,7 +308,7 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
             }}
             onMouseEnter={(e) => {
               e.target.style.transform = 'scale(1.02)';
-              e.target.style.boxShadow = `0 0 15px ${COLORS.secondary}60`;
+              e.target.style.boxShadow = `0 0 15px ${COLORS.pink}60`;
             }}
             onMouseLeave={(e) => {
               e.target.style.transform = 'scale(1)';
@@ -334,14 +324,14 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
       {featuredDiagram && (
         <div
           style={{
-            background: `${COLORS.accent}15`,
-            border: `2px solid ${COLORS.accent}60`,
+            background: `${COLORS.secondary}15`,
+            border: `2px solid ${COLORS.secondary}60`,
             borderRadius: '12px',
             padding: '15px',
             marginBottom: '20px',
           }}
         >
-          <div style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '2px', color: COLORS.accent, marginBottom: '10px' }}>
+          <div style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '2px', color: COLORS.secondary, marginBottom: '10px' }}>
             CUSTOM DIAGRAM
           </div>
           <div
@@ -356,9 +346,9 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
               minHeight: '120px',
             }}
           >
-            {diagramLoading && !diagramError && <LCARSSpinner color={COLORS.accent} />}
+            {diagramLoading && !diagramError && <LCARSSpinner color={COLORS.secondary} />}
             {diagramError && (
-              <div style={{ color: '#9AA5B8', fontFamily: 'monospace', fontSize: '11px', letterSpacing: '1px' }}>
+              <div style={{ color: COLORS.textMuted, fontFamily: 'monospace', fontSize: '11px', letterSpacing: '1px' }}>
                 [IMAGE UNAVAILABLE]
               </div>
             )}
@@ -381,19 +371,19 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
               }}
             />
           </div>
-          <div style={{ fontSize: '13px', fontWeight: '600', color: '#fff', marginBottom: '8px', lineHeight: '1.3' }}>
+          <div style={{ fontSize: '13px', fontWeight: '600', color: COLORS.text, marginBottom: '8px', lineHeight: '1.3' }}>
             {featuredDiagram.title}
           </div>
-          <div style={{ fontSize: '10px', color: '#aaa', marginBottom: '10px', lineHeight: '1.4' }}>
+          <div style={{ fontSize: '10px', color: COLORS.textMuted, marginBottom: '10px', lineHeight: '1.4' }}>
             {featuredDiagram.description}
           </div>
           <button
             onClick={() => onMediaClick && onMediaClick(featuredDiagram)}
             style={{
               width: '100%',
-              background: `linear-gradient(135deg, ${COLORS.accent}40 0%, ${COLORS.highlight}40 100%)`,
-              border: `2px solid ${COLORS.accent}`,
-              color: COLORS.accent,
+              background: `linear-gradient(135deg, ${COLORS.secondary}40 0%, ${COLORS.info}40 100%)`,
+              border: `2px solid ${COLORS.secondary}`,
+              color: COLORS.secondary,
               padding: '10px',
               borderRadius: '10px',
               fontSize: '10px',
@@ -405,7 +395,7 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
             }}
             onMouseEnter={(e) => {
               e.target.style.transform = 'scale(1.02)';
-              e.target.style.boxShadow = `0 0 15px ${COLORS.accent}60`;
+              e.target.style.boxShadow = `0 0 15px ${COLORS.secondary}60`;
             }}
             onMouseLeave={(e) => {
               e.target.style.transform = 'scale(1)';
@@ -421,10 +411,10 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
       <div
         style={{
           fontSize: '9px',
-          color: '#777',
+          color: COLORS.textMuted,
           textAlign: 'center',
           padding: '10px',
-          borderTop: `1px solid ${COLORS.accent}40`,
+          borderTop: `1px solid ${COLORS.secondary}40`,
           letterSpacing: '1px',
         }}
       >

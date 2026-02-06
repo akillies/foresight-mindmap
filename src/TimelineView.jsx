@@ -1,23 +1,12 @@
 import React, { useState } from 'react';
 import mindMapData from './mindMapData';
+import { COLORS } from './constants';
+
+const SPECULATIVE_COLOR = '#9D4EDD';
 
 const TimelineView = ({ onClose }) => {
   const [selectedEra, setSelectedEra] = useState('all');
   const [showUncertainty, setShowUncertainty] = useState(true);
-
-  // LCARS Color Palette
-  const COLORS = {
-    primary: '#5C88DA',
-    secondary: '#FFCC66',
-    accent: '#CC99CC',
-    highlight: '#FF9966',
-    success: '#99CC99',
-    pink: '#FF6B9D',
-    background: '#000000',
-    panel: '#1a1a2e',
-    text: '#E8F1FF',
-    speculative: '#9D4EDD',
-  };
 
   // Timeline eras
   const eras = [
@@ -27,7 +16,7 @@ const TimelineView = ({ onClose }) => {
     { id: 'corporate', label: 'CORPORATE', range: '1970s-1980s', color: COLORS.accent },
     { id: 'academic', label: 'ACADEMIC', range: '1990s-2000s', color: COLORS.highlight },
     { id: 'modern', label: 'MODERN', range: '2010s-2020s', color: COLORS.success },
-    { id: 'speculative', label: 'SPECULATIVE', range: '2030s-2100', color: COLORS.speculative },
+    { id: 'speculative', label: 'SPECULATIVE', range: '2030s-2100', color: SPECULATIVE_COLOR },
   ];
 
   // Filter helper function for era filtering
@@ -74,6 +63,8 @@ const TimelineView = ({ onClose }) => {
 
   return (
     <div
+      role="region"
+      aria-label="Timeline view of foresight methodologies from 1948 to 2100"
       className="timeline-container"
       style={{
         position: 'fixed',
@@ -108,7 +99,7 @@ const TimelineView = ({ onClose }) => {
               margin: 0,
               fontSize: '20px',
               fontWeight: '700',
-              color: '#000000',
+              color: COLORS.background,
               letterSpacing: '3px',
               fontFamily: 'monospace',
             }}
@@ -118,7 +109,7 @@ const TimelineView = ({ onClose }) => {
           <div
             style={{
               fontSize: '11px',
-              color: '#000000',
+              color: COLORS.background,
               opacity: 0.7,
               letterSpacing: '1px',
               marginTop: '4px',
@@ -130,10 +121,11 @@ const TimelineView = ({ onClose }) => {
         </div>
         <button
           onClick={onClose}
+          aria-label="Close timeline view"
           style={{
             background: 'transparent',
-            border: `2px solid #000000`,
-            color: '#000000',
+            border: `2px solid ${COLORS.background}`,
+            color: COLORS.background,
             fontSize: '24px',
             width: '40px',
             height: '40px',
@@ -143,6 +135,7 @@ const TimelineView = ({ onClose }) => {
             alignItems: 'center',
             justifyContent: 'center',
             fontWeight: 'bold',
+            transition: 'all 0.2s',
           }}
         >
           ×
@@ -171,7 +164,7 @@ const TimelineView = ({ onClose }) => {
               style={{
                 background: selectedEra === era.id ? (era.color || COLORS.primary) : 'transparent',
                 border: `2px solid ${era.color || COLORS.primary}`,
-                color: selectedEra === era.id ? '#000000' : (era.color || COLORS.primary),
+                color: selectedEra === era.id ? COLORS.background : (era.color || COLORS.primary),
                 padding: '8px 14px',
                 borderRadius: '15px',
                 fontSize: '10px',
@@ -200,7 +193,7 @@ const TimelineView = ({ onClose }) => {
           <label
             htmlFor="uncertainty-toggle"
             style={{
-              color: COLORS.speculative,
+              color: SPECULATIVE_COLOR,
               fontSize: '11px',
               fontWeight: '600',
               letterSpacing: '1px',
@@ -257,7 +250,7 @@ const TimelineView = ({ onClose }) => {
                   justifyContent: 'center',
                   fontSize: '14px',
                   fontWeight: '700',
-                  color: '#000000',
+                  color: COLORS.background,
                   fontFamily: 'monospace',
                   boxShadow: `0 0 20px ${item.color}60`,
                 }}
@@ -291,7 +284,7 @@ const TimelineView = ({ onClose }) => {
                       color: COLORS.text,
                       fontSize: '11px',
                       opacity: 0.7,
-                      fontFamily: 'Inter, sans-serif',
+                      fontFamily: 'monospace',
                     }}
                   >
                     {item.creator}
@@ -384,7 +377,7 @@ const TimelineView = ({ onClose }) => {
                         fontSize: '11px',
                         lineHeight: '1.5',
                         opacity: 0.9,
-                        fontFamily: 'Inter, sans-serif',
+                        fontFamily: 'monospace',
                       }}
                     >
                       {futurist.description}
@@ -414,7 +407,7 @@ const TimelineView = ({ onClose }) => {
                           style={{
                             fontSize: '9px',
                             background: futurist.color,
-                            color: '#000',
+                            color: COLORS.background,
                             padding: '4px 8px',
                             borderRadius: '8px',
                             fontWeight: '600',
@@ -436,7 +429,7 @@ const TimelineView = ({ onClose }) => {
         <div>
           <h3
             style={{
-              color: COLORS.speculative,
+              color: SPECULATIVE_COLOR,
               fontSize: '14px',
               fontWeight: '700',
               letterSpacing: '2px',
@@ -453,7 +446,7 @@ const TimelineView = ({ onClose }) => {
               opacity: 0.7,
               marginBottom: '20px',
               fontStyle: 'italic',
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'monospace',
             }}
           >
             The cone of possibilities - uncertainty expands exponentially beyond 2060
@@ -468,9 +461,9 @@ const TimelineView = ({ onClose }) => {
             const probabilityColors = {
               'very-low': '#EF4444',
               low: '#F59E0B',
-              'low-medium': '#FFCC66',
-              medium: '#99CC99',
-              'medium-high': '#5C88DA',
+              'low-medium': COLORS.secondary,
+              medium: COLORS.success,
+              'medium-high': COLORS.primary,
               high: '#10B981',
               'very-high': '#059669',
             };
@@ -548,7 +541,7 @@ const TimelineView = ({ onClose }) => {
                         borderRadius: '10px',
                         fontSize: '9px',
                         fontWeight: '700',
-                        color: '#000',
+                        color: COLORS.background,
                         letterSpacing: '1px',
                         fontFamily: 'monospace',
                       }}
@@ -564,7 +557,7 @@ const TimelineView = ({ onClose }) => {
                       lineHeight: '1.6',
                       opacity: 0.9,
                       marginBottom: '12px',
-                      fontFamily: 'Inter, sans-serif',
+                      fontFamily: 'monospace',
                     }}
                   >
                     {scenario.description}
@@ -595,7 +588,7 @@ const TimelineView = ({ onClose }) => {
                               opacity: 0.8,
                               paddingLeft: '12px',
                               borderLeft: `2px solid ${scenario.color}40`,
-                              fontFamily: 'Inter, sans-serif',
+                              fontFamily: 'monospace',
                             }}
                           >
                             {milestone}
@@ -614,7 +607,7 @@ const TimelineView = ({ onClose }) => {
         <div style={{ marginTop: '40px' }}>
           <h3
             style={{
-              color: '#10B981',
+              color: COLORS.success,
               fontSize: '14px',
               fontWeight: '700',
               letterSpacing: '2px',
@@ -631,7 +624,7 @@ const TimelineView = ({ onClose }) => {
               opacity: 0.7,
               marginBottom: '20px',
               fontStyle: 'italic',
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'monospace',
             }}
           >
             Star Trek-inspired pathway: abundance, collaboration, enlightenment
@@ -667,7 +660,7 @@ const TimelineView = ({ onClose }) => {
                       fontSize: '14px',
                       fontWeight: '700',
                       marginBottom: '8px',
-                      fontFamily: 'Inter, sans-serif',
+                      fontFamily: 'monospace',
                     }}
                   >
                     {milestone.title}
@@ -682,7 +675,7 @@ const TimelineView = ({ onClose }) => {
                   lineHeight: '1.6',
                   opacity: 0.9,
                   marginBottom: '12px',
-                  fontFamily: 'Inter, sans-serif',
+                  fontFamily: 'monospace',
                 }}
               >
                 {milestone.description}
@@ -712,7 +705,7 @@ const TimelineView = ({ onClose }) => {
                           opacity: 0.8,
                           paddingLeft: '12px',
                           borderLeft: `2px solid ${milestone.color}40`,
-                          fontFamily: 'Inter, sans-serif',
+                          fontFamily: 'monospace',
                         }}
                       >
                         • {dev}
@@ -768,12 +761,12 @@ const TimelineView = ({ onClose }) => {
         }
 
         ::-webkit-scrollbar-thumb {
-          background: #5C88DA;
+          background: ${COLORS.primary};
           border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-          background: #FFCC66;
+          background: ${COLORS.secondary};
         }
 
         /* Mobile Responsive Timeline */
@@ -785,7 +778,7 @@ const TimelineView = ({ onClose }) => {
             bottom: 0 !important;
             right: 0 !important;
             border-left: none !important;
-            border-top: 3px solid #5C88DA !important;
+            border-top: 3px solid ${COLORS.primary} !important;
             border-radius: 20px 20px 0 0 !important;
             animation: slideInBottom 0.3s ease !important;
           }

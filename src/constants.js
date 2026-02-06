@@ -15,7 +15,12 @@ export const COLORS = {
   background: '#000000',
   panel: '#1a1a2e',
   text: '#E8F1FF',
+  textMuted: '#8899AA',
+  textDim: '#b8c5d8',
   warning: '#FFCC66',
+  info: '#99CCFF',
+  successBright: '#77DD77',
+  warningLight: '#FFB366',
 };
 
 // Media type colors for visual categorization
@@ -76,6 +81,15 @@ export const SCENE_CONFIG = {
   easterEggCheckInterval: 10000, // 10 seconds
   blackSwanSpawnChance: 0.0005, // 0.05% per check
   enterpriseSpawnChance: 0.0017, // 0.17% per check
+};
+
+// Performance safety limits - prevent stack overflow and browser crashes
+export const PERFORMANCE_LIMITS = {
+  MAX_VISIBLE_NODES: 200,
+  MAX_EXPANSION_DEPTH: 4,
+  CLICK_DEBOUNCE_MS: 300,
+  NODE_WARNING_THRESHOLD: 150,
+  ANIMATION_FRUSTUM_MARGIN: 1.5, // multiplier for frustum culling check
 };
 
 // Animation configuration
