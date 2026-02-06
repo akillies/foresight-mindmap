@@ -27,10 +27,10 @@ const EnhancedInfoPanel = ({ selectedNode, isOpen, onClose, onToggle, onMediaCli
   if (!selectedNode) return null;
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: '📋' },
-    { id: 'media', label: 'Media', icon: '🎬', count: selectedNode.media?.length || 0 },
-    { id: 'process', label: 'Process', icon: '📝', visible: selectedNode.processGuide || selectedNode.steps },
-    { id: 'cases', label: 'Cases', icon: '💼', visible: selectedNode.caseStudies && selectedNode.caseStudies.length > 0 },
+    { id: 'overview', label: 'Overview', icon: 'OVR' },
+    { id: 'media', label: 'Media', icon: 'MED', count: selectedNode.media?.length || 0 },
+    { id: 'process', label: 'Process', icon: 'PRC', visible: selectedNode.processGuide || selectedNode.steps },
+    { id: 'cases', label: 'Cases', icon: 'CAS', visible: selectedNode.caseStudies && selectedNode.caseStudies.length > 0 },
   ].filter(tab => tab.visible !== false);
 
   return (
@@ -362,7 +362,7 @@ const MediaTab = ({ selectedNode, onMediaClick }) => {
   if (!selectedNode.media || selectedNode.media.length === 0) {
     return (
       <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9AA5B8' }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>📭</div>
+        <div style={{ fontSize: '24px', marginBottom: '16px', fontFamily: 'monospace', fontWeight: '700', color: COLORS.primary }}>[NO MEDIA]</div>
         <div style={{ fontSize: '14px' }}>No media items available for this node.</div>
       </div>
     );
@@ -383,10 +383,11 @@ const MediaTab = ({ selectedNode, onMediaClick }) => {
   };
 
   const typeIcons = {
-    video: '🎬',
-    image: '🖼️',
-    article: '📰',
-    document: '📄',
+    video: 'VID',
+    image: 'IMG',
+    article: 'ART',
+    document: 'DOC',
+    podcast: 'POD',
   };
 
   return (
@@ -481,7 +482,7 @@ const ProcessTab = ({ selectedNode }) => {
   if (!processGuide) {
     return (
       <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9AA5B8' }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>📝</div>
+        <div style={{ fontSize: '24px', marginBottom: '16px', fontFamily: 'monospace', fontWeight: '700', color: COLORS.primary }}>[NO PROCESS]</div>
         <div style={{ fontSize: '14px' }}>No process guide available for this methodology.</div>
       </div>
     );
@@ -544,7 +545,7 @@ const ProcessTab = ({ selectedNode }) => {
               paddingLeft: '44px',
               fontWeight: '600',
             }}>
-              ⏱️ {step.duration}
+              [{step.duration}]
             </div>
           )}
         </div>
@@ -567,7 +568,7 @@ const ProcessTab = ({ selectedNode }) => {
             fontFamily: 'monospace',
             margin: '0 0 10px 0',
           }}>
-            💡 FACILITATOR TIPS
+            FACILITATOR TIPS
           </h4>
           <ul style={{ marginLeft: '20px', fontSize: '12px', lineHeight: '1.7', color: '#b8c5d8' }}>
             {processGuide.tips.map((tip, idx) => (
@@ -585,7 +586,7 @@ const CasesTab = ({ selectedNode }) => {
   if (!selectedNode.caseStudies || selectedNode.caseStudies.length === 0) {
     return (
       <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9AA5B8' }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>💼</div>
+        <div style={{ fontSize: '24px', marginBottom: '16px', fontFamily: 'monospace', fontWeight: '700', color: COLORS.primary }}>[NO CASES]</div>
         <div style={{ fontSize: '14px' }}>No case studies available for this methodology.</div>
       </div>
     );

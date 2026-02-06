@@ -2252,7 +2252,7 @@ const ForesightMindMap = () => {
               e.target.style.transform = 'scale(1)';
             }}
           >
-            <span>🎬</span> BROWSE MEDIA
+            BROWSE MEDIA
           </button>
 
           {/* Diagram Gallery Button */}
@@ -2287,7 +2287,7 @@ const ForesightMindMap = () => {
               e.target.style.transform = 'scale(1)';
             }}
           >
-            <span>📊</span> DIAGRAM GALLERY
+            DIAGRAM GALLERY
           </button>
 
           {/* Timeline Toggle Button */}

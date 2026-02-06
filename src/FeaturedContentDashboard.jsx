@@ -29,59 +29,62 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
       const allMedia = [];
       const videos = [];
       const diagrams = [];
-      const stats = { videos: 0, images: 0, articles: 0, documents: 0, total: 0 };
+      const stats = { videos: 0, images: 0, articles: 0, documents: 0, podcasts: 0, total: 0 };
 
-      // Process center node
-      if (mindMapData.center && mindMapData.center.media) {
-        mindMapData.center.media.forEach(item => {
-          allMedia.push({ ...item, source: 'Strategic Foresight' });
+      // Helper to process media array
+      const processMedia = (media, source) => {
+        if (!media) return;
+        media.forEach(item => {
+          allMedia.push({ ...item, source });
           stats[item.type + 's'] = (stats[item.type + 's'] || 0) + 1;
           stats.total++;
 
           if (item.type === 'video') {
-            videos.push({ ...item, source: 'Strategic Foresight' });
+            videos.push({ ...item, source });
+          }
+
+          if (item.type === 'image' && item.url && item.url.startsWith('/diagrams/')) {
+            diagrams.push({ ...item, source });
           }
         });
-      }
+      };
 
-      // Process level 1 nodes
-      if (mindMapData.level1) {
-        mindMapData.level1.forEach(pillar => {
-          if (pillar.media) {
-            pillar.media.forEach(item => {
-              allMedia.push({ ...item, source: pillar.label });
-              stats[item.type + 's'] = (stats[item.type + 's'] || 0) + 1;
-              stats.total++;
+      // Process center node
+      processMedia(mindMapData.center?.media, 'Strategic Foresight');
 
-              if (item.type === 'video') {
-                videos.push({ ...item, source: pillar.label });
-              }
-            });
-          }
+      // Process level 1 nodes (pillars)
+      mindMapData.level1?.forEach(pillar => {
+        processMedia(pillar.media, pillar.label);
+      });
+
+      // Process methodologies
+      mindMapData.methodologies?.forEach(methodology => {
+        processMedia(methodology.media, methodology.label);
+      });
+
+      // Process futurists
+      mindMapData.futurists?.forEach(futurist => {
+        processMedia(futurist.media, futurist.name);
+      });
+
+      // Process speculativeFutures timeline
+      mindMapData.speculativeFutures?.timeline?.forEach(era => {
+        era.events?.forEach(event => {
+          processMedia(event.media, event.title || era.era);
         });
-      }
+      });
 
-      // Process level 2 nodes (methodologies)
-      if (mindMapData.level2) {
-        mindMapData.level2.forEach(methodology => {
-          if (methodology.media) {
-            methodology.media.forEach(item => {
-              allMedia.push({ ...item, source: methodology.label });
-              stats[item.type + 's'] = (stats[item.type + 's'] || 0) + 1;
-              stats.total++;
-
-              if (item.type === 'video') {
-                videos.push({ ...item, source: methodology.label });
-              }
-
-              // Track local diagrams (from /diagrams/ folder)
-              if (item.type === 'image' && item.url && item.url.startsWith('/diagrams/')) {
-                diagrams.push({ ...item, source: methodology.label });
-              }
-            });
-          }
+      // Process positiveFutures timeline
+      mindMapData.positiveFutures?.timeline?.forEach(era => {
+        era.events?.forEach(event => {
+          processMedia(event.media, event.title || era.era);
         });
-      }
+      });
+
+      // Process futuresSocieties
+      mindMapData.futuresSocieties?.forEach(society => {
+        processMedia(society.media, society.name);
+      });
 
       setAllVideos(videos);
       setLocalDiagrams(diagrams);
@@ -169,22 +172,26 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
         <div style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '2px', color: COLORS.primary, marginBottom: '12px', textAlign: 'center' }}>
           CURATED RESOURCES
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '24px', fontWeight: '700', color: COLORS.secondary }}>{contentStats.videos}</div>
-            <div style={{ fontSize: '10px', color: COLORS.secondary, opacity: 0.8 }}>VIDEOS</div>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.secondary }}>{contentStats.videos}</div>
+            <div style={{ fontSize: '9px', color: COLORS.secondary, opacity: 0.8 }}>VIDEOS</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '24px', fontWeight: '700', color: COLORS.accent }}>{contentStats.images}</div>
-            <div style={{ fontSize: '10px', color: COLORS.accent, opacity: 0.8 }}>DIAGRAMS</div>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.accent }}>{contentStats.images}</div>
+            <div style={{ fontSize: '9px', color: COLORS.accent, opacity: 0.8 }}>DIAGRAMS</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '24px', fontWeight: '700', color: COLORS.pink }}>{contentStats.articles}</div>
-            <div style={{ fontSize: '10px', color: COLORS.pink, opacity: 0.8 }}>ARTICLES</div>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.pink }}>{contentStats.articles}</div>
+            <div style={{ fontSize: '9px', color: COLORS.pink, opacity: 0.8 }}>ARTICLES</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '24px', fontWeight: '700', color: COLORS.success }}>{contentStats.documents}</div>
-            <div style={{ fontSize: '10px', color: COLORS.success, opacity: 0.8 }}>PAPERS</div>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.success }}>{contentStats.documents}</div>
+            <div style={{ fontSize: '9px', color: COLORS.success, opacity: 0.8 }}>PAPERS</div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.warning }}>{contentStats.podcasts}</div>
+            <div style={{ fontSize: '9px', color: COLORS.warning, opacity: 0.8 }}>PODCASTS</div>
           </div>
         </div>
         <div

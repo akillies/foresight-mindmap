@@ -21,6 +21,22 @@ const mindMapData = {
     grokipedia: 'https://en.wikipedia.org/wiki/Futures_studies',
     media: [
       {
+        type: 'document',
+        title: 'Alternative Futures at the Manoa School',
+        url: 'https://jfsdigital.org/wp-content/uploads/2014/01/142-E01.pdf',
+        source: 'Journal of Futures Studies',
+        year: 2009,
+        description: 'James Dator\'s definitive paper explaining the Manoa School approach and his four alternative futures archetypes: Continuation, Limits and Discipline, Collapse, and Transformation. Foundational reading for understanding how all possible futures can be categorized into these four narrative patterns.'
+      },
+      {
+        type: 'document',
+        title: 'The Futures Wheel',
+        url: 'https://www.researchgate.net/publication/349335014_THE_FUTURES_WHEEL',
+        source: 'Futures Research Methodology v3.0',
+        year: 2009,
+        description: 'Jerome C. Glenn\'s comprehensive guide to the Futures Wheel method he invented in 1971. Shows how to map primary, secondary, and tertiary consequences of any trend or event through structured brainstorming. From the Millennium Project\'s definitive futures methods handbook.'
+      },
+      {
         type: 'video',
         title: 'Arthur C. Clarke Predicts the Future (1964)',
         url: 'https://www.youtube.com/watch?v=YwELr8ir9qM',
@@ -969,6 +985,14 @@ const mindMapData = {
       },
       media: [
         {
+          type: 'document',
+          title: 'Managing Strategic Surprise by Response to Weak Signals',
+          url: 'https://www.creaciondeestrategia.com/wp-content/uploads/2022/02/Ansoff_1975.pdf',
+          source: 'California Management Review',
+          year: 1975,
+          description: 'Igor Ansoff\'s foundational paper introducing weak signals theory. Develops technique for early identification of strategic signals and matching organizational response to information quality. Establishes the five-level signal strength model from "sense of turbulence" to actionable intelligence.'
+        },
+        {
           type: 'image',
           title: 'Weak Signals Detection Framework',
           url: '/diagrams/weak-signals-framework.svg',
@@ -1612,6 +1636,14 @@ const mindMapData = {
           source: 'Metafuture'
         },
         {
+          type: 'document',
+          title: 'Six Pillars: Futures Thinking for Transforming',
+          url: 'https://www.metafuture.org/library1/FuturesStudies/Six-pillars-Foresight-2008.pdf',
+          source: 'Foresight (Emerald)',
+          year: 2008,
+          description: 'Inayatullah\'s comprehensive framework introducing six foundational concepts for futures work: the used future, the disowned future, alternative futures, alignment, models of social change, and uses of the future. Provides conceptual architecture that unifies CLA, scenarios, and visioning.'
+        },
+        {
           type: 'article',
           title: 'Causal Layered Analysis',
           url: 'https://en.wikipedia.org/wiki/Causal_layered_analysis',
@@ -1802,6 +1834,30 @@ const mindMapData = {
         }
       ],
       media: [
+        {
+          type: 'document',
+          title: 'Scenarios: Uncharted Waters Ahead',
+          url: 'https://hbr.org/1985/09/scenarios-uncharted-waters-ahead',
+          source: 'Harvard Business Review',
+          year: 1985,
+          description: 'Pierre Wack\'s foundational paper on scenario planning methodology. Part 1 of his famous two-part HBR series describing how Shell developed scenario planning to anticipate the 1973 oil crisis. Introduces the concept of "predetermined elements" and "critical uncertainties."'
+        },
+        {
+          type: 'document',
+          title: 'Scenarios: Shooting the Rapids',
+          url: 'https://hbr.org/1985/11/scenarios-shooting-the-rapids',
+          source: 'Harvard Business Review',
+          year: 1985,
+          description: 'Pierre Wack\'s second HBR paper completing his scenario methodology framework. Explains how scenarios work to change mental models of decision-makers, not just to predict the future. Introduces "The Gentle Art of Re-perceiving."'
+        },
+        {
+          type: 'document',
+          title: 'Scenario Planning: Pierre Wack\'s Hidden Messages',
+          url: 'https://chermackscenarios.com/wp-content/uploads/2020/10/Scenario-planning-PierreWacks-hiddenmessages.pdf',
+          source: 'Futures',
+          year: 2010,
+          description: 'George Burt\'s analysis based on Pierre Wack\'s personal papers at the Pierre Wack Memorial Library, Oxford. Distills Wack\'s original views on scenario planning from his unpublished notes and correspondence.'
+        },
         {
           type: 'podcast',
           title: 'FuturePod: Scenario Planning Conversations',
@@ -2293,6 +2349,14 @@ const mindMapData = {
       ],
       media: [
         {
+          type: 'document',
+          title: 'An Experimental Application of the Delphi Method to the Use of Experts',
+          url: 'https://www.rand.org/content/dam/rand/pubs/research_memoranda/2009/RM727.1.pdf',
+          source: 'RAND Corporation',
+          year: 1963,
+          description: 'The foundational paper by Norman Dalkey and Olaf Helmer introducing the Delphi method. Published in Management Science 9(3), 458-467. Describes the first experimental application of systematic expert consensus-building through anonymous iteration and controlled feedback.'
+        },
+        {
           type: 'article',
           title: 'Delphi Method',
           url: 'https://en.wikipedia.org/wiki/Delphi_method',
@@ -2668,10 +2732,26 @@ const mindMapData = {
       media: [
         {
           type: 'document',
+          title: 'Futures Under Glass: A Recipe for People Who Hate to Predict',
+          url: 'https://www.sciencedirect.com/science/article/abs/pii/001632879090017X',
+          source: 'Futures',
+          year: 1990,
+          description: 'John B. Robinson\'s foundational paper establishing backcasting methodology. Argues the distinguishing characteristic of backcasting is "a concern not with what futures are likely to happen, but with how desirable futures can be attained." Introduces normative, problem-solving approach for sustainability planning.'
+        },
+        {
+          type: 'document',
           title: 'The Natural Step Framework (1989)',
           url: 'https://www.naturalstep.org/approach',
           description: 'Famous application of backcasting to sustainability',
           year: 1989
+        },
+        {
+          type: 'document',
+          title: 'Backcasting for Sustainability: Introduction to the Special Issue',
+          url: 'https://www.tellus.org/pub/TFSC_Backcasting_for_Sustainability.pdf',
+          source: 'Technological Forecasting and Social Change',
+          year: 2011,
+          description: 'Comprehensive review of backcasting methodology evolution since Robinson\'s 1990 paper. Examines how backcasting has been applied to sustainability transitions, energy policy, and climate action across diverse contexts.'
         },
         {
           type: 'article',

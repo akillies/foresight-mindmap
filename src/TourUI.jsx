@@ -58,7 +58,7 @@ export function TourLauncherButton({ onLaunch }) {
         e.target.style.transform = 'scale(1)';
       }}
     >
-      <span style={{ fontSize: '14px' }}>🚀</span>
+      <span style={{ fontSize: '12px', fontWeight: '700' }}>[+]</span>
       GUIDED TOUR
     </button>
   );

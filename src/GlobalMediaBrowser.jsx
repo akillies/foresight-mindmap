@@ -22,10 +22,11 @@ const MEDIA_TYPE_COLORS = {
 };
 
 const MEDIA_TYPE_ICONS = {
-  video: '🎬',
-  image: '🖼️',
-  article: '📰',
-  document: '📄',
+  video: 'VID',
+  image: 'IMG',
+  article: 'ART',
+  document: 'DOC',
+  podcast: 'POD',
 };
 
 /**
@@ -74,9 +75,9 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
         });
       }
 
-      // Process level 2 nodes (methodologies)
-      if (mindMapData.level2) {
-        mindMapData.level2.forEach(methodology => {
+      // Process methodologies
+      if (mindMapData.methodologies) {
+        mindMapData.methodologies.forEach(methodology => {
           if (methodology.media) {
             methodology.media.forEach(item => {
               media.push({
@@ -269,10 +270,10 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                 }}
               >
                 <option value="all">All Types ({typeCounts.all})</option>
-                <option value="video">🎬 Videos ({typeCounts.video})</option>
-                <option value="image">🖼️ Images ({typeCounts.image})</option>
-                <option value="article">📰 Articles ({typeCounts.article})</option>
-                <option value="document">📄 Documents ({typeCounts.document})</option>
+                <option value="video">Videos ({typeCounts.video})</option>
+                <option value="image">Images ({typeCounts.image})</option>
+                <option value="article">Articles ({typeCounts.article})</option>
+                <option value="document">Documents ({typeCounts.document})</option>
               </select>
             </div>
 
@@ -387,7 +388,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
         }}>
           {filteredMedia.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '60px 20px', color: '#9AA5B8' }}>
-              <div style={{ fontSize: '64px', marginBottom: '20px' }}>🔍</div>
+              <div style={{ fontSize: '36px', marginBottom: '20px', fontFamily: 'monospace', fontWeight: '700', color: COLORS.primary }}>[NO RESULTS]</div>
               <div style={{ fontSize: '16px' }}>No media found matching your filters</div>
             </div>
           ) : (

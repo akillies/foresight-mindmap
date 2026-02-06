@@ -285,7 +285,7 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
         }}>
           {filteredDiagrams.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '80px 20px', color: '#9AA5B8' }}>
-              <div style={{ fontSize: '72px', marginBottom: '20px' }}>📊</div>
+              <div style={{ fontSize: '48px', marginBottom: '20px', color: COLORS.accent, fontFamily: 'monospace', fontWeight: '700' }}>[NO RESULTS]</div>
               <div style={{ fontSize: '18px', fontWeight: '600' }}>No diagrams found</div>
               <div style={{ fontSize: '13px', marginTop: '8px' }}>Try adjusting your filters</div>
             </div>
