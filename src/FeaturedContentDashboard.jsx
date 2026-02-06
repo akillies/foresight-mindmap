@@ -16,9 +16,45 @@ const COLORS = {
  * Featured Content Dashboard - Showcases the rich media library
  * Makes 142+ media items discoverable and prominent
  */
+// LCARS Loading Spinner Component
+const LCARSSpinner = ({ color = COLORS.accent }) => (
+  <div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '10px',
+  }}>
+    <div style={{
+      width: '40px',
+      height: '40px',
+      border: `3px solid ${color}30`,
+      borderTop: `3px solid ${color}`,
+      borderRadius: '50%',
+      animation: 'lcars-spin 1s linear infinite',
+    }} />
+    <span style={{
+      color: color,
+      fontSize: '9px',
+      fontFamily: 'monospace',
+      letterSpacing: '2px',
+      fontWeight: '600',
+    }}>
+      LOADING
+    </span>
+    <style>{`
+      @keyframes lcars-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    `}</style>
+  </div>
+);
+
 const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
   const [featuredVideo, setFeaturedVideo] = useState(null);
   const [featuredDiagram, setFeaturedDiagram] = useState(null);
+  const [diagramLoading, setDiagramLoading] = useState(true);
+  const [diagramError, setDiagramError] = useState(false);
   const [contentStats, setContentStats] = useState({ videos: 0, images: 0, articles: 0, documents: 0, total: 0 });
   const [allVideos, setAllVideos] = useState([]);
   const [localDiagrams, setLocalDiagrams] = useState([]);
@@ -99,6 +135,8 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
       if (diagrams.length > 0) {
         const randomDiagram = diagrams[Math.floor(Math.random() * diagrams.length)];
         setFeaturedDiagram(randomDiagram);
+        setDiagramLoading(true);
+        setDiagramError(false);
       }
     };
 
@@ -116,6 +154,8 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
       if (localDiagrams.length > 0) {
         const randomDiagram = localDiagrams[Math.floor(Math.random() * localDiagrams.length)];
         setFeaturedDiagram(randomDiagram);
+        setDiagramLoading(true);
+        setDiagramError(false);
       }
     }, 30000); // 30 seconds
 
@@ -316,6 +356,12 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
               minHeight: '120px',
             }}
           >
+            {diagramLoading && !diagramError && <LCARSSpinner color={COLORS.accent} />}
+            {diagramError && (
+              <div style={{ color: '#9AA5B8', fontFamily: 'monospace', fontSize: '11px', letterSpacing: '1px' }}>
+                [IMAGE UNAVAILABLE]
+              </div>
+            )}
             <img
               src={featuredDiagram.url}
               alt={featuredDiagram.title}
@@ -323,6 +369,15 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
                 maxWidth: '100%',
                 maxHeight: '150px',
                 objectFit: 'contain',
+                display: diagramLoading || diagramError ? 'none' : 'block',
+              }}
+              onLoad={() => {
+                setDiagramLoading(false);
+                setDiagramError(false);
+              }}
+              onError={() => {
+                setDiagramLoading(false);
+                setDiagramError(true);
               }}
             />
           </div>
