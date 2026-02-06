@@ -61,9 +61,9 @@ const DiagramGallery = ({ isOpen, onClose, onDiagramClick }) => {
         });
       }
 
-      // Process level 2 nodes (methodologies)
-      if (mindMapData.level2) {
-        mindMapData.level2.forEach(methodology => {
+      // Process methodologies
+      if (mindMapData.methodologies) {
+        mindMapData.methodologies.forEach(methodology => {
           processMedia(methodology.media, methodology.label, methodology.color);
         });
       }

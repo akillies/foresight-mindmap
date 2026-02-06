@@ -15,18 +15,19 @@ const COLORS = {
 };
 
 const MEDIA_TYPE_COLORS = {
-  video: COLORS.secondary,
-  image: COLORS.accent,
-  article: COLORS.pink,
-  document: COLORS.success,
+  video: COLORS.secondary,    // Pink
+  image: COLORS.accent,       // Gold
+  article: COLORS.pink,       // Lavender
+  document: COLORS.primary,   // Blue
+  podcast: COLORS.warning,    // Orange
 };
 
-const MEDIA_TYPE_ICONS = {
-  video: 'VID',
-  image: 'IMG',
-  article: 'ART',
-  document: 'DOC',
-  podcast: 'POD',
+const MEDIA_TYPE_LABELS = {
+  video: 'VIDEO',
+  image: 'IMAGE',
+  article: 'ARTICLE',
+  document: 'PAPER',
+  podcast: 'PODCAST',
 };
 
 /**
@@ -150,6 +151,7 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
     image: allMedia.filter(m => m.type === 'image').length,
     article: allMedia.filter(m => m.type === 'article').length,
     document: allMedia.filter(m => m.type === 'document').length,
+    podcast: allMedia.filter(m => m.type === 'podcast').length,
   };
 
   if (!isOpen) return null;
@@ -269,11 +271,12 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                   cursor: 'pointer',
                 }}
               >
-                <option value="all">All Types ({typeCounts.all})</option>
-                <option value="video">Videos ({typeCounts.video})</option>
-                <option value="image">Images ({typeCounts.image})</option>
-                <option value="article">Articles ({typeCounts.article})</option>
-                <option value="document">Documents ({typeCounts.document})</option>
+                <option value="all">ALL TYPES ({typeCounts.all})</option>
+                <option value="video">VIDEOS ({typeCounts.video})</option>
+                <option value="podcast">PODCASTS ({typeCounts.podcast})</option>
+                <option value="article">ARTICLES ({typeCounts.article})</option>
+                <option value="document">PAPERS ({typeCounts.document})</option>
+                <option value="image">DIAGRAMS ({typeCounts.image})</option>
               </select>
             </div>
 
@@ -401,83 +404,99 @@ const GlobalMediaBrowser = ({ isOpen, onClose, onMediaClick }) => {
                     onClose();
                   }}
                   style={{
-                    background: `${MEDIA_TYPE_COLORS[item.type]}10`,
-                    border: `2px solid ${MEDIA_TYPE_COLORS[item.type]}40`,
-                    borderRadius: '12px',
-                    padding: '16px',
+                    background: COLORS.panel,
+                    border: `2px solid ${MEDIA_TYPE_COLORS[item.type] || COLORS.primary}50`,
+                    borderLeft: `4px solid ${MEDIA_TYPE_COLORS[item.type] || COLORS.primary}`,
+                    borderRadius: '0 12px 12px 0',
+                    padding: '0',
                     textAlign: 'left',
                     cursor: 'pointer',
                     transition: 'all 0.2s',
                     color: '#fff',
                     fontFamily: 'inherit',
+                    overflow: 'hidden',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = `${MEDIA_TYPE_COLORS[item.type]}20`;
-                    e.currentTarget.style.borderColor = MEDIA_TYPE_COLORS[item.type];
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                    e.currentTarget.style.boxShadow = `0 8px 20px ${MEDIA_TYPE_COLORS[item.type]}40`;
+                    e.currentTarget.style.borderColor = MEDIA_TYPE_COLORS[item.type] || COLORS.primary;
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = `0 6px 20px ${MEDIA_TYPE_COLORS[item.type] || COLORS.primary}30`;
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = `${MEDIA_TYPE_COLORS[item.type]}10`;
-                    e.currentTarget.style.borderColor = `${MEDIA_TYPE_COLORS[item.type]}40`;
+                    e.currentTarget.style.borderColor = `${MEDIA_TYPE_COLORS[item.type] || COLORS.primary}50`;
                     e.currentTarget.style.transform = 'translateY(0)';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
-                  <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
-                    <span style={{ fontSize: '24px' }}>{MEDIA_TYPE_ICONS[item.type]}</span>
-                    <div style={{ flex: 1 }}>
-                      <div style={{
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: MEDIA_TYPE_COLORS[item.type],
-                        marginBottom: '6px',
-                        lineHeight: '1.3',
-                      }}>
-                        {item.title}
-                      </div>
-                      {item.description && (
-                        <div style={{
-                          fontSize: '11px',
-                          color: '#b8c5d8',
-                          lineHeight: '1.5',
-                          marginBottom: '10px',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: 'vertical',
-                          overflow: 'hidden',
-                        }}>
-                          {item.description}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  {/* Type Badge Header */}
+                  <div style={{
+                    background: MEDIA_TYPE_COLORS[item.type] || COLORS.primary,
+                    padding: '6px 12px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}>
+                    <span style={{
+                      color: '#000',
+                      fontSize: '10px',
+                      fontWeight: '700',
+                      letterSpacing: '1.5px',
+                      fontFamily: 'monospace',
+                    }}>
+                      {MEDIA_TYPE_LABELS[item.type] || 'MEDIA'}
+                    </span>
                     {item.year && (
                       <span style={{
-                        background: `${COLORS.warning}30`,
-                        border: `1px solid ${COLORS.warning}60`,
-                        color: COLORS.warning,
-                        padding: '4px 8px',
-                        borderRadius: '6px',
+                        color: '#000',
                         fontSize: '10px',
-                        fontWeight: '600',
+                        fontWeight: '700',
+                        fontFamily: 'monospace',
                       }}>
                         {item.year}
                       </span>
                     )}
-                    <span style={{
-                      background: `${item.sourceColor || COLORS.primary}30`,
-                      border: `1px solid ${item.sourceColor || COLORS.primary}60`,
-                      color: item.sourceColor || COLORS.primary,
-                      padding: '4px 8px',
-                      borderRadius: '6px',
-                      fontSize: '10px',
+                  </div>
+
+                  {/* Content */}
+                  <div style={{ padding: '14px' }}>
+                    <div style={{
+                      fontSize: '13px',
                       fontWeight: '600',
+                      color: COLORS.text,
+                      marginBottom: '8px',
+                      lineHeight: '1.4',
+                    }}>
+                      {item.title}
+                    </div>
+                    {item.description && (
+                      <div style={{
+                        fontSize: '11px',
+                        color: '#9AA5B8',
+                        lineHeight: '1.5',
+                        marginBottom: '12px',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                      }}>
+                        {item.description}
+                      </div>
+                    )}
+
+                    {/* Source Tag */}
+                    <div style={{
+                      display: 'inline-block',
+                      background: `${MEDIA_TYPE_COLORS[item.type] || COLORS.primary}20`,
+                      border: `1px solid ${MEDIA_TYPE_COLORS[item.type] || COLORS.primary}40`,
+                      color: MEDIA_TYPE_COLORS[item.type] || COLORS.primary,
+                      padding: '4px 10px',
+                      borderRadius: '4px',
+                      fontSize: '9px',
+                      fontWeight: '600',
+                      letterSpacing: '0.5px',
+                      fontFamily: 'monospace',
                     }}>
                       {item.source}
-                    </span>
+                    </div>
                   </div>
                 </button>
               ))}
