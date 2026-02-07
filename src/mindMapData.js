@@ -128,6 +128,37 @@ const mindMapData = {
         ]
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Strategic_foresight',
+      media: [
+        {
+          type: 'video',
+          title: 'TED: 3 Ways to Plan for the (Very) Long Term',
+          url: 'https://www.youtube.com/watch?v=4SnkYQr0WqE',
+          description: 'Ari Wallach introduces three tactics for long-term futures thinking: transgenerational thinking, futures thinking, and telos thinking. A compelling introduction to mapping what lies ahead.',
+          year: 2016,
+          source: 'TEDxMidAtlantic'
+        },
+        {
+          type: 'article',
+          title: 'Strategic Foresight',
+          url: 'https://en.wikipedia.org/wiki/Strategic_foresight',
+          source: 'Wikipedia',
+          description: 'Comprehensive overview of strategic foresight as a discipline — how organizations map current trends, competing visions, and barriers to understand which futures are plausible.'
+        },
+        {
+          type: 'article',
+          title: 'The Futures Triangle — Interactive Tool',
+          url: 'https://www.sitra.fi/en/tool/the-futures-triangle/',
+          source: 'Sitra (Finnish Innovation Fund)',
+          description: 'Interactive guide to using the Futures Triangle framework for mapping the pull of the future, push of the present, and weight of the past in any strategic context.'
+        },
+        {
+          type: 'document',
+          title: 'Strategic Foresight 101',
+          url: 'https://coe.gsa.gov/docs/StrategicForesight101.pdf',
+          source: 'U.S. General Services Administration',
+          description: 'U.S. government guide introducing core foresight methodologies including mapping techniques and frameworks for understanding future views.'
+        }
+      ],
       children: ['futures-triangle', 'stakeholder-analysis']
     },
     {
@@ -148,6 +179,36 @@ const mindMapData = {
         ]
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Environmental_scanning',
+      media: [
+        {
+          type: 'article',
+          title: 'Horizon Scanning',
+          url: 'https://en.wikipedia.org/wiki/Horizon_scanning',
+          source: 'Wikipedia',
+          description: 'Overview of horizon scanning as a foresight method for early detection and assessment of emerging technologies, threats, and weak signals of change.'
+        },
+        {
+          type: 'article',
+          title: 'Weak Signals and Trend Analysis: Horizon Scanning',
+          url: 'https://www.gov.uk/government/publications/weak-signals-and-trend-analysis-horizon-scanning',
+          source: 'UK Government Office for Science',
+          description: 'Official government guidance on detecting weak signals and emerging trends through systematic horizon scanning techniques.'
+        },
+        {
+          type: 'article',
+          title: 'How to Do Horizon Scanning: A Step-by-Step Guide',
+          url: 'https://www.futuresplatform.com/blog/how-to-horizon-scanning-guideline',
+          source: 'Futures Platform',
+          description: 'Comprehensive tutorial on horizon scanning methodology for identifying weak signals, emerging trends, and early signs of change 5-20 years ahead.'
+        },
+        {
+          type: 'article',
+          title: 'Horizon Scanning and Foresight Methods',
+          url: 'https://www.ncbi.nlm.nih.gov/books/NBK556423/',
+          source: 'National Academies Press',
+          description: 'Academic overview of horizon scanning processes for anticipating emerging issues, including practical frameworks and case studies from biosecurity and bioeconomy domains.'
+        }
+      ],
       children: ['env-scanning', 'weak-signals', 'emerging-issues']
     },
     {
@@ -166,6 +227,29 @@ const mindMapData = {
         ]
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Kondratiev_wave',
+      media: [
+        {
+          type: 'article',
+          title: 'Kondratiev Wave',
+          url: 'https://en.wikipedia.org/wiki/Kondratiev_wave',
+          source: 'Wikipedia',
+          description: 'The theory of 40-60 year economic supercycles driven by technological innovation — from steam power to digital technology. Understanding these long waves is key to timing strategic decisions.'
+        },
+        {
+          type: 'article',
+          title: 'Longue Durée — Fernand Braudel',
+          url: 'https://en.wikipedia.org/wiki/Longue_dur%C3%A9e',
+          source: 'Wikipedia',
+          description: 'Braudel\'s concept of long-duration historical structures — the slow-moving forces beneath surface events that shape civilizations over centuries. Foundation of the Timing pillar in foresight.'
+        },
+        {
+          type: 'article',
+          title: 'Long-Wave Economic Cycles: Kondratieff, Kuznets, Schumpeter',
+          url: 'https://www.sociostudies.org/almanac/articles/long-wave_economic/',
+          source: 'Social Evolution & History',
+          description: 'Academic analysis of long-wave theories from multiple economists, explaining how 40-60 year cycles driven by technological innovation create predictable macro-historical patterns.'
+        }
+      ],
       children: ['macro-historical', 'cycle-theory']
     },
     {
@@ -186,6 +270,37 @@ const mindMapData = {
         ]
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Causal_layered_analysis',
+      media: [
+        {
+          type: 'article',
+          title: 'Causal Layered Analysis',
+          url: 'https://en.wikipedia.org/wiki/Causal_layered_analysis',
+          source: 'Wikipedia',
+          description: 'Sohail Inayatullah\'s method for moving beyond surface-level "litany" to uncover the deeper social causes, worldviews, and myths that shape how we perceive and create futures.'
+        },
+        {
+          type: 'article',
+          title: 'Metafuture.org — CLA Resources',
+          url: 'https://www.metafuture.org/causal-layered-analysis/',
+          source: 'Metafuture',
+          description: 'Inayatullah\'s own collection of CLA resources, including papers, workshop guides, and case studies demonstrating how to apply the four-layer analysis method.'
+        },
+        {
+          type: 'video',
+          title: 'TEDxNoosa: Sohail Inayatullah — Causal Layered Analysis',
+          url: 'https://www.metafuture.org/video/tedxnoosa-2013-sohail-inayatullah-causal-layered-analysis/',
+          source: 'TEDxNoosa / Metafuture',
+          year: 2013,
+          description: 'CLA creator Sohail Inayatullah presents his four-layer methodology live — from surface litany through social causes, worldview, and myth/metaphor — showing how deepening analysis unlocks transformative solutions.'
+        },
+        {
+          type: 'article',
+          title: 'CLA: A Four-Level Approach to Alternative Futures',
+          url: 'https://www.researchgate.net/publication/332706079_Causal_Layered_Analysis_A_Four-Level_Approach_to_Alternative_Futures_RELEVANCE_AND_USE_IN_FORESIGHT',
+          source: 'ResearchGate',
+          description: 'Academic paper examining CLA methodology for uncovering deeper worldviews and metaphors, with detailed examples of applying the four layers to real-world policy and planning challenges.'
+        }
+      ],
       children: ['cla', 'discourse-analysis']
     },
     {
@@ -208,6 +323,31 @@ const mindMapData = {
         ]
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Scenario_planning',
+      media: [
+        {
+          type: 'article',
+          title: 'Scenario Planning',
+          url: 'https://en.wikipedia.org/wiki/Scenario_planning',
+          source: 'Wikipedia',
+          description: 'From Herman Kahn at RAND to Pierre Wack at Shell to Peter Schwartz at GBN — the history and practice of creating multiple plausible scenarios to expand strategic thinking beyond single-point predictions.'
+        },
+        {
+          type: 'video',
+          title: 'Peter Schwartz: The Art of the Long View',
+          url: 'https://www.youtube.com/watch?v=qkHfFolJxJk',
+          description: 'Peter Schwartz, pioneer of scenario planning at Shell and founder of GBN, discusses how to use scenarios as strategic tools for navigating uncertainty.',
+          source: 'Long Now Foundation',
+          year: 2007
+        },
+        {
+          type: 'document',
+          title: 'Scenario Planning: Step-by-Step Methodology Guide',
+          url: 'https://www.intrac.org/app/uploads/2024/12/Scenario-planning.pdf',
+          source: 'INTRAC',
+          year: 2024,
+          description: 'Practical guide covering 2x2 matrix scenarios, trend extrapolation, and judgment approaches for creating multiple plausible alternative futures in organizational contexts.'
+        }
+      ],
       children: ['scenarios', 'wild-cards', 'morphological']
     },
     {
@@ -223,6 +363,29 @@ const mindMapData = {
         whenToUse: 'When trend-break required to reach desired target'
       },
       wikipedia: 'https://en.wikipedia.org/wiki/Backcasting',
+      media: [
+        {
+          type: 'article',
+          title: 'Backcasting',
+          url: 'https://en.wikipedia.org/wiki/Backcasting',
+          source: 'Wikipedia',
+          description: 'Working backward from a desired future to identify the steps needed to get there. Unlike forecasting (projecting forward from present), backcasting starts with "where do we want to be?" and asks "how do we get there?"'
+        },
+        {
+          type: 'article',
+          title: 'The Natural Step — Backcasting from Sustainability Principles',
+          url: 'https://thenaturalstep.org/approach/',
+          source: 'The Natural Step',
+          description: 'A leading framework applying backcasting to sustainability — defining success principles first, then working backward to create strategic action plans for organizations and communities.'
+        },
+        {
+          type: 'article',
+          title: 'Backcasting: Creating Your Preferred Future',
+          url: 'https://kithindin.com/backcasting/',
+          source: 'Kit Hindin — Futures & Strategic Facilitation',
+          description: 'Practical guide to backcasting methodology — how to define a compelling vision of a desired future, then work backward to identify milestones, actions, and interventions needed to get there.'
+        }
+      ],
       children: ['visioning', 'backcasting', 'strategic-issue']
     }
   ],
@@ -410,6 +573,28 @@ const mindMapData = {
           title: 'UNESCO Logo',
           url: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/UNESCO_logo.svg',
           description: 'UNESCO Chair in Futures Studies - Sohail Inayatullah developed Futures Triangle as UNESCO Chair holder'
+        },
+        {
+          type: 'article',
+          title: 'The Futures Triangle — Foresight Guide',
+          url: 'https://www.shapingtomorrow.com/media-centre/pf-ch06.pdf',
+          source: 'Shaping Tomorrow',
+          description: 'Practical guide to applying the Futures Triangle in workshops: how to identify pull, push, and weight forces, plot tensions, and derive strategic implications for organizational planning.'
+        },
+        {
+          type: 'article',
+          title: 'The Futures Triangle: Origins and Iterations',
+          url: 'https://journals.sagepub.com/doi/10.1177/19467567231203162',
+          source: 'World Futures Review (SAGE)',
+          year: 2023,
+          description: 'Inayatullah himself traces the origins and evolution of the Futures Triangle methodology, reflecting on how the framework has been adapted and applied across diverse contexts over 15 years.'
+        },
+        {
+          type: 'article',
+          title: 'Futures Thinking: Drivers of Change & the Futures Triangle',
+          url: 'https://knowledgeworks.org/resources/futures-thinking-now-drivers-change-futures-triangle/',
+          source: 'KnowledgeWorks',
+          description: 'Educational resource showing how to use the Futures Triangle to examine competing factors shaping education and workforce futures, with practical step-by-step instructions.'
         }
       ]
     },
@@ -1737,6 +1922,14 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Discourse_analysis',
           source: 'Wikipedia',
           description: 'Methods for analyzing discourse'
+        },
+        {
+          type: 'article',
+          title: 'Communication in Futures Studies: A Discursive Analysis',
+          url: 'https://www.sciencedirect.com/science/article/abs/pii/S0016328719303507',
+          source: 'Futures (Elsevier)',
+          year: 2019,
+          description: 'Comprehensive literature review on communication within futures studies, proposing six general discourses and examining how language and narrative shape our understanding of possible futures.'
         }
       ],
       metadata: {
@@ -2091,6 +2284,13 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Wild_card_(foresight)',
           source: 'Wikipedia',
           description: 'Understanding high-impact surprises'
+        },
+        {
+          type: 'article',
+          title: 'Wild Cards: What They Are and How to Use Them in Futures & Foresight',
+          url: 'https://medium.com/predict/wild-cards-what-they-are-and-how-to-use-them-in-futures-foresight-64d4755cd35b',
+          source: 'Medium (Predict)',
+          description: 'Practical guide to wild cards in foresight practice — definitions, identification methods, and how to incorporate low-probability high-impact events into scenario planning exercises.'
         }
       ],
       metadata: {
@@ -2262,6 +2462,27 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Morphological_analysis_(problem-solving)',
           source: 'Wikipedia',
           description: 'Complete guide to morphological analysis methodology covering Fritz Zwicky\'s systematic approach to exploring solution spaces. Explains how to define parameters, identify values, construct morphological boxes, evaluate feasible combinations, and apply the method to complex problems from technology forecasting to policy design.'
+        },
+        {
+          type: 'article',
+          title: 'Fritz Zwicky — Morphological Analysis Pioneer',
+          url: 'https://en.wikipedia.org/wiki/Fritz_Zwicky',
+          source: 'Wikipedia',
+          description: 'Biography of astrophysicist Fritz Zwicky who invented morphological analysis in the 1940s at Caltech. Also predicted dark matter, neutron stars, and gravitational lensing — applying the same systematic exploration of possibilities to physics.'
+        },
+        {
+          type: 'article',
+          title: 'The Zwicky Box: A Powerful Method for Problem Solving and Creativity',
+          url: 'https://nesslabs.com/zwicky-box',
+          source: 'Ness Labs',
+          description: 'Accessible introduction to Zwicky\'s morphological box technique — how to decompose any complex problem into parameters, list possible values, and systematically explore the combinatorial solution space.'
+        },
+        {
+          type: 'article',
+          title: 'General Morphological Analysis',
+          url: 'https://www.swemorph.com/ma.html',
+          source: 'Swedish Morphological Society',
+          description: 'Official resource from the research society dedicated to Zwicky\'s method. Presents General Morphological Analysis as a rigorous framework for non-quantified modeling, scenario development, and policy analysis.'
         }
       ],
       metadata: {
@@ -2371,7 +2592,7 @@ const mindMapData = {
           source: 'AK Consulting'
         },
         {
-          type: 'video',
+          type: 'article',
           title: 'Ideas in Action: 60 Years of RAND',
           url: 'https://www.rand.org/pubs/corporate_pubs/CP501.html',
           description: '60-minute documentary narrated by Tobey Maguire exploring RAND\'s history from Cold War nuclear strategy to systems analysis',
@@ -2379,7 +2600,7 @@ const mindMapData = {
           source: 'RAND Corporation'
         },
         {
-          type: 'video',
+          type: 'article',
           title: 'Smithsonian RAND Videohistory Collection',
           url: 'https://siarchives.si.edu/collections/siris_arc_217704',
           description: 'Interviews with RAND participants discussing the development of Delphi and other forecasting methods',
@@ -2568,6 +2789,21 @@ const mindMapData = {
           url: 'https://www.rand.org/content/dam/rand/pubs/papers/2008/P3820.pdf',
           description: 'Theodore Gordon and Olaf Helmer\'s original RAND paper introducing cross-impact analysis methodology',
           year: 1968
+        },
+        {
+          type: 'article',
+          title: 'Cross-Impact Analysis',
+          url: 'https://en.wikipedia.org/wiki/Cross_impact_analysis',
+          source: 'Wikipedia',
+          description: 'Overview of how cross-impact analysis maps relationships between future events and variables, determining how one occurrence changes the probability of others — essential for understanding cascading effects in complex systems.'
+        },
+        {
+          type: 'article',
+          title: 'The Methods of Futures Research (Gordon, 1992)',
+          url: 'https://journals.sagepub.com/doi/10.1177/0002716292522001003',
+          source: 'The ANNALS of the American Academy',
+          year: 1992,
+          description: 'Theodore Jay Gordon\'s comprehensive overview of futures research methods including detailed explanation of cross-impact analysis, its evolution from the original 1966 card game to computerized matrix models.'
         }
       ],
       metadata: {
@@ -2940,6 +3176,22 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Strategic_management',
           source: 'Wikipedia',
           description: 'Overview of strategic management approaches including Igor Ansoff\'s strategic issue management system for detecting and responding to weak signals in real-time. Explains the balance between operational efficiency and strategic flexibility, and methods for creating responsive organizational systems.'
+        },
+        {
+          type: 'article',
+          title: 'Strategic Issue Management (Ansoff, 1980)',
+          url: 'https://onlinelibrary.wiley.com/doi/abs/10.1002/smj.4250010204',
+          source: 'Strategic Management Journal',
+          year: 1980,
+          description: 'Igor Ansoff\'s seminal paper introducing strategic issue management as a real-time alternative to periodic strategic planning. Describes both strong-signal and weak-signal systems for early detection and fast organizational response.'
+        },
+        {
+          type: 'article',
+          title: 'The Seminal Work of H. Igor Ansoff',
+          url: 'https://www.sciencedirect.com/science/article/abs/pii/S0040162510001459',
+          source: 'Technological Forecasting and Social Change',
+          year: 2010,
+          description: 'Examines Ansoff\'s pioneering contributions to strategic foresight — how his work on strategic issue management, weak signal detection, and turbulence theory laid the groundwork for modern organizational foresight practice.'
         }
       ],
       metadata: {
@@ -3079,6 +3331,20 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/World_Future_Society',
           description: 'Complete history of the oldest futures membership organization',
           source: 'Wikipedia'
+        },
+        {
+          type: 'article',
+          title: 'The Futurist Magazine Archive',
+          url: 'https://en.wikipedia.org/wiki/The_Futurist',
+          source: 'Wikipedia',
+          description: 'History of The Futurist magazine (1967-2015) — WFS\'s flagship publication that brought futures thinking to mainstream audiences for nearly 50 years, featuring contributions from Alvin Toffler, Carl Sagan, and Ray Kurzweil.'
+        },
+        {
+          type: 'article',
+          title: 'Who We Are: About THE FUTURIST and World Future Society',
+          url: 'https://medium.com/the-futurist/who-we-are-about-the-futurist-and-world-future-society-dace6e565b46',
+          source: 'Medium / The Futurist',
+          description: 'Official overview of the WFS and THE FUTURIST magazine\'s mission — developing "Civilization Type One" through futures thinking, with its 50+ year history of catalyzing mainstream engagement with foresight.'
         }
       ]
     },
@@ -3169,6 +3435,20 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Association_of_Professional_Futurists',
           description: 'Professional association advancing foresight practice',
           source: 'Wikipedia'
+        },
+        {
+          type: 'article',
+          title: 'Foresight Competency Model',
+          url: 'https://www.apf.org/page/competencies',
+          source: 'APF',
+          description: 'The APF\'s six core competencies for professional futurists: Framing, Scanning, Futuring, Designing, Visioning, and Adapting. Defines what it means to practice foresight professionally and provides a benchmark for the field.'
+        },
+        {
+          type: 'article',
+          title: 'Becoming a Professional Futurist: Step-by-Step Guide',
+          url: 'https://www.apf.org/post/a-step-by-step-approach-toward-becoming-a-professional-futurist',
+          source: 'APF',
+          description: 'Comprehensive guide to pursuing a career in professional foresight — education pathways, skills development, mentorship, and how the APF credentialing system works.'
         }
       ]
     }
@@ -3483,6 +3763,20 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Gene_Roddenberry',
           source: 'Wikipedia',
           description: 'Complete biography covering Roddenberry\'s life from WWII pilot to TV producer who created Star Trek. Documents his vision of an optimistic future, IDIC philosophy promoting diversity and inclusion, influence on technology development (communicators, PADDs, tricorders), social commentary through science fiction allegory, and lasting cultural impact inspiring scientists, astronauts, and engineers.'
+        },
+        {
+          type: 'article',
+          title: 'How Star Trek Inspired Real Technology',
+          url: 'https://en.wikipedia.org/wiki/Technology_in_Star_Trek',
+          source: 'Wikipedia',
+          description: 'Catalogue of Star Trek technologies that inspired real inventions — from flip communicators (Motorola StarTAC) to PADDs (tablets) to universal translators (Google Translate). Shows how Roddenberry\'s optimistic sci-fi directly shaped R&D agendas.'
+        },
+        {
+          type: 'article',
+          title: 'Gene Roddenberry at 100: Star Trek and a Philosophy for the Future',
+          url: 'https://www.indiewire.com/features/general/gene-roddenberry-100-star-trek-philosophy-1234658664/',
+          source: 'IndieWire',
+          description: 'Retrospective on Roddenberry\'s centennial examining his enduring philosophical vision — a diverse, optimistic future where humanity transcends prejudice and scarcity through reason and cooperation.'
         }
       ]
     },
@@ -3521,6 +3815,21 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Michael_Crichton',
           source: 'Wikipedia',
           description: 'Complete works including Jurassic Park, The Andromeda Strain, Westworld, and Prey. Documents Crichton\'s influence on public understanding of emerging technologies (genetic engineering, nanotechnology, AI) through techno-thrillers exploring unintended consequences and systemic risks. His cautionary tales shaped discourse around technological governance and precautionary principle.'
+        },
+        {
+          type: 'article',
+          title: 'Jurassic Park — Technology and Ethics',
+          url: 'https://en.wikipedia.org/wiki/Jurassic_Park_(novel)',
+          source: 'Wikipedia',
+          description: 'Crichton\'s landmark novel exploring how genetic engineering could go catastrophically wrong. Ian Malcolm\'s chaos theory critique of complex technological systems became a cultural touchstone for precautionary thinking about biotechnology.'
+        },
+        {
+          type: 'document',
+          title: 'Aliens Cause Global Warming — Caltech Lecture (2003)',
+          url: 'https://stephenschneider.stanford.edu/Publications/PDF_Papers/Crichton2003.pdf',
+          source: 'Caltech / Stanford Archive',
+          year: 2003,
+          description: 'Crichton\'s provocative Caltech Michelin Lecture critiquing consensus science and the politicization of complex technological issues — a masterclass in contrarian futures thinking about how expert predictions can mislead policy.'
         }
       ]
     },
@@ -3556,6 +3865,21 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Ursula_K._Le_Guin',
           source: 'Wikipedia',
           description: 'Biography covering Le Guin\'s life as anthropologist\'s daughter and pioneering science fiction author. Documents her major works (The Left Hand of Darkness, The Dispossessed, Earthsea), exploration of gender fluidity decades before mainstream discourse, alternative political systems (anarchist utopias), ecological consciousness, and use of "elsewhere" to illuminate contemporary social issues.'
+        },
+        {
+          type: 'article',
+          title: 'The Dispossessed — An Ambiguous Utopia',
+          url: 'https://en.wikipedia.org/wiki/The_Dispossessed',
+          source: 'Wikipedia',
+          description: 'Le Guin\'s masterwork exploring anarchist-communist society on a moon colony vs. capitalist planet. Won Hugo and Nebula awards. A thought experiment in alternative political futures that remains influential in foresight thinking about social organization.'
+        },
+        {
+          type: 'video',
+          title: 'Ursula K. Le Guin — National Book Awards Speech (2014)',
+          url: 'https://www.pbs.org/wnet/americanmasters/worlds-of-ursula-k-leguin-passionate-acceptance-speech/11630/',
+          source: 'PBS American Masters',
+          year: 2014,
+          description: 'Le Guin\'s viral acceptance speech calling for writers who can imagine alternatives to our current way of living — "We will need writers who can remember freedom." A powerful manifesto on the role of imagination in creating better futures.'
         }
       ]
     },
@@ -3593,6 +3917,28 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/William_Gibson',
           source: 'Wikipedia',
           description: 'Biography covering Gibson\'s creation of cyberpunk genre through Neuromancer (1984), coining of term "cyberspace," and prescient vision of internet culture, virtual reality, and tech-noir aesthetics before widespread internet adoption. Documents his influence on tech developers, hackers, and Silicon Valley culture, with concepts like the matrix, cyber-consoles, and mega-corporations shaping how we imagine digital futures.'
+        },
+        {
+          type: 'article',
+          title: 'Neuromancer',
+          url: 'https://en.wikipedia.org/wiki/Neuromancer',
+          source: 'Wikipedia',
+          description: 'Gibson\'s 1984 debut novel that coined "cyberspace" and defined cyberpunk. Won the Hugo, Nebula, and Philip K. Dick awards. Predicted virtual reality, hacking culture, AI consciousness, and corporate-dominated digital landscapes decades before the internet went mainstream.'
+        },
+        {
+          type: 'video',
+          title: 'Cyberpunk (1990 Documentary)',
+          url: 'https://archive.org/details/cyberpunk_201410',
+          source: 'Internet Archive',
+          year: 1990,
+          description: 'Documentary featuring extensive interviews with William Gibson, Timothy Leary, and Jaron Lanier exploring cyberpunk culture, virtual reality, hacking, and Gibson\'s famous observation that "the future is already here — it\'s just not evenly distributed."'
+        },
+        {
+          type: 'article',
+          title: 'William Gibson Riffs on Writing and the Future',
+          url: 'https://ideas.ted.com/william-gibson-riffs-on-writing-and-the-future/',
+          source: 'TED Ideas',
+          description: 'Gibson discusses his approach to speculative fiction — how he observes present trends to imagine near-future scenarios, and why he moved from far-future cyberpunk to near-future thrillers as reality caught up with his imagination.'
         }
       ]
     },
@@ -3631,6 +3977,21 @@ const mindMapData = {
           url: 'https://en.wikipedia.org/wiki/Neal_Stephenson',
           source: 'Wikipedia',
           description: 'Complete works and influence'
+        },
+        {
+          type: 'article',
+          title: 'Snow Crash — The Metaverse Origin',
+          url: 'https://en.wikipedia.org/wiki/Snow_Crash',
+          source: 'Wikipedia',
+          description: 'Stephenson\'s 1992 novel that coined "metaverse" and "avatar" in their digital senses. Predicted virtual reality social spaces, cryptocurrency, private security states, and gig economies. Directly inspired Second Life, Google Earth, and Meta\'s VR strategy.'
+        },
+        {
+          type: 'video',
+          title: 'Neal Stephenson: Termination Shock — Long Now Talk',
+          url: 'https://longnow.org/seminars/02021/nov/17/termination-shock/',
+          source: 'Long Now Foundation',
+          year: 2021,
+          description: 'Stephenson discusses geoengineering, climate adaptation, and near-future planetary system changes with Alexander Rose. Explores how science fiction can model complex interventions in Earth\'s climate system.'
         }
       ]
     }
@@ -3762,7 +4123,7 @@ const mindMapData = {
         },
         media: [
           {
-            type: 'image',
+            type: 'document',
             title: 'IPCC Climate Scenarios 2100',
             url: '/documents/ipcc-ar5-synthesis-2014.pdf',
             description: 'Official climate projection scenarios'
@@ -3816,6 +4177,21 @@ const mindMapData = {
             url: 'https://en.wikipedia.org/wiki/Space_colonization',
             source: 'Wikipedia',
             description: 'Technical and social challenges'
+          },
+          {
+            type: 'article',
+            title: 'O\'Neill Cylinder — Space Habitat Design',
+            url: 'https://en.wikipedia.org/wiki/O%27Neill_cylinder',
+            source: 'Wikipedia',
+            description: 'Gerard K. O\'Neill\'s design for large rotating space habitats supporting thousands of people. First proposed in 1976, O\'Neill cylinders remain the most detailed blueprint for permanent space settlements and inspired both NASA studies and science fiction (The Expanse, Gundam).'
+          },
+          {
+            type: 'video',
+            title: 'The High Frontier: The Untold Story of Gerard K. O\'Neill',
+            url: 'https://tubitv.com/movies/100000873/the-high-frontier-the-untold-story-of-gerard-k-o-neill',
+            source: 'Tubi (Free)',
+            year: 2021,
+            description: 'Documentary featuring Jeff Bezos, Elon Musk, and Peter Diamandis on O\'Neill\'s vision for human space colonies. Traces how one physicist\'s dream of orbiting habitats influenced the billionaire space race and modern space settlement movement.'
           }
         ]
       },

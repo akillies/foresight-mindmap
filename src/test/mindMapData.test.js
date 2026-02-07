@@ -92,6 +92,34 @@ describe('mindMapData integrity', () => {
         }
       })
 
+      // Futurist media
+      mindMapData.futurists?.forEach(futurist => {
+        if (futurist.media) {
+          allMedia.push(...futurist.media.map(m => ({ ...m, source: futurist.id })))
+        }
+      })
+
+      // Futures Societies media
+      mindMapData.futuresSocieties?.forEach(society => {
+        if (society.media) {
+          allMedia.push(...society.media.map(m => ({ ...m, source: society.id })))
+        }
+      })
+
+      // Speculative Futures media
+      mindMapData.speculativeFutures?.scenarios?.forEach(scenario => {
+        if (scenario.media) {
+          allMedia.push(...scenario.media.map(m => ({ ...m, source: scenario.id })))
+        }
+      })
+
+      // Positive Futures media
+      mindMapData.positiveFutures?.milestones?.forEach(milestone => {
+        if (milestone.media) {
+          allMedia.push(...milestone.media.map(m => ({ ...m, source: milestone.id })))
+        }
+      })
+
       return allMedia
     }
 

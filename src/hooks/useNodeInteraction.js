@@ -226,6 +226,14 @@ export function useNodeInteraction() {
     }
   }, []);
 
+  /**
+   * Open media viewer for a given media object
+   */
+  const openMedia = useCallback((media) => {
+    setImageError(false);
+    setSelectedMedia(media);
+  }, []);
+
   return {
     // State
     selectedNode,
@@ -243,6 +251,7 @@ export function useNodeInteraction() {
     handleNodeClick,
     updateHoveredNode,
     clearSelection,
+    openMedia,
     closeMedia,
     dismissWarning,
   };

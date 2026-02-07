@@ -147,7 +147,7 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
         setDiagramLoading(true);
         setDiagramError(false);
       }
-    }, 30000); // 30 seconds
+    }, 60000); // 60 seconds
 
     return () => clearInterval(interval);
   }, [allVideos, localDiagrams]);
@@ -420,7 +420,7 @@ const FeaturedContentDashboard = ({ onMediaClick, isVisible = true }) => {
       >
         {localDiagrams.length} CUSTOM DIAGRAMS • {allVideos.length} HISTORICAL VIDEOS
         <br />
-        CONTENT ROTATES EVERY 30 SECONDS
+        CONTENT ROTATES EVERY 60 SECONDS
       </div>
     </div>
   );

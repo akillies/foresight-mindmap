@@ -175,6 +175,7 @@ const ForesightMindMap = () => {
     warningToast,
     handleNodeClick,
     updateHoveredNode,
+    openMedia,
     closeMedia,
     dismissWarning,
   } = useNodeInteraction();
@@ -357,10 +358,7 @@ const ForesightMindMap = () => {
           isOpen={infoPanelOpen}
           onClose={() => setSelectedNode(null)}
           onToggle={() => setInfoPanelOpen(!infoPanelOpen)}
-          onMediaClick={(media) => {
-            setImageError(false);
-            // Media selection is handled through the handleNodeClick in useNodeInteraction
-          }}
+          onMediaClick={openMedia}
         />
       </Suspense>
 
@@ -507,10 +505,7 @@ const ForesightMindMap = () => {
       {!tourActive && (
         <Suspense fallback={null}>
           <FeaturedContentDashboard
-            onMediaClick={(media) => {
-              setImageError(false);
-              // Need to set selectedMedia through the hook
-            }}
+            onMediaClick={openMedia}
             isVisible={!selectedMedia}
           />
         </Suspense>
@@ -521,9 +516,7 @@ const ForesightMindMap = () => {
         <GlobalMediaBrowser
           isOpen={showMediaBrowser}
           onClose={() => setShowMediaBrowser(false)}
-          onMediaClick={(media) => {
-            setImageError(false);
-          }}
+          onMediaClick={openMedia}
         />
       </Suspense>
 
@@ -532,9 +525,7 @@ const ForesightMindMap = () => {
         <DiagramGallery
           isOpen={showDiagramGallery}
           onClose={() => setShowDiagramGallery(false)}
-          onDiagramClick={(diagram) => {
-            setImageError(false);
-          }}
+          onDiagramClick={openMedia}
         />
       </Suspense>
 
