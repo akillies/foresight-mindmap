@@ -114,7 +114,7 @@ export function TransitOverlay() {
         left: '50%',
         transform: 'translateX(-50%)',
         textAlign: 'center',
-        fontFamily: '"Courier New", Consolas, monospace',
+        fontFamily: '"Exo 2", "Courier New", Consolas, monospace',
       }}>
         <div style={{
           fontSize: '9px',

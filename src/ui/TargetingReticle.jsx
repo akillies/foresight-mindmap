@@ -160,7 +160,7 @@ export function TargetingReticle({ screenX, screenY, label, isLocked }) {
           transform: 'translateX(-50%)',
           whiteSpace: 'nowrap',
           fontSize: '9px',
-          fontFamily: '"Courier New", Consolas, monospace',
+          fontFamily: '"Exo 2", "Courier New", Consolas, monospace',
           fontWeight: '700',
           letterSpacing: '0.12em',
           color: color,

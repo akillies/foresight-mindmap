@@ -57,7 +57,7 @@ export function AboutModal({ isOpen, onClose }) {
             fontWeight: '700',
             letterSpacing: '4px',
             marginBottom: '25px',
-            fontFamily: 'monospace',
+            fontFamily: "'Exo 2', monospace",
             textAlign: 'center',
             textTransform: 'uppercase',
           }}
@@ -171,6 +171,68 @@ export function AboutModal({ isOpen, onClose }) {
             </p>
           </div>
 
+          {/* Experimental modes — discreet */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '16px',
+            marginBottom: '16px',
+            opacity: 0.35,
+          }}>
+            <a
+              href="?planetary"
+              style={{
+                color: COLORS.textMuted,
+                textDecoration: 'none',
+                fontSize: '9px',
+                fontFamily: 'monospace',
+                letterSpacing: '1.5px',
+                padding: '4px 10px',
+                border: `1px solid transparent`,
+                borderRadius: '4px',
+                transition: 'all 0.3s',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.opacity = '1';
+                e.target.style.color = COLORS.secondary;
+                e.target.style.borderColor = `${COLORS.secondary}40`;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.opacity = '';
+                e.target.style.color = COLORS.textMuted;
+                e.target.style.borderColor = 'transparent';
+              }}
+            >
+              MINDMAP 2.0
+            </a>
+            <a
+              href="?planetary&vr"
+              style={{
+                color: COLORS.textMuted,
+                textDecoration: 'none',
+                fontSize: '9px',
+                fontFamily: 'monospace',
+                letterSpacing: '1.5px',
+                padding: '4px 10px',
+                border: `1px solid transparent`,
+                borderRadius: '4px',
+                transition: 'all 0.3s',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.opacity = '1';
+                e.target.style.color = COLORS.accent;
+                e.target.style.borderColor = `${COLORS.accent}40`;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.opacity = '';
+                e.target.style.color = COLORS.textMuted;
+                e.target.style.borderColor = 'transparent';
+              }}
+            >
+              XR MODE
+            </a>
+          </div>
+
           <div style={{
             background: `${COLORS.pink}15`,
             border: `1px solid ${COLORS.pink}40`,
@@ -199,7 +261,7 @@ export function AboutModal({ isOpen, onClose }) {
             fontWeight: '700',
             letterSpacing: '2px',
             cursor: 'pointer',
-            fontFamily: 'monospace',
+            fontFamily: "'Exo 2', monospace",
             transition: 'all 0.2s',
             textTransform: 'uppercase',
           }}

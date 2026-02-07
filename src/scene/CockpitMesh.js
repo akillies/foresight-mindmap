@@ -37,6 +37,37 @@ const COLOR_PANEL_BG = new THREE.Color(0x060812);
 /* ── Geometry Helpers ──────────────────────────────────────── */
 
 /**
+ * Create a glow plane behind an element (AdditiveBlending for emissive halo).
+ */
+function createGlowPlane(width, height, color, opacity) {
+  const geometry = new THREE.PlaneGeometry(width, height);
+  const material = new THREE.MeshBasicMaterial({
+    color,
+    transparent: true,
+    opacity: opacity || 0.15,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+  return new THREE.Mesh(geometry, material);
+}
+
+/**
+ * Create a thin accent strip (colored edge highlight).
+ */
+function createAccentStrip(width, height, color) {
+  const geometry = new THREE.PlaneGeometry(width, height);
+  const material = new THREE.MeshBasicMaterial({
+    color,
+    transparent: true,
+    opacity: 0.6,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+  });
+  return new THREE.Mesh(geometry, material);
+}
+
+/**
  * Create an L-shaped LCARS elbow.
  */
 function createElbowGeometry(size, thickness, depth) {
@@ -169,7 +200,31 @@ export function createCockpitMesh(isXR = false) {
     elbow.position.set(pos.x, pos.y, pos.z);
     elbow.scale.set(pos.sx, pos.sy, 1);
     group.add(elbow);
+
+    // Glow halo behind each elbow
+    const glow = createGlowPlane(elbowSize * 1.8, elbowSize * 1.8, elbowColors[i], 0.12);
+    glow.position.set(pos.x, pos.y, pos.z - 0.01);
+    group.add(glow);
   }
+
+  // ── Accent Edge Strips ──
+  // Colored lines along the top and bottom bezels (gradient gold → blue)
+  const topAccent = createAccentStrip(R * 2.2, 0.004, COLOR_GOLD);
+  topAccent.position.set(0, R * 0.62 + 0.032, GLASS_Z);
+  group.add(topAccent);
+
+  const bottomAccent = createAccentStrip(R * 2.2, 0.004, COLOR_LAVENDER);
+  bottomAccent.position.set(0, -R * 0.58 - 0.028, GLASS_Z);
+  group.add(bottomAccent);
+
+  // Vertical accent strips on side bezels
+  const leftAccent = createAccentStrip(0.004, R * 1.2, COLOR_GOLD);
+  leftAccent.position.set(-R * 0.95 - 0.024, 0, GLASS_Z);
+  group.add(leftAccent);
+
+  const rightAccent = createAccentStrip(0.004, R * 1.2, COLOR_BLUE);
+  rightAccent.position.set(R * 0.95 + 0.024, 0, GLASS_Z);
+  group.add(rightAccent);
 
   // ── LCARS Pill Decorations ──
   const pillGeo = new THREE.BoxGeometry(0.06, 0.015, DEPTH * 0.5);
@@ -273,9 +328,15 @@ export function createCockpitMesh(isXR = false) {
     updateReadouts(hudData) {
       textures.update(hudData);
 
+      const now = performance.now();
+
       // Pulse the status dot
-      const pulse = 0.5 + 0.5 * Math.sin(performance.now() * 0.003);
+      const pulse = 0.5 + 0.5 * Math.sin(now * 0.003);
       dotMat.opacity = 0.6 + pulse * 0.4;
+
+      // Breathing glass tint (slow, subtle opacity oscillation)
+      const breathe = 0.5 + 0.5 * Math.sin(now * 0.0008);
+      glassTintMat.opacity = 0.05 + breathe * 0.06;
     },
 
     /**
