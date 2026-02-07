@@ -12,6 +12,7 @@ export { GlobalStyles } from './GlobalStyles';
 
 // HUD Components (Planetary Exploration Cockpit)
 export { HUDProvider, useHUD } from './HUDContext';
+export { CockpitFrame } from './CockpitFrame';
 export { SystemStatusBar } from './SystemStatusBar';
 export { PlanetDataPanel } from './PlanetDataPanel';
 export { TargetingReticle } from './TargetingReticle';

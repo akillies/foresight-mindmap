@@ -101,9 +101,9 @@ export function createPlanet({ color, biome, position, userData }) {
   const geometry = new THREE.SphereGeometry(size, segments, segments);
   const material = new THREE.MeshStandardMaterial({
     map: texture,
-    color: texture ? undefined : planetColor,
+    ...(texture ? {} : { color: planetColor }),
     emissive: planetColor,
-    emissiveIntensity: 0.15,
+    emissiveIntensity: 0.05,
     roughness: 0.7,
     metalness: 0.1,
   });

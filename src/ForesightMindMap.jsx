@@ -24,9 +24,7 @@ import { ControlPanel, HoverTooltip, AboutModal, GlobalStyles } from './ui';
 import {
   HUDProvider,
   useHUD,
-  SystemStatusBar,
-  NavigationHUD,
-  PlanetDataPanel,
+  CockpitFrame,
   TransitOverlay,
 } from './ui';
 
@@ -465,8 +463,8 @@ const ForesightMindMap = () => {
       {/* Navigation UI — Planetary HUD or standard Control Panel */}
       {IS_PLANETARY ? (
         <>
-          <SystemStatusBar gpuInfo={gpuInfo} />
-          <NavigationHUD
+          <CockpitFrame
+            gpuInfo={gpuInfo}
             onStartTour={() => setShowTourSelection(true)}
             timelineVisible={timelineVisible}
             onToggleTimeline={() => setTimelineVisible(!timelineVisible)}
@@ -475,7 +473,6 @@ const ForesightMindMap = () => {
             onOpenMediaBrowser={() => setShowMediaBrowser(true)}
             onOpenDiagramGallery={() => setShowDiagramGallery(true)}
           />
-          <PlanetDataPanel />
           <TransitOverlay />
         </>
       ) : (

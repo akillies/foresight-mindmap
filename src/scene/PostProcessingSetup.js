@@ -7,8 +7,8 @@
  */
 
 const BLOOM_DEFAULTS = {
-  strength: 1.5,
-  radius: 0.4,
+  strength: 0.8,
+  radius: 0.3,
   threshold: 0.85,
 };
 

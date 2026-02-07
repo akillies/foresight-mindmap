@@ -207,7 +207,7 @@ export class FlightController {
     // Orbit offset: position the camera slightly above and away from the path point
     const nodePos = this._targetPosition;
     const offsetDir = _vec3A.copy(point).sub(nodePos).normalize();
-    const orbitDist = 8 * (1 - eased) + 5; // approach closer as we arrive
+    const orbitDist = 15 * (1 - eased) + 12; // approach from far, settle at comfortable orbit
     const camPos = _vec3B.copy(nodePos).addScaledVector(offsetDir, orbitDist);
     camPos.y = point.y + 3;
 
@@ -235,8 +235,8 @@ export class FlightController {
 
     // Settle into a nice orbit distance
     const nodePos = this._targetPosition;
-    const finalDist = 5;
-    const startDist = 5;
+    const finalDist = 10;
+    const startDist = 15;
     const dist = startDist + (finalDist - startDist) * eased;
 
     // Gentle orbit during arrival

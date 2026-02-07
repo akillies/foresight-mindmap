@@ -47,8 +47,8 @@ export async function initializeScene(container) {
 
   // Camera controls (replaces OrbitControls)
   const controls = new CameraControls(camera, renderer.domElement);
-  controls.dampingFactor = 0.05;
-  controls.draggingDampingFactor = 0.15;
+  controls.smoothTime = 0.25;
+  controls.draggingSmoothTime = 0.125;
   controls.minDistance = SCENE_CONFIG.cameraMinDistance;
   controls.maxDistance = SCENE_CONFIG.cameraMaxDistance;
   controls.maxPolarAngle = Math.PI;
