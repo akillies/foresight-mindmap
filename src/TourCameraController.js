@@ -71,7 +71,9 @@ class TourCameraController {
 
       // Store current camera state
       const startPosition = this.camera.position.clone();
-      const startTarget = this.controls?.target?.clone() || new THREE.Vector3(0, 0, 0);
+      const startTarget = this.controls?.getTarget
+        ? this.controls.getTarget(new THREE.Vector3())
+        : (this.controls?.target?.clone() || new THREE.Vector3(0, 0, 0));
 
       // Target values
       const endPosition = new THREE.Vector3().copy(position);
@@ -103,8 +105,17 @@ class TourCameraController {
 
         // Interpolate look-at target
         if (this.controls) {
-          this.controls.target.lerpVectors(startTarget, endTarget, eased);
-          this.controls.update();
+          const lookTarget = new THREE.Vector3().lerpVectors(startTarget, endTarget, eased);
+          if (this.controls.setLookAt) {
+            this.controls.setLookAt(
+              this.camera.position.x, this.camera.position.y, this.camera.position.z,
+              lookTarget.x, lookTarget.y, lookTarget.z,
+              false,
+            );
+          } else {
+            this.controls.target.lerpVectors(startTarget, endTarget, eased);
+            this.controls.update();
+          }
         } else {
           const lookTarget = new THREE.Vector3().lerpVectors(startTarget, endTarget, eased);
           this.camera.lookAt(lookTarget);
@@ -173,7 +184,9 @@ class TourCameraController {
       };
       this.onUpdate = onUpdate;
 
-      const startTarget = this.controls?.target?.clone() || new THREE.Vector3(0, 0, 0);
+      const startTarget = this.controls?.getTarget
+        ? this.controls.getTarget(new THREE.Vector3())
+        : (this.controls?.target?.clone() || new THREE.Vector3(0, 0, 0));
 
       const animate = () => {
         if (!this.isAnimating) return;
@@ -193,8 +206,17 @@ class TourCameraController {
 
         // Smooth look-at transition
         if (this.controls) {
-          this.controls.target.lerpVectors(startTarget, target, Math.min(eased * 2, 1));
-          this.controls.update();
+          const lookTarget = new THREE.Vector3().lerpVectors(startTarget, target, Math.min(eased * 2, 1));
+          if (this.controls.setLookAt) {
+            this.controls.setLookAt(
+              point.x, point.y, point.z,
+              lookTarget.x, lookTarget.y, lookTarget.z,
+              false,
+            );
+          } else {
+            this.controls.target.lerpVectors(startTarget, target, Math.min(eased * 2, 1));
+            this.controls.update();
+          }
         } else {
           const lookTarget = new THREE.Vector3().lerpVectors(startTarget, target, Math.min(eased * 2, 1));
           this.camera.lookAt(lookTarget);
@@ -276,8 +298,12 @@ class TourCameraController {
         this.camera.position.set(x, y, z);
 
         if (this.controls) {
-          this.controls.target.copy(targetVec);
-          this.controls.update();
+          if (this.controls.setLookAt) {
+            this.controls.setLookAt(x, y, z, targetVec.x, targetVec.y, targetVec.z, false);
+          } else {
+            this.controls.target.copy(targetVec);
+            this.controls.update();
+          }
         } else {
           this.camera.lookAt(targetVec);
         }

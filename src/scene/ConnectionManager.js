@@ -4,7 +4,11 @@
  */
 import * as THREE from 'three';
 import mindMapData from '../mindMapData';
-import { ANIMATION_CONFIG } from '../constants';
+import { ANIMATION_CONFIG, FLIGHT_CONFIG } from '../constants';
+
+// Module-level active connection state
+let _activeParentId = null;
+let _activeChildId = null;
 
 /**
  * Create Connection (curved line with energy particles)
@@ -163,6 +167,24 @@ export function removeCrossPillarConnections(scene, crossPillarConnectionsRef) {
 }
 
 /**
+ * Set the active connection (highlights a specific lane during flight)
+ * @param {string} parentId - Parent node ID
+ * @param {string} childId - Child node ID
+ */
+export function setActiveConnection(parentId, childId) {
+  _activeParentId = parentId;
+  _activeChildId = childId;
+}
+
+/**
+ * Clear the active connection highlight
+ */
+export function clearActiveConnection() {
+  _activeParentId = null;
+  _activeChildId = null;
+}
+
+/**
  * Animate connections (opacity changes and particle movement)
  * @param {THREE.Line[]} connectionsRef - Array of connection references
  * @param {Object|null} selectedNode - Currently selected node
@@ -171,20 +193,36 @@ export function animateConnections(connectionsRef, selectedNode) {
   connectionsRef.forEach((conn) => {
     const { parentId, childId, baseOpacity, curve, particles, particleProgress, particleSpeed } = conn.userData;
     const isRelated = selectedNode && (selectedNode.id === parentId || selectedNode.id === childId);
-    const targetOpacity = isRelated ? 0.7 : (baseOpacity || 0.3);
+
+    // Check if this connection is the active flight lane
+    const isActiveLane = _activeParentId !== null &&
+      ((parentId === _activeParentId && childId === _activeChildId) ||
+       (parentId === _activeChildId && childId === _activeParentId));
+
+    const targetOpacity = isActiveLane
+      ? FLIGHT_CONFIG.laneGlowOpacity
+      : isRelated ? 0.7 : (baseOpacity || 0.3);
 
     // Smooth lerp to target opacity for base line
     if (conn.material.opacity !== targetOpacity) {
       conn.material.opacity += (targetOpacity - conn.material.opacity) * ANIMATION_CONFIG.connectionOpacityLerp;
     }
 
+    // Color pulse toward white on active lane
+    if (isActiveLane && conn.userData.baseColor) {
+      const pulse = Math.sin(Date.now() * 0.004) * 0.5 + 0.5;
+      conn.material.color.set(conn.userData.baseColor);
+      conn.material.color.lerp(new THREE.Color(0xffffff), pulse * 0.4);
+    }
+
     // Animate energy particles along the curve
     if (particles && curve && particleProgress) {
       const positions = particles.geometry.attributes.position.array;
+      const speedMultiplier = isActiveLane ? FLIGHT_CONFIG.laneParticleBoost : 1;
 
       for (let i = 0; i < particleProgress.length; i++) {
         // Move particle along curve
-        particleProgress[i] += particleSpeed;
+        particleProgress[i] += particleSpeed * speedMultiplier;
         if (particleProgress[i] > 1) particleProgress[i] = 0;
 
         // Get position on curve

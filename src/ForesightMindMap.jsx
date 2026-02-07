@@ -7,7 +7,7 @@
  * - hooks/ - Audio, search, node interaction, scene lifecycle
  * - ui/ - Control panel, audio controls, tooltips, modals
  */
-import React, { useEffect, useState, Component, lazy, Suspense } from 'react';
+import React, { useEffect, useRef, useCallback, useState, Component, lazy, Suspense } from 'react';
 import mindMapData from './mindMapData';
 import { tourManager } from './TourManager';
 import { getTour } from './tourData';
@@ -21,6 +21,17 @@ import { useThreeScene } from './hooks/useThreeScene';
 
 // UI Components
 import { ControlPanel, HoverTooltip, AboutModal, GlobalStyles } from './ui';
+import {
+  HUDProvider,
+  useHUD,
+  SystemStatusBar,
+  NavigationHUD,
+  PlanetDataPanel,
+  TransitOverlay,
+} from './ui';
+
+// Beta flag — ?planetary query param enables the planetary exploration experience
+const IS_PLANETARY = new URLSearchParams(window.location.search).has('planetary');
 
 // Scene utilities for cross-pillar connections and search effects
 import {
@@ -133,6 +144,118 @@ class ErrorBoundary extends Component {
 }
 
 /**
+ * HUDWiring — renderless component that connects scene data to HUD context.
+ * Must be rendered inside HUDProvider so useHUD() returns real setters.
+ */
+function HUDWiring({ selectedNode, nodesRef, gpuInfo, transitCallbackRef }) {
+  const { setPlanetInfo, setSceneStats, setTransitState } = useHUD();
+
+  // --- 1. Connect planet info to selected node ---
+  useEffect(() => {
+    if (!selectedNode) {
+      setPlanetInfo({
+        name: 'STRATEGIC FORESIGHT',
+        color: COLORS.primary,
+        biome: null,
+        childrenCount: 0,
+        mediaCount: 0,
+        description: '',
+      });
+      return;
+    }
+
+    // Find the full data entry for this node
+    let nodeData = null;
+    let childrenCount = 0;
+    let mediaCount = 0;
+
+    if (selectedNode.id === 'root' || selectedNode.id === 'strategic-foresight') {
+      nodeData = mindMapData.center;
+      childrenCount = mindMapData.level1.length;
+      mediaCount = nodeData.media?.length || 0;
+    } else {
+      // Check level1 pillars
+      const pillar = mindMapData.level1.find(p => p.id === selectedNode.id);
+      if (pillar) {
+        nodeData = pillar;
+        childrenCount = mindMapData.methodologies.filter(m => m.parent === pillar.id).length;
+        mediaCount = pillar.media?.length || 0;
+      } else {
+        // Check methodologies
+        const methodology = mindMapData.methodologies.find(m => m.id === selectedNode.id);
+        if (methodology) {
+          nodeData = methodology;
+          childrenCount = 0;
+          mediaCount = methodology.media?.length || 0;
+        }
+      }
+    }
+
+    setPlanetInfo({
+      name: selectedNode.label?.replace('\n', ' ') || 'UNKNOWN',
+      color: selectedNode.color || COLORS.primary,
+      biome: nodeData?.biome || selectedNode.biome || null,
+      childrenCount,
+      mediaCount,
+      description: selectedNode.description || nodeData?.description || '',
+    });
+  }, [selectedNode, setPlanetInfo]);
+
+  // --- 2. Connect FPS counter and scene stats ---
+  useEffect(() => {
+    let frameCount = 0;
+    let lastTime = performance.now();
+    let rafId;
+    let active = true;
+
+    // Set initial GPU backend and node count
+    setSceneStats({
+      gpuBackend: gpuInfo.isWebGPU ? 'WebGPU' : 'WebGL',
+      nodeCount: nodesRef.current.length,
+    });
+
+    const measure = () => {
+      if (!active) return;
+      rafId = requestAnimationFrame(measure);
+      frameCount++;
+
+      const now = performance.now();
+      const delta = now - lastTime;
+      if (delta >= 500) {
+        const fps = Math.round((frameCount * 1000) / delta);
+        frameCount = 0;
+        lastTime = now;
+        setSceneStats({
+          fps,
+          nodeCount: nodesRef.current.length,
+        });
+      }
+    };
+    rafId = requestAnimationFrame(measure);
+
+    return () => {
+      active = false;
+      cancelAnimationFrame(rafId);
+    };
+  }, [gpuInfo, nodesRef, setSceneStats]);
+
+  // --- 3. Connect transit state ---
+  useEffect(() => {
+    if (!transitCallbackRef) return;
+
+    transitCallbackRef.current = (isInTransit, target, progress) => {
+      setTransitState(isInTransit, target, progress);
+    };
+
+    return () => {
+      transitCallbackRef.current = null;
+    };
+  }, [transitCallbackRef, setTransitState]);
+
+  return null;
+}
+
+/**
  * Main ForesightMindMap Component
  */
 const ForesightMindMap = () => {
@@ -188,6 +311,8 @@ const ForesightMindMap = () => {
     connectionsRef,
     crossPillarConnectionsRef,
     controlsRef,
+    gpuInfo,
+    transitCallbackRef,
   } = useThreeScene(handleNodeClick, updateHoveredNode, selectedNode);
 
   // ===== SEARCH EFFECT =====
@@ -301,7 +426,17 @@ const ForesightMindMap = () => {
   }, [expandedNodes]);
 
   // ===== RENDER =====
+  const Wrapper = IS_PLANETARY ? HUDProvider : React.Fragment;
   return (
+    <Wrapper>
+    {IS_PLANETARY && (
+      <HUDWiring
+        selectedNode={selectedNode}
+        nodesRef={nodesRef}
+        gpuInfo={gpuInfo}
+        transitCallbackRef={transitCallbackRef}
+      />
+    )}
     <div style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden' }}>
       {/* SEO H1 Tag - Visually Hidden */}
       <h1 style={{
@@ -327,29 +462,46 @@ const ForesightMindMap = () => {
         }}
       />
 
-      {/* Control Panel */}
-      <ControlPanel
-        isOpen={controlPanelOpen}
-        onToggle={() => setControlPanelOpen(!controlPanelOpen)}
-        onStartTour={() => setShowTourSelection(true)}
-        timelineVisible={timelineVisible}
-        onToggleTimeline={() => setTimelineVisible(!timelineVisible)}
-        showRelationships={showRelationships}
-        onToggleRelationships={() => setShowRelationships(!showRelationships)}
-        onOpenMediaBrowser={() => setShowMediaBrowser(true)}
-        onOpenDiagramGallery={() => setShowDiagramGallery(true)}
-        onOpenAbout={() => setShowAbout(true)}
-        audioEnabled={audioEnabled}
-        setAudioEnabled={setAudioEnabled}
-        audioPreset={audioPreset}
-        setAudioPreset={setAudioPreset}
-        tourMusicVolume={tourMusicVolume}
-        setTourMusicVolume={setTourMusicVolume}
-        tourNarrationVolume={tourNarrationVolume}
-        setTourNarrationVolume={setTourNarrationVolume}
-        tourAudioMuted={tourAudioMuted}
-        setTourAudioMuted={setTourAudioMuted}
-      />
+      {/* Navigation UI — Planetary HUD or standard Control Panel */}
+      {IS_PLANETARY ? (
+        <>
+          <SystemStatusBar gpuInfo={gpuInfo} />
+          <NavigationHUD
+            onStartTour={() => setShowTourSelection(true)}
+            timelineVisible={timelineVisible}
+            onToggleTimeline={() => setTimelineVisible(!timelineVisible)}
+            showRelationships={showRelationships}
+            onToggleRelationships={() => setShowRelationships(!showRelationships)}
+            onOpenMediaBrowser={() => setShowMediaBrowser(true)}
+            onOpenDiagramGallery={() => setShowDiagramGallery(true)}
+          />
+          <PlanetDataPanel />
+          <TransitOverlay />
+        </>
+      ) : (
+        <ControlPanel
+          isOpen={controlPanelOpen}
+          onToggle={() => setControlPanelOpen(!controlPanelOpen)}
+          onStartTour={() => setShowTourSelection(true)}
+          timelineVisible={timelineVisible}
+          onToggleTimeline={() => setTimelineVisible(!timelineVisible)}
+          showRelationships={showRelationships}
+          onToggleRelationships={() => setShowRelationships(!showRelationships)}
+          onOpenMediaBrowser={() => setShowMediaBrowser(true)}
+          onOpenDiagramGallery={() => setShowDiagramGallery(true)}
+          onOpenAbout={() => setShowAbout(true)}
+          audioEnabled={audioEnabled}
+          setAudioEnabled={setAudioEnabled}
+          audioPreset={audioPreset}
+          setAudioPreset={setAudioPreset}
+          tourMusicVolume={tourMusicVolume}
+          setTourMusicVolume={setTourMusicVolume}
+          tourNarrationVolume={tourNarrationVolume}
+          setTourNarrationVolume={setTourNarrationVolume}
+          tourAudioMuted={tourAudioMuted}
+          setTourAudioMuted={setTourAudioMuted}
+        />
+      )}
 
       {/* Enhanced Info Panel */}
       <Suspense fallback={null}>
@@ -538,7 +690,58 @@ const ForesightMindMap = () => {
           />
         </Suspense>
       )}
+      {/* Beta Launcher — standard mode only */}
+      {!IS_PLANETARY && (
+        <button
+          onClick={() => {
+            const url = new URL(window.location);
+            url.searchParams.set('planetary', '');
+            window.location.href = url.toString();
+          }}
+          aria-label="Launch planetary exploration beta"
+          style={{
+            position: 'fixed',
+            bottom: '16px',
+            right: '16px',
+            zIndex: 800,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '8px 16px',
+            background: 'rgba(10, 12, 28, 0.85)',
+            backdropFilter: 'blur(8px)',
+            border: `1px solid ${COLORS.primary}50`,
+            borderRadius: '4px',
+            color: COLORS.primary,
+            fontFamily: '"Courier New", Consolas, monospace',
+            fontSize: '10px',
+            fontWeight: '700',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = `${COLORS.primary}`;
+            e.currentTarget.style.boxShadow = `0 0 16px ${COLORS.primary}30`;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = `${COLORS.primary}50`;
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+        >
+          <span style={{
+            width: '6px',
+            height: '6px',
+            borderRadius: '50%',
+            background: COLORS.successBright,
+            boxShadow: `0 0 6px ${COLORS.successBright}`,
+          }} />
+          PLANETARY BETA
+        </button>
+      )}
     </div>
+    </Wrapper>
   );
 };
 

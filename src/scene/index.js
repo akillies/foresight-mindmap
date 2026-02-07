@@ -10,6 +10,9 @@ export {
   cleanupScene,
 } from './SceneSetup';
 
+export { createRenderer } from './RendererFactory';
+export { createPostProcessing } from './PostProcessingSetup';
+
 export {
   createStarfield,
   createDistantGalaxies,
@@ -26,14 +29,28 @@ export {
   removeChildNodes,
   getDescendantIds,
   getNodeDepth,
+  setPlanetaryMode,
+  getAsteroidBelts,
 } from './NodeFactory';
+
+export { disposePlanetTextures } from './PlanetFactory';
+
+export { createGPUStarfield } from './GPUStarfield';
+
+export { createAsteroidBelt } from './AsteroidBelt';
+
+export { createPlanetLOD } from './PlanetLOD';
 
 export {
   createConnection,
   createCrossPillarConnections,
   removeCrossPillarConnections,
   animateConnections,
+  setActiveConnection,
+  clearActiveConnection,
 } from './ConnectionManager';
+
+export { FlightController } from './FlightController';
 
 export {
   createBlackSwan,

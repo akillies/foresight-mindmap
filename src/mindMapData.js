@@ -117,6 +117,7 @@ const mindMapData = {
       label: 'Mapping',
       description: 'Understanding current views of the future',
       color: '#5C88DA',
+      biome: 'ocean',
       level: 1,
       details: {
         overview: 'Before exploring futures, we must understand the present landscape of competing visions and forces. Mapping reveals the tensions between aspirations, trends, and barriers that shape what futures are plausible.',
@@ -166,6 +167,7 @@ const mindMapData = {
       label: 'Anticipating',
       description: 'Detecting early signs of change',
       color: '#FFCC66',
+      biome: 'desert',
       level: 1,
       details: {
         overview: 'Organizations must learn to respond to "weak signals" before they become expensive problems. Anticipating involves systematic exploration of the environment to detect emerging issues and discontinuities.',
@@ -216,6 +218,7 @@ const mindMapData = {
       label: 'Timing',
       description: 'Understanding macro-historical patterns',
       color: '#CC99CC',
+      biome: 'crystal',
       level: 1,
       details: {
         overview: 'Understanding change requires historical context—the deeper rhythms and cycles that influence present and future. Timing helps us see beyond immediate events to longer-term patterns.',
@@ -257,6 +260,7 @@ const mindMapData = {
       label: 'Deepening',
       description: 'Uncovering worldviews and myths',
       color: '#FF9966',
+      biome: 'volcanic',
       level: 1,
       details: {
         overview: 'Surface problems often have deeper roots in worldviews and myths. Deepening moves beyond symptoms to uncover the ideological structures and unconscious narratives that shape reality.',
@@ -308,6 +312,7 @@ const mindMapData = {
       label: 'Creating\nAlternatives',
       description: 'Developing multiple plausible scenarios',
       color: '#99CC99',
+      biome: 'garden',
       level: 1,
       details: {
         overview: 'The heart of futures work is creating multiple plausible scenarios that expand our thinking beyond single predictions. This pillar encompasses methods for generating, exploring, and analyzing alternative futures.',
@@ -355,6 +360,7 @@ const mindMapData = {
       label: 'Transforming',
       description: 'Creating and achieving preferred futures',
       color: '#FF6B9D',
+      biome: 'gasGiant',
       level: 1,
       details: {
         overview: 'The ultimate purpose of foresight is action. Transforming moves from insight to implementation, from exploring futures to creating them.',

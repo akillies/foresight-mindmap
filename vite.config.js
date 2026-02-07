@@ -5,19 +5,16 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    // Enable sourcemaps for production debugging
     sourcemap: true,
-    // Optimize chunk splitting
     rollupOptions: {
       output: {
         manualChunks: {
-          // Vendor chunks for better caching
           'three': ['three'],
+          'three-webgpu': ['three/webgpu', 'three/tsl'],
           'react-vendor': ['react', 'react-dom'],
         },
       },
     },
-    // Adjust chunk size warning (Three.js is large by nature)
-    chunkSizeWarningLimit: 600,
+    chunkSizeWarningLimit: 800,
   },
 })

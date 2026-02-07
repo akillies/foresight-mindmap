@@ -1,14 +1,44 @@
 /**
  * Node Factory Module
- * Creates and manages 3D nodes for the mind map visualization
+ * Creates and manages 3D nodes for the mind map visualization.
+ *
+ * When planetary mode is enabled (via setPlanetaryMode), delegates to
+ * PlanetFactory for visually rich celestial bodies. Otherwise falls back
+ * to the original glowing-sphere style.
  */
 import * as THREE from 'three';
 import mindMapData from '../mindMapData';
-import { COLORS, MEDIA_COLORS, SCENE_CONFIG, MATERIAL_DEFAULTS } from '../constants';
+import { COLORS, MEDIA_COLORS, SCENE_CONFIG, MATERIAL_DEFAULTS, BIOME_MAP, PLANET_CONFIG } from '../constants';
 import { createConnection } from './ConnectionManager';
+import { createStar, createPlanet, createMoon, createStation } from './PlanetFactory';
+import { createPlanetLOD } from './PlanetLOD';
+import { createAsteroidBelt } from './AsteroidBelt';
+
+// Module-level flag — set by useThreeScene after renderer init
+let usePlanetary = false;
+
+// Active asteroid belts — each { mesh, update(time) }; updated by animation loop
+const asteroidBelts = [];
 
 /**
- * Create a node with glow effects
+ * Enable or disable planetary node rendering.
+ * Call with `true` after confirming the renderer supports it.
+ */
+export function setPlanetaryMode(enabled) {
+  usePlanetary = enabled;
+  if (!enabled) asteroidBelts.length = 0;
+}
+
+/**
+ * Get active asteroid belts for animation loop updates.
+ * @returns {{ mesh: THREE.InstancedMesh, update: (time: number) => void }[]}
+ */
+export function getAsteroidBelts() {
+  return asteroidBelts;
+}
+
+/**
+ * Create a node with glow effects (legacy fallback style)
  * @param {Object} params - Node parameters
  * @returns {THREE.Mesh} The created node mesh
  */
@@ -80,22 +110,26 @@ function createNodeMesh({ color, size, materialDefaults, position, userData }) {
  */
 export function createCenterNode(scene, nodesRef) {
   const { center } = mindMapData;
+  const position = new THREE.Vector3(0, 0, 0);
 
-  const sphere = createNodeMesh({
-    color: center.color,
-    size: SCENE_CONFIG.centerNodeSize,
-    materialDefaults: MATERIAL_DEFAULTS.center,
-    position: new THREE.Vector3(0, 0, 0),
-    userData: center,
-  });
+  let node;
+  if (usePlanetary) {
+    node = createStar({ color: center.color, position, userData: center });
+  } else {
+    node = createNodeMesh({
+      color: center.color,
+      size: SCENE_CONFIG.centerNodeSize,
+      materialDefaults: MATERIAL_DEFAULTS.center,
+      position,
+      userData: center,
+    });
+    node.children[0].material.opacity = 0.6;
+    node.children[1].material.opacity = 0.3;
+    node.children[2].material.opacity = 0.15;
+  }
 
-  // Adjust core opacity for center node
-  sphere.children[0].material.opacity = 0.6;
-  sphere.children[1].material.opacity = 0.3;
-  sphere.children[2].material.opacity = 0.15;
-
-  scene.add(sphere);
-  nodesRef.push(sphere);
+  scene.add(node);
+  nodesRef.push(node);
 }
 
 /**
@@ -114,23 +148,39 @@ export function createLevel1Nodes(scene, nodesRef, connectionsRef) {
     const x = Math.cos(angle) * radius;
     const z = Math.sin(angle) * radius;
     const y = 0;
+    const position = new THREE.Vector3(x, y, z);
 
-    const sphere = createNodeMesh({
-      color: pillar.color,
-      size: SCENE_CONFIG.level1NodeSize,
-      materialDefaults: MATERIAL_DEFAULTS.level1,
-      position: new THREE.Vector3(x, y, z),
-      userData: pillar,
-    });
+    let node;
+    if (usePlanetary) {
+      const biome = pillar.biome || BIOME_MAP[pillar.id] || 'ocean';
+      node = createPlanetLOD({ color: pillar.color, biome, position, userData: pillar });
 
-    scene.add(sphere);
-    nodesRef.push(sphere);
+      // Attach asteroid belt to the LOD group
+      const belt = createAsteroidBelt(node, {
+        count: 200,
+        innerRadius: PLANET_CONFIG.planet.size * 2.5,
+        outerRadius: PLANET_CONFIG.planet.size * 3.5,
+        color: new THREE.Color(pillar.color).lerp(new THREE.Color(0x888888), 0.6).getHex(),
+      });
+      asteroidBelts.push(belt);
+    } else {
+      node = createNodeMesh({
+        color: pillar.color,
+        size: SCENE_CONFIG.level1NodeSize,
+        materialDefaults: MATERIAL_DEFAULTS.level1,
+        position,
+        userData: pillar,
+      });
+    }
+
+    scene.add(node);
+    nodesRef.push(node);
 
     // Create connection to center
     createConnection(
       scene,
       new THREE.Vector3(0, 0, 0),
-      new THREE.Vector3(x, y, z),
+      position,
       pillar.color,
       0.3,
       'strategic-foresight',
@@ -169,31 +219,34 @@ export function createChildNodes(scene, parentNode, nodesRef, connectionsRef) {
     const x = parentPos.x + localX;
     const z = parentPos.z + localZ;
     const y = parentPos.y;
+    const position = new THREE.Vector3(x, y, z);
 
-    const sphere = createNodeMesh({
-      color: child.color,
-      size: SCENE_CONFIG.level2NodeSize,
-      materialDefaults: MATERIAL_DEFAULTS.level2,
-      position: new THREE.Vector3(x, y, z),
-      userData: {
-        ...child,
-        parent: parent.id,
-      },
-    });
+    const childData = { ...child, parent: parent.id };
 
-    // Adjust core opacity for child nodes
-    sphere.children[0].material.opacity = 0.4;
-    sphere.children[1].material.opacity = 0.2;
-    sphere.children[2].material.opacity = 0.1;
+    let node;
+    if (usePlanetary) {
+      node = createMoon({ color: child.color, position, userData: childData });
+    } else {
+      node = createNodeMesh({
+        color: child.color,
+        size: SCENE_CONFIG.level2NodeSize,
+        materialDefaults: MATERIAL_DEFAULTS.level2,
+        position,
+        userData: childData,
+      });
+      node.children[0].material.opacity = 0.4;
+      node.children[1].material.opacity = 0.2;
+      node.children[2].material.opacity = 0.1;
+    }
 
-    scene.add(sphere);
-    nodesRef.push(sphere);
+    scene.add(node);
+    nodesRef.push(node);
 
     // Create connection to parent
     createConnection(
       scene,
       parentPos,
-      new THREE.Vector3(x, y, z),
+      position,
       child.color,
       0.3,
       parent.id,
@@ -231,42 +284,52 @@ export function createMediaNodes(scene, parentNode, nodesRef, connectionsRef) {
       const x = parentPos.x + localX;
       const z = parentPos.z + localZ;
       const y = parentPos.y;
+      const position = new THREE.Vector3(x, y, z);
 
       const mediaColor = MEDIA_COLORS[mediaItem.type] || COLORS.primary;
-
-      // Single optimized sphere - reduced from 3 meshes to 1 for performance
-      // Reduced segments from 16 to 8 (75% fewer polygons)
-      const geometry = new THREE.SphereGeometry(SCENE_CONFIG.mediaNodeSize, 8, 8);
-      const material = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(mediaColor),
-        emissive: new THREE.Color(mediaColor),
-        emissiveIntensity: MATERIAL_DEFAULTS.media.emissiveIntensity,
-        roughness: MATERIAL_DEFAULTS.media.roughness,
-        metalness: MATERIAL_DEFAULTS.media.metalness,
-        transparent: true,
-        opacity: MATERIAL_DEFAULTS.media.opacity,
-      });
-
-      const sphere = new THREE.Mesh(geometry, material);
-      sphere.position.set(x, y, z);
-      sphere.userData = {
+      const mediaData = {
         ...mediaItem,
         mediaId,
         isMedia: true,
         parentId: parent.id,
       };
-      sphere.castShadow = true;
-      sphere.receiveShadow = true;
-      sphere.originalY = y;
 
-      scene.add(sphere);
-      nodesRef.push(sphere);
+      let node;
+      if (usePlanetary) {
+        node = createStation({
+          color: mediaColor,
+          mediaType: mediaItem.type,
+          position,
+          userData: mediaData,
+        });
+      } else {
+        // Single optimized sphere for legacy mode
+        const geometry = new THREE.SphereGeometry(SCENE_CONFIG.mediaNodeSize, 8, 8);
+        const material = new THREE.MeshStandardMaterial({
+          color: new THREE.Color(mediaColor),
+          emissive: new THREE.Color(mediaColor),
+          emissiveIntensity: MATERIAL_DEFAULTS.media.emissiveIntensity,
+          roughness: MATERIAL_DEFAULTS.media.roughness,
+          metalness: MATERIAL_DEFAULTS.media.metalness,
+          transparent: true,
+          opacity: MATERIAL_DEFAULTS.media.opacity,
+        });
+        node = new THREE.Mesh(geometry, material);
+        node.position.copy(position);
+        node.userData = mediaData;
+        node.castShadow = true;
+        node.receiveShadow = true;
+        node.originalY = y;
+      }
+
+      scene.add(node);
+      nodesRef.push(node);
 
       // Create connection to parent
       createConnection(
         scene,
         parentPos,
-        new THREE.Vector3(x, y, z),
+        position,
         mediaColor,
         0.2,
         parent.id,
@@ -280,7 +343,6 @@ export function createMediaNodes(scene, parentNode, nodesRef, connectionsRef) {
         mediaIndex: index,
         mediaTitle: mediaItem?.title,
       });
-      // Continue to next media item - don't let one failure kill all media
     }
   });
 }
@@ -319,19 +381,28 @@ export function removeChildNodes(scene, parentNode, nodesRef, connectionsRef) {
   });
 
   uniqueNodesToRemove.forEach(node => {
-    // Dispose child meshes (core, inner glow, outer glow) before removing parent
-    if (node.children && node.children.length > 0) {
-      // Iterate in reverse since removal modifies the array
-      for (let i = node.children.length - 1; i >= 0; i--) {
-        const child = node.children[i];
-        if (child.geometry) child.geometry.dispose();
-        if (child.material) child.material.dispose();
-        node.remove(child);
+    // Remove associated asteroid belts from tracking array
+    for (let b = asteroidBelts.length - 1; b >= 0; b--) {
+      if (node.children && node.children.includes(asteroidBelts[b].mesh)) {
+        asteroidBelts.splice(b, 1);
       }
     }
+
+    // Recursively dispose all descendant meshes (handles LOD levels + their children)
+    node.traverse((obj) => {
+      if (obj === node) return; // skip root, handled below
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) {
+        if (obj.material.map) obj.material.map = null;
+        obj.material.dispose();
+      }
+    });
     scene.remove(node);
     if (node.geometry) node.geometry.dispose();
-    if (node.material) node.material.dispose();
+    if (node.material) {
+      if (node.material.map) node.material.map = null; // don't dispose cached textures
+      node.material.dispose();
+    }
   });
 
   // Update nodesRef in place
@@ -350,7 +421,6 @@ export function removeChildNodes(scene, parentNode, nodesRef, connectionsRef) {
     conn.geometry.dispose();
     conn.material.dispose();
 
-    // Also dispose particle systems
     if (conn.userData.particles) {
       scene.remove(conn.userData.particles);
       conn.userData.particles.geometry.dispose();

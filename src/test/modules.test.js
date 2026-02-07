@@ -37,6 +37,14 @@ describe('Module Structure', () => {
       expect(SCENE_CONFIG.level1Radius).toBe(25);
     });
 
+    it('should export FLIGHT_CONFIG object', async () => {
+      const { FLIGHT_CONFIG } = await import('../constants');
+      expect(FLIGHT_CONFIG).toBeDefined();
+      expect(FLIGHT_CONFIG.baseDuration).toBe(1.5);
+      expect(FLIGHT_CONFIG.maxDuration).toBe(3.0);
+      expect(FLIGHT_CONFIG.arcHeightRatio).toBe(0.3);
+    });
+
     it('should export Vector3 constants for scale', async () => {
       const { SCALE_SELECTED, SCALE_NORMAL } = await import('../constants');
       expect(SCALE_SELECTED).toBeDefined();
@@ -80,6 +88,13 @@ describe('Module Structure', () => {
       expect(scene.createCrossPillarConnections).toBeTypeOf('function');
       expect(scene.removeCrossPillarConnections).toBeTypeOf('function');
       expect(scene.animateConnections).toBeTypeOf('function');
+      expect(scene.setActiveConnection).toBeTypeOf('function');
+      expect(scene.clearActiveConnection).toBeTypeOf('function');
+    });
+
+    it('should export FlightController class', async () => {
+      const scene = await import('../scene');
+      expect(scene.FlightController).toBeTypeOf('function');
     });
 
     it('should export EasterEggs functions', async () => {
