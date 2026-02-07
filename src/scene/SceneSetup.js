@@ -23,6 +23,8 @@ CameraControls.install({ THREE });
 export async function initializeScene(container) {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x000000);
+  // Exponential fog for depth falloff — objects fade to black at distance
+  scene.fog = new THREE.FogExp2(0x000000, 0.004);
   scene.rotation.y = 0;
 
   const camera = new THREE.PerspectiveCamera(

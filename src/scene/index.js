@@ -52,6 +52,8 @@ export {
 
 export { FlightController } from './FlightController';
 
+export { createWarpStreaks } from './WarpStreaks';
+
 export {
   createBlackSwan,
   createEnterpriseD,

@@ -40,8 +40,8 @@ describe('Module Structure', () => {
     it('should export FLIGHT_CONFIG object', async () => {
       const { FLIGHT_CONFIG } = await import('../constants');
       expect(FLIGHT_CONFIG).toBeDefined();
-      expect(FLIGHT_CONFIG.baseDuration).toBe(1.5);
-      expect(FLIGHT_CONFIG.maxDuration).toBe(3.0);
+      expect(FLIGHT_CONFIG.baseDuration).toBe(2.5);
+      expect(FLIGHT_CONFIG.maxDuration).toBe(5.0);
       expect(FLIGHT_CONFIG.arcHeightRatio).toBe(0.3);
     });
 

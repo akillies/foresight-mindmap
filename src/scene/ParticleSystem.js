@@ -3,6 +3,7 @@
  * Handles starfield, nebulas, and distant galaxies for cosmic background
  */
 import * as THREE from 'three';
+import { createNoise2D } from 'simplex-noise';
 import { SCENE_CONFIG } from '../constants';
 
 /**
@@ -23,11 +24,22 @@ export function createStarfield(scene) {
   const lcarPink = new THREE.Color(0xFF6B9D);
   const white = new THREE.Color(0xFFFFFF);
 
+  // Dead zone radius: no stars within this distance of origin (where planets live)
+  const DEAD_ZONE = 50;
+
   for (let i = 0; i < particlesCount; i++) {
-    // Position in 3D space (larger area for depth)
-    positions[i * 3] = (Math.random() - 0.5) * 500;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 500;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 500;
+    // Position in 3D space — enforce dead zone around planet system
+    let x, y, z, dist;
+    do {
+      x = (Math.random() - 0.5) * 500;
+      y = (Math.random() - 0.5) * 500;
+      z = (Math.random() - 0.5) * 500;
+      dist = Math.sqrt(x * x + y * y + z * z);
+    } while (dist < DEAD_ZONE);
+
+    positions[i * 3] = x;
+    positions[i * 3 + 1] = y;
+    positions[i * 3 + 2] = z;
 
     // Color variation with LCARS palette
     const colorChoice = Math.random();
@@ -38,8 +50,9 @@ export function createStarfield(scene) {
     colors[i * 3 + 1] = color.g;
     colors[i * 3 + 2] = color.b;
 
-    // Variable star sizes (0.3 to 1.5) - some stars brighter/closer
-    sizes[i] = Math.random() * 1.2 + 0.3;
+    // Star size attenuated by distance — far stars are tiny pinpoints
+    const distFactor = Math.min(dist / 250, 1);
+    sizes[i] = 0.2 + distFactor * 0.6;
 
     // Slow rotation velocities
     velocities[i * 3] = (Math.random() - 0.5) * 0.0001;
@@ -55,9 +68,9 @@ export function createStarfield(scene) {
   particlesGeometry.userData = { velocities };
 
   const particlesMaterial = new THREE.PointsMaterial({
-    size: 1.0,
+    size: 0.6,
     vertexColors: true,
-    opacity: 0.8,
+    opacity: 0.7,
     transparent: true,
     blending: THREE.AdditiveBlending,
     sizeAttenuation: true,
@@ -121,86 +134,187 @@ export function createDistantGalaxies(scene) {
 }
 
 /**
- * Create animated nebula backgrounds
+ * Create organic cloud texture using multi-octave noise
+ * @param {number[]} primaryColor - RGB array [r, g, b]
+ * @param {number[]} secondaryColor - RGB array [r, g, b]
+ * @param {number} seed - Noise offset for variation
+ * @returns {THREE.CanvasTexture} Procedural cloud texture
+ */
+function createNebulaCloudTexture(primaryColor, secondaryColor, seed) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512;
+  canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+  const imageData = ctx.createImageData(512, 512);
+  const data = imageData.data;
+
+  // Initialize noise generator
+  const noise2D = createNoise2D();
+
+  // Process each pixel
+  for (let y = 0; y < 512; y++) {
+    for (let x = 0; x < 512; x++) {
+      const i = (y * 512 + x) * 4;
+
+      // Normalized coordinates [-1, 1]
+      const nx = (x / 512) * 2 - 1;
+      const ny = (y / 512) * 2 - 1;
+
+      // Multi-octave noise (fBm with 4 octaves)
+      let cloudDensity = 0;
+      let amplitude = 1.0;
+      let frequency = 2.0;
+      for (let octave = 0; octave < 4; octave++) {
+        cloudDensity += amplitude * noise2D(
+          (nx * frequency) + seed,
+          (ny * frequency) + seed
+        );
+        amplitude *= 0.5;
+        frequency *= 2.0;
+      }
+
+      // Normalize to [0, 1]
+      cloudDensity = (cloudDensity + 1) * 0.5;
+
+      // Apply soft radial falloff for edge transparency
+      const distFromCenter = Math.sqrt(nx * nx + ny * ny);
+      const radialFalloff = Math.max(0, 1 - Math.pow(distFromCenter / 1.0, 1.5));
+
+      // Combine density with falloff
+      const finalDensity = cloudDensity * radialFalloff;
+
+      // Blend between primary and secondary colors based on density
+      const colorMix = Math.pow(cloudDensity, 0.7);
+      const r = primaryColor[0] * colorMix + secondaryColor[0] * (1 - colorMix);
+      const g = primaryColor[1] * colorMix + secondaryColor[1] * (1 - colorMix);
+      const b = primaryColor[2] * colorMix + secondaryColor[2] * (1 - colorMix);
+
+      // Write RGBA
+      data[i] = r;
+      data[i + 1] = g;
+      data[i + 2] = b;
+      data[i + 3] = finalDensity * 255; // Alpha based on final density
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.needsUpdate = true;
+  return texture;
+}
+
+/**
+ * Create layered volumetric nebula backgrounds
  * @param {THREE.Scene} scene - The Three.js scene
  * @returns {THREE.Mesh[]} Array of nebula meshes for animation
  */
 export function createNebulas(scene) {
-  const nebulaCount = SCENE_CONFIG.nebulaCount;
   const nebulas = [];
-  const nebulaColors = [
-    { primary: [92, 136, 218], secondary: [204, 153, 204] },   // Blue to Purple
-    { primary: [255, 107, 157], secondary: [153, 78, 221] },   // Pink to Purple
-    { primary: [99, 204, 153], secondary: [92, 136, 218] }     // Teal to Blue
+
+  // Define 5 nebula clusters with position and depth characteristics
+  const nebulaConfigs = [
+    // Large background nebulae (dramatic backdrop)
+    {
+      position: { angle: 0.2, distance: 180, height: 40 },
+      size: 160,
+      layers: 6,
+      depthSpread: 15,
+      primaryColor: [92, 136, 218],    // Blue
+      secondaryColor: [140, 100, 180],  // Purple
+      baseOpacity: 0.25,
+    },
+    {
+      position: { angle: 3.5, distance: 200, height: -30 },
+      size: 180,
+      layers: 6,
+      depthSpread: 12,
+      primaryColor: [255, 200, 100],    // Amber
+      secondaryColor: [200, 140, 60],   // Gold
+      baseOpacity: 0.18, // Subtle warm glow
+    },
+    // Medium nebulae (mid-ground depth)
+    {
+      position: { angle: 1.8, distance: 120, height: -20 },
+      size: 100,
+      layers: 5,
+      depthSpread: 10,
+      primaryColor: [255, 107, 157],    // Pink
+      secondaryColor: [180, 60, 120],   // Magenta
+      baseOpacity: 0.28,
+    },
+    {
+      position: { angle: 4.7, distance: 140, height: 25 },
+      size: 110,
+      layers: 5,
+      depthSpread: 12,
+      primaryColor: [99, 204, 153],     // Teal
+      secondaryColor: [60, 120, 180],   // Blue
+      baseOpacity: 0.26,
+    },
+    // Close wispy nebula (foreground atmosphere)
+    {
+      position: { angle: 2.5, distance: 70, height: 10 },
+      size: 80,
+      layers: 4,
+      depthSpread: 8,
+      primaryColor: [140, 100, 180],    // Purple
+      secondaryColor: [92, 136, 218],   // Blue
+      baseOpacity: 0.15, // Very transparent
+    },
   ];
 
-  for (let i = 0; i < nebulaCount; i++) {
-    const canvas = document.createElement('canvas');
-    canvas.width = 512;
-    canvas.height = 512;
-    const ctx = canvas.getContext('2d');
+  nebulaConfigs.forEach((config, clusterIndex) => {
+    // Create multiple layered planes for each cluster
+    for (let layer = 0; layer < config.layers; layer++) {
+      // Generate unique cloud texture for this layer
+      const seed = clusterIndex * 100 + layer * 10;
+      const texture = createNebulaCloudTexture(
+        config.primaryColor,
+        config.secondaryColor,
+        seed
+      );
 
-    // Create complex nebula with multiple gradients
-    const colors = nebulaColors[i];
+      // Create plane geometry
+      const geometry = new THREE.PlaneGeometry(config.size, config.size);
+      const material = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        opacity: config.baseOpacity * (1 - layer * 0.12), // Layers fade slightly
+        blending: THREE.AdditiveBlending,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+      });
 
-    // Background radial gradient
-    const gradient1 = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
-    gradient1.addColorStop(0, `rgba(${colors.primary[0]}, ${colors.primary[1]}, ${colors.primary[2]}, 0.08)`);
-    gradient1.addColorStop(0.4, `rgba(${colors.secondary[0]}, ${colors.secondary[1]}, ${colors.secondary[2]}, 0.04)`);
-    gradient1.addColorStop(1, 'rgba(0, 0, 0, 0)');
-    ctx.fillStyle = gradient1;
-    ctx.fillRect(0, 0, 512, 512);
+      const nebula = new THREE.Mesh(geometry, material);
 
-    // Add second offset gradient for depth
-    const gradient2 = ctx.createRadialGradient(
-      256 + Math.random() * 100 - 50,
-      256 + Math.random() * 100 - 50,
-      0,
-      256,
-      256,
-      200
-    );
-    gradient2.addColorStop(0, `rgba(${colors.secondary[0]}, ${colors.secondary[1]}, ${colors.secondary[2]}, 0.06)`);
-    gradient2.addColorStop(0.5, `rgba(${colors.primary[0]}, ${colors.primary[1]}, ${colors.primary[2]}, 0.03)`);
-    gradient2.addColorStop(1, 'rgba(0, 0, 0, 0)');
-    ctx.fillStyle = gradient2;
-    ctx.fillRect(0, 0, 512, 512);
+      // Position layer with depth offset along view direction
+      const baseX = Math.cos(config.position.angle) * config.position.distance;
+      const baseZ = Math.sin(config.position.angle) * config.position.distance;
+      const baseY = config.position.height;
 
-    // Create texture from canvas
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.needsUpdate = true;
+      // Offset each layer slightly in depth
+      const depthOffset = (layer - config.layers / 2) * config.depthSpread;
+      const offsetAngle = config.position.angle + Math.PI; // Offset towards camera
+      nebula.position.set(
+        baseX + Math.cos(offsetAngle) * depthOffset,
+        baseY + (Math.random() - 0.5) * 8,
+        baseZ + Math.sin(offsetAngle) * depthOffset
+      );
 
-    // Create large plane for nebula
-    const geometry = new THREE.PlaneGeometry(200, 200);
-    const material = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      opacity: 0.3,
-      blending: THREE.AdditiveBlending,
-      side: THREE.DoubleSide,
-      depthWrite: false
-    });
+      // Slight rotation variation for parallax effect
+      nebula.rotation.x = (Math.random() - 0.5) * 0.3;
+      nebula.rotation.y = (Math.random() - 0.5) * 0.3;
+      nebula.rotation.z = Math.random() * Math.PI * 2;
 
-    const nebula = new THREE.Mesh(geometry, material);
+      // Store animation data
+      nebula.userData.rotationSpeed = (Math.random() - 0.5) * 0.00015;
+      nebula.userData.baseOpacity = material.opacity;
+      nebula.userData.isCloseLayer = (clusterIndex === 4 && layer < 2); // Foreground layers
 
-    // Position nebulas at different depths and angles
-    const angle = (i / nebulaCount) * Math.PI * 2;
-    const distance = 180 + i * 20;
-    nebula.position.set(
-      Math.cos(angle) * distance,
-      (Math.random() - 0.5) * 60,
-      Math.sin(angle) * distance
-    );
-
-    // Random rotation for variety
-    nebula.rotation.z = Math.random() * Math.PI * 2;
-
-    // Store rotation speed for animation
-    nebula.userData.rotationSpeed = (Math.random() - 0.5) * 0.0002;
-
-    scene.add(nebula);
-    nebulas.push(nebula);
-  }
+      scene.add(nebula);
+      nebulas.push(nebula);
+    }
+  });
 
   return nebulas;
 }
@@ -241,11 +355,23 @@ export function animateStarfield(particles) {
 }
 
 /**
- * Animate nebulas (slow rotation)
+ * Animate nebulas (slow rotation and subtle opacity pulsing)
  * @param {THREE.Mesh[]} nebulas - Array of nebula meshes
  */
 export function animateNebulas(nebulas) {
-  nebulas.forEach((nebula) => {
+  const time = Date.now() * 0.001;
+
+  nebulas.forEach((nebula, index) => {
+    // Slow rotation at varying speeds for volumetric effect
     nebula.rotation.z += nebula.userData.rotationSpeed;
+    nebula.rotation.x += nebula.userData.rotationSpeed * 0.3;
+    nebula.rotation.y += nebula.userData.rotationSpeed * 0.15;
+
+    // Breathing effect on close foreground layers
+    if (nebula.userData.isCloseLayer) {
+      const breathPhase = time * 0.3 + index * 0.5;
+      const breathe = Math.sin(breathPhase) * 0.15 + 1.0; // [0.85, 1.15]
+      nebula.material.opacity = nebula.userData.baseOpacity * breathe;
+    }
   });
 }

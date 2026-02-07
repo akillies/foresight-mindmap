@@ -27,6 +27,7 @@ import {
   clearActiveConnection,
   createGPUStarfield,
   getAsteroidBelts,
+  createWarpStreaks,
 } from '../scene';
 import { PLANET_CONFIG, SCALE_SELECTED, SCALE_NORMAL, SCENE_CONFIG, ANIMATION_CONFIG, PERFORMANCE_LIMITS } from '../constants';
 
@@ -133,11 +134,15 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
 
         // Initialize FlightController (planetary beta only)
         let flightController = null;
+        let warpStreaks = null;
         if (IS_PLANETARY) {
           flightController = new FlightController();
           flightController.init(camera, controls);
           flightController.setConnectionCallbacks(setActiveConnection, clearActiveConnection);
           flightControllerRef.current = flightController;
+
+          // Warp star streaking effect during transit
+          warpStreaks = createWarpStreaks(scene);
         }
 
         // Clock for delta time (camera-controls requires deltaTime in seconds)
@@ -263,6 +268,15 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
                 const target = flightController.getCurrentTarget();
                 const targetLabel = target?.userData?.label?.replace('\n', ' ') || null;
                 transitCallbackRef.current(true, targetLabel, progress);
+              }
+
+              // Warp star streaks — rainbow elongation during transit
+              if (warpStreaks) {
+                const flightState = flightController.getState();
+                const elapsed = flightController._elapsed;
+                const duration = flightController._phaseDuration;
+                const phaseProgress = duration > 0 ? Math.min(elapsed / duration, 1) : 0;
+                warpStreaks.update(camera, flightState, phaseProgress);
               }
             }
 
@@ -510,6 +524,7 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
           if (handleKeyDown) window.removeEventListener('keydown', handleKeyDown);
 
           if (gpuStarfield) gpuStarfield.dispose();
+          if (warpStreaks) warpStreaks.dispose();
           if (flightController) flightController.dispose();
           if (IS_PLANETARY) disposePlanetTextures();
           cleanupScene({ scene, camera, renderer, controls }, container);

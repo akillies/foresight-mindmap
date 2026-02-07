@@ -136,9 +136,9 @@ export const STATION_SHAPES = {
 // Flight controller configuration
 export const FLIGHT_CONFIG = {
   arcHeightRatio: 0.3,
-  baseDuration: 1.5,
-  distanceMultiplier: 0.03,
-  maxDuration: 3.0,
+  baseDuration: 2.5,
+  distanceMultiplier: 0.04,
+  maxDuration: 5.0,
   departDuration: 0.8,
   arriveDuration: 1.0,
   laneGlowOpacity: 0.8,
