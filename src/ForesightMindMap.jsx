@@ -503,16 +503,18 @@ const ForesightMindMap = () => {
         />
       )}
 
-      {/* Enhanced Info Panel */}
-      <Suspense fallback={null}>
-        <EnhancedInfoPanel
-          selectedNode={selectedNode}
-          isOpen={infoPanelOpen}
-          onClose={() => setSelectedNode(null)}
-          onToggle={() => setInfoPanelOpen(!infoPanelOpen)}
-          onMediaClick={openMedia}
-        />
-      </Suspense>
+      {/* Enhanced Info Panel — standard mode only (cockpit HUD replaces this) */}
+      {!IS_PLANETARY && (
+        <Suspense fallback={null}>
+          <EnhancedInfoPanel
+            selectedNode={selectedNode}
+            isOpen={infoPanelOpen}
+            onClose={() => setSelectedNode(null)}
+            onToggle={() => setInfoPanelOpen(!infoPanelOpen)}
+            onMediaClick={openMedia}
+          />
+        </Suspense>
+      )}
 
       {/* Media Viewer */}
       {selectedMedia && (
@@ -524,8 +526,10 @@ const ForesightMindMap = () => {
         </Suspense>
       )}
 
-      {/* Hover Tooltip */}
-      <HoverTooltip hoveredNode={hoveredNode} selectedNode={selectedNode} />
+      {/* Hover Tooltip — standard mode only (targeting reticle replaces this) */}
+      {!IS_PLANETARY && (
+        <HoverTooltip hoveredNode={hoveredNode} selectedNode={selectedNode} />
+      )}
 
       {/* Global Styles */}
       <GlobalStyles />
@@ -653,8 +657,8 @@ const ForesightMindMap = () => {
         </Suspense>
       )}
 
-      {/* Featured Content Dashboard */}
-      {!tourActive && (
+      {/* Featured Content Dashboard — standard mode only */}
+      {!tourActive && !IS_PLANETARY && (
         <Suspense fallback={null}>
           <FeaturedContentDashboard
             onMediaClick={openMedia}
