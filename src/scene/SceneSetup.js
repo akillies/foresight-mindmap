@@ -6,9 +6,12 @@
 import * as THREE from 'three';
 import CameraControls from 'camera-controls';
 import { tourManager } from '../TourManager';
-import { SCENE_CONFIG } from '../constants';
+import { SCENE_CONFIG, VR_CONFIG } from '../constants';
 import { createRenderer } from './RendererFactory';
 import { createPostProcessing } from './PostProcessingSetup';
+
+const IS_VR = new URLSearchParams(window.location.search).has('planetary')
+  && new URLSearchParams(window.location.search).has('vr');
 
 // Install camera-controls with the THREE.js subset it requires
 CameraControls.install({ THREE });
@@ -24,7 +27,8 @@ export async function initializeScene(container) {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x000000);
   // Exponential fog for depth falloff — objects fade to black at distance
-  scene.fog = new THREE.FogExp2(0x000000, 0.004);
+  // Reduced density in VR for less overdraw (stereo rendering doubles cost)
+  scene.fog = new THREE.FogExp2(0x000000, IS_VR ? VR_CONFIG.fogDensityVR : 0.004);
   scene.rotation.y = 0;
 
   const camera = new THREE.PerspectiveCamera(
@@ -82,8 +86,9 @@ export function setupLighting(scene) {
   const keyLight = new THREE.DirectionalLight(0x5C88DA, 1.2);
   keyLight.position.set(50, 50, 50);
   keyLight.castShadow = true;
-  keyLight.shadow.mapSize.width = 4096;
-  keyLight.shadow.mapSize.height = 4096;
+  const shadowSize = IS_VR ? VR_CONFIG.shadowMapSizeVR : 4096;
+  keyLight.shadow.mapSize.width = shadowSize;
+  keyLight.shadow.mapSize.height = shadowSize;
   scene.add(keyLight);
 
   const fillLight = new THREE.PointLight(0xFFCC66, 0.8, 100);

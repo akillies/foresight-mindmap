@@ -28,11 +28,13 @@ import {
   createGPUStarfield,
   getAsteroidBelts,
   createWarpStreaks,
+  createCockpitMesh,
 } from '../scene';
-import { PLANET_CONFIG, SCALE_SELECTED, SCALE_NORMAL, SCENE_CONFIG, ANIMATION_CONFIG, PERFORMANCE_LIMITS } from '../constants';
+import { PLANET_CONFIG, SCALE_SELECTED, SCALE_NORMAL, SCENE_CONFIG, ANIMATION_CONFIG, PERFORMANCE_LIMITS, VR_CONFIG } from '../constants';
 
-// Beta flag — ?planetary query param enables the planetary exploration experience
+// Beta flags — query params gate feature branches
 const IS_PLANETARY = new URLSearchParams(window.location.search).has('planetary');
+const IS_VR = IS_PLANETARY && new URLSearchParams(window.location.search).has('vr');
 
 /**
  * Custom hook for Three.js scene management
@@ -62,6 +64,10 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
   const particlesRef = useRef(null);
   const nebulasRef = useRef([]);
 
+  // 3D cockpit mesh (VR mode only)
+  const cockpitMeshRef = useRef(null);
+  const hudDataRef = useRef(null);
+
   // Transit state tracking (planetary beta only)
   const transitCallbackRef = useRef(null);
   const lastTransitStateRef = useRef('ORBITING');
@@ -85,7 +91,6 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
     if (!containerRef.current) return;
 
     const container = containerRef.current;
-    let frameId;
     let disposed = false;
     const cleanupRef = { current: null };
 
@@ -145,6 +150,89 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
           warpStreaks = createWarpStreaks(scene);
         }
 
+        // 3D cockpit mesh (VR mode — replaces CSS CockpitFrame)
+        let cockpitMesh = null;
+        if (IS_VR) {
+          cockpitMesh = createCockpitMesh(false /* isXR — starts in flat-screen */);
+          cockpitMesh.attachToCamera(camera);
+          cockpitMeshRef.current = cockpitMesh;
+
+          // On XR session start, move cockpit to scene space
+          renderer.xr.addEventListener('sessionstart', () => {
+            camera.remove(cockpitMesh.group);
+            cockpitMesh.placeInXRSpace(scene, camera.position);
+          });
+          renderer.xr.addEventListener('sessionend', () => {
+            scene.remove(cockpitMesh.group);
+            cockpitMesh.attachToCamera(camera);
+          });
+        }
+
+        // ── XR Controllers (VR mode) ──
+        let controller1 = null;
+        let controller2 = null;
+        let controllerRay = null;
+        const xrTempMatrix = new THREE.Matrix4();
+
+        if (IS_VR) {
+          controller1 = renderer.xr.getController(0);
+          controller2 = renderer.xr.getController(1);
+          scene.add(controller1, controller2);
+
+          // Visual laser pointer ray on primary controller
+          const rayGeometry = new THREE.BufferGeometry().setFromPoints([
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(0, 0, -VR_CONFIG.rayLength),
+          ]);
+          const rayMaterial = new THREE.LineBasicMaterial({
+            color: VR_CONFIG.rayColor,
+            transparent: true,
+            opacity: 0.6,
+          });
+          controllerRay = new THREE.Line(rayGeometry, rayMaterial);
+          controller1.add(controllerRay);
+
+          // Trigger press → select planet (replaces mouse click)
+          controller1.addEventListener('selectstart', () => {
+            if (!renderer.xr.isPresenting) return;
+
+            // Raycast from controller
+            xrTempMatrix.identity().extractRotation(controller1.matrixWorld);
+            raycasterRef.current.ray.origin.setFromMatrixPosition(controller1.matrixWorld);
+            raycasterRef.current.ray.direction.set(0, 0, -1).applyMatrix4(xrTempMatrix);
+
+            const intersects = raycasterRef.current.intersectObjects(nodesRef.current, true);
+            if (intersects.length > 0) {
+              let clickedNode = intersects[0].object;
+              const currentNodes = nodesRef.current;
+              while (clickedNode.parent && !currentNodes.includes(clickedNode)) {
+                clickedNode = clickedNode.parent;
+              }
+              if (!currentNodes.includes(clickedNode)) return;
+
+              if (flightController) {
+                const currentSelected = selectedNodeRef.current;
+                if (
+                  !flightController.isFlying() &&
+                  currentSelected &&
+                  clickedNode.userData.id !== currentSelected.id &&
+                  clickedNode.userData.id &&
+                  !clickedNode.userData.isMedia
+                ) {
+                  flightController.setSourceNodeId(currentSelected.id);
+                  flightController.flyTo(clickedNode).then(() => {
+                    onNodeClick(clickedNode, scene, nodesRef.current, connectionsRef.current);
+                  });
+                } else if (!flightController.isFlying()) {
+                  onNodeClick(clickedNode, scene, nodesRef.current, connectionsRef.current);
+                }
+              } else {
+                onNodeClick(clickedNode, scene, nodesRef.current, connectionsRef.current);
+              }
+            }
+          });
+        }
+
         // Clock for delta time (camera-controls requires deltaTime in seconds)
         const clock = new THREE.Clock();
 
@@ -154,9 +242,18 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
         const boundingSphere = new THREE.Sphere();
         const FRUSTUM_MARGIN = PERFORMANCE_LIMITS.ANIMATION_FRUSTUM_MARGIN;
 
-        const animate = () => {
+        // XR session event: disable camera-controls while headset owns camera
+        if (IS_VR) {
+          renderer.xr.addEventListener('sessionstart', () => {
+            if (controls) controls.enabled = false;
+          });
+          renderer.xr.addEventListener('sessionend', () => {
+            if (controls) controls.enabled = true;
+          });
+        }
+
+        const animate = (time, xrFrame) => {
           if (disposed) return;
-          frameId = requestAnimationFrame(animate);
 
           try {
             const deltaTime = clock.getDelta();
@@ -280,6 +377,11 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
               }
             }
 
+            // 3D cockpit readouts (VR mode)
+            if (cockpitMesh && hudDataRef.current) {
+              cockpitMesh.updateReadouts(hudDataRef.current);
+            }
+
             // Easter Egg spawn system
             if (currentTime - lastEasterEggCheckRef.current > SCENE_CONFIG.easterEggCheckInterval) {
               lastEasterEggCheckRef.current = currentTime;
@@ -297,7 +399,14 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
 
             // Raycasting for hover effects
             // Recursive mode needed for LOD/Group nodes in planetary mode
-            raycasterRef.current.setFromCamera(mouseRef.current, camera);
+            if (xrPresenting && controller1) {
+              // XR controller raycast
+              xrTempMatrix.identity().extractRotation(controller1.matrixWorld);
+              raycasterRef.current.ray.origin.setFromMatrixPosition(controller1.matrixWorld);
+              raycasterRef.current.ray.direction.set(0, 0, -1).applyMatrix4(xrTempMatrix);
+            } else {
+              raycasterRef.current.setFromCamera(mouseRef.current, camera);
+            }
             const intersects = raycasterRef.current.intersectObjects(nodes, true);
 
             for (let i = 0; i < nodeCount; i++) {
@@ -322,16 +431,25 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
             }
 
             // camera-controls requires delta in seconds
-            controls.update(deltaTime);
+            // Disable when XR headset owns camera position/rotation
+            const xrPresenting = renderer.xr?.isPresenting;
+            if (!xrPresenting) {
+              controls.update(deltaTime);
+            }
 
-            // Render via post-processing pipeline
-            postProcessing.render();
+            // Render: bypass post-processing in XR (incompatible with stereo)
+            if (xrPresenting) {
+              renderer.render(scene, camera);
+            } else {
+              postProcessing.render();
+            }
           } catch (error) {
             console.error('Animation loop error (non-fatal):', error.message);
           }
         };
 
-        animate();
+        // setAnimationLoop works for both flat-screen (uses rAF) and XR (uses XR frame loop)
+        renderer.setAnimationLoop(animate);
 
         // Event Handlers
         const handleMouseMove = (event) => {
@@ -513,7 +631,7 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
 
         // Store cleanup handler for the effect return
         cleanupRef.current = () => {
-          if (frameId) cancelAnimationFrame(frameId);
+          renderer.setAnimationLoop(null);
 
           container.removeEventListener('mousemove', handleMouseMove);
           container.removeEventListener('mousedown', handleMouseDown);
@@ -525,6 +643,11 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
 
           if (gpuStarfield) gpuStarfield.dispose();
           if (warpStreaks) warpStreaks.dispose();
+          if (cockpitMesh) cockpitMesh.dispose();
+          if (controllerRay) {
+            controllerRay.geometry.dispose();
+            controllerRay.material.dispose();
+          }
           if (flightController) flightController.dispose();
           if (IS_PLANETARY) disposePlanetTextures();
           cleanupScene({ scene, camera, renderer, controls }, container);
@@ -559,5 +682,7 @@ export function useThreeScene(onNodeClick, onHoverChange, selectedNode) {
     gpuInfo,
     flightControllerRef,
     transitCallbackRef,
+    hudDataRef,
+    cockpitMeshRef,
   };
 }

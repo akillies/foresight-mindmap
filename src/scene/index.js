@@ -54,6 +54,9 @@ export { FlightController } from './FlightController';
 
 export { createWarpStreaks } from './WarpStreaks';
 
+export { createCockpitMesh } from './CockpitMesh';
+export { createCockpitTextureSet } from './CockpitTextures';
+
 export {
   createBlackSwan,
   createEnterpriseD,

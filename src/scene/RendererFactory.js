@@ -6,6 +6,7 @@
  * Uses dynamic imports to avoid pulling in three/webgpu at module load time,
  * which would break in test environments (jsdom) that lack WebGL constants.
  */
+import { VR_CONFIG } from '../constants';
 
 /**
  * @typedef {Object} RendererResult
@@ -25,7 +26,9 @@
  * @returns {Promise<RendererResult>}
  */
 export async function createRenderer(container) {
-  const forceWebGL = new URLSearchParams(window.location.search).has('forceWebGL');
+  const params = new URLSearchParams(window.location.search);
+  const forceWebGL = params.has('forceWebGL');
+  const enableVR = params.has('planetary') && params.has('vr');
 
   if (forceWebGL) {
     const THREE = await import('three');
@@ -33,6 +36,14 @@ export async function createRenderer(container) {
     await configureRenderer(renderer, container);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    // Enable WebXR on WebGL renderer if VR mode requested
+    if (enableVR) {
+      renderer.xr.enabled = true;
+      renderer.xr.setFramebufferScaleFactor(VR_CONFIG.initialFramebufferScale);
+      renderer.xr.setFoveation(VR_CONFIG.foveationLevel);
+    }
+
     return {
       renderer,
       isWebGPU: false,
@@ -49,6 +60,13 @@ export async function createRenderer(container) {
   await renderer.init();
 
   const isWebGPU = renderer.backend?.isWebGPUBackend === true;
+
+  // Enable WebXR on WebGPU renderer if VR mode requested
+  if (enableVR) {
+    renderer.xr.enabled = true;
+    renderer.xr.setFramebufferScaleFactor(VR_CONFIG.initialFramebufferScale);
+    renderer.xr.setFoveation(VR_CONFIG.foveationLevel);
+  }
 
   return {
     renderer,

@@ -12,6 +12,7 @@ import mindMapData from './mindMapData';
 import { tourManager } from './TourManager';
 import { getTour } from './tourData';
 import { COLORS } from './constants';
+import { VRButton } from 'three/addons/webxr/VRButton.js';
 
 // Custom Hooks
 import { useAudio } from './hooks/useAudio';
@@ -28,8 +29,9 @@ import {
   TransitOverlay,
 } from './ui';
 
-// Beta flag — ?planetary query param enables the planetary exploration experience
+// Beta flags — query params gate feature branches
 const IS_PLANETARY = new URLSearchParams(window.location.search).has('planetary');
+const IS_VR = IS_PLANETARY && new URLSearchParams(window.location.search).has('vr');
 
 // Scene utilities for cross-pillar connections and search effects
 import {
@@ -145,7 +147,7 @@ class ErrorBoundary extends Component {
  * HUDWiring — renderless component that connects scene data to HUD context.
  * Must be rendered inside HUDProvider so useHUD() returns real setters.
  */
-function HUDWiring({ selectedNode, nodesRef, gpuInfo, transitCallbackRef }) {
+function HUDWiring({ selectedNode, nodesRef, gpuInfo, transitCallbackRef, hudDataRef }) {
   const { setPlanetInfo, setSceneStats, setTransitState } = useHUD();
 
   // --- 1. Connect planet info to selected node ---
@@ -250,6 +252,23 @@ function HUDWiring({ selectedNode, nodesRef, gpuInfo, transitCallbackRef }) {
     };
   }, [transitCallbackRef, setTransitState]);
 
+  // --- 4. Bridge HUD data to 3D cockpit (VR mode) ---
+  const {
+    accentColor, planetName, biome, childrenCount, mediaCount,
+    description, nodeCount, fps, gpuBackend, isInTransit, transitTarget,
+  } = useHUD();
+
+  useEffect(() => {
+    if (!hudDataRef) return;
+    hudDataRef.current = {
+      accentColor, planetName, biome, childrenCount, mediaCount,
+      description, nodeCount, fps, gpuBackend, isInTransit, transitTarget,
+    };
+  }, [
+    hudDataRef, accentColor, planetName, biome, childrenCount, mediaCount,
+    description, nodeCount, fps, gpuBackend, isInTransit, transitTarget,
+  ]);
+
   return null;
 }
 
@@ -305,12 +324,14 @@ const ForesightMindMap = () => {
   const {
     containerRef,
     sceneRef,
+    rendererRef,
     nodesRef,
     connectionsRef,
     crossPillarConnectionsRef,
     controlsRef,
     gpuInfo,
     transitCallbackRef,
+    hudDataRef,
   } = useThreeScene(handleNodeClick, updateHoveredNode, selectedNode);
 
   // ===== SEARCH EFFECT =====
@@ -423,6 +444,39 @@ const ForesightMindMap = () => {
     };
   }, [expandedNodes]);
 
+  // ===== VR BUTTON =====
+  const vrButtonRef = useRef(null);
+  useEffect(() => {
+    if (!IS_VR || !rendererRef.current) return;
+
+    const button = VRButton.createButton(rendererRef.current);
+    // LCARS styling for the VR entry button
+    Object.assign(button.style, {
+      fontFamily: '"Courier New", Consolas, monospace',
+      fontSize: '11px',
+      fontWeight: '700',
+      letterSpacing: '0.15em',
+      textTransform: 'uppercase',
+      background: 'rgba(10, 12, 28, 0.9)',
+      border: `1px solid ${COLORS.secondary}`,
+      borderRadius: '4px',
+      color: COLORS.secondary,
+      padding: '10px 20px',
+      cursor: 'pointer',
+      zIndex: '900',
+      position: 'fixed',
+      bottom: '24px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+    });
+    vrButtonRef.current = button;
+    document.body.appendChild(button);
+
+    return () => {
+      if (button.parentElement) button.parentElement.removeChild(button);
+    };
+  }, [rendererRef.current]);
+
   // ===== RENDER =====
   const Wrapper = IS_PLANETARY ? HUDProvider : React.Fragment;
   return (
@@ -433,6 +487,7 @@ const ForesightMindMap = () => {
         nodesRef={nodesRef}
         gpuInfo={gpuInfo}
         transitCallbackRef={transitCallbackRef}
+        hudDataRef={hudDataRef}
       />
     )}
     <div style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden' }}>
@@ -461,7 +516,8 @@ const ForesightMindMap = () => {
       />
 
       {/* Navigation UI — Planetary HUD or standard Control Panel */}
-      {IS_PLANETARY ? (
+      {/* In VR mode (?planetary&vr), 3D CockpitMesh replaces CSS CockpitFrame */}
+      {IS_PLANETARY && !IS_VR ? (
         <>
           <CockpitFrame
             gpuInfo={gpuInfo}

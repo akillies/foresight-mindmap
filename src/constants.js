@@ -162,6 +162,36 @@ export const GPU_PARTICLE_CONFIG = {
   orbitalSpeed: 0.0003,
 };
 
+// VR/XR configuration
+export const VR_CONFIG = {
+  // Cockpit geometry (meters in XR space, world-units in flat-screen)
+  cockpitRadius: 1.5,           // distance from player to bezels
+  cockpitFlatScreenZ: -2,       // z-offset when parented to camera (flat-screen)
+  bezelThickness: 0.02,         // extrusion depth of bezel panels
+  elbowSize: 0.12,              // corner elbow square size
+  textureUpdateHz: 2,           // canvas texture refresh rate
+
+  // Performance budgets for stereo rendering
+  fogDensityVR: 0.003,          // reduced from 0.004
+  nebulaCountVR: 12,            // reduced from 26
+  starfieldCountVR: 50_000,     // reduced from 100K
+  shadowMapSizeVR: 2048,        // reduced from 4096
+
+  // XR session settings
+  referenceSpaceType: 'local-floor',
+  initialFramebufferScale: 1.0,
+  minFramebufferScale: 0.7,
+  foveationLevel: 1,            // 0 = none, 1 = low, 2 = medium, 3 = high
+  targetFPS: 90,
+  fpsFloor: 75,                 // below this, reduce resolution
+
+  // Controller
+  rayLength: 10,                // meters
+  rayColor: 0xFFCC66,           // LCARS gold
+  selectButton: 'trigger',
+  gripAction: 'grab',
+};
+
 // Material defaults for consistent node appearance
 export const MATERIAL_DEFAULTS = {
   center: {
