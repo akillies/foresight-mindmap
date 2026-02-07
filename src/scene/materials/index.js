@@ -8,4 +8,5 @@ export {
   createStarTexture,
   createMoonTexture,
   BIOME_TEXTURE_GENERATORS,
+  createBumpTexture,
 } from './BiomeTextures';

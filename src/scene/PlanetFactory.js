@@ -16,6 +16,7 @@ import { PLANET_CONFIG, STATION_SHAPES } from '../constants';
 import {
   createStarTexture,
   createMoonTexture,
+  createBumpTexture,
   BIOME_TEXTURE_GENERATORS,
 } from './materials';
 
@@ -91,10 +92,13 @@ export function createPlanet({ color, biome, position, userData }) {
   const { size, atmosphereScale, segments } = PLANET_CONFIG.planet;
   const planetColor = new THREE.Color(color);
 
-  // Generate or retrieve biome texture
+  // Generate or retrieve biome texture + bump map
   const generator = BIOME_TEXTURE_GENERATORS[biome];
   const texture = generator
     ? getCachedTexture(`planet-${biome}`, generator)
+    : null;
+  const bumpTex = biome
+    ? getCachedTexture(`bump-${biome}`, createBumpTexture, biome)
     : null;
 
   // Planet surface
@@ -102,6 +106,7 @@ export function createPlanet({ color, biome, position, userData }) {
   const material = new THREE.MeshStandardMaterial({
     map: texture,
     ...(texture ? {} : { color: planetColor }),
+    ...(bumpTex ? { bumpMap: bumpTex, bumpScale: 0.04 } : {}),
     emissive: planetColor,
     emissiveIntensity: 0.05,
     roughness: 0.7,

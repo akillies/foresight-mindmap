@@ -682,8 +682,8 @@ const ForesightMindMap = () => {
         />
       </Suspense>
 
-      {/* Welcome Modal */}
-      {!tourActive && (
+      {/* Welcome Modal — standard mode only */}
+      {!tourActive && !IS_PLANETARY && (
         <Suspense fallback={null}>
           <WelcomeModal
             onStartTour={() => setShowTourSelection(true)}
