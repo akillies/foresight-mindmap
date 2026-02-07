@@ -1,16 +1,15 @@
 /**
- * CockpitFrame — LCARS windshield-style cockpit HUD
+ * CockpitFrame — LCARS Shuttlecraft Cockpit Console
  *
- * Replaces SystemStatusBar + NavigationHUD + PlanetDataPanel with a
- * continuous CSS Grid frame. Four LCARS corner elbows (gold, blue,
- * lavender, orange) anchor gradient-bordered bezels that wrap the 3D
- * viewport like a cockpit windshield.
+ * TNG-inspired cockpit frame with physical depth: perspective-
+ * transformed side bezels, recessed scanner/switch panels,
+ * backlit LCARS corner elbows, and viewport vignette.
  *
- * Data flow:
- *   - Top bezel: planet name, node count, FPS, GPU badge
- *   - Left bezel: 5 navigation switches (Tour, Timeline, Links, Media, Diagrams)
- *   - Right bezel: scanner readouts (biome, sub-nodes, media, summary)
- *   - Bottom bezel: system status / transit info
+ * Data flow (via useHUD context):
+ *   Top bezel:    planet name, node count, FPS, GPU badge
+ *   Left bezel:   5 nav switches in recessed switch panel
+ *   Right bezel:  scanner readouts in recessed display
+ *   Bottom bezel: instrument strip with system status
  */
 import React, { useState, useEffect, useRef } from 'react';
 import { COLORS } from '../constants';
@@ -45,8 +44,9 @@ function BezelSwitch({ label, isActive, onClick, color, ariaLabel }) {
       aria-pressed={isActive}
       style={isActive ? {
         borderLeftColor: color,
-        background: `${color}18`,
+        background: `${color}15`,
         color: color,
+        boxShadow: `inset 3px 0 12px ${color}12`,
       } : undefined}
     >
       <span
@@ -112,7 +112,7 @@ export function CockpitFrame({
 
   const backend = gpuInfo?.backend || gpuBackend || 'WebGL';
   const isWebGPU = backend.toLowerCase().includes('webgpu');
-  const isCenterStar = !planetName || planetName === 'STRATEGIC FORESIGHT';
+  const isCenterStar = !planetName || planetName.toUpperCase() === 'STRATEGIC FORESIGHT';
 
   const switchHandlers = {
     tour: onStartTour,
@@ -139,8 +139,13 @@ export function CockpitFrame({
       <div className="cockpit-elbow cockpit-elbow-bl" />
       <div className="cockpit-elbow cockpit-elbow-br" />
 
-      {/* ── Top Bezel: Status Strip ── */}
+      {/* ── Viewport Windshield Edge (vignette) ── */}
+      <div className="cockpit-viewport-edge" />
+
+      {/* ── Top Bezel: Console Status Strip ── */}
       <div className="cockpit-bezel cockpit-top">
+        <div className="cockpit-pill" style={{ background: '#FFCC66' }} />
+
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div className="cockpit-status-dot" />
           <span style={{ fontWeight: 700, textTransform: 'uppercase', color: accentColor }}>
@@ -153,7 +158,7 @@ export function CockpitFrame({
             <span style={{ marginRight: 4 }}>NODES</span>
             <span style={{ color: COLORS.text, fontWeight: 700 }}>{nodeCount}</span>
           </span>
-          <span style={{ width: 1, height: 12, background: `${COLORS.textMuted}40`, display: 'inline-block' }} />
+          <span className="instrument-divider" />
           <span>
             <span style={{ marginRight: 4 }}>FPS</span>
             <span style={{
@@ -175,80 +180,109 @@ export function CockpitFrame({
         >
           {backend.toUpperCase()}
         </div>
+
+        <div className="cockpit-pill" style={{ background: '#5C88DA' }} />
       </div>
 
-      {/* ── Left Bezel: Navigation Controls ── */}
+      {/* ── Left Bezel: Navigation Console ── */}
       <nav
         className="cockpit-bezel cockpit-left"
         role="navigation"
         aria-label="Cockpit navigation"
       >
-        <div
-          className="cockpit-section-header"
-          style={{ padding: '4px 10px 6px', margin: 0, border: 'none' }}
-        >
-          NAV
+        <div className="console-panel-header">
+          <span className="console-panel-pill" style={{ background: '#FFCC66' }} />
+          <span>NAV CTRL</span>
         </div>
 
-        {NAV_SWITCHES.map((sw, i) => (
-          <React.Fragment key={sw.key}>
-            {i === 3 && <div className="cockpit-separator" />}
-            <BezelSwitch
-              label={sw.label}
-              isActive={switchActive[sw.key]}
-              onClick={switchHandlers[sw.key]}
-              color={sw.color}
-              ariaLabel={sw.aria}
-            />
-          </React.Fragment>
-        ))}
+        <div className="console-switch-panel">
+          {NAV_SWITCHES.map((sw, i) => (
+            <React.Fragment key={sw.key}>
+              {i === 3 && <div className="cockpit-separator" />}
+              <BezelSwitch
+                label={sw.label}
+                isActive={switchActive[sw.key]}
+                onClick={switchHandlers[sw.key]}
+                color={sw.color}
+                ariaLabel={sw.aria}
+              />
+            </React.Fragment>
+          ))}
+        </div>
       </nav>
 
-      {/* ── Right Bezel: Scanner Data ── */}
+      {/* ── Right Bezel: Scanner Console ── */}
       <aside
         className="cockpit-bezel cockpit-right"
         role="complementary"
         aria-label="Scanner readout"
       >
-        <div className="cockpit-section-header">
-          {isCenterStar ? 'SCANNER' : 'SCAN TARGET'}
+        <div className="console-panel-header">
+          <span className="console-panel-pill" style={{ background: '#5C88DA' }} />
+          <span>{isCenterStar ? 'SCANNER' : 'SCAN TARGET'}</span>
         </div>
 
-        {isCenterStar ? (
-          <div style={{ color: COLORS.textMuted, fontSize: 10, letterSpacing: '0.1em' }}>
-            AWAITING TARGET
-          </div>
-        ) : (
-          <>
-            <DataReadout label="DESIGNATION" value={planetName} color={accentColor} />
-            {biome && (
-              <DataReadout
-                label="BIOME CLASS"
-                value={BIOME_LABELS[biome] || biome.toUpperCase()}
-                color={accentColor}
-              />
-            )}
-            <DataReadout label="SUB-NODES" value={String(childrenCount).padStart(3, '0')} />
-            <DataReadout label="MEDIA OBJECTS" value={String(mediaCount).padStart(3, '0')} />
-            {description && (
-              <div className="cockpit-readout">
-                <div className="cockpit-readout-label">SUMMARY</div>
-                <div className="cockpit-summary">{description}</div>
-              </div>
-            )}
-          </>
-        )}
+        <div
+          className="scanner-display"
+          style={!isCenterStar ? {
+            borderColor: `${accentColor}25`,
+            boxShadow: `inset 2px 2px 8px rgba(0,0,0,0.6), inset -1px -1px 4px rgba(255,255,255,0.02), 0 0 10px ${accentColor}15`,
+          } : undefined}
+        >
+          {isCenterStar ? (
+            <div style={{
+              color: '#556677',
+              fontSize: 10,
+              letterSpacing: '0.1em',
+              textAlign: 'center',
+              padding: '20px 0',
+            }}>
+              AWAITING TARGET
+            </div>
+          ) : (
+            <>
+              <DataReadout label="DESIGNATION" value={planetName} color={accentColor} />
+              {biome && (
+                <DataReadout
+                  label="BIOME CLASS"
+                  value={BIOME_LABELS[biome] || biome.toUpperCase()}
+                  color={accentColor}
+                />
+              )}
+              <DataReadout label="SUB-NODES" value={String(childrenCount).padStart(3, '0')} />
+              <DataReadout label="MEDIA OBJECTS" value={String(mediaCount).padStart(3, '0')} />
+              {description && (
+                <div className="cockpit-readout">
+                  <div className="cockpit-readout-label">SUMMARY</div>
+                  <div className="cockpit-summary">{description}</div>
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </aside>
 
-      {/* ── Bottom Bezel: System Status ── */}
+      {/* ── Bottom Bezel: Instrument Strip ── */}
       <div className="cockpit-bezel cockpit-bottom">
-        {isInTransit ? (
-          <span>
-            IN TRANSIT{transitTarget ? ` \u25B8 ${transitTarget.toUpperCase()}` : ''}
-          </span>
-        ) : (
-          <span>SYSTEMS ONLINE \u25C8 SENSORS ACTIVE</span>
-        )}
+        <div className="cockpit-pill" style={{ background: '#CC99CC' }} />
+
+        <div className="instrument-cluster">
+          {isInTransit ? (
+            <span style={{ color: accentColor }}>
+              IN TRANSIT {'\u25B8'} {transitTarget?.toUpperCase() || '...'}
+            </span>
+          ) : (
+            <>
+              <span>SYSTEMS ONLINE</span>
+              <span className="instrument-divider" />
+              <span style={{ color: COLORS.success }}>{'\u25C8'}</span>
+              <span className="instrument-divider" />
+              <span>SENSORS ACTIVE</span>
+            </>
+          )}
+        </div>
+
+        <div className="cockpit-pill" style={{ background: '#FF9966' }} />
       </div>
 
       {/* ── Scanline Overlay ── */}
