@@ -66,8 +66,8 @@ export const SCALE_NORMAL = new THREE.Vector3(1, 1, 1);
 
 // Scene configuration defaults
 export const SCENE_CONFIG = {
-  starfieldCount: 4000,
-  galaxyCount: 4,
+  starfieldCount: 3000,
+  galaxyCount: 8,
   nebulaCount: 3,
   level1Radius: 25,
   level2Radius: 10,
@@ -154,12 +154,16 @@ export const LOD_DISTANCES = {
 
 // GPU compute particle system configuration (WebGPU path)
 export const GPU_PARTICLE_CONFIG = {
-  count: 100_000,
+  count: 80_000,
   spaceSize: 500,
   resetDistance: 300,
+  deadZone: 80,               // no stars within this radius of origin
   driftSpeed: 0.001,
   twinkleSpeed: 2.0,
   orbitalSpeed: 0.0003,
+  maxStarSize: 0.7,           // reduced from 1.5 — stars are background, not foreground
+  minStarSize: 0.1,
+  baseOpacity: 0.45,          // reduced from 0.8 — subtler star field
 };
 
 // VR/XR configuration

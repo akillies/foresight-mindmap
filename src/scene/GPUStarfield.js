@@ -28,6 +28,8 @@ export async function createGPUStarfield(scene, renderer) {
   const attribBuffer   = instancedArray(PARTICLE_COUNT, 'vec4');
 
   // --- Compute Init (runs once) ---
+  const deadZone = float(GPU_PARTICLE_CONFIG.deadZone);
+
   const computeInit = Fn(() => {
     const idx = instanceIndex;
     const seed = float(idx);
@@ -35,10 +37,20 @@ export async function createGPUStarfield(scene, renderer) {
     const spaceSize = float(GPU_PARTICLE_CONFIG.spaceSize);
 
     // Distribute in a spaceSize^3 cube
-    const px = hash(seed.add(0.0)).sub(0.5).mul(spaceSize);
-    const py = hash(seed.add(1.0)).sub(0.5).mul(spaceSize);
-    const pz = hash(seed.add(2.0)).sub(0.5).mul(spaceSize);
-    positionBuffer.element(idx).assign(vec3(px, py, pz));
+    const pos = vec3(
+      hash(seed.add(0.0)).sub(0.5).mul(spaceSize),
+      hash(seed.add(1.0)).sub(0.5).mul(spaceSize),
+      hash(seed.add(2.0)).sub(0.5).mul(spaceSize),
+    ).toVar();
+
+    // Dead zone: push stars outward if too close to origin (where planets live)
+    const dist = pos.length();
+    If(dist.lessThan(deadZone), () => {
+      const scale = deadZone.div(dist.max(float(0.01)));
+      pos.assign(pos.mul(scale));
+    });
+
+    positionBuffer.element(idx).assign(pos);
 
     // Slow drift velocities
     const driftSpeed = float(GPU_PARTICLE_CONFIG.driftSpeed);
@@ -47,11 +59,12 @@ export async function createGPUStarfield(scene, renderer) {
     const vz = hash(seed.add(5.0)).sub(0.5).mul(driftSpeed);
     velocityBuffer.element(idx).assign(vec3(vx, vy, vz));
 
-    // Attributes: brightness(0-1), phase(0-2PI), colorIndex(0-3), size(0.3-1.5)
+    // Attributes: brightness(0-1), phase(0-2PI), colorIndex(0-3), size
     const brightness = hash(seed.add(6.0));
     const phase = hash(seed.add(7.0)).mul(6.28318);
     const colorIdx = hash(seed.add(8.0)).mul(4.0).floor();
-    const size = hash(seed.add(9.0)).mul(1.2).add(0.3);
+    const sizeRange = float(GPU_PARTICLE_CONFIG.maxStarSize - GPU_PARTICLE_CONFIG.minStarSize);
+    const size = hash(seed.add(9.0)).mul(sizeRange).add(float(GPU_PARTICLE_CONFIG.minStarSize));
     attribBuffer.element(idx).assign(vec4(brightness, phase, colorIdx, size));
   })().compute(PARTICLE_COUNT);
 
@@ -94,6 +107,13 @@ export async function createGPUStarfield(scene, renderer) {
       pos.z.assign(hash(seed.add(2.0)).sub(0.5).mul(spaceSize));
     });
 
+    // Dead zone enforcement — keep stars out of the planet system
+    const d2 = pos.length();
+    If(d2.lessThan(deadZone), () => {
+      const pushScale = deadZone.div(d2.max(float(0.01)));
+      pos.assign(pos.mul(pushScale));
+    });
+
     positionBuffer.element(idx).assign(pos);
     attribBuffer.element(idx).assign(attr);
   })().compute(PARTICLE_COUNT);
@@ -125,7 +145,7 @@ export async function createGPUStarfield(scene, renderer) {
 
   material.positionNode = starPos;
   material.colorNode = finalColor.mul(brightness);
-  material.opacityNode = circleShape.mul(0.8);
+  material.opacityNode = circleShape.mul(float(GPU_PARTICLE_CONFIG.baseOpacity));
   material.scaleNode = starAttr.w;
   material.blending = THREE_GPU.AdditiveBlending;
   material.transparent = true;

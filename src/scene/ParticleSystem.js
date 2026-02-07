@@ -25,7 +25,7 @@ export function createStarfield(scene) {
   const white = new THREE.Color(0xFFFFFF);
 
   // Dead zone radius: no stars within this distance of origin (where planets live)
-  const DEAD_ZONE = 50;
+  const DEAD_ZONE = 80;
 
   for (let i = 0; i < particlesCount; i++) {
     // Position in 3D space — enforce dead zone around planet system
@@ -41,18 +41,18 @@ export function createStarfield(scene) {
     positions[i * 3 + 1] = y;
     positions[i * 3 + 2] = z;
 
-    // Color variation with LCARS palette
+    // Color variation with LCARS palette — bias toward cool/dim stars
     const colorChoice = Math.random();
-    const color = colorChoice < 0.4 ? lcarBlue :
-                  colorChoice < 0.6 ? lcarAmber :
-                  colorChoice < 0.75 ? white : lcarPink;
+    const color = colorChoice < 0.5 ? lcarBlue :
+                  colorChoice < 0.7 ? white :
+                  colorChoice < 0.85 ? lcarAmber : lcarPink;
     colors[i * 3] = color.r;
     colors[i * 3 + 1] = color.g;
     colors[i * 3 + 2] = color.b;
 
-    // Star size attenuated by distance — far stars are tiny pinpoints
+    // Star size — mostly tiny pinpoints, a few brighter ones
     const distFactor = Math.min(dist / 250, 1);
-    sizes[i] = 0.2 + distFactor * 0.6;
+    sizes[i] = 0.1 + distFactor * 0.35;
 
     // Slow rotation velocities
     velocities[i * 3] = (Math.random() - 0.5) * 0.0001;
@@ -68,9 +68,9 @@ export function createStarfield(scene) {
   particlesGeometry.userData = { velocities };
 
   const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.6,
+    size: 0.4,
     vertexColors: true,
-    opacity: 0.7,
+    opacity: 0.45,
     transparent: true,
     blending: THREE.AdditiveBlending,
     sizeAttenuation: true,
@@ -91,43 +91,55 @@ export function createStarfield(scene) {
  */
 export function createDistantGalaxies(scene) {
   const galaxyCount = SCENE_CONFIG.galaxyCount;
-  const lcarColors = [0x5C88DA, 0xCC99CC];
+  const lcarColors = [0x5C88DA, 0xCC99CC, 0x99CCFF, 0xFFCC66];
 
   for (let i = 0; i < galaxyCount; i++) {
     const canvas = document.createElement('canvas');
-    canvas.width = 64;
-    canvas.height = 64;
+    canvas.width = 128;
+    canvas.height = 128;
     const ctx = canvas.getContext('2d');
 
-    // Create radial gradient for galaxy glow
-    const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    // Create radial gradient for galaxy glow — with more color depth
     const color = lcarColors[i % lcarColors.length];
     const r = (color >> 16) & 255;
     const g = (color >> 8) & 255;
     const b = color & 255;
-    gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.15)`);
-    gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.05)`);
-    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 64, 64);
+
+    // Two-pass: outer haze + inner core
+    const outerGlow = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    outerGlow.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.12)`);
+    outerGlow.addColorStop(0.3, `rgba(${r}, ${g}, ${b}, 0.06)`);
+    outerGlow.addColorStop(0.7, `rgba(${r}, ${g}, ${b}, 0.02)`);
+    outerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = outerGlow;
+    ctx.fillRect(0, 0, 128, 128);
+
+    // Bright core
+    const core = ctx.createRadialGradient(64, 64, 0, 64, 64, 16);
+    core.addColorStop(0, `rgba(255, 255, 255, 0.15)`);
+    core.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = core;
+    ctx.fillRect(0, 0, 128, 128);
 
     const texture = new THREE.CanvasTexture(canvas);
     const material = new THREE.SpriteMaterial({
       map: texture,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.3 + Math.random() * 0.15,
       blending: THREE.AdditiveBlending,
     });
 
     const sprite = new THREE.Sprite(material);
-    const angle = (i / galaxyCount) * Math.PI * 2;
-    const distance = 220 + Math.random() * 30;
+    const angle = (i / galaxyCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
+    const distance = 180 + Math.random() * 60;
     sprite.position.set(
       Math.cos(angle) * distance,
-      (Math.random() - 0.5) * 80,
+      (Math.random() - 0.5) * 100,
       Math.sin(angle) * distance
     );
-    sprite.scale.set(30 + Math.random() * 15, 30 + Math.random() * 15, 1);
+    // Varied sizes: a few large dramatic ones, most medium
+    const baseSize = i < 3 ? 50 + Math.random() * 30 : 25 + Math.random() * 20;
+    sprite.scale.set(baseSize, baseSize * (0.5 + Math.random() * 0.5), 1);
 
     scene.add(sprite);
   }
@@ -251,15 +263,15 @@ export function createNebulas(scene) {
       secondaryColor: [60, 120, 180],   // Blue
       baseOpacity: 0.26,
     },
-    // Close wispy nebula (foreground atmosphere)
+    // Close wispy nebula (foreground atmosphere) — pushed further out
     {
-      position: { angle: 2.5, distance: 70, height: 10 },
+      position: { angle: 2.5, distance: 100, height: 10 },
       size: 80,
-      layers: 4,
+      layers: 3,
       depthSpread: 8,
       primaryColor: [140, 100, 180],    // Purple
       secondaryColor: [92, 136, 218],   // Blue
-      baseOpacity: 0.15, // Very transparent
+      baseOpacity: 0.10, // Very transparent — shouldn't compete with planets
     },
   ];
 

@@ -25,10 +25,11 @@ CameraControls.install({ THREE });
  */
 export async function initializeScene(container) {
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x000000);
-  // Exponential fog for depth falloff — objects fade to black at distance
+  // Deep space background — very subtle navy instead of pure black adds depth
+  scene.background = new THREE.Color(0x020308);
+  // Exponential fog for depth falloff — matches background color
   // Reduced density in VR for less overdraw (stereo rendering doubles cost)
-  scene.fog = new THREE.FogExp2(0x000000, IS_VR ? VR_CONFIG.fogDensityVR : 0.004);
+  scene.fog = new THREE.FogExp2(0x020308, IS_VR ? VR_CONFIG.fogDensityVR : 0.004);
   scene.rotation.y = 0;
 
   const camera = new THREE.PerspectiveCamera(
