@@ -1,6 +1,7 @@
 /**
- * Scene Module Index
- * Re-exports all scene-related functionality
+ * Scene Module Index — backward compatibility barrel.
+ * Re-exports from shared/ + planetary/ locations.
+ * Will be deleted once all imports are updated.
  */
 
 export {
@@ -8,20 +9,13 @@ export {
   setupLighting,
   handleResize,
   cleanupScene,
-} from './SceneSetup';
-
-export { createRenderer } from './RendererFactory';
-export { createPostProcessing } from './PostProcessingSetup';
-
-export {
+  createRenderer,
+  createPostProcessing,
   createStarfield,
   createDistantGalaxies,
   createNebulas,
   animateStarfield,
   animateNebulas,
-} from './ParticleSystem';
-
-export {
   createCenterNode,
   createLevel1Nodes,
   createChildNodes,
@@ -31,35 +25,23 @@ export {
   getNodeDepth,
   setPlanetaryMode,
   getAsteroidBelts,
-} from './NodeFactory';
-
-export { disposePlanetTextures } from './PlanetFactory';
-
-export { createGPUStarfield } from './GPUStarfield';
-
-export { createAsteroidBelt } from './AsteroidBelt';
-
-export { createPlanetLOD } from './PlanetLOD';
-
-export {
   createConnection,
   createCrossPillarConnections,
   removeCrossPillarConnections,
   animateConnections,
   setActiveConnection,
   clearActiveConnection,
-} from './ConnectionManager';
-
-export { FlightController } from './FlightController';
-
-export { createWarpStreaks } from './WarpStreaks';
-
-export { createCockpitMesh } from './CockpitMesh';
-export { createCockpitTextureSet } from './CockpitTextures';
-
-export {
   createBlackSwan,
   createEnterpriseD,
   checkEasterEggSpawn,
   animateEasterEgg,
-} from './EasterEggs';
+} from '@shared/scene';
+
+export { disposePlanetTextures } from '@planetary/scene/PlanetFactory';
+export { createGPUStarfield } from '@planetary/scene/GPUStarfield';
+export { createAsteroidBelt } from '@planetary/scene/AsteroidBelt';
+export { createPlanetLOD } from '@planetary/scene/PlanetLOD';
+export { FlightController } from '@planetary/scene/FlightController';
+export { createWarpStreaks } from '@planetary/scene/WarpStreaks';
+export { createCockpitMesh } from '@planetary/scene/CockpitMesh';
+export { createCockpitTextureSet } from '@planetary/scene/CockpitTextures';

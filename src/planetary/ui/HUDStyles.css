@@ -1,0 +1,187 @@
+/**
+ * HUDStyles.css - Shared cockpit HUD styling
+ * Geometric panels, scan-line overlays, angular clip-paths
+ * Uses CSS custom property --hud-accent for dynamic planet color
+ */
+
+/* ===== CSS Custom Properties ===== */
+:root {
+  --hud-accent: #5C88DA;
+  --hud-panel-bg: rgba(10, 12, 28, 0.72);
+  --hud-border-alpha: 0.45;
+  --hud-glow-spread: 8px;
+  --hud-font: 'Courier New', 'Consolas', monospace;
+}
+
+/* ===== Scan-line Overlay ===== */
+.hud-scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(100, 200, 255, 0.012) 2px,
+    rgba(100, 200, 255, 0.012) 4px
+  );
+  mix-blend-mode: screen;
+}
+
+/* ===== Base Panel ===== */
+.hud-panel {
+  background: var(--hud-panel-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--hud-accent) 45%, transparent);
+  color: #E8F1FF;
+  font-family: var(--hud-font);
+  position: relative;
+}
+
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(100, 200, 255, 0.015) 3px,
+    rgba(100, 200, 255, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ===== Angular Clip Paths ===== */
+.hud-clip-notch-tl {
+  clip-path: polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px);
+}
+
+.hud-clip-notch-tr {
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+}
+
+.hud-clip-notch-br {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+}
+
+.hud-clip-angular {
+  clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
+}
+
+/* ===== Geometric Border Patterns ===== */
+.hud-border-top {
+  position: relative;
+}
+
+.hud-border-top::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--hud-accent) 15%,
+    var(--hud-accent) 85%,
+    transparent 100%
+  );
+}
+
+.hud-border-left::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--hud-accent) 15%,
+    var(--hud-accent) 85%,
+    transparent 100%
+  );
+}
+
+/* ===== Data Readout Label ===== */
+.hud-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #8899AA;
+  font-family: var(--hud-font);
+  margin-bottom: 2px;
+  line-height: 1;
+}
+
+.hud-value {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #E8F1FF;
+  font-family: var(--hud-font);
+  line-height: 1.2;
+}
+
+/* ===== Animations ===== */
+@keyframes hud-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hud-slide-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes hud-slide-left {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes hud-reticle-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(90deg); }
+}
+
+@keyframes hud-reticle-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes hud-bracket-converge {
+  0% { gap: 48px; opacity: 0.4; }
+  70% { gap: 4px; opacity: 1; }
+  100% { gap: 8px; opacity: 0.9; }
+}
+
+@keyframes hud-warp-streak {
+  0% {
+    transform: scaleY(0) translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(40) translateY(-200px);
+    opacity: 0;
+  }
+}
+
+@keyframes hud-transit-glow {
+  0%, 100% { box-shadow: 0 0 30px rgba(100, 200, 255, 0.1); }
+  50% { box-shadow: 0 0 60px rgba(100, 200, 255, 0.3); }
+}
+
+@keyframes hud-number-tick {
+  0% { transform: translateY(-4px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}

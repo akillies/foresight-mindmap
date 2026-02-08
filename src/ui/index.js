@@ -1,20 +1,20 @@
 /**
- * UI Components Module Index
- * Re-exports all UI components
+ * UI Components Module Index — backward compatibility barrel.
+ * Will be deleted once all imports are updated.
  */
 
-export { ControlPanel } from './ControlPanel';
-export { AudioControls } from './AudioControls';
-export { MusicSelectionPanel } from './MusicSelectionPanel';
-export { HoverTooltip } from './HoverTooltip';
-export { AboutModal } from './AboutModal';
-export { GlobalStyles } from './GlobalStyles';
+// Classic UI
+export { ControlPanel } from '@classic/ui/ControlPanel';
+export { AudioControls } from '@classic/ui/AudioControls';
+export { MusicSelectionPanel } from '@classic/ui/MusicSelectionPanel';
+export { HoverTooltip } from '@classic/ui/HoverTooltip';
 
-// HUD Components (Planetary Exploration Cockpit)
-export { HUDProvider, useHUD } from './HUDContext';
-export { CockpitFrame } from './CockpitFrame';
-export { SystemStatusBar } from './SystemStatusBar';
-export { PlanetDataPanel } from './PlanetDataPanel';
-export { TargetingReticle } from './TargetingReticle';
-export { TransitOverlay } from './TransitOverlay';
-export { NavigationHUD } from './NavigationHUD';
+// Shared UI
+export { AboutModal } from '@shared/ui/AboutModal';
+export { GlobalStyles } from '@shared/ui/GlobalStyles';
+
+// Planetary UI
+export { HUDProvider, useHUD } from '@planetary/ui/HUDContext';
+export { CockpitFrame } from '@planetary/ui/CockpitFrame';
+export { TransitOverlay } from '@planetary/ui/TransitOverlay';
+export { TargetingReticle } from '@planetary/ui/TargetingReticle';

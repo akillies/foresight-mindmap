@@ -1,8 +1,16 @@
 import { defineConfig } from 'vitest/config'
+import { resolve } from 'path'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@shared': resolve(__dirname, 'src/shared'),
+      '@classic': resolve(__dirname, 'src/classic'),
+      '@planetary': resolve(__dirname, 'src/planetary'),
+    },
+  },
   test: {
     // Use jsdom for DOM testing
     environment: 'jsdom',
