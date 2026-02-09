@@ -40,13 +40,6 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
       raycasterRef, selectedNodeRef, onNodeClick: nodeClickCb,
     } = initRefs;
 
-    // Stash refs for keyboard handler
-    sceneRefLocal.current = scene;
-    controlsRefLocal.current = controls;
-    nodesRefLocal.current = nodesRef;
-    connectionsRefLocal.current = connectionsRef;
-    selectedNodeRefLocal.current = selectedNodeRef;
-
     // GPU starfield (compute shader path)
     let gpuStarfield = null;
     if (capabilities.compute) {
