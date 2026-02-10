@@ -15,7 +15,11 @@ const PLATFORMS = {
   ted: {
     name: 'TED',
     match: (url) => url?.includes('ted.com'),
-    canEmbed: false,
+    extractId: (url) => {
+      const m = url?.match(/ted\.com\/talks\/([a-zA-Z0-9_]+)/);
+      return m ? m[1] : null;
+    },
+    canEmbed: true,
   },
   pbs: {
     name: 'PBS',
@@ -71,22 +75,37 @@ const VideoEmbed = ({
   const videoUrl = sourceUrl || url;
   const platform = detectPlatform(videoUrl);
 
-  if (platform.key === 'youtube' && platform.canEmbed) {
-    const videoId = platform.extractId(videoUrl);
-    if (videoId) {
-      return (
-        <YouTubePlayer
-          videoId={videoId}
-          title={title}
-          watchUrl={videoUrl}
-          source={source}
-          year={year}
-        />
-      );
+  if (platform.canEmbed) {
+    if (platform.key === 'youtube') {
+      const videoId = platform.extractId(videoUrl);
+      if (videoId) {
+        return (
+          <YouTubePlayer
+            videoId={videoId}
+            title={title}
+            watchUrl={videoUrl}
+            source={source}
+            year={year}
+          />
+        );
+      }
+    } else if (platform.key === 'ted') {
+      const talkSlug = platform.extractId(videoUrl);
+      if (talkSlug) {
+        return (
+          <TEDPlayer
+            talkSlug={talkSlug}
+            title={title}
+            watchUrl={videoUrl}
+            source={source}
+            year={year}
+          />
+        );
+      }
     }
   }
 
-  // For non-YouTube or failed extraction, show preview card
+  // For non-embeddable or failed extraction, show preview card
   return (
     <VideoCard
       title={title}
@@ -243,6 +262,57 @@ const YouTubePlayer = ({ videoId, title, watchUrl, source, year }) => {
       </div>
 
       <SourceFooter watchUrl={watchUrl} source={source || 'YouTube'} />
+    </div>
+  );
+};
+
+/**
+ * TED Player with iframe embed
+ */
+const TEDPlayer = ({ talkSlug, title, watchUrl, source, year }) => {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return (
+      <VideoCard
+        title={title}
+        url={watchUrl}
+        platform={{ name: 'TED', key: 'ted' }}
+        source={source}
+        year={year}
+      />
+    );
+  }
+
+  return (
+    <div>
+      <div
+        style={{
+          position: 'relative',
+          paddingBottom: '56.25%',
+          height: 0,
+          overflow: 'hidden',
+          borderRadius: '8px',
+          background: COLORS.background,
+        }}
+      >
+        <iframe
+          src={`https://embed.ted.com/talks/${talkSlug}`}
+          title={title}
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          onError={() => setHasError(true)}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            border: 'none',
+          }}
+        />
+      </div>
+      <SourceFooter watchUrl={watchUrl} source={source || 'TED'} />
     </div>
   );
 };

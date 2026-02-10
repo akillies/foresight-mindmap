@@ -80,7 +80,7 @@ function PlanetaryAppInner() {
 
     const button = VRButton.createButton(rendererRef.current);
     Object.assign(button.style, {
-      fontFamily: '"Courier New", Consolas, monospace',
+      fontFamily: '"Exo 2", "Courier New", Consolas, monospace',
       fontSize: '11px',
       fontWeight: '700',
       letterSpacing: '0.15em',
@@ -172,7 +172,7 @@ function PlanetaryAppInner() {
               zIndex: 10000,
               display: 'flex',
               alignItems: 'stretch',
-              fontFamily: '"Courier New", monospace',
+              fontFamily: '"Exo 2", "Courier New", Consolas, monospace',
               cursor: 'pointer',
               animation: 'lcars-toast-in 0.3s ease-out',
               maxWidth: '90vw',

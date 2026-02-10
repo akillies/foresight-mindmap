@@ -10,7 +10,7 @@
   --hud-panel-bg: rgba(10, 12, 28, 0.72);
   --hud-border-alpha: 0.45;
   --hud-glow-spread: 8px;
-  --hud-font: 'Courier New', 'Consolas', monospace;
+  --hud-font: 'Exo 2', 'Courier New', Consolas, monospace;
 }
 
 /* ===== Scan-line Overlay ===== */

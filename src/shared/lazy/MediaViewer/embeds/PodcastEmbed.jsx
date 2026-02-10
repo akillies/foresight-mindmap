@@ -278,7 +278,8 @@ function detectPlatform(url) {
     if (match) {
       return { type: 'spotify', subtype: match[1], id: match[2] };
     }
-    return { type: 'spotify' };
+    console.warn('[PodcastEmbed] Could not extract Spotify ID from URL:', url);
+    return { type: 'generic' };
   }
 
   // Apple Podcasts
@@ -290,7 +291,8 @@ function detectPlatform(url) {
       const embedUrl = `https://embed.podcasts.apple.com/us/podcast/id${match[1]}?theme=dark`;
       return { type: 'apple', id: match[1], embedUrl };
     }
-    return { type: 'apple' };
+    console.warn('[PodcastEmbed] Could not extract Apple Podcasts ID from URL:', url);
+    return { type: 'generic' };
   }
 
   // Long Now

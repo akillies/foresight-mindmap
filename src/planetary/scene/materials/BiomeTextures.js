@@ -9,12 +9,13 @@ const TEX_SIZE = 1024;
 
 /**
  * Create an offscreen canvas and return its 2D context.
+ * @param {number} [size=TEX_SIZE] - Canvas width/height in pixels
  */
-function createCanvas() {
+function createCanvas(size = TEX_SIZE) {
   const canvas = document.createElement('canvas');
-  canvas.width = TEX_SIZE;
-  canvas.height = TEX_SIZE;
-  return { canvas, ctx: canvas.getContext('2d') };
+  canvas.width = size;
+  canvas.height = size;
+  return { canvas, ctx: canvas.getContext('2d'), size };
 }
 
 /**
@@ -83,8 +84,8 @@ function ridgedNoise(noise, x, y, octaves = 4, lacunarity = 2.0, gain = 0.5) {
  * Generate an ocean world texture.
  * Deep blue seas with continent shapes, coastal shelves, swirling clouds, and polar ice caps.
  */
-export function createOceanTexture() {
-  const { canvas, ctx } = createCanvas();
+export function createOceanTexture(texSize = TEX_SIZE) {
+  const { canvas, ctx } = createCanvas(texSize);
   const noise = createNoise2D();
 
   const deepOcean = [10, 40, 120];
@@ -97,14 +98,14 @@ export function createOceanTexture() {
   const cloud = [220, 240, 255];
   const iceCap = [240, 250, 255];
 
-  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const imageData = ctx.createImageData(texSize, texSize);
   const data = imageData.data;
 
-  for (let y = 0; y < TEX_SIZE; y++) {
-    for (let x = 0; x < TEX_SIZE; x++) {
-      const nx = x / TEX_SIZE;
-      const ny = y / TEX_SIZE;
-      const i = (y * TEX_SIZE + x) * 4;
+  for (let y = 0; y < texSize; y++) {
+    for (let x = 0; x < texSize; x++) {
+      const nx = x / texSize;
+      const ny = y / texSize;
+      const i = (y * texSize + x) * 4;
 
       // Continent shapes with fBm for realistic landmasses
       const continentVal = (fbm(noise, nx * 3 + 10, ny * 3 + 10, 5, 2.0, 0.5) + 1) * 0.5;
@@ -175,8 +176,8 @@ export function createOceanTexture() {
  * Generate a desert world texture.
  * Multi-scale dune ridges, wind erosion, rocky mesas, dried riverbeds, sandy gradients.
  */
-export function createDesertTexture() {
-  const { canvas, ctx } = createCanvas();
+export function createDesertTexture(texSize = TEX_SIZE) {
+  const { canvas, ctx } = createCanvas(texSize);
   const noise = createNoise2D();
 
   const darkAmber = [140, 100, 35];
@@ -188,14 +189,14 @@ export function createDesertTexture() {
   const darkRock = [80, 55, 25];
   const riverbed = [60, 45, 20];
 
-  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const imageData = ctx.createImageData(texSize, texSize);
   const data = imageData.data;
 
-  for (let y = 0; y < TEX_SIZE; y++) {
-    for (let x = 0; x < TEX_SIZE; x++) {
-      const nx = x / TEX_SIZE;
-      const ny = y / TEX_SIZE;
-      const i = (y * TEX_SIZE + x) * 4;
+  for (let y = 0; y < texSize; y++) {
+    for (let x = 0; x < texSize; x++) {
+      const nx = x / texSize;
+      const ny = y / texSize;
+      const i = (y * texSize + x) * 4;
 
       // Large dune ridges (anisotropic - stretched X more than Y for wind direction)
       const largeDunes = (fbm(noise, nx * 3, ny * 1.5, 4, 2.0, 0.5) + 1) * 0.5;
@@ -261,8 +262,8 @@ export function createDesertTexture() {
  * Generate a crystal/ice world texture.
  * Voronoi-like crack patterns, iridescent shimmer, frost formations, subsurface blue glow.
  */
-export function createCrystalTexture() {
-  const { canvas, ctx } = createCanvas();
+export function createCrystalTexture(texSize = TEX_SIZE) {
+  const { canvas, ctx } = createCanvas(texSize);
   const noise = createNoise2D();
 
   const deepIce = [140, 170, 210];
@@ -275,14 +276,14 @@ export function createCrystalTexture() {
   const crevasse = [80, 100, 140];
   const deepCrevasse = [40, 60, 100];
 
-  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const imageData = ctx.createImageData(texSize, texSize);
   const data = imageData.data;
 
-  for (let y = 0; y < TEX_SIZE; y++) {
-    for (let x = 0; x < TEX_SIZE; x++) {
-      const nx = x / TEX_SIZE;
-      const ny = y / TEX_SIZE;
-      const i = (y * TEX_SIZE + x) * 4;
+  for (let y = 0; y < texSize; y++) {
+    for (let x = 0; x < texSize; x++) {
+      const nx = x / texSize;
+      const ny = y / texSize;
+      const i = (y * texSize + x) * 4;
 
       // Base ice terrain
       const iceVal = (fbm(noise, nx * 5, ny * 5, 5, 2.0, 0.5) + 1) * 0.5;
@@ -365,8 +366,8 @@ export function createCrystalTexture() {
  * Generate a volcanic world texture.
  * Lava flow networks, cooling magma crust, volcanic caldera, dramatic color contrast.
  */
-export function createVolcanicTexture() {
-  const { canvas, ctx } = createCanvas();
+export function createVolcanicTexture(texSize = TEX_SIZE) {
+  const { canvas, ctx } = createCanvas(texSize);
   const noise = createNoise2D();
 
   const darkRock = [20, 18, 18];
@@ -378,14 +379,14 @@ export function createVolcanicTexture() {
   const magmaWhite = [255, 220, 100];
   const calderaRim = [180, 90, 40];
 
-  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const imageData = ctx.createImageData(texSize, texSize);
   const data = imageData.data;
 
-  for (let y = 0; y < TEX_SIZE; y++) {
-    for (let x = 0; x < TEX_SIZE; x++) {
-      const nx = x / TEX_SIZE;
-      const ny = y / TEX_SIZE;
-      const i = (y * TEX_SIZE + x) * 4;
+  for (let y = 0; y < texSize; y++) {
+    for (let x = 0; x < texSize; x++) {
+      const nx = x / texSize;
+      const ny = y / texSize;
+      const i = (y * texSize + x) * 4;
 
       // Base rock terrain
       const rockVal = (fbm(noise, nx * 6, ny * 6, 5, 2.0, 0.5) + 1) * 0.5;
@@ -480,8 +481,8 @@ export function createVolcanicTexture() {
  * Earth-like terrain: deep ocean → shallow → beach → lowland → forest → highland → snow caps.
  * Realistic continent shapes with fBm and cloud layers.
  */
-export function createGardenTexture() {
-  const { canvas, ctx } = createCanvas();
+export function createGardenTexture(texSize = TEX_SIZE) {
+  const { canvas, ctx } = createCanvas(texSize);
   const noise = createNoise2D();
 
   const deepOcean = [15, 50, 120];
@@ -495,14 +496,14 @@ export function createGardenTexture() {
   const snowCap = [240, 245, 250];
   const cloud = [240, 245, 255];
 
-  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const imageData = ctx.createImageData(texSize, texSize);
   const data = imageData.data;
 
-  for (let y = 0; y < TEX_SIZE; y++) {
-    for (let x = 0; x < TEX_SIZE; x++) {
-      const nx = x / TEX_SIZE;
-      const ny = y / TEX_SIZE;
-      const i = (y * TEX_SIZE + x) * 4;
+  for (let y = 0; y < texSize; y++) {
+    for (let x = 0; x < texSize; x++) {
+      const nx = x / texSize;
+      const ny = y / texSize;
+      const i = (y * texSize + x) * 4;
 
       // Continental elevation using fBm for realistic landmasses
       const elevation = (fbm(noise, nx * 4, ny * 4, 6, 2.1, 0.52) + 1) * 0.5;
@@ -594,8 +595,8 @@ export function createGardenTexture() {
  * Multiple atmospheric bands with turbulence, storm eyes at different sizes,
  * subtle color variation within bands, shadow/depth between bands.
  */
-export function createGasGiantTexture() {
-  const { canvas, ctx } = createCanvas();
+export function createGasGiantTexture(texSize = TEX_SIZE) {
+  const { canvas, ctx } = createCanvas(texSize);
   const noise = createNoise2D();
 
   const band1Dark = [170, 60, 100];
@@ -610,7 +611,7 @@ export function createGasGiantTexture() {
   const storm = [255, 200, 220];
   const stormDark = [220, 160, 180];
 
-  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const imageData = ctx.createImageData(texSize, texSize);
   const data = imageData.data;
 
   // Storm positions [x, y, radius]
@@ -621,11 +622,11 @@ export function createGasGiantTexture() {
     [0.85, 0.6, 0.035], // Tiny storm
   ];
 
-  for (let y = 0; y < TEX_SIZE; y++) {
-    for (let x = 0; x < TEX_SIZE; x++) {
-      const nx = x / TEX_SIZE;
-      const ny = y / TEX_SIZE;
-      const i = (y * TEX_SIZE + x) * 4;
+  for (let y = 0; y < texSize; y++) {
+    for (let x = 0; x < texSize; x++) {
+      const nx = x / texSize;
+      const ny = y / texSize;
+      const i = (y * texSize + x) * 4;
 
       // Horizontal bands (dominant latitude pattern) - more bands
       const bandVal = Math.sin(ny * Math.PI * 12) * 0.5 + 0.5;
@@ -730,8 +731,8 @@ export function createGasGiantTexture() {
  * Generate a star surface texture.
  * Granulation patterns with convection cells, bright faculae regions, chromatic variation.
  */
-export function createStarTexture() {
-  const { canvas, ctx } = createCanvas();
+export function createStarTexture(texSize = TEX_SIZE) {
+  const { canvas, ctx } = createCanvas(texSize);
   const noise = createNoise2D();
 
   const coreOrange = [255, 180, 80];
@@ -742,14 +743,14 @@ export function createStarTexture() {
   const spot = [200, 140, 60];
   const darkSpot = [180, 120, 50];
 
-  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const imageData = ctx.createImageData(texSize, texSize);
   const data = imageData.data;
 
-  for (let y = 0; y < TEX_SIZE; y++) {
-    for (let x = 0; x < TEX_SIZE; x++) {
-      const nx = x / TEX_SIZE;
-      const ny = y / TEX_SIZE;
-      const i = (y * TEX_SIZE + x) * 4;
+  for (let y = 0; y < texSize; y++) {
+    for (let x = 0; x < texSize; x++) {
+      const nx = x / texSize;
+      const ny = y / texSize;
+      const i = (y * texSize + x) * 4;
 
       // Granulation pattern (convection cells) using high-frequency fBm
       const granulation = (fbm(noise, nx * 15, ny * 15, 5, 2.1, 0.55) + 1) * 0.5;
@@ -830,8 +831,8 @@ export function createStarTexture() {
  * Generate a moon texture with multi-octave terrain and distinct crater shapes.
  * Grey cratered surface with better crater detail (circular craters with bright rims).
  */
-export function createMoonTexture(tintColor) {
-  const { canvas, ctx } = createCanvas();
+export function createMoonTexture(tintColor, texSize = TEX_SIZE) {
+  const { canvas, ctx } = createCanvas(texSize);
   const noise = createNoise2D();
 
   // Tint the grey toward the parent planet's color
@@ -848,7 +849,7 @@ export function createMoonTexture(tintColor) {
     (baseGrey[2] + b) / 2,
   ];
 
-  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const imageData = ctx.createImageData(texSize, texSize);
   const data = imageData.data;
 
   // Define crater positions [x, y, radius]
@@ -863,11 +864,11 @@ export function createMoonTexture(tintColor) {
     [0.75, 0.75, 0.045],
   ];
 
-  for (let y = 0; y < TEX_SIZE; y++) {
-    for (let x = 0; x < TEX_SIZE; x++) {
-      const nx = x / TEX_SIZE;
-      const ny = y / TEX_SIZE;
-      const i = (y * TEX_SIZE + x) * 4;
+  for (let y = 0; y < texSize; y++) {
+    for (let x = 0; x < texSize; x++) {
+      const nx = x / texSize;
+      const ny = y / texSize;
+      const i = (y * texSize + x) * 4;
 
       // Multi-octave terrain for realistic lunar surface
       const terrain = (fbm(noise, nx * 6, ny * 6, 5, 2.0, 0.52) + 1) * 0.5;
@@ -928,18 +929,18 @@ export function createMoonTexture(tintColor) {
  * @param {string} biome - The biome name (ocean, desert, crystal, volcanic, garden, gasGiant)
  * @returns {HTMLCanvasElement} - Grayscale heightmap canvas
  */
-export function createBumpTexture(biome) {
-  const { canvas, ctx } = createCanvas();
+export function createBumpTexture(biome, texSize = TEX_SIZE) {
+  const { canvas, ctx } = createCanvas(texSize);
   const noise = createNoise2D();
 
-  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const imageData = ctx.createImageData(texSize, texSize);
   const data = imageData.data;
 
-  for (let y = 0; y < TEX_SIZE; y++) {
-    for (let x = 0; x < TEX_SIZE; x++) {
-      const nx = x / TEX_SIZE;
-      const ny = y / TEX_SIZE;
-      const i = (y * TEX_SIZE + x) * 4;
+  for (let y = 0; y < texSize; y++) {
+    for (let x = 0; x < texSize; x++) {
+      const nx = x / texSize;
+      const ny = y / texSize;
+      const i = (y * texSize + x) * 4;
 
       let height = 0.5; // Default mid-level
 
@@ -1066,3 +1067,333 @@ export const BIOME_TEXTURE_GENERATORS = {
   garden: createGardenTexture,
   gasGiant: createGasGiantTexture,
 };
+
+/**
+ * Create a downscaled biome texture at a smaller resolution.
+ * Used for MED-level LOD textures to avoid the flat-color pop.
+ * @param {string} biome - The biome name
+ * @param {number} targetSize - Target texture size (e.g. 512)
+ * @returns {HTMLCanvasElement}
+ */
+export function createDownscaledTexture(biome, targetSize) {
+  const generator = BIOME_TEXTURE_GENERATORS[biome];
+  if (!generator) return null;
+  return generator(targetSize);
+}
+
+// ---- Moon texture variants ----
+
+/**
+ * Cratered moon (default variant, same as createMoonTexture).
+ */
+export function createCrateredMoonTexture(tintColor) {
+  return createMoonTexture(tintColor);
+}
+
+/**
+ * Icy moon: blue-white surface, smooth with crack lines, fewer craters.
+ */
+export function createIcyMoonTexture(tintColor) {
+  const { canvas, ctx } = createCanvas();
+  const noise = createNoise2D();
+
+  const r = parseInt(tintColor.slice(1, 3), 16);
+  const g = parseInt(tintColor.slice(3, 5), 16);
+  const b = parseInt(tintColor.slice(5, 7), 16);
+
+  const iceWhite = [210, 225, 240];
+  const icePale = [190, 210, 235];
+  const iceBlue = [150, 180, 220];
+  const crackDark = [90, 110, 150];
+  const tint = [(iceWhite[0] + r) / 2, (iceWhite[1] + g) / 2, (iceWhite[2] + b) / 2];
+
+  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const data = imageData.data;
+
+  const craters = [[0.4, 0.6, 0.06], [0.8, 0.3, 0.04]];
+
+  for (let y = 0; y < TEX_SIZE; y++) {
+    for (let x = 0; x < TEX_SIZE; x++) {
+      const nx = x / TEX_SIZE;
+      const ny = y / TEX_SIZE;
+      const i = (y * TEX_SIZE + x) * 4;
+
+      const terrain = (fbm(noise, nx * 4, ny * 4, 4, 2.0, 0.5) + 1) * 0.5;
+      let color = lerpColor(icePale, tint, terrain * 0.5);
+
+      // Smooth ice variation
+      const iceVar = (fbm(noise, nx * 8 + 20, ny * 8 + 20, 3, 2.0, 0.55) + 1) * 0.5;
+      if (iceVar > 0.6) {
+        color = lerpColor(color, iceWhite, (iceVar - 0.6) / 0.4 * 0.4);
+      } else if (iceVar < 0.35) {
+        color = lerpColor(color, iceBlue, (0.35 - iceVar) / 0.35 * 0.3);
+      }
+
+      // Crack lines using ridged noise
+      const cracks = ridgedNoise(noise, nx * 12 + 50, ny * 12 + 50, 3, 2.5, 0.6);
+      if (cracks > 0.82) {
+        const crackT = (cracks - 0.82) / 0.18;
+        color = lerpColor(color, crackDark, crackT * 0.7);
+      }
+
+      // Sparse craters
+      for (const [cx, cy, cr] of craters) {
+        const dx = nx - cx;
+        const dy = ny - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < cr) {
+          const nd = dist / cr;
+          if (nd < 0.8) {
+            color = lerpColor(color, crackDark, (1 - nd / 0.8) * 0.4);
+          } else {
+            const rimT = Math.sin((nd - 0.8) / 0.2 * Math.PI);
+            color = lerpColor(color, iceWhite, rimT * 0.5);
+          }
+        }
+      }
+
+      data[i] = color[0];
+      data[i + 1] = color[1];
+      data[i + 2] = color[2];
+      data[i + 3] = 255;
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+  return canvas;
+}
+
+/**
+ * Rocky moon: brown/grey ridged terrain with many small craters.
+ */
+export function createRockyMoonTexture(tintColor) {
+  const { canvas, ctx } = createCanvas();
+  const noise = createNoise2D();
+
+  const r = parseInt(tintColor.slice(1, 3), 16);
+  const g = parseInt(tintColor.slice(3, 5), 16);
+  const b = parseInt(tintColor.slice(5, 7), 16);
+
+  const rockBrown = [130, 110, 90];
+  const darkRock = [70, 60, 50];
+  const lightRock = [160, 145, 125];
+  const ridgeColor = [100, 85, 70];
+  const tint = [(rockBrown[0] + r) / 2, (rockBrown[1] + g) / 2, (rockBrown[2] + b) / 2];
+
+  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const data = imageData.data;
+
+  // Many small craters
+  const craters = [
+    [0.15, 0.2, 0.04], [0.35, 0.15, 0.035], [0.55, 0.3, 0.05],
+    [0.75, 0.2, 0.03], [0.25, 0.5, 0.045], [0.65, 0.55, 0.04],
+    [0.1, 0.7, 0.035], [0.45, 0.75, 0.04], [0.8, 0.65, 0.03],
+    [0.5, 0.5, 0.06], [0.9, 0.4, 0.025], [0.3, 0.85, 0.03],
+  ];
+
+  for (let y = 0; y < TEX_SIZE; y++) {
+    for (let x = 0; x < TEX_SIZE; x++) {
+      const nx = x / TEX_SIZE;
+      const ny = y / TEX_SIZE;
+      const i = (y * TEX_SIZE + x) * 4;
+
+      const terrain = (fbm(noise, nx * 5, ny * 5, 5, 2.0, 0.52) + 1) * 0.5;
+      let color = lerpColor(darkRock, tint, terrain * 0.7);
+
+      // Ridged terrain
+      const ridges = ridgedNoise(noise, nx * 8 + 30, ny * 8 + 30, 4, 2.2, 0.55);
+      if (ridges > 0.6) {
+        const ridgeT = (ridges - 0.6) / 0.4;
+        color = lerpColor(color, ridgeColor, ridgeT * 0.5);
+      }
+
+      // Fine rock texture
+      const detail = (fbm(noise, nx * 18 + 80, ny * 18 + 80, 2, 2.0, 0.5) + 1) * 0.5;
+      if (detail > 0.6) {
+        color = lerpColor(color, lightRock, (detail - 0.6) / 0.4 * 0.2);
+      }
+
+      // Many small craters
+      for (const [cx, cy, cr] of craters) {
+        const dx = nx - cx;
+        const dy = ny - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < cr) {
+          const nd = dist / cr;
+          if (nd < 0.85) {
+            color = lerpColor(color, darkRock, (1 - nd / 0.85) * 0.6);
+          } else {
+            const rimT = Math.sin((nd - 0.85) / 0.15 * Math.PI);
+            color = lerpColor(color, lightRock, rimT * 0.7);
+          }
+        }
+      }
+
+      data[i] = color[0];
+      data[i + 1] = color[1];
+      data[i + 2] = color[2];
+      data[i + 3] = 255;
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+  return canvas;
+}
+
+/**
+ * Volcanic moon: dark surface with orange lava traces.
+ */
+export function createVolcanicMoonTexture(tintColor) {
+  const { canvas, ctx } = createCanvas();
+  const noise = createNoise2D();
+
+  const r = parseInt(tintColor.slice(1, 3), 16);
+  const g = parseInt(tintColor.slice(3, 5), 16);
+  const b = parseInt(tintColor.slice(5, 7), 16);
+
+  const darkSurface = [35, 30, 28];
+  const medSurface = [55, 48, 42];
+  const lavaOrange = [220, 100, 20];
+  const lavaBright = [255, 160, 40];
+  const tint = [(darkSurface[0] * 2 + r) / 3, (darkSurface[1] * 2 + g) / 3, (darkSurface[2] * 2 + b) / 3];
+
+  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const data = imageData.data;
+
+  for (let y = 0; y < TEX_SIZE; y++) {
+    for (let x = 0; x < TEX_SIZE; x++) {
+      const nx = x / TEX_SIZE;
+      const ny = y / TEX_SIZE;
+      const i = (y * TEX_SIZE + x) * 4;
+
+      const terrain = (fbm(noise, nx * 6, ny * 6, 5, 2.0, 0.5) + 1) * 0.5;
+      let color = lerpColor(darkSurface, tint, terrain * 0.6);
+
+      // Surface variation
+      const surfVar = (fbm(noise, nx * 10 + 15, ny * 10 + 15, 3, 2.2, 0.55) + 1) * 0.5;
+      color = lerpColor(color, medSurface, surfVar * 0.3);
+
+      // Lava traces using ridged noise for fissure patterns
+      const lavaFlow = ridgedNoise(noise, nx * 10 + 40, ny * 10 + 40, 3, 2.3, 0.55);
+      if (lavaFlow > 0.8) {
+        const flowT = (lavaFlow - 0.8) / 0.2;
+        if (flowT > 0.6) {
+          color = lerpColor(color, lavaBright, (flowT - 0.6) / 0.4 * 0.8);
+        } else {
+          color = lerpColor(color, lavaOrange, flowT / 0.6 * 0.7);
+        }
+      } else if (lavaFlow > 0.72) {
+        // Faint orange glow near fissures
+        const glowT = (lavaFlow - 0.72) / 0.08;
+        color = lerpColor(color, lavaOrange, glowT * 0.2);
+      }
+
+      data[i] = color[0];
+      data[i + 1] = color[1];
+      data[i + 2] = color[2];
+      data[i + 3] = 255;
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+  return canvas;
+}
+
+/**
+ * Dusty moon: uniform fine-grain surface, soft appearance, very few features.
+ */
+export function createDustyMoonTexture(tintColor) {
+  const { canvas, ctx } = createCanvas();
+  const noise = createNoise2D();
+
+  const r = parseInt(tintColor.slice(1, 3), 16);
+  const g = parseInt(tintColor.slice(3, 5), 16);
+  const b = parseInt(tintColor.slice(5, 7), 16);
+
+  const dustLight = [165, 155, 145];
+  const dustMid = [145, 135, 125];
+  const dustDark = [120, 112, 105];
+  const tint = [(dustMid[0] + r) / 2, (dustMid[1] + g) / 2, (dustMid[2] + b) / 2];
+
+  const imageData = ctx.createImageData(TEX_SIZE, TEX_SIZE);
+  const data = imageData.data;
+
+  // Very few, small craters
+  const craters = [[0.5, 0.4, 0.05], [0.2, 0.7, 0.03]];
+
+  for (let y = 0; y < TEX_SIZE; y++) {
+    for (let x = 0; x < TEX_SIZE; x++) {
+      const nx = x / TEX_SIZE;
+      const ny = y / TEX_SIZE;
+      const i = (y * TEX_SIZE + x) * 4;
+
+      // Very soft, low-contrast terrain
+      const terrain = (fbm(noise, nx * 3, ny * 3, 3, 2.0, 0.45) + 1) * 0.5;
+      let color = lerpColor(dustDark, tint, terrain * 0.6);
+
+      // Fine grain texture (high frequency, low amplitude)
+      const grain = (fbm(noise, nx * 25 + 60, ny * 25 + 60, 2, 2.0, 0.5) + 1) * 0.5;
+      color = lerpColor(color, dustLight, (grain - 0.5) * 0.15);
+
+      // Gentle undulations
+      const gentle = (fbm(noise, nx * 6 + 100, ny * 6 + 100, 2, 2.0, 0.5) + 1) * 0.5;
+      if (gentle > 0.6) {
+        color = lerpColor(color, dustLight, (gentle - 0.6) / 0.4 * 0.15);
+      }
+
+      // Sparse, shallow craters
+      for (const [cx, cy, cr] of craters) {
+        const dx = nx - cx;
+        const dy = ny - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < cr) {
+          const nd = dist / cr;
+          if (nd < 0.85) {
+            color = lerpColor(color, dustDark, (1 - nd / 0.85) * 0.3);
+          } else {
+            const rimT = Math.sin((nd - 0.85) / 0.15 * Math.PI);
+            color = lerpColor(color, dustLight, rimT * 0.3);
+          }
+        }
+      }
+
+      data[i] = color[0];
+      data[i + 1] = color[1];
+      data[i + 2] = color[2];
+      data[i + 3] = 255;
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+  return canvas;
+}
+
+// Moon variant generators indexed for deterministic selection
+const MOON_VARIANTS = [
+  { name: 'cratered', generator: createCrateredMoonTexture },
+  { name: 'icy', generator: createIcyMoonTexture },
+  { name: 'rocky', generator: createRockyMoonTexture },
+  { name: 'volcanic', generator: createVolcanicMoonTexture },
+  { name: 'dusty', generator: createDustyMoonTexture },
+];
+
+/**
+ * Hash a string to a number for deterministic variant selection.
+ */
+function hashString(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash + str.charCodeAt(i)) | 0;
+  }
+  return Math.abs(hash);
+}
+
+/**
+ * Get a deterministic moon variant based on the node ID.
+ * @param {string} nodeId - The node's unique identifier
+ * @returns {{ name: string, generator: Function }}
+ */
+export function getMoonVariant(nodeId) {
+  const hash = hashString(nodeId || 'default');
+  return MOON_VARIANTS[hash % MOON_VARIANTS.length];
+}

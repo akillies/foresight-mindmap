@@ -9,4 +9,11 @@ export {
   createMoonTexture,
   BIOME_TEXTURE_GENERATORS,
   createBumpTexture,
+  createDownscaledTexture,
+  createCrateredMoonTexture,
+  createIcyMoonTexture,
+  createRockyMoonTexture,
+  createVolcanicMoonTexture,
+  createDustyMoonTexture,
+  getMoonVariant,
 } from './BiomeTextures';

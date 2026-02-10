@@ -34,15 +34,15 @@ describe('Module Structure', () => {
       const { SCENE_CONFIG } = await import('../constants');
       expect(SCENE_CONFIG).toBeDefined();
       expect(SCENE_CONFIG.starfieldCount).toBe(3000);
-      expect(SCENE_CONFIG.level1Radius).toBe(25);
+      expect(SCENE_CONFIG.level1Radius).toBe(60);
     });
 
     it('should export FLIGHT_CONFIG object', async () => {
       const { FLIGHT_CONFIG } = await import('../constants');
       expect(FLIGHT_CONFIG).toBeDefined();
-      expect(FLIGHT_CONFIG.baseDuration).toBe(2.5);
-      expect(FLIGHT_CONFIG.maxDuration).toBe(5.0);
-      expect(FLIGHT_CONFIG.arcHeightRatio).toBe(0.3);
+      expect(FLIGHT_CONFIG.baseDuration).toBe(3.5);
+      expect(FLIGHT_CONFIG.maxDuration).toBe(7.0);
+      expect(FLIGHT_CONFIG.arcHeightRatio).toBe(0.35);
     });
 
     it('should export Vector3 constants for scale', async () => {

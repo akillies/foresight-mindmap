@@ -18,6 +18,7 @@ import {
   createMoonTexture,
   createBumpTexture,
   BIOME_TEXTURE_GENERATORS,
+  getMoonVariant,
 } from './materials';
 
 // Cache generated textures so we don't regenerate on every node creation
@@ -106,7 +107,7 @@ export function createPlanet({ color, biome, position, userData }) {
   const material = new THREE.MeshStandardMaterial({
     map: texture,
     ...(texture ? {} : { color: planetColor }),
-    ...(bumpTex ? { bumpMap: bumpTex, bumpScale: 0.04 } : {}),
+    ...(bumpTex ? { bumpMap: bumpTex, bumpScale: 0.08 } : {}),
     emissive: planetColor,
     emissiveIntensity: 0.05,
     roughness: 0.7,
@@ -157,7 +158,12 @@ export function createMoon({ color, position, userData }) {
   const { size, atmosphereScale, segments } = PLANET_CONFIG.moon;
   const moonColor = new THREE.Color(color);
 
-  const texture = getCachedTexture(`moon-${color}`, createMoonTexture, color);
+  // Select moon texture variant based on node ID
+  const nodeId = userData.id || userData.mediaId || '';
+  const variant = getMoonVariant(nodeId);
+  const cacheKey = `moon-${color}-${variant.name}`;
+  const texture = getCachedTexture(cacheKey, variant.generator, color);
+
   const geometry = new THREE.SphereGeometry(size, segments, segments);
   const material = new THREE.MeshStandardMaterial({
     map: texture,
@@ -186,6 +192,19 @@ export function createMoon({ color, position, userData }) {
     })
   );
   moon.add(atmo);
+
+  // Outer glow shell (similar to planets)
+  const outerGlow = new THREE.Mesh(
+    new THREE.SphereGeometry(size * 1.35, 16, 16),
+    new THREE.MeshBasicMaterial({
+      color: moonColor,
+      transparent: true,
+      opacity: 0.05,
+      side: THREE.BackSide,
+      blending: THREE.AdditiveBlending,
+    })
+  );
+  moon.add(outerGlow);
 
   return moon;
 }
