@@ -372,8 +372,9 @@ export function useSceneCore(onNodeClick, onHoverChange, selectedNode, extension
           camera.position.multiplyScalar(scaleFactor);
 
           const distance = camera.position.length();
+          const maxDist = sceneConfig.cameraMaxDistance || SCENE_CONFIG.cameraMaxDistance;
           if (distance < SCENE_CONFIG.cameraMinDistance) camera.position.setLength(SCENE_CONFIG.cameraMinDistance);
-          if (distance > SCENE_CONFIG.cameraMaxDistance) camera.position.setLength(SCENE_CONFIG.cameraMaxDistance);
+          if (distance > maxDist) camera.position.setLength(maxDist);
         };
 
         const handleResize = () => {

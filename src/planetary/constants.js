@@ -31,6 +31,14 @@ export const STATION_SHAPES = {
   image: 'icosahedron',
 };
 
+// Planetary-specific layout overrides (wider spacing for meaningful flight)
+export const PLANETARY_LAYOUT = {
+  level1Radius: 60,
+  level2Radius: 18,
+  level3Radius: 12,
+  cameraMaxDistance: 350,
+};
+
 // Flight controller configuration
 export const FLIGHT_CONFIG = {
   arcHeightRatio: 0.35,

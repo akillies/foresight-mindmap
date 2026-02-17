@@ -9,7 +9,7 @@
 import * as THREE from 'three';
 import mindMapData from '@shared/mindMapData';
 import { COLORS, MEDIA_COLORS, SCENE_CONFIG, MATERIAL_DEFAULTS } from '@shared/constants';
-import { BIOME_MAP, PLANET_CONFIG } from '@planetary/constants';
+import { BIOME_MAP, PLANET_CONFIG, PLANETARY_LAYOUT } from '@planetary/constants';
 import { createConnection } from './ConnectionManager';
 import { createStar, createPlanet, createMoon, createStation } from '@planetary/scene/PlanetFactory';
 import { createPlanetLOD } from '@planetary/scene/PlanetLOD';
@@ -17,6 +17,11 @@ import { createAsteroidBelt } from '@planetary/scene/AsteroidBelt';
 
 // Module-level flag — set by useThreeScene after renderer init
 let usePlanetary = false;
+
+// Returns layout radii — planetary uses wider spacing, classic uses SCENE_CONFIG defaults
+function getLayout() {
+  return usePlanetary ? PLANETARY_LAYOUT : SCENE_CONFIG;
+}
 
 // Active asteroid belts — each { mesh, update(time) }; updated by animation loop
 const asteroidBelts = [];
@@ -141,7 +146,7 @@ export function createCenterNode(scene, nodesRef) {
  */
 export function createLevel1Nodes(scene, nodesRef, connectionsRef) {
   const { level1 } = mindMapData;
-  const radius = SCENE_CONFIG.level1Radius;
+  const radius = getLayout().level1Radius;
   const angleStep = (Math.PI * 2) / level1.length;
 
   level1.forEach((pillar, index) => {
@@ -206,7 +211,7 @@ export function createChildNodes(scene, parentNode, nodesRef, connectionsRef) {
   const children = methodologies.filter(m => parent.children.includes(m.id));
 
   const parentPos = parentNode.position;
-  const radius = SCENE_CONFIG.level2Radius;
+  const radius = getLayout().level2Radius;
   const angleStep = (Math.PI * 2) / children.length;
 
   children.forEach((child, index) => {
@@ -269,7 +274,7 @@ export function createMediaNodes(scene, parentNode, nodesRef, connectionsRef) {
   if (!parent.media || parent.media.length === 0) return;
 
   const parentPos = parentNode.position;
-  const radius = SCENE_CONFIG.level3Radius;
+  const radius = getLayout().level3Radius;
   const angleStep = (Math.PI * 2) / parent.media.length;
 
   parent.media.forEach((mediaItem, index) => {

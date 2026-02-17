@@ -31,6 +31,7 @@ export async function initializeScene(container, sceneConfig = {}) {
     enableVR = false,
     fogDensity = 0.004,
     shadowMapSize = 4096,
+    cameraMaxDistance,
   } = sceneConfig;
 
   const scene = new THREE.Scene();
@@ -61,7 +62,7 @@ export async function initializeScene(container, sceneConfig = {}) {
   controls.smoothTime = 0.25;
   controls.draggingSmoothTime = 0.125;
   controls.minDistance = SCENE_CONFIG.cameraMinDistance;
-  controls.maxDistance = SCENE_CONFIG.cameraMaxDistance;
+  controls.maxDistance = cameraMaxDistance || SCENE_CONFIG.cameraMaxDistance;
   controls.maxPolarAngle = Math.PI;
   controls.minPolarAngle = 0;
 

@@ -34,7 +34,7 @@ describe('Module Structure', () => {
       const { SCENE_CONFIG } = await import('../constants');
       expect(SCENE_CONFIG).toBeDefined();
       expect(SCENE_CONFIG.starfieldCount).toBe(3000);
-      expect(SCENE_CONFIG.level1Radius).toBe(60);
+      expect(SCENE_CONFIG.level1Radius).toBe(25);
     });
 
     it('should export FLIGHT_CONFIG object', async () => {
