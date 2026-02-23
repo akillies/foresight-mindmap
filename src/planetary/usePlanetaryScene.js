@@ -325,7 +325,11 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
 
   // Call useSceneCore with our extensions
   const coreResult = useSceneCore(onNodeClick, onHoverChange, selectedNode, {
-    sceneConfig: { enableVR: IS_VR, cameraMaxDistance: 350 },
+    sceneConfig: {
+      enableVR: IS_VR,
+      cameraMaxDistance: 350,
+      bloomConfig: { threshold: 0.7, strength: 1.0, radius: 0.3 },
+    },
     planetaryMode: true,
     onInit: handleInit,
     onAnimate: handleAnimate,

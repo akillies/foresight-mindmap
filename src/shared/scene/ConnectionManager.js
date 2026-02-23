@@ -25,25 +25,28 @@ let _activeChildId = null;
 export function createConnection(scene, start, end, color, opacity = 0.3, parentId = null, childId = null, connectionsRef) {
   const midPoint = new THREE.Vector3(
     (start.x + end.x) / 2,
-    (start.y + end.y) / 2 + 5,
+    (start.y + end.y) / 2 + 2.5,
     (start.z + end.z) / 2
   );
 
   const curve = new THREE.CatmullRomCurve3([start, midPoint, end]);
   const points = curve.getPoints(50);
 
-  // Dimmer base line (static)
+  // HUD-style dashed line
   const geometry = new THREE.BufferGeometry().setFromPoints(points);
-  const material = new THREE.LineBasicMaterial({
+  const material = new THREE.LineDashedMaterial({
     color: new THREE.Color(color),
-    opacity: opacity * 0.3,
+    opacity: opacity * 0.25,
     transparent: true,
+    dashSize: 0.8,
+    gapSize: 0.4,
   });
 
   const line = new THREE.Line(geometry, material);
+  line.computeLineDistances();
 
-  // Create energy particles along the curve (3-5 particles per connection)
-  const particleCount = 4;
+  // Create energy particles along the curve
+  const particleCount = 2;
   const particlePositions = new Float32Array(particleCount * 3);
   const particleColors = new Float32Array(particleCount * 3);
   const particleSizes = new Float32Array(particleCount);
@@ -63,7 +66,7 @@ export function createConnection(scene, start, end, color, opacity = 0.3, parent
     particleColors[i * 3 + 1] = particleColor.g;
     particleColors[i * 3 + 2] = particleColor.b;
 
-    particleSizes[i] = 0.2;
+    particleSizes[i] = 0.12;
   }
 
   const particleGeometry = new THREE.BufferGeometry();
@@ -72,10 +75,10 @@ export function createConnection(scene, start, end, color, opacity = 0.3, parent
   particleGeometry.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
 
   const particleMaterial = new THREE.PointsMaterial({
-    size: 0.2,
+    size: 0.12,
     vertexColors: true,
     transparent: true,
-    opacity: 0.9,
+    opacity: 0.6,
     blending: THREE.AdditiveBlending,
     sizeAttenuation: true,
   });
@@ -123,7 +126,7 @@ export function createCrossPillarConnections(scene, activeNode, nodesRef, crossP
     // Create dashed line
     const midPoint = new THREE.Vector3(
       (sourcePos.x + targetPos.x) / 2,
-      (sourcePos.y + targetPos.y) / 2 + 3,
+      (sourcePos.y + targetPos.y) / 2 + 1.5,
       (sourcePos.z + targetPos.z) / 2
     );
 
@@ -132,11 +135,11 @@ export function createCrossPillarConnections(scene, activeNode, nodesRef, crossP
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
 
     const material = new THREE.LineDashedMaterial({
-      color: new THREE.Color('#CCCCCC'),
+      color: new THREE.Color('#88AACC'),
       opacity: 0.15,
       transparent: true,
-      dashSize: 2,
-      gapSize: 1,
+      dashSize: 0.6,
+      gapSize: 0.3,
     });
 
     const line = new THREE.Line(geometry, material);
@@ -209,11 +212,15 @@ export function animateConnections(connectionsRef, selectedNode) {
       conn.material.opacity += (targetOpacity - conn.material.opacity) * ANIMATION_CONFIG.connectionOpacityLerp;
     }
 
-    // Color pulse toward white on active lane
+    // Animated dash scrolling
+    if (conn.material.dashOffset !== undefined) {
+      conn.material.dashOffset -= isActiveLane ? 0.008 : 0.002;
+    }
+
+    // Steady 25% white lerp on active lane (replaces pulsing)
     if (isActiveLane && conn.userData.baseColor) {
-      const pulse = Math.sin(Date.now() * 0.004) * 0.5 + 0.5;
       conn.material.color.set(conn.userData.baseColor);
-      conn.material.color.lerp(new THREE.Color(0xffffff), pulse * 0.4);
+      conn.material.color.lerp(new THREE.Color(0xffffff), 0.25);
     }
 
     // Animate energy particles along the curve

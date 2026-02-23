@@ -12,10 +12,14 @@
  * as the existing NodeFactory — compatible with raycasting, animation, and selection.
  */
 import * as THREE from 'three';
-import { PLANET_CONFIG, STATION_SHAPES } from '@planetary/constants';
+import {
+  PLANET_CONFIG, STATION_SHAPES,
+  BIOME_MATERIAL_PROFILES, DEFAULT_PLANET_MATERIAL, MOON_MATERIAL,
+} from '@planetary/constants';
 import {
   createStarTexture,
   createMoonTexture,
+  createCloudTexture,
   createBumpTexture,
   BIOME_TEXTURE_GENERATORS,
   getMoonVariant,
@@ -63,7 +67,7 @@ export function createStar({ color, position, userData }) {
     new THREE.MeshBasicMaterial({
       color: starColor,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.5,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     })
@@ -76,12 +80,25 @@ export function createStar({ color, position, userData }) {
     new THREE.MeshBasicMaterial({
       color: new THREE.Color(0xFFEECC),
       transparent: true,
-      opacity: 0.1,
+      opacity: 0.2,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     })
   );
   star.add(corona);
+
+  // Second corona layer (wider halo for more bloom)
+  const outerCorona = new THREE.Mesh(
+    new THREE.SphereGeometry(size * 2.0, 32, 32),
+    new THREE.MeshBasicMaterial({
+      color: new THREE.Color(0xFFEECC),
+      transparent: true,
+      opacity: 0.06,
+      side: THREE.BackSide,
+      blending: THREE.AdditiveBlending,
+    })
+  );
+  star.add(outerCorona);
 
   return star;
 }
@@ -102,16 +119,26 @@ export function createPlanet({ color, biome, position, userData }) {
     ? getCachedTexture(`bump-${biome}`, createBumpTexture, biome)
     : null;
 
+  // Look up biome material profile
+  const profile = BIOME_MATERIAL_PROFILES[biome] || DEFAULT_PLANET_MATERIAL;
+
   // Planet surface
   const geometry = new THREE.SphereGeometry(size, segments, segments);
-  const material = new THREE.MeshStandardMaterial({
+  const material = new THREE.MeshPhysicalMaterial({
     map: texture,
     ...(texture ? {} : { color: planetColor }),
-    ...(bumpTex ? { bumpMap: bumpTex, bumpScale: 0.08 } : {}),
+    ...(bumpTex ? { bumpMap: bumpTex, bumpScale: profile.bumpScale } : {}),
     emissive: planetColor,
-    emissiveIntensity: 0.05,
-    roughness: 0.7,
-    metalness: 0.1,
+    emissiveIntensity: profile.emissiveIntensity,
+    roughness: profile.roughness,
+    metalness: profile.metalness,
+    clearcoat: profile.clearcoat,
+    clearcoatRoughness: profile.clearcoatRoughness,
+    sheen: profile.sheen,
+    sheenColor: new THREE.Color(profile.sheenColor),
+    sheenRoughness: profile.sheenRoughness,
+    iridescence: profile.iridescence,
+    iridescenceIOR: profile.iridescenceIOR,
   });
 
   const planet = new THREE.Mesh(geometry, material);
@@ -122,12 +149,15 @@ export function createPlanet({ color, biome, position, userData }) {
   planet.receiveShadow = true;
 
   // Atmosphere shell (transparent, slightly larger)
+  const atmoColor = profile.atmosphereTint
+    ? new THREE.Color(profile.atmosphereTint)
+    : planetColor;
   const atmosphere = new THREE.Mesh(
     new THREE.SphereGeometry(size * atmosphereScale, 32, 32),
     new THREE.MeshBasicMaterial({
-      color: planetColor,
+      color: atmoColor,
       transparent: true,
-      opacity: 0.12,
+      opacity: profile.atmosphereOpacity,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     })
@@ -140,12 +170,30 @@ export function createPlanet({ color, biome, position, userData }) {
     new THREE.MeshBasicMaterial({
       color: planetColor,
       transparent: true,
-      opacity: 0.06,
+      opacity: profile.outerGlowOpacity,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     })
   );
   planet.add(outerGlow);
+
+  // Cloud layer for biomes that have one (garden, gasGiant)
+  if (profile.hasCloudLayer) {
+    const cloudTex = getCachedTexture(`cloud-layer`, createCloudTexture);
+    const cloudLayer = new THREE.Mesh(
+      new THREE.SphereGeometry(size * 1.08, 32, 32),
+      new THREE.MeshBasicMaterial({
+        map: cloudTex,
+        transparent: true,
+        opacity: 0.6,
+        side: THREE.FrontSide,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      })
+    );
+    planet.add(cloudLayer);
+    planet.userData._cloudMesh = cloudLayer;
+  }
 
   return planet;
 }
@@ -165,12 +213,15 @@ export function createMoon({ color, position, userData }) {
   const texture = getCachedTexture(cacheKey, variant.generator, color);
 
   const geometry = new THREE.SphereGeometry(size, segments, segments);
-  const material = new THREE.MeshStandardMaterial({
+  const material = new THREE.MeshPhysicalMaterial({
     map: texture,
     emissive: moonColor,
-    emissiveIntensity: 0.2,
-    roughness: 0.6,
-    metalness: 0.15,
+    emissiveIntensity: MOON_MATERIAL.emissiveIntensity,
+    roughness: MOON_MATERIAL.roughness,
+    metalness: MOON_MATERIAL.metalness,
+    sheen: MOON_MATERIAL.sheen,
+    sheenColor: new THREE.Color(MOON_MATERIAL.sheenColor),
+    sheenRoughness: MOON_MATERIAL.sheenRoughness,
   });
 
   const moon = new THREE.Mesh(geometry, material);
@@ -186,7 +237,7 @@ export function createMoon({ color, position, userData }) {
     new THREE.MeshBasicMaterial({
       color: moonColor,
       transparent: true,
-      opacity: 0.08,
+      opacity: MOON_MATERIAL.atmosphereOpacity,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     })
@@ -199,7 +250,7 @@ export function createMoon({ color, position, userData }) {
     new THREE.MeshBasicMaterial({
       color: moonColor,
       transparent: true,
-      opacity: 0.05,
+      opacity: MOON_MATERIAL.outerGlowOpacity,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     })

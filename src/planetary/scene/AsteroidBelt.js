@@ -6,6 +6,7 @@
  * @module AsteroidBelt
  */
 import * as THREE from 'three';
+import { BIOME_BELT_COLORS } from '@planetary/constants';
 
 /**
  * Create an asteroid belt around a planet node.
@@ -17,6 +18,7 @@ import * as THREE from 'three';
  * @param {number} [options.innerRadius=4.0] - Inner ring radius
  * @param {number} [options.outerRadius=6.0] - Outer ring radius
  * @param {number} [options.color=0x888888] - Belt color (hex)
+ * @param {string} [options.biome] - Biome name for per-instance coloring
  * @returns {{ mesh: THREE.InstancedMesh, update: (time: number) => void }}
  */
 export function createAsteroidBelt(planet, {
@@ -24,7 +26,10 @@ export function createAsteroidBelt(planet, {
   innerRadius = 4.0,
   outerRadius = 6.0,
   color = 0x888888,
+  biome,
 } = {}) {
+  const palette = biome && BIOME_BELT_COLORS[biome];
+
   // Deformed icosahedron (detail level 0 = 12 faces, very cheap)
   const baseGeo = new THREE.IcosahedronGeometry(0.15, 0);
 
@@ -40,10 +45,14 @@ export function createAsteroidBelt(planet, {
   baseGeo.computeVertexNormals();
 
   const material = new THREE.MeshStandardMaterial({
-    color,
-    roughness: 0.9,
-    metalness: 0.1,
+    color: palette ? palette.base : color,
+    roughness: 0.75,
+    metalness: palette ? palette.metalness : 0.1,
     flatShading: true,
+    ...(palette && {
+      emissive: new THREE.Color(palette.base),
+      emissiveIntensity: palette.emissive,
+    }),
   });
 
   const mesh = new THREE.InstancedMesh(baseGeo, material, count);
@@ -84,6 +93,18 @@ export function createAsteroidBelt(planet, {
     mesh.setMatrixAt(i, dummy.matrix);
   }
   mesh.instanceMatrix.needsUpdate = true;
+
+  // Per-instance color variation: lerp between palette base and accent
+  if (palette) {
+    const baseColor = new THREE.Color(palette.base);
+    const accentColor = new THREE.Color(palette.accent);
+    const instanceColor = new THREE.Color();
+    for (let i = 0; i < count; i++) {
+      instanceColor.copy(baseColor).lerp(accentColor, Math.random());
+      mesh.setColorAt(i, instanceColor);
+    }
+    mesh.instanceColor.needsUpdate = true;
+  }
 
   // Attach to planet as child so it inherits planet position
   planet.add(mesh);

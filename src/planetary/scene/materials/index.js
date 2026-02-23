@@ -7,6 +7,7 @@ export {
   createGasGiantTexture,
   createStarTexture,
   createMoonTexture,
+  createCloudTexture,
   BIOME_TEXTURE_GENERATORS,
   createBumpTexture,
   createDownscaledTexture,

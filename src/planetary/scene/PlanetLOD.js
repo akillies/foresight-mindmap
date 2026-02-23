@@ -10,7 +10,10 @@
 import * as THREE from 'three';
 import { createPlanet } from './PlanetFactory';
 import { createDownscaledTexture, BIOME_TEXTURE_GENERATORS } from './materials';
-import { PLANET_CONFIG, LOD_DISTANCES } from '@planetary/constants';
+import {
+  PLANET_CONFIG, LOD_DISTANCES,
+  BIOME_MATERIAL_PROFILES, DEFAULT_PLANET_MATERIAL,
+} from '@planetary/constants';
 
 // Cache for MED-level downscaled textures and LOW-level sampled colors
 const medTextureCache = new Map();
@@ -68,26 +71,30 @@ export function createPlanetLOD(params) {
   lod.addLevel(highDetail, LOD_DISTANCES.HIGH);
 
   // MED: 24-segment sphere with downscaled 512x512 biome texture + thin atmosphere
+  const medProfile = BIOME_MATERIAL_PROFILES[biome] || DEFAULT_PLANET_MATERIAL;
   const medGeo = new THREE.SphereGeometry(PLANET_CONFIG.planet.size, 24, 24);
   const medTexture = getCachedMedTexture(biome);
-  const medMat = new THREE.MeshStandardMaterial({
+  const medMat = new THREE.MeshPhysicalMaterial({
     ...(medTexture ? { map: medTexture } : { color: planetColor }),
     emissive: planetColor,
-    emissiveIntensity: 0.15,
-    roughness: 0.7,
-    metalness: 0.1,
+    emissiveIntensity: medProfile.emissiveIntensity,
+    roughness: medProfile.roughness,
+    metalness: medProfile.metalness,
   });
   const medMesh = new THREE.Mesh(medGeo, medMat);
   medMesh.userData = { ...userData, celestialType: 'planet', biome };
   medMesh.originalY = position.y;
 
-  // Add thin atmosphere
+  // Add thin atmosphere (slightly dimmer than HIGH)
+  const medAtmoColor = medProfile.atmosphereTint
+    ? new THREE.Color(medProfile.atmosphereTint)
+    : planetColor;
   const medAtmo = new THREE.Mesh(
     new THREE.SphereGeometry(PLANET_CONFIG.planet.size * 1.1, 16, 16),
     new THREE.MeshBasicMaterial({
-      color: planetColor,
+      color: medAtmoColor,
       transparent: true,
-      opacity: 0.1,
+      opacity: medProfile.atmosphereOpacity * 0.85,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     })
@@ -101,7 +108,7 @@ export function createPlanetLOD(params) {
   const lowMat = new THREE.MeshBasicMaterial({
     color: sampledColor,
     transparent: true,
-    opacity: 0.85,
+    opacity: 0.9,
   });
   const lowMesh = new THREE.Mesh(lowGeo, lowMat);
   lowMesh.userData = { ...userData, celestialType: 'planet', biome };

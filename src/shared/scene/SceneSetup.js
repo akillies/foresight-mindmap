@@ -32,6 +32,7 @@ export async function initializeScene(container, sceneConfig = {}) {
     fogDensity = 0.004,
     shadowMapSize = 4096,
     cameraMaxDistance,
+    bloomConfig,
   } = sceneConfig;
 
   const scene = new THREE.Scene();
@@ -71,7 +72,7 @@ export async function initializeScene(container, sceneConfig = {}) {
 
   // Post-processing (TSL bloom for WebGPU, legacy EffectComposer for ?forceWebGL)
   const useLegacy = !isWebGPU && !capabilities.tsl;
-  const pp = await createPostProcessing(renderer, scene, camera, useLegacy);
+  const pp = await createPostProcessing(renderer, scene, camera, useLegacy, bloomConfig);
 
   return {
     scene,
@@ -107,7 +108,7 @@ export function setupLighting(scene, config = {}) {
   fillLight.position.set(-30, 20, 40);
   scene.add(fillLight);
 
-  const rimLight = new THREE.PointLight(0xCC99CC, 0.6, 100);
+  const rimLight = new THREE.PointLight(0xCC99CC, 0.9, 100);
   rimLight.position.set(0, -30, -50);
   scene.add(rimLight);
 }

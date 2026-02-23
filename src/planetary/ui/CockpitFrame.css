@@ -9,8 +9,8 @@
 /* ===== Root Frame ===== */
 .cockpit-frame {
   --cockpit-accent: #5C88DA;
-  --strut-color: rgba(180, 190, 210, 0.4);
-  --console-bg: rgba(10, 12, 28, 0.85);
+  --strut-color: rgba(180, 190, 210, 0.55);
+  --console-bg: rgba(10, 12, 28, 0.92);
   --scanner-bg: rgba(10, 12, 28, 0.3);
 
   position: fixed;
@@ -35,8 +35,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   background: linear-gradient(
     135deg,
     var(--strut-color) 0%,
@@ -54,8 +54,8 @@
   position: absolute;
   bottom: 56px;
   right: 0;
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   background: linear-gradient(
     315deg,
     var(--strut-color) 0%,
@@ -72,8 +72,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   background: linear-gradient(
     225deg,
     var(--strut-color) 0%,
@@ -90,8 +90,8 @@
   position: absolute;
   bottom: 56px;
   left: 0;
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   background: linear-gradient(
     45deg,
     var(--strut-color) 0%,
@@ -109,7 +109,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 140px;
+  width: 180px;
   height: 2px;
   background: linear-gradient(90deg, var(--strut-color), transparent);
   opacity: 0;
@@ -122,7 +122,7 @@
   top: 0;
   left: 0;
   width: 2px;
-  height: 140px;
+  height: 180px;
   background: linear-gradient(180deg, var(--strut-color), transparent);
 }
 
@@ -130,7 +130,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 140px;
+  width: 180px;
   height: 2px;
   background: linear-gradient(270deg, var(--strut-color), transparent);
   opacity: 0;
@@ -143,7 +143,7 @@
   top: 0;
   right: 0;
   width: 2px;
-  height: 140px;
+  height: 180px;
   background: linear-gradient(180deg, var(--strut-color), transparent);
 }
 
@@ -154,8 +154,9 @@
   pointer-events: none;
   z-index: 959;
   box-shadow:
-    inset 0 0 80px rgba(0, 0, 0, 0.3),
-    inset 0 0 160px rgba(0, 0, 0, 0.12);
+    inset 0 0 60px rgba(0, 0, 0, 0.45),
+    inset 0 0 140px rgba(0, 0, 0, 0.25),
+    inset 0 0 300px rgba(0, 0, 0, 0.10);
 }
 
 /* ===== Top Status Bar — Holographic ===== */
@@ -173,6 +174,9 @@
   font-size: 10px;
   letter-spacing: 0.12em;
   pointer-events: none;
+  background: linear-gradient(180deg, rgba(8, 10, 24, 0.4), transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   opacity: 0;
   animation: cockpit-boot-status 0.5s ease-out 0.1s forwards;
 }
@@ -361,6 +365,8 @@
   height: 56px;
   z-index: 962;
   background: var(--console-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   clip-path: polygon(3% 15%, 97% 15%, 100% 100%, 0% 100%);
   display: flex;
   align-items: center;
@@ -382,8 +388,8 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(180, 190, 210, 0.2) 20%,
-    rgba(180, 190, 210, 0.2) 80%,
+    rgba(180, 190, 210, 0.35) 15%,
+    rgba(180, 190, 210, 0.35) 85%,
     transparent 100%
   );
 }
@@ -482,8 +488,8 @@
     0deg,
     transparent 0px,
     transparent 2px,
-    rgba(100, 200, 255, 0.008) 2px,
-    rgba(100, 200, 255, 0.008) 4px
+    rgba(100, 200, 255, 0.012) 2px,
+    rgba(100, 200, 255, 0.012) 4px
   );
   mix-blend-mode: screen;
 }

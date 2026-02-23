@@ -167,6 +167,7 @@ export function createLevel1Nodes(scene, nodesRef, connectionsRef) {
         innerRadius: PLANET_CONFIG.planet.size * 2.5,
         outerRadius: PLANET_CONFIG.planet.size * 3.5,
         color: new THREE.Color(pillar.color).lerp(new THREE.Color(0x888888), 0.6).getHex(),
+        biome,
       });
       asteroidBelts.push(belt);
     } else {

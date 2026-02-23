@@ -1057,6 +1057,53 @@ export function createBumpTexture(biome, texSize = TEX_SIZE) {
 }
 
 /**
+ * Generate a procedural cloud texture for planet cloud layers.
+ * White/semi-transparent clouds on a transparent background.
+ * @param {number} [texSize=TEX_SIZE] - Canvas width/height in pixels
+ * @returns {HTMLCanvasElement}
+ */
+export function createCloudTexture(texSize = TEX_SIZE) {
+  const { canvas, ctx } = createCanvas(texSize);
+  const noise = createNoise2D();
+
+  const imageData = ctx.createImageData(texSize, texSize);
+  const data = imageData.data;
+
+  for (let y = 0; y < texSize; y++) {
+    for (let x = 0; x < texSize; x++) {
+      const nx = x / texSize;
+      const ny = y / texSize;
+      const i = (y * texSize + x) * 4;
+
+      // Multi-octave cloud noise at medium frequency
+      const cloudBase = (fbm(noise, nx * 5, ny * 5, 4, 2.0, 0.55) + 1) * 0.5;
+      const cloudDetail = (fbm(noise, nx * 10 + 30, ny * 10 + 30, 3, 2.2, 0.5) + 1) * 0.5;
+      const coverage = cloudBase * 0.65 + cloudDetail * 0.35;
+
+      // Only render clouds above threshold for soft edges
+      if (coverage > 0.45) {
+        const alpha = Math.min(1, (coverage - 0.45) / 0.4);
+        // White to light grey variation
+        const brightness = 220 + (cloudDetail - 0.5) * 60;
+        const clamped = Math.max(180, Math.min(255, brightness));
+        data[i] = clamped;
+        data[i + 1] = clamped;
+        data[i + 2] = clamped;
+        data[i + 3] = (alpha * 180) | 0;
+      } else {
+        data[i] = 0;
+        data[i + 1] = 0;
+        data[i + 2] = 0;
+        data[i + 3] = 0;
+      }
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+  return canvas;
+}
+
+/**
  * Texture generator lookup by biome name.
  */
 export const BIOME_TEXTURE_GENERATORS = {
