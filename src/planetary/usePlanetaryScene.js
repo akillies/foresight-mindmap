@@ -13,7 +13,8 @@ import { createGPUStarfield } from '@planetary/scene/GPUStarfield';
 import { getAsteroidBelts } from '@shared/scene/NodeFactory';
 import { createWarpStreaks } from '@planetary/scene/WarpStreaks';
 import { createCockpitMesh } from '@planetary/scene/CockpitMesh';
-import { VR_CONFIG } from '@planetary/constants';
+import { VR_CONFIG, SELECTION_RING } from '@planetary/constants';
+import { sfx } from '@shared/audio/SFXManager';
 
 const IS_VR = new URLSearchParams(window.location.search).has('vr');
 
@@ -31,6 +32,10 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
   const cockpitMeshRef = useRef(null);
   const warpStreaksRef = useRef(null);
   const gpuStarfieldRef = useRef(null);
+  const selectionRingRef = useRef(null);
+  const galaxySpritesRef = useRef([]);
+  const dustParticlesRef = useRef(null);
+  const targetScreenPosRef = useRef(null);
 
   // ── onInit: Set up GPU starfield, flight, warp, cockpit, VR ──
   const handleInit = useCallback(async (initRefs) => {
@@ -56,6 +61,80 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
     // Warp streaking effect
     const warpStreaks = createWarpStreaks(scene);
     warpStreaksRef.current = warpStreaks;
+
+    // Selection ring (amber targeting ring around selected planet)
+    const ringGeo = new THREE.RingGeometry(SELECTION_RING.innerRadius, SELECTION_RING.outerRadius, 64);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: SELECTION_RING.color,
+      transparent: true,
+      opacity: 0,
+      side: THREE.DoubleSide,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const selectionRing = new THREE.Mesh(ringGeo, ringMat);
+    selectionRing.rotation.x = -Math.PI / 2 + SELECTION_RING.tiltX;
+    selectionRing.visible = false;
+    scene.add(selectionRing);
+    selectionRingRef.current = selectionRing;
+
+    // Distant galaxy sprites (soft additive-blended billboards)
+    const galaxySprites = [];
+    const galaxyPositions = [
+      [400, 80, -350], [-300, -50, 400], [250, 120, 450],
+      [-450, 60, -200], [100, -100, -500],
+    ];
+    const galaxyCanvas = document.createElement('canvas');
+    galaxyCanvas.width = 128;
+    galaxyCanvas.height = 128;
+    const gCtx = galaxyCanvas.getContext('2d');
+    const gGrad = gCtx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    gGrad.addColorStop(0, 'rgba(180, 160, 220, 0.4)');
+    gGrad.addColorStop(0.3, 'rgba(120, 140, 200, 0.15)');
+    gGrad.addColorStop(1, 'rgba(80, 100, 160, 0)');
+    gCtx.fillStyle = gGrad;
+    gCtx.beginPath();
+    gCtx.ellipse(64, 64, 64, 40, 0.3, 0, Math.PI * 2);
+    gCtx.fill();
+    const galaxyTex = new THREE.CanvasTexture(galaxyCanvas);
+
+    for (const [gx, gy, gz] of galaxyPositions) {
+      const spriteMat = new THREE.SpriteMaterial({
+        map: galaxyTex,
+        transparent: true,
+        opacity: 0.08 + Math.random() * 0.04,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
+      const sprite = new THREE.Sprite(spriteMat);
+      sprite.position.set(gx, gy, gz);
+      sprite.scale.set(20 + Math.random() * 20, 12 + Math.random() * 12, 1);
+      scene.add(sprite);
+      galaxySprites.push(sprite);
+    }
+    galaxySpritesRef.current = galaxySprites;
+
+    // Ambient dust (near-camera slow-drifting translucent particles)
+    const dustCount = 200;
+    const dustGeo = new THREE.BufferGeometry();
+    const dustPositions = new Float32Array(dustCount * 3);
+    for (let i = 0; i < dustCount; i++) {
+      dustPositions[i * 3] = (Math.random() - 0.5) * 80;
+      dustPositions[i * 3 + 1] = (Math.random() - 0.5) * 60;
+      dustPositions[i * 3 + 2] = (Math.random() - 0.5) * 80;
+    }
+    dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
+    const dustMat = new THREE.PointsMaterial({
+      color: 0xAABBDD,
+      size: 0.15,
+      transparent: true,
+      opacity: 0.04,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const dustPoints = new THREE.Points(dustGeo, dustMat);
+    scene.add(dustPoints);
+    dustParticlesRef.current = dustPoints;
 
     // 3D cockpit mesh (VR mode — replaces CSS CockpitFrame)
     let cockpitMesh = null;
@@ -224,6 +303,21 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
       window.removeEventListener('keydown', handleKeyDown);
       if (gpuStarfield) gpuStarfield.dispose();
       if (warpStreaks) warpStreaks.dispose();
+      if (selectionRing) {
+        selectionRing.geometry.dispose();
+        selectionRing.material.dispose();
+        scene.remove(selectionRing);
+      }
+      for (const gs of galaxySprites) {
+        gs.material.dispose();
+        scene.remove(gs);
+      }
+      galaxyTex.dispose();
+      if (dustPoints) {
+        dustPoints.geometry.dispose();
+        dustPoints.material.dispose();
+        scene.remove(dustPoints);
+      }
       if (cockpitMesh) cockpitMesh.dispose();
       if (controllerRay) {
         controllerRay.geometry.dispose();
@@ -257,10 +351,16 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
     if (flightController) {
       flightController.update(deltaTime);
 
-      // Notify consumer of transit state changes
+      // Notify consumer of transit state changes + trigger warp SFX
       const flightState = flightController.getState();
       if (flightState !== lastTransitStateRef.current) {
+        const prevState = lastTransitStateRef.current;
         lastTransitStateRef.current = flightState;
+
+        // Warp SFX
+        if (flightState === 'DEPARTING') sfx.warpStart();
+        if (flightState === 'ORBITING' && prevState !== 'ORBITING') sfx.warpEnd();
+
         if (transitCallbackRef.current) {
           const isFlying = flightState !== 'ORBITING';
           const target = flightController.getCurrentTarget();
@@ -289,11 +389,63 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
       }
     }
 
+    // Galaxy sprites slow rotation
+    const gSprites = galaxySpritesRef.current;
+    for (let g = 0; g < gSprites.length; g++) {
+      gSprites[g].material.rotation += 0.00002 * (g + 1);
+    }
+
+    // Ambient dust: slow drift relative to camera
+    const dustPts = dustParticlesRef.current;
+    if (dustPts) {
+      dustPts.position.x = camera.position.x * 0.3;
+      dustPts.position.y = camera.position.y * 0.3;
+      dustPts.position.z = camera.position.z * 0.3;
+      dustPts.rotation.y += 0.00005;
+    }
+
+    // Selection ring animation (rotation + opacity pulse + position tracking)
+    const selRing = selectionRingRef.current;
+    if (selRing && selRing.visible) {
+      selRing.rotation.z += SELECTION_RING.rotationSpeed;
+      const pulse = SELECTION_RING.pulseMin +
+        (SELECTION_RING.pulseMax - SELECTION_RING.pulseMin) *
+        (0.5 + 0.5 * Math.sin(currentTime * SELECTION_RING.pulseSpeed));
+      selRing.material.opacity = pulse;
+
+      // 3D→2D projection for targeting reticle overlay
+      const projected = selRing.position.clone().project(camera);
+      const hw = renderer.domElement.clientWidth / 2;
+      const hh = renderer.domElement.clientHeight / 2;
+      targetScreenPosRef.current = {
+        x: projected.x * hw + hw,
+        y: -projected.y * hh + hh,
+      };
+    } else {
+      targetScreenPosRef.current = null;
+    }
+
     // 3D cockpit readouts (VR mode)
     const cockpitMesh = cockpitMeshRef.current;
     if (cockpitMesh && hudDataRef.current) {
       cockpitMesh.updateReadouts(hudDataRef.current);
     }
+  }, []);
+
+  // Position the selection ring on a target node
+  const moveSelectionRing = useCallback((targetNode) => {
+    const ring = selectionRingRef.current;
+    if (!ring) return;
+    if (!targetNode || targetNode.userData.celestialType === 'star') {
+      ring.visible = false;
+      return;
+    }
+    ring.visible = true;
+    ring.material.opacity = 0;
+    // Get world position (handles LOD groups)
+    const worldPos = new THREE.Vector3();
+    targetNode.getWorldPosition(worldPos);
+    ring.position.copy(worldPos);
   }, []);
 
   // ── onClick: flight intercept ──
@@ -311,8 +463,10 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
       clickedNode.userData.id &&
       !clickedNode.userData.isMedia
     ) {
+      sfx.select();
       flightController.setSourceNodeId(currentSelected.id);
       flightController.flyTo(clickedNode).then(() => {
+        moveSelectionRing(clickedNode);
         onNodeClick(clickedNode, scene, nodesRef.current, connectionsRef.current);
       });
       return true; // handled
@@ -320,8 +474,14 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
       return true; // swallow click during flight
     }
 
+    // Non-flight click: position ring and play SFX
+    if (clickedNode.userData.id && !clickedNode.userData.isMedia) {
+      sfx.select();
+      moveSelectionRing(clickedNode);
+    }
+
     return false; // let core handle it
-  }, [onNodeClick]);
+  }, [onNodeClick, moveSelectionRing]);
 
   // Call useSceneCore with our extensions
   const coreResult = useSceneCore(onNodeClick, onHoverChange, selectedNode, {
@@ -342,5 +502,6 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
     transitCallbackRef,
     hudDataRef,
     cockpitMeshRef,
+    targetScreenPosRef,
   };
 }

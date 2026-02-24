@@ -66,6 +66,7 @@ function PlanetaryAppInner() {
     gpuInfo,
     transitCallbackRef,
     hudDataRef,
+    targetScreenPosRef,
   } = usePlanetaryScene(handleNodeClick, updateHoveredNode, selectedNode);
 
   // Shared effects
@@ -113,6 +114,7 @@ function PlanetaryAppInner() {
         gpuInfo={gpuInfo}
         transitCallbackRef={transitCallbackRef}
         hudDataRef={hudDataRef}
+        targetScreenPosRef={targetScreenPosRef}
       />
       <div style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden' }}>
         {/* 3D Canvas Container */}
@@ -124,7 +126,7 @@ function PlanetaryAppInner() {
             width: '100%',
             height: '100%',
             cursor: 'grab',
-            background: COLORS.background,
+            background: 'radial-gradient(ellipse at center, #0a0d1a 0%, #050718 40%, #020308 100%)',
           }}
         />
 

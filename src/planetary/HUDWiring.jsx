@@ -8,8 +8,8 @@ import mindMapData from '@shared/mindMapData';
 import { COLORS } from '@shared/constants';
 import { useHUD } from '@planetary/ui/HUDContext';
 
-export function HUDWiring({ selectedNode, nodesRef, gpuInfo, transitCallbackRef, hudDataRef }) {
-  const { setPlanetInfo, setSceneStats, setTransitState } = useHUD();
+export function HUDWiring({ selectedNode, nodesRef, gpuInfo, transitCallbackRef, hudDataRef, targetScreenPosRef }) {
+  const { setPlanetInfo, setSceneStats, setTransitState, setTargetScreenPos } = useHUD();
 
   // --- 1. Connect planet info to selected node ---
   useEffect(() => {
@@ -109,7 +109,16 @@ export function HUDWiring({ selectedNode, nodesRef, gpuInfo, transitCallbackRef,
     };
   }, [transitCallbackRef, setTransitState]);
 
-  // --- 4. Bridge HUD data to 3D cockpit (VR mode) ---
+  // --- 4. Targeting reticle screen position (10 Hz) ---
+  useEffect(() => {
+    if (!targetScreenPosRef) return;
+    const interval = setInterval(() => {
+      setTargetScreenPos(targetScreenPosRef.current);
+    }, 100);
+    return () => clearInterval(interval);
+  }, [targetScreenPosRef, setTargetScreenPos]);
+
+  // --- 5. Bridge HUD data to 3D cockpit (VR mode) ---
   const {
     accentColor, planetName, biome, childrenCount, mediaCount,
     description, nodeCount, fps, gpuBackend, isInTransit, transitTarget,

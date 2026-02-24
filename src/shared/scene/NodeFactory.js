@@ -121,6 +121,13 @@ export function createCenterNode(scene, nodesRef) {
   let node;
   if (usePlanetary) {
     node = createStar({ color: center.color, position, userData: center });
+    // Star gets an asteroid belt
+    const starBelt = createAsteroidBelt(node, {
+      innerRadius: PLANET_CONFIG.star.size * 2.0,
+      outerRadius: PLANET_CONFIG.star.size * 3.0,
+      biome: 'star',
+    });
+    asteroidBelts.push(starBelt);
   } else {
     node = createNodeMesh({
       color: center.color,
@@ -161,15 +168,16 @@ export function createLevel1Nodes(scene, nodesRef, connectionsRef) {
       const biome = pillar.biome || BIOME_MAP[pillar.id] || 'ocean';
       node = createPlanetLOD({ color: pillar.color, biome, position, userData: pillar });
 
-      // Attach asteroid belt to the LOD group
-      const belt = createAsteroidBelt(node, {
-        count: 200,
-        innerRadius: PLANET_CONFIG.planet.size * 2.5,
-        outerRadius: PLANET_CONFIG.planet.size * 3.5,
-        color: new THREE.Color(pillar.color).lerp(new THREE.Color(0x888888), 0.6).getHex(),
-        biome,
-      });
-      asteroidBelts.push(belt);
+      // Asteroid belts only on gasGiant biome (not every planet)
+      if (biome === 'gasGiant' || biome === 'volcanic') {
+        const belt = createAsteroidBelt(node, {
+          innerRadius: PLANET_CONFIG.planet.size * 2.5,
+          outerRadius: PLANET_CONFIG.planet.size * 3.5,
+          color: new THREE.Color(pillar.color).lerp(new THREE.Color(0x888888), 0.6).getHex(),
+          biome,
+        });
+        asteroidBelts.push(belt);
+      }
     } else {
       node = createNodeMesh({
         color: pillar.color,

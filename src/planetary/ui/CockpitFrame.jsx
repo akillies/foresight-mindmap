@@ -1,18 +1,20 @@
 /**
- * CockpitFrame — Descent-style Angular Cockpit
+ * CockpitFrame — Elite Dangerous + TNG Shuttlecraft Cockpit
  *
- * Glass canopy with thin metallic struts at corners,
- * holographic status bar (top), scanner overlay (right),
- * lower console panel (bottom). Mostly open viewport.
+ * Heavy canopy frame with warm amber glow, LCARS pill indicators,
+ * collapsible scanner, targeting reticle brackets, SFX triggers.
  *
  * Data flow (via useHUD context):
  *   Top bar:      planet name, node count, FPS, GPU badge
  *   Right panel:  scanner readouts (holographic overlay, fades in/out)
- *   Bottom panel: nav switches, system status, transit info
+ *   Bottom panel: nav switches, instrument cluster, transit info, mute
+ *   Reticle:      four L-brackets tracking selected planet via 3D→2D projection
  */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { COLORS } from '@shared/constants';
+import { AMBER_ACCENT } from '@planetary/constants';
 import { useHUD } from './HUDContext';
+import { sfx } from '@shared/audio/SFXManager';
 import './CockpitFrame.css';
 
 const BIOME_LABELS = {
@@ -22,6 +24,15 @@ const BIOME_LABELS = {
   volcanic: 'VOLCANIC',
   garden: 'VERDANT',
   gasGiant: 'GAS GIANT',
+};
+
+const BIOME_SWATCH_COLORS = {
+  ocean: '#4488CC',
+  desert: '#CCAA66',
+  crystal: '#AACCFF',
+  volcanic: '#FF6633',
+  garden: '#66AA44',
+  gasGiant: '#DD88BB',
 };
 
 const NAV_SWITCHES = [
@@ -35,10 +46,16 @@ const NAV_SWITCHES = [
 /* -- Sub-components -------------------------------------------------- */
 
 function ConsoleSwitch({ label, isActive, onClick, color, ariaLabel }) {
+  const handleClick = useCallback(() => {
+    sfx.consoleClick();
+    onClick();
+  }, [onClick]);
+
   return (
     <button
       className="console-switch"
-      onClick={onClick}
+      onClick={handleClick}
+      onMouseEnter={() => sfx.hover()}
       aria-label={ariaLabel}
       aria-pressed={isActive}
       style={isActive ? {
@@ -72,6 +89,26 @@ function DataReadout({ label, value, color }) {
   );
 }
 
+/* -- Targeting Reticle ------------------------------------------------ */
+
+function TargetingReticle({ targetScreenPos, isLocked }) {
+  if (!targetScreenPos) return null;
+
+  const bracketClass = isLocked ? 'active converging' : '';
+
+  return (
+    <div
+      className="cockpit-reticle"
+      style={{ left: targetScreenPos.x, top: targetScreenPos.y }}
+    >
+      <div className={`reticle-bracket reticle-tl ${bracketClass}`} />
+      <div className={`reticle-bracket reticle-tr ${bracketClass}`} />
+      <div className={`reticle-bracket reticle-bl ${bracketClass}`} />
+      <div className={`reticle-bracket reticle-br ${bracketClass}`} />
+    </div>
+  );
+}
+
 /* -- Main Component -------------------------------------------------- */
 
 export function CockpitFrame({
@@ -96,9 +133,29 @@ export function CockpitFrame({
     gpuBackend,
     isInTransit,
     transitTarget,
+    targetScreenPos,
   } = useHUD();
 
-  // FPS smoothing -- update display at 2 Hz to avoid jitter
+  // Scanner collapse state
+  const [scannerCollapsed, setScannerCollapsed] = useState(false);
+
+  // Mute state
+  const [muted, setMuted] = useState(false);
+
+  // Scan animation trigger — on planet change
+  const [scanActive, setScanActive] = useState(false);
+  const prevPlanetRef = useRef(planetName);
+
+  useEffect(() => {
+    if (planetName !== prevPlanetRef.current && planetName) {
+      setScanActive(true);
+      prevPlanetRef.current = planetName;
+      const timer = setTimeout(() => setScanActive(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [planetName]);
+
+  // FPS smoothing -- update display at 2 Hz
   const [displayFps, setDisplayFps] = useState(60);
   const fpsRef = useRef(fps);
   useEffect(() => {
@@ -106,6 +163,20 @@ export function CockpitFrame({
     const interval = setInterval(() => setDisplayFps(Math.round(fpsRef.current)), 500);
     return () => clearInterval(interval);
   }, [fps]);
+
+  // Mouse parallax tracking
+  const frameRef = useRef(null);
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!frameRef.current) return;
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      frameRef.current.style.setProperty('--mouse-x', x.toFixed(3));
+      frameRef.current.style.setProperty('--mouse-y', y.toFixed(3));
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const backend = gpuInfo?.backend || gpuBackend || 'WebGL';
   const isWebGPU = backend.toLowerCase().includes('webgpu');
@@ -127,19 +198,36 @@ export function CockpitFrame({
     diagrams: false,
   };
 
-  return (
-    <div className="cockpit-frame" style={{ '--cockpit-accent': accentColor }}>
+  const handleMuteToggle = useCallback(() => {
+    sfx.toggleMute();
+    setMuted(sfx.isMuted());
+  }, []);
 
-      {/* -- Canopy Struts (angular corner lines) -- */}
+  const handleScannerToggle = useCallback(() => {
+    sfx.scannerToggle();
+    setScannerCollapsed(!scannerCollapsed);
+  }, [scannerCollapsed]);
+
+  return (
+    <div className="cockpit-frame" ref={frameRef}>
+
+      {/* -- Canopy Struts (heavy angular frame with amber glow) -- */}
       <div className="cockpit-struts">
         <div className="cockpit-strut-tr" />
         <div className="cockpit-strut-bl" />
         <div className="cockpit-strut-line-tl" />
         <div className="cockpit-strut-line-tr" />
+        <div className="cockpit-strut-cross-top" />
       </div>
 
       {/* -- Viewport Vignette -- */}
       <div className="cockpit-viewport-edge" />
+
+      {/* -- Targeting Reticle -- */}
+      <TargetingReticle
+        targetScreenPos={!isCenterStar ? targetScreenPos : null}
+        isLocked={!isCenterStar && !isInTransit}
+      />
 
       {/* -- Top Holographic Status Bar -- */}
       <div className="cockpit-status-bar">
@@ -148,8 +236,8 @@ export function CockpitFrame({
           <span style={{
             fontWeight: 700,
             textTransform: 'uppercase',
-            color: accentColor,
-            textShadow: `0 0 12px ${accentColor}40`,
+            color: AMBER_ACCENT,
+            textShadow: '0 0 12px rgba(240, 160, 48, 0.4)',
           }}>
             {planetName}
           </span>
@@ -157,12 +245,12 @@ export function CockpitFrame({
 
         <div className="cockpit-status-right" style={{ color: COLORS.textMuted }}>
           <span>
-            <span style={{ marginRight: 4 }}>NODES</span>
+            <span style={{ marginRight: 4, color: 'rgba(240, 160, 48, 0.5)' }}>NODES</span>
             <span style={{ color: COLORS.text, fontWeight: 700 }}>{nodeCount}</span>
           </span>
           <span className="instrument-divider" />
           <span>
-            <span style={{ marginRight: 4 }}>FPS</span>
+            <span style={{ marginRight: 4, color: 'rgba(240, 160, 48, 0.5)' }}>FPS</span>
             <span style={{
               color: displayFps >= 50 ? COLORS.success : displayFps >= 30 ? COLORS.warning : COLORS.pink,
               fontWeight: 700,
@@ -184,28 +272,46 @@ export function CockpitFrame({
         </div>
       </div>
 
-      {/* -- Scanner Panel (holographic right overlay) -- */}
+      {/* -- Scanner Panel (collapsible right overlay) -- */}
       <aside
-        className={`cockpit-scanner-panel ${isCenterStar ? 'scanner-hidden' : 'scanner-visible'}`}
+        className={`cockpit-scanner-panel ${
+          isCenterStar && !scannerCollapsed ? 'scanner-hidden' :
+          scannerCollapsed ? 'scanner-hidden' :
+          'scanner-visible'
+        }`}
         role="complementary"
         aria-label="Scanner readout"
       >
+        <button
+          className="scanner-collapse-tab"
+          onClick={handleScannerToggle}
+          aria-label={scannerCollapsed ? 'Expand scanner' : 'Collapse scanner'}
+        >
+          {scannerCollapsed ? '\u25C0' : '\u25B6'}
+        </button>
+
         <div className="scanner-panel-header">
-          <span className="scanner-pill" style={{ background: COLORS.primary }} />
-          <span style={{ color: COLORS.textMuted }}>
-            {isCenterStar ? 'SCANNER' : 'SCAN TARGET'}
-          </span>
+          <span className="scanner-pill" />
+          <span>{isCenterStar ? 'SCANNER' : 'SCAN TARGET'}</span>
         </div>
 
-        <div className="scanner-display">
+        <div className={`scanner-display ${scanActive ? 'scan-active' : ''}`}>
           {!isCenterStar && (
             <>
-              <DataReadout label="DESIGNATION" value={planetName} color={accentColor} />
+              <DataReadout label="DESIGNATION" value={planetName} color={AMBER_ACCENT} />
               {biome && (
                 <DataReadout
                   label="BIOME CLASS"
-                  value={BIOME_LABELS[biome] || biome.toUpperCase()}
-                  color={accentColor}
+                  value={
+                    <>
+                      <span
+                        className="scanner-biome-swatch"
+                        style={{ color: BIOME_SWATCH_COLORS[biome], background: BIOME_SWATCH_COLORS[biome] }}
+                      />
+                      {BIOME_LABELS[biome] || biome.toUpperCase()}
+                    </>
+                  }
+                  color={AMBER_ACCENT}
                 />
               )}
               <DataReadout label="SUB-NODES" value={String(childrenCount).padStart(3, '0')} />
@@ -246,25 +352,32 @@ export function CockpitFrame({
         {/* Center instrument cluster */}
         <div className="console-instrument-cluster">
           {isInTransit ? (
-            <span style={{ color: accentColor }}>
+            <span style={{ color: AMBER_ACCENT }}>
               IN TRANSIT {'\u25B8'} {transitTarget?.toUpperCase() || '...'}
             </span>
           ) : (
             <>
               <span>SYSTEMS ONLINE</span>
               <span className="instrument-divider" />
-              <span style={{ color: COLORS.success }}>{'\u25C8'}</span>
+              <span style={{ color: AMBER_ACCENT }}>{'\u25C8'}</span>
               <span className="instrument-divider" />
               <span>SENSORS ACTIVE</span>
             </>
           )}
         </div>
 
-        {/* Right: transit status or spacer */}
+        {/* Right: transit status + mute */}
         <div className="console-transit">
           {isInTransit && (
             <span style={{ color: COLORS.highlight }}>WARP</span>
           )}
+          <button
+            className={`cockpit-mute-btn ${muted ? 'muted' : ''}`}
+            onClick={handleMuteToggle}
+            aria-label={muted ? 'Unmute sound effects' : 'Mute sound effects'}
+          >
+            {muted ? 'SFX OFF' : 'SFX ON'}
+          </button>
         </div>
       </div>
 

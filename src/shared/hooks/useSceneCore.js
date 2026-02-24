@@ -220,11 +220,16 @@ export function useSceneCore(onNodeClick, onHoverChange, selectedNode, extension
                 node.material.emissiveIntensity = baseIntensity + Math.sin(currentTime * ANIMATION_CONFIG.nodePulseSpeed + i) * pulseAmplitude;
               }
 
-              // Scale effect
-              if (isSelected) {
-                node.scale.lerp(SCALE_SELECTED, ANIMATION_CONFIG.scaleLerpSelected);
-              } else if (!isHovered && node.scale.x > 1.0) {
-                node.scale.lerp(SCALE_NORMAL, ANIMATION_CONFIG.scaleLerpNormal);
+              // Scale effect (classic only — planetary uses selection ring instead)
+              if (!planetaryMode) {
+                if (isSelected) {
+                  node.scale.lerp(SCALE_SELECTED, ANIMATION_CONFIG.scaleLerpSelected);
+                } else if (!isHovered && node.scale.x > 1.0) {
+                  node.scale.lerp(SCALE_NORMAL, ANIMATION_CONFIG.scaleLerpNormal);
+                }
+              } else if (planetaryMode && node.scale.x !== 1.0) {
+                // Ensure planets stay at normal scale in planetary mode
+                node.scale.lerp(SCALE_NORMAL, 0.15);
               }
             }
 
@@ -275,7 +280,7 @@ export function useSceneCore(onNodeClick, onHoverChange, selectedNode, extension
               }
               if (nodes.includes(hoveredObj)) {
                 hoveredObj.isHovered = true;
-                hoveredObj.scale.setScalar(1.1);
+                if (!planetaryMode) hoveredObj.scale.setScalar(1.1);
                 onHoverChange(hoveredObj.userData);
               } else {
                 onHoverChange(null);

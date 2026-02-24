@@ -3,13 +3,37 @@
  * Only imported by the Planetary Explorer app
  */
 
+// HUD accent color (warm amber/orange, Elite Dangerous style)
+export const AMBER_ACCENT = '#F0A030';
+export const AMBER_ACCENT_HEX = 0xF0A030;
+
 // Planetary node sizes (used by PlanetFactory when WebGPU/TSL available)
 export const PLANET_CONFIG = {
   star: { size: 3.0, atmosphereScale: 1.3, coronaScale: 1.6 },
-  planet: { size: 2.0, atmosphereScale: 1.15, cloudScale: 1.05, segments: 48 },
+  planet: { size: 2.0, atmosphereScale: 1.25, cloudScale: 1.05, segments: 64 },
   moon: { size: 1.0, atmosphereScale: 1.08, segments: 40 },
   station: { size: 0.5, segments: 16 },
   rotationSpeed: { planet: 0.0004, cloud: 0.0006, moon: 0.0003, star: 0.0001 },
+};
+
+// Selection ring around targeted planet
+export const SELECTION_RING = {
+  innerRadius: 2.4,
+  outerRadius: 2.7,
+  color: 0xF0A030,
+  rotationSpeed: 0.0012,
+  pulseSpeed: 0.003,
+  pulseMin: 0.6,
+  pulseMax: 1.0,
+  tiltX: 0.3,
+};
+
+// Biome-specific asteroid belt density (count override)
+export const BELT_DENSITY = {
+  volcanic: 400,
+  crystal: 180,
+  gasGiant: 350,
+  star: 250,
 };
 
 // Biome-to-pillar mapping for procedural planet generation
@@ -23,6 +47,7 @@ export const BIOME_MAP = {
 };
 
 // Per-biome material tuning for MeshPhysicalMaterial
+// atmosphereOpacity is for the single merged atmosphere shell (no separate outerGlow)
 export const BIOME_MATERIAL_PROFILES = {
   ocean: {
     emissiveIntensity: 0.08,
@@ -36,8 +61,7 @@ export const BIOME_MATERIAL_PROFILES = {
     iridescence: 0,
     iridescenceIOR: 1.3,
     bumpScale: 0.08,
-    atmosphereOpacity: 0.15,
-    outerGlowOpacity: 0.08,
+    atmosphereOpacity: 0.2,
     atmosphereTint: null,
     hasCloudLayer: false,
   },
@@ -53,8 +77,7 @@ export const BIOME_MATERIAL_PROFILES = {
     iridescence: 0,
     iridescenceIOR: 1.3,
     bumpScale: 0.12,
-    atmosphereOpacity: 0.1,
-    outerGlowOpacity: 0.05,
+    atmosphereOpacity: 0.14,
     atmosphereTint: '#CC9944',
     hasCloudLayer: false,
   },
@@ -70,8 +93,7 @@ export const BIOME_MATERIAL_PROFILES = {
     iridescence: 0.6,
     iridescenceIOR: 1.8,
     bumpScale: 0.06,
-    atmosphereOpacity: 0.12,
-    outerGlowOpacity: 0.07,
+    atmosphereOpacity: 0.18,
     atmosphereTint: '#88AAEE',
     hasCloudLayer: false,
   },
@@ -86,9 +108,8 @@ export const BIOME_MATERIAL_PROFILES = {
     sheenRoughness: 1.0,
     iridescence: 0,
     iridescenceIOR: 1.3,
-    bumpScale: 0.1,
-    atmosphereOpacity: 0.1,
-    outerGlowOpacity: 0.06,
+    bumpScale: 0.12,
+    atmosphereOpacity: 0.14,
     atmosphereTint: '#FF4400',
     hasCloudLayer: false,
   },
@@ -104,8 +125,7 @@ export const BIOME_MATERIAL_PROFILES = {
     iridescence: 0,
     iridescenceIOR: 1.3,
     bumpScale: 0.08,
-    atmosphereOpacity: 0.14,
-    outerGlowOpacity: 0.07,
+    atmosphereOpacity: 0.2,
     atmosphereTint: '#88BBFF',
     hasCloudLayer: true,
   },
@@ -121,8 +141,7 @@ export const BIOME_MATERIAL_PROFILES = {
     iridescence: 0.2,
     iridescenceIOR: 1.5,
     bumpScale: 0.04,
-    atmosphereOpacity: 0.18,
-    outerGlowOpacity: 0.1,
+    atmosphereOpacity: 0.25,
     atmosphereTint: '#FFAACC',
     hasCloudLayer: true,
   },
@@ -140,8 +159,7 @@ export const DEFAULT_PLANET_MATERIAL = {
   iridescence: 0,
   iridescenceIOR: 1.3,
   bumpScale: 0.08,
-  atmosphereOpacity: 0.12,
-  outerGlowOpacity: 0.06,
+  atmosphereOpacity: 0.16,
   atmosphereTint: null,
   hasCloudLayer: false,
 };
@@ -153,8 +171,7 @@ export const MOON_MATERIAL = {
   sheen: 0.2,
   sheenColor: '#AAAACC',
   sheenRoughness: 0.6,
-  atmosphereOpacity: 0.12,
-  outerGlowOpacity: 0.08,
+  atmosphereOpacity: 0.15,
 };
 
 // Media type → orbital station geometry
@@ -168,6 +185,7 @@ export const STATION_SHAPES = {
 
 // Biome-specific asteroid belt color palettes
 export const BIOME_BELT_COLORS = {
+  star:     { base: 0xAA8844, accent: 0xFFCC66, metalness: 0.35, emissive: 0.04 },
   ocean:    { base: 0x4477AA, accent: 0x88BBDD, metalness: 0.25, emissive: 0.02 },
   desert:   { base: 0xAA8855, accent: 0xCCAA66, metalness: 0.15, emissive: 0.01 },
   crystal:  { base: 0x7799CC, accent: 0xAADDFF, metalness: 0.55, emissive: 0.08 },

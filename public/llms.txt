@@ -1,0 +1,104 @@
+# Foresight: Interactive 3D Strategic Foresight Learning Tool
+
+> An open educational tool for futures literacy. Explore 18 strategic foresight methodologies through an interactive 3D mind map and planetary visualization.
+
+## Overview
+
+Foresight is a free, browser-based 3D learning application that teaches strategic foresight — the disciplined exploration of alternative futures to inform present-day decisions. It covers the Six Pillars framework developed by Sohail Inayatullah, organizing 18 methodologies into six categories with curated educational media, case studies, and expert resources for each.
+
+URL: https://foresight-mindmap.vercel.app/
+Author: Alexander Kline Consulting
+License: Open educational resource, free to use
+Language: English
+
+## Modes
+
+### Classic Mind Map (/)
+A 3D node-and-edge visualization where the center node represents Strategic Foresight, branching outward to the Six Pillars, then to individual methodologies, and finally to curated media resources. Users click nodes to expand branches, view methodology details, and access educational content.
+
+### Planetary Explorer (/explore)
+A space-exploration metaphor where each methodology is a procedurally generated planet with a biome matching its character (e.g., garden, crystalline, volcanic, oceanic, gas giant). Users fly between planets, orbit them, and dive into content. Features include asteroid belts, warp transit effects, moons, and an LCARS-inspired cockpit HUD.
+
+## The Six Pillars of Strategic Foresight
+
+### 1. Mapping
+Understanding current views of the future. Methodologies: Environmental Scanning, Weak Signals.
+
+### 2. Anticipating
+Detecting early signs of change. Methodologies: Emerging Issues Analysis, Macro-Historical Analysis, Cycle Theory.
+
+### 3. Timing
+Understanding temporal patterns and cycles in futures work. Methodologies: Futures Triangle, Stakeholder Analysis.
+
+### 4. Deepening
+Examining underlying worldviews and assumptions. Methodologies: Causal Layered Analysis, Discourse Analysis.
+
+### 5. Creating Alternatives
+Generating diverse future scenarios and possibilities. Methodologies: Scenario Planning, Wild Card Scenarios, Morphological Analysis, Delphi Method, Cross-Impact Analysis.
+
+### 6. Transforming
+Creating preferred futures and pathways to achieve them. Methodologies: Visioning, Backcasting, Strategic Issue Management, Aspirational Futures Design.
+
+## Features
+
+- 3D interactive mind map with expandable node hierarchy
+- Procedurally generated planets with biome-specific textures and atmospheres
+- Flight navigation between nodes with warp transit effects
+- Asteroid belts around methodology clusters
+- LCARS-inspired heads-up display (cockpit HUD) in planetary mode
+- Generative ambient audio using Web Audio API (binaural beats at scientifically-backed frequencies)
+- Guided narrated tours for onboarding
+- Curated media browser: videos, articles, documents, podcasts, and images for each methodology
+- Timeline view showing the historical evolution of futures studies
+- Diagram gallery with framework visualizations
+- Responsive design for desktop and mobile browsers
+- Privacy-focused analytics (Plausible, no cookies, no user accounts)
+
+## Educational Content
+
+Each of the 18 methodologies includes:
+- Overview and historical context
+- Pioneer/inventor information
+- Curated video lectures (YouTube, TED)
+- Academic papers and articles
+- Case studies
+- Podcast episodes from futures-focused shows
+- Framework diagrams
+
+Notable educators and thinkers referenced: Sohail Inayatullah, James Dator, Peter Schwartz, Herman Kahn, Wendell Bell, Eleonora Masini, Jim Dator, Olaf Helmer, Theodore Gordon, Fritz Zwicky, Arthur C. Clarke, Ray Kurzweil, Alvin Toffler, Buckminster Fuller.
+
+## Technology
+
+- Frontend: React 19, Three.js 0.182, Vite 7
+- Rendering: WebGPU with WebGL2 automatic fallback
+- Particle systems: WebGPU compute shaders (starfield, nebulae)
+- Textures: Procedural canvas-based generation per biome (simplex noise)
+- Audio: Web Audio API with oscillator-based generative ambient sound
+- Build: Vite multi-page (two entry points: classic and planetary)
+- Testing: Vitest with jsdom
+- Deployment: Vercel
+- Monitoring: Sentry for error tracking
+- No backend, no database, no user accounts, no data collection
+
+## Upcoming
+
+- Scenario Flight: An interactive narrative futures exploration mode where users make decisions that affect planetary outcomes, using quality-based narrative mechanics and convergent storytelling
+
+## Structured Data
+
+name: Foresight
+type: Educational Web Application
+url: https://foresight-mindmap.vercel.app/
+canonical: https://futures.alexanderkline.com/
+author: Alexander Kline Consulting
+subject: Strategic Foresight, Futures Studies
+audience: Undergraduate, Graduate, Professional Development
+methodology_count: 18
+framework: Six Pillars of Foresight (Sohail Inayatullah)
+pillars: Mapping, Anticipating, Timing, Deepening, Creating Alternatives, Transforming
+media_types: video, article, document, podcast, image
+rendering: Three.js with WebGPU/WebGL2
+free: yes
+login_required: no
+data_collection: no
+language: en

@@ -22,6 +22,7 @@ export function HUDProvider({ children }) {
     nodeCount: 0,
     fps: 0,
     gpuBackend: 'WebGL',
+    targetScreenPos: null,
   });
 
   const setPlanetInfo = useCallback((info) => {
@@ -54,12 +55,20 @@ export function HUDProvider({ children }) {
     }));
   }, []);
 
+  const setTargetScreenPos = useCallback((pos) => {
+    setHudState(prev => ({
+      ...prev,
+      targetScreenPos: pos,
+    }));
+  }, []);
+
   return (
     <HUDContext.Provider value={{
       ...hudState,
       setPlanetInfo,
       setTransitState,
       setSceneStats,
+      setTargetScreenPos,
     }}>
       {children}
     </HUDContext.Provider>
@@ -82,9 +91,11 @@ export function useHUD() {
       nodeCount: 0,
       fps: 0,
       gpuBackend: 'WebGL',
+      targetScreenPos: null,
       setPlanetInfo: () => {},
       setTransitState: () => {},
       setSceneStats: () => {},
+      setTargetScreenPos: () => {},
     };
   }
   return ctx;

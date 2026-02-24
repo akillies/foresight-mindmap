@@ -63,7 +63,7 @@ export function createPlanetLOD(params) {
   const planetColor = new THREE.Color(color);
   const lod = new THREE.LOD();
 
-  // HIGH: Full planet from PlanetFactory (48-segment sphere + atmosphere + glow)
+  // HIGH: Full planet from PlanetFactory (64-segment sphere + atmosphere)
   const highDetail = createPlanet(params);
   // createPlanet sets position on the mesh, but LOD manages position itself,
   // so reset the child to origin (LOD group holds the world position)

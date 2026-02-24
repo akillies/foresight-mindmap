@@ -148,7 +148,7 @@ export function createPlanet({ color, biome, position, userData }) {
   planet.castShadow = true;
   planet.receiveShadow = true;
 
-  // Atmosphere shell (transparent, slightly larger)
+  // Single merged atmosphere shell (higher quality, replaces old atmosphere + outerGlow)
   const atmoColor = profile.atmosphereTint
     ? new THREE.Color(profile.atmosphereTint)
     : planetColor;
@@ -160,22 +160,10 @@ export function createPlanet({ color, biome, position, userData }) {
       opacity: profile.atmosphereOpacity,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
+      depthWrite: false,
     })
   );
   planet.add(atmosphere);
-
-  // Outer glow (softer, larger)
-  const outerGlow = new THREE.Mesh(
-    new THREE.SphereGeometry(size * 1.4, 32, 32),
-    new THREE.MeshBasicMaterial({
-      color: planetColor,
-      transparent: true,
-      opacity: profile.outerGlowOpacity,
-      side: THREE.BackSide,
-      blending: THREE.AdditiveBlending,
-    })
-  );
-  planet.add(outerGlow);
 
   // Cloud layer for biomes that have one (garden, gasGiant)
   if (profile.hasCloudLayer) {
@@ -231,7 +219,7 @@ export function createMoon({ color, position, userData }) {
   moon.castShadow = true;
   moon.receiveShadow = true;
 
-  // Thin atmosphere glow
+  // Single atmosphere glow shell (merged atmosphere + outer glow)
   const atmo = new THREE.Mesh(
     new THREE.SphereGeometry(size * atmosphereScale, 24, 24),
     new THREE.MeshBasicMaterial({
@@ -240,22 +228,10 @@ export function createMoon({ color, position, userData }) {
       opacity: MOON_MATERIAL.atmosphereOpacity,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
+      depthWrite: false,
     })
   );
   moon.add(atmo);
-
-  // Outer glow shell (similar to planets)
-  const outerGlow = new THREE.Mesh(
-    new THREE.SphereGeometry(size * 1.35, 16, 16),
-    new THREE.MeshBasicMaterial({
-      color: moonColor,
-      transparent: true,
-      opacity: MOON_MATERIAL.outerGlowOpacity,
-      side: THREE.BackSide,
-      blending: THREE.AdditiveBlending,
-    })
-  );
-  moon.add(outerGlow);
 
   return moon;
 }
