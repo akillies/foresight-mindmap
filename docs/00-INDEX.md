@@ -11,6 +11,7 @@ Last Updated: February 5, 2025
 | Document | Purpose | Audience |
 |----------|---------|----------|
 | [ROADMAP.md](vision/ROADMAP.md) | Development phases & feature planning | Product/Dev |
+| [CHECKPOINT-2026-02-23.md](vision/CHECKPOINT-2026-02-23.md) | Current status, priorities, what's next | Product/Dev |
 | [ARCHITECTURE.md](technical/ARCHITECTURE.md) | System design & technical decisions | Developers |
 | [SCRATCHPAD.md](development/SCRATCHPAD.md) | Session continuity & quick reference | All agents |
 | [README.md](../README.md) | User-facing project overview | Public |
@@ -23,6 +24,7 @@ Last Updated: February 5, 2025
 **Strategic direction and planning**
 
 - **ROADMAP.md** - Development phases, feature roadmap, milestones
+- **CHECKPOINT-2026-02-23.md** - Current status checkpoint: what's shipped, what's next, priority order
 
 ### /technical
 **Architecture and implementation details**
