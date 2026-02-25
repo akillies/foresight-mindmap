@@ -11,11 +11,11 @@
   --cockpit-accent: #F0A030;
   --cockpit-accent-dim: rgba(240, 160, 48, 0.3);
   --cockpit-accent-glow: rgba(240, 160, 48, 0.15);
-  --strut-color: rgba(140, 120, 80, 0.55);
-  --strut-edge: rgba(240, 160, 48, 0.4);
+  --strut-color: rgba(140, 120, 80, 0.85);
+  --strut-edge: rgba(240, 160, 48, 0.7);
   --console-bg: rgba(10, 12, 28, 0.75);
   --scanner-bg: rgba(10, 12, 28, 0.6);
-  --frame-dark: rgba(30, 28, 22, 0.7);
+  --frame-dark: rgba(30, 28, 22, 0.9);
 
   position: fixed;
   inset: 0;
@@ -48,8 +48,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 200px;
-  height: 200px;
+  width: 280px;
+  height: 280px;
   background: linear-gradient(
     135deg,
     var(--frame-dark) 0%,
@@ -67,8 +67,8 @@
   position: absolute;
   bottom: 60px;
   right: 0;
-  width: 200px;
-  height: 200px;
+  width: 280px;
+  height: 280px;
   background: linear-gradient(
     315deg,
     var(--frame-dark) 0%,
@@ -85,8 +85,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 200px;
-  height: 200px;
+  width: 280px;
+  height: 280px;
   background: linear-gradient(
     225deg,
     var(--frame-dark) 0%,
@@ -104,8 +104,8 @@
   position: absolute;
   bottom: 60px;
   left: 0;
-  width: 200px;
-  height: 200px;
+  width: 280px;
+  height: 280px;
   background: linear-gradient(
     45deg,
     var(--frame-dark) 0%,
@@ -123,10 +123,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 220px;
-  height: 2px;
+  width: 300px;
+  height: 3px;
   background: linear-gradient(90deg, var(--strut-edge), transparent);
-  box-shadow: 0 0 8px var(--cockpit-accent-glow);
+  box-shadow: 0 0 14px var(--cockpit-accent-glow);
   opacity: 0;
   animation: cockpit-strut-fade 0.5s ease-out 0.2s forwards;
 }
@@ -136,20 +136,20 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 2px;
-  height: 220px;
+  width: 3px;
+  height: 300px;
   background: linear-gradient(180deg, var(--strut-edge), transparent);
-  box-shadow: 0 0 8px var(--cockpit-accent-glow);
+  box-shadow: 0 0 14px var(--cockpit-accent-glow);
 }
 
 .cockpit-struts .cockpit-strut-line-tr {
   position: absolute;
   top: 0;
   right: 0;
-  width: 220px;
-  height: 2px;
+  width: 300px;
+  height: 3px;
   background: linear-gradient(270deg, var(--strut-edge), transparent);
-  box-shadow: 0 0 8px var(--cockpit-accent-glow);
+  box-shadow: 0 0 14px var(--cockpit-accent-glow);
   opacity: 0;
   animation: cockpit-strut-fade 0.5s ease-out 0.25s forwards;
 }
@@ -159,10 +159,10 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 2px;
-  height: 220px;
+  width: 3px;
+  height: 300px;
   background: linear-gradient(180deg, var(--strut-edge), transparent);
-  box-shadow: 0 0 8px var(--cockpit-accent-glow);
+  box-shadow: 0 0 14px var(--cockpit-accent-glow);
 }
 
 /* Cross-strut (top center) for canopy windshield feel */
@@ -171,23 +171,76 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 3px;
-  height: 80px;
+  width: 4px;
+  height: 120px;
   background: linear-gradient(180deg, var(--strut-edge) 0%, transparent 100%);
   opacity: 0;
   animation: cockpit-strut-fade 0.5s ease-out 0.3s forwards;
 }
 
-/* ===== Viewport Vignette (triple layer) ===== */
+/* Cross-strut (bottom center) — mirror of top strut */
+.cockpit-strut-cross-bottom {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 80px;
+  background: linear-gradient(0deg, var(--strut-edge) 0%, transparent 100%);
+  opacity: 0;
+  animation: cockpit-strut-fade 0.5s ease-out 0.35s forwards;
+}
+
+/* Angled struts from corners for windshield frame feel */
+.cockpit-strut-angle-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 180px;
+  background: linear-gradient(180deg, var(--strut-edge) 0%, transparent 100%);
+  transform-origin: top left;
+  transform: rotate(25deg);
+  opacity: 0;
+  animation: cockpit-strut-fade 0.5s ease-out 0.4s forwards;
+}
+
+.cockpit-strut-angle-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 180px;
+  background: linear-gradient(180deg, var(--strut-edge) 0%, transparent 100%);
+  transform-origin: top right;
+  transform: rotate(-25deg);
+  opacity: 0;
+  animation: cockpit-strut-fade 0.5s ease-out 0.45s forwards;
+}
+
+/* ===== Viewport Vignette (triple layer + radial gradient) ===== */
 .cockpit-viewport-edge {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 959;
   box-shadow:
-    inset 0 0 80px rgba(0, 0, 0, 0.5),
-    inset 0 0 180px rgba(0, 0, 0, 0.3),
-    inset 0 0 350px rgba(0, 0, 0, 0.12);
+    inset 0 0 100px rgba(0, 0, 0, 0.6),
+    inset 0 0 200px rgba(0, 0, 0, 0.4),
+    inset 0 0 400px rgba(0, 0, 0, 0.15);
+}
+
+.cockpit-viewport-edge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(0, 0, 0, 0.25) 70%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
 }
 
 /* ===== Top Status Bar — Amber Holographic ===== */
@@ -202,7 +255,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   pointer-events: none;
   background: linear-gradient(180deg, rgba(8, 10, 24, 0.5), transparent);
@@ -275,7 +328,7 @@
   position: fixed;
   top: 42px;
   right: 12px;
-  width: 240px;
+  width: 320px;
   z-index: 962;
   pointer-events: auto;
   backdrop-filter: blur(16px);
@@ -283,7 +336,7 @@
   background: var(--scanner-bg);
   border: 1px solid var(--cockpit-accent-dim);
   border-radius: 4px;
-  padding: 10px;
+  padding: 14px;
   transition: opacity 0.4s ease, transform 0.4s ease, width 0.3s ease;
   overflow-y: auto;
   overflow-x: hidden;
@@ -313,7 +366,7 @@
   gap: 8px;
   padding-bottom: 8px;
   margin-bottom: 8px;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -398,7 +451,7 @@
 }
 
 .cockpit-readout-label {
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -408,7 +461,7 @@
 }
 
 .cockpit-readout-value {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.06em;
   color: #E8F1FF;
@@ -431,7 +484,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 72px;
   z-index: 962;
   background: var(--console-bg);
   backdrop-filter: blur(12px);
@@ -468,7 +521,7 @@
 .console-nav-switches {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   pointer-events: auto;
 }
 
@@ -479,7 +532,7 @@
   border-bottom: 2px solid transparent;
   color: #667788;
   font-family: 'Exo 2', 'Courier New', Consolas, monospace;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -487,7 +540,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 0 10px;
+  padding: 0 14px;
   transition: all 0.2s ease;
   position: relative;
   white-space: nowrap;
@@ -532,7 +585,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: rgba(240, 160, 48, 0.6);
@@ -543,7 +596,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -558,10 +611,10 @@
   border-radius: 3px;
   color: var(--cockpit-accent);
   font-family: 'Exo 2', 'Courier New', Consolas, monospace;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  padding: 2px 8px;
+  padding: 3px 10px;
   cursor: pointer;
   pointer-events: auto;
   transition: all 0.2s ease;
@@ -587,8 +640,8 @@
 
 .reticle-bracket {
   position: absolute;
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   border-color: var(--cockpit-accent);
   border-style: solid;
   border-width: 0;
@@ -602,10 +655,10 @@
 }
 
 /* Four L-shaped corner brackets */
-.reticle-tl { top: -20px; left: -20px; border-top-width: 2px; border-left-width: 2px; }
-.reticle-tr { top: -20px; right: -20px; border-top-width: 2px; border-right-width: 2px; }
-.reticle-bl { bottom: -20px; left: -20px; border-bottom-width: 2px; border-left-width: 2px; }
-.reticle-br { bottom: -20px; right: -20px; border-bottom-width: 2px; border-right-width: 2px; }
+.reticle-tl { top: -28px; left: -28px; border-top-width: 2px; border-left-width: 2px; }
+.reticle-tr { top: -28px; right: -28px; border-top-width: 2px; border-right-width: 2px; }
+.reticle-bl { bottom: -28px; left: -28px; border-bottom-width: 2px; border-left-width: 2px; }
+.reticle-br { bottom: -28px; right: -28px; border-bottom-width: 2px; border-right-width: 2px; }
 
 /* Lock-on convergence animation */
 .reticle-bracket.converging.reticle-tl { animation: reticle-converge-tl 0.4s ease-out forwards, reticle-pulse 2.5s ease-in-out 0.4s infinite; }
@@ -613,19 +666,27 @@
 .reticle-bracket.converging.reticle-bl { animation: reticle-converge-bl 0.4s ease-out forwards, reticle-pulse 2.5s ease-in-out 0.4s infinite; }
 .reticle-bracket.converging.reticle-br { animation: reticle-converge-br 0.4s ease-out forwards, reticle-pulse 2.5s ease-in-out 0.4s infinite; }
 
-/* ===== Scanline Overlay ===== */
+/* ===== Scanline Overlay (dual layer — fine + moiré) ===== */
 .cockpit-scanlines {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 963;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0px,
-    transparent 2px,
-    rgba(240, 160, 48, 0.008) 2px,
-    rgba(240, 160, 48, 0.008) 4px
-  );
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(240, 160, 48, 0.03) 2px,
+      rgba(240, 160, 48, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 4px,
+      rgba(240, 160, 48, 0.015) 4px,
+      rgba(240, 160, 48, 0.015) 6px
+    );
   mix-blend-mode: screen;
 }
 
@@ -684,20 +745,33 @@
 }
 
 @keyframes reticle-converge-tl {
-  from { top: -32px; left: -32px; opacity: 0; }
-  to { top: -20px; left: -20px; opacity: 1; }
+  from { top: -44px; left: -44px; opacity: 0; }
+  to { top: -28px; left: -28px; opacity: 1; }
 }
 @keyframes reticle-converge-tr {
-  from { top: -32px; right: -32px; opacity: 0; }
-  to { top: -20px; right: -20px; opacity: 1; }
+  from { top: -44px; right: -44px; opacity: 0; }
+  to { top: -28px; right: -28px; opacity: 1; }
 }
 @keyframes reticle-converge-bl {
-  from { bottom: -32px; left: -32px; opacity: 0; }
-  to { bottom: -20px; left: -20px; opacity: 1; }
+  from { bottom: -44px; left: -44px; opacity: 0; }
+  to { bottom: -28px; left: -28px; opacity: 1; }
 }
 @keyframes reticle-converge-br {
-  from { bottom: -32px; right: -32px; opacity: 0; }
-  to { bottom: -20px; right: -20px; opacity: 1; }
+  from { bottom: -44px; right: -44px; opacity: 0; }
+  to { bottom: -28px; right: -28px; opacity: 1; }
+}
+
+/* ===== Large screen bump ===== */
+@media (min-width: 1440px) {
+  .cockpit-status-bar { font-size: 13px; }
+  .cockpit-readout-label { font-size: 11px; }
+  .cockpit-readout-value { font-size: 18px; }
+  .cockpit-scanner-panel { width: 360px; padding: 16px; }
+  .scanner-panel-header { font-size: 12px; }
+  .console-switch { font-size: 12px; }
+  .console-instrument-cluster { font-size: 12px; }
+  .console-transit { font-size: 12px; }
+  .cockpit-mute-btn { font-size: 11px; }
 }
 
 /* ===== Responsive ===== */
@@ -708,7 +782,10 @@
   .console-switch-label {
     display: none;
   }
-  .cockpit-strut-cross-top {
+  .cockpit-strut-cross-top,
+  .cockpit-strut-cross-bottom,
+  .cockpit-strut-angle-left,
+  .cockpit-strut-angle-right {
     display: none;
   }
 }
@@ -728,7 +805,10 @@
   .cockpit-struts,
   .cockpit-strut-tr,
   .cockpit-strut-bl,
-  .cockpit-strut-cross-top {
+  .cockpit-strut-cross-top,
+  .cockpit-strut-cross-bottom,
+  .cockpit-strut-angle-left,
+  .cockpit-strut-angle-right {
     display: none;
   }
   .cockpit-reticle {

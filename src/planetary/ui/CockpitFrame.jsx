@@ -218,7 +218,19 @@ export function CockpitFrame({
         <div className="cockpit-strut-line-tl" />
         <div className="cockpit-strut-line-tr" />
         <div className="cockpit-strut-cross-top" />
+        <div className="cockpit-strut-cross-bottom" />
+        <div className="cockpit-strut-angle-left" />
+        <div className="cockpit-strut-angle-right" />
       </div>
+
+      {/* -- Subtle amber canopy reflection -- */}
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        pointerEvents: 'none',
+        zIndex: 958,
+        background: 'linear-gradient(180deg, rgba(240, 160, 48, 0.02) 0%, transparent 30%, transparent 80%, rgba(240, 160, 48, 0.01) 100%)',
+      }} />
 
       {/* -- Viewport Vignette -- */}
       <div className="cockpit-viewport-edge" />
