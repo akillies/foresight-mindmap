@@ -44,14 +44,21 @@ function getCachedTexture(key, generatorFn, ...args) {
  */
 export function createStar({ color, position, userData }) {
   const { size, coronaScale } = PLANET_CONFIG.star;
-  const starColor = new THREE.Color(color);
 
-  // Textured core
+  // Override data color — rich golden amber for planetary mode
+  const starColor = new THREE.Color(0xFFAA22);
+
+  // Textured core with emissive material for bloom interaction
   const texture = getCachedTexture('star', createStarTexture);
   const geometry = new THREE.SphereGeometry(size, 48, 48);
-  const material = new THREE.MeshBasicMaterial({
+  const material = new THREE.MeshStandardMaterial({
     map: texture,
     color: starColor,
+    emissive: new THREE.Color(0xFFBB33),
+    emissiveIntensity: 2.5,
+    emissiveMap: texture,
+    roughness: 1.0,
+    metalness: 0.0,
   });
 
   const star = new THREE.Mesh(geometry, material);
@@ -61,44 +68,57 @@ export function createStar({ color, position, userData }) {
   star.castShadow = false;
   star.receiveShadow = false;
 
-  // Inner glow (additive blend, slightly larger)
+  // Inner glow — warm golden, boosted opacity
   const innerGlow = new THREE.Mesh(
     new THREE.SphereGeometry(size * 1.15, 32, 32),
     new THREE.MeshBasicMaterial({
-      color: starColor,
+      color: new THREE.Color(0xFFCC44),
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.75,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     })
   );
   star.add(innerGlow);
 
-  // Corona (large, diffuse outer glow)
+  // Corona — warm amber, stronger presence
   const corona = new THREE.Mesh(
-    new THREE.SphereGeometry(size * coronaScale, 32, 32),
+    new THREE.SphereGeometry(size * 2.0, 32, 32),
     new THREE.MeshBasicMaterial({
-      color: new THREE.Color(0xFFEECC),
+      color: new THREE.Color(0xFFAA33),
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.4,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     })
   );
   star.add(corona);
 
-  // Second corona layer (wider halo for more bloom)
+  // Outer corona — deep orange halo
   const outerCorona = new THREE.Mesh(
-    new THREE.SphereGeometry(size * 2.0, 32, 32),
+    new THREE.SphereGeometry(size * 3.0, 32, 32),
     new THREE.MeshBasicMaterial({
-      color: new THREE.Color(0xFFEECC),
+      color: new THREE.Color(0xFF8800),
       transparent: true,
-      opacity: 0.06,
+      opacity: 0.15,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending,
     })
   );
   star.add(outerCorona);
+
+  // 4th corona — ultra-wide bloom halo
+  const wideHalo = new THREE.Mesh(
+    new THREE.SphereGeometry(size * 4.5, 32, 32),
+    new THREE.MeshBasicMaterial({
+      color: new THREE.Color(0xFF6600),
+      transparent: true,
+      opacity: 0.04,
+      side: THREE.BackSide,
+      blending: THREE.AdditiveBlending,
+    })
+  );
+  star.add(wideHalo);
 
   return star;
 }

@@ -735,11 +735,11 @@ export function createStarTexture(texSize = TEX_SIZE) {
   const { canvas, ctx } = createCanvas(texSize);
   const noise = createNoise2D();
 
-  const coreOrange = [255, 180, 80];
-  const core = [255, 200, 100];
-  const bright = [255, 240, 200];
-  const brightWhite = [255, 250, 230];
-  const faculae = [255, 245, 220];
+  const coreOrange = [255, 160, 40];
+  const core = [255, 180, 60];
+  const bright = [255, 220, 120];
+  const brightWhite = [255, 240, 180];
+  const faculae = [255, 230, 160];
   const spot = [200, 140, 60];
   const darkSpot = [180, 120, 50];
 
@@ -794,13 +794,13 @@ export function createStarTexture(texSize = TEX_SIZE) {
         color = lerpColor(color, brightWhite, cellT * 0.25);
       }
 
-      // Bright faculae regions (very bright active areas)
-      if (faculaeVal > 0.72) {
-        const faculaeT = (faculaeVal - 0.72) / 0.28;
+      // Bright faculae regions (tighter threshold, less washed-out cream)
+      if (faculaeVal > 0.82) {
+        const faculaeT = (faculaeVal - 0.82) / 0.18;
         if (faculaeT > 0.6) {
-          color = lerpColor(color, brightWhite, (faculaeT - 0.6) / 0.4 * 0.7);
+          color = lerpColor(color, brightWhite, (faculaeT - 0.6) / 0.4 * 0.5);
         } else {
-          color = lerpColor(color, faculae, faculaeT / 0.6 * 0.5);
+          color = lerpColor(color, faculae, faculaeT / 0.6 * 0.35);
         }
       }
 
