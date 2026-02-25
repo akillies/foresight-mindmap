@@ -223,14 +223,14 @@ export const LOD_DISTANCES = {
 
 // GPU compute particle system configuration (WebGPU path)
 export const GPU_PARTICLE_CONFIG = {
-  count: 80_000,
-  spaceSize: 800,
-  resetDistance: 500,
+  count: 120_000,
+  spaceSize: 1200,
+  resetDistance: 700,
   deadZone: 140,
   driftSpeed: 0.001,
   twinkleSpeed: 2.0,
   orbitalSpeed: 0.0003,
-  maxStarSize: 0.7,
+  maxStarSize: 1.0,
   minStarSize: 0.1,
   baseOpacity: 0.45,
 };

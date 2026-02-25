@@ -13,6 +13,7 @@ import { createGPUStarfield } from '@planetary/scene/GPUStarfield';
 import { getAsteroidBelts } from '@shared/scene/NodeFactory';
 import { createWarpStreaks } from '@planetary/scene/WarpStreaks';
 import { createCockpitMesh } from '@planetary/scene/CockpitMesh';
+import { createEnhancedNebulas } from '@planetary/scene/EnhancedNebulas';
 import { VR_CONFIG, SELECTION_RING } from '@planetary/constants';
 import { sfx } from '@shared/audio/SFXManager';
 
@@ -36,6 +37,9 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
   const galaxySpritesRef = useRef([]);
   const dustParticlesRef = useRef(null);
   const targetScreenPosRef = useRef(null);
+  const enhancedNebulasRef = useRef(null);
+  const deepSpaceLightsRef = useRef([]);
+  const distantClustersRef = useRef([]);
 
   // ── onInit: Set up GPU starfield, flight, warp, cockpit, VR ──
   const handleInit = useCallback(async (initRefs) => {
@@ -135,6 +139,55 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
     const dustPoints = new THREE.Points(dustGeo, dustMat);
     scene.add(dustPoints);
     dustParticlesRef.current = dustPoints;
+
+    // Enhanced volumetric nebulas (replace flat core nebulas)
+    const enhancedNeb = createEnhancedNebulas(scene);
+    enhancedNebulasRef.current = enhancedNeb;
+
+    // Distant star clusters (300-600 units, faint additive points)
+    const clusterColors = [0xF0A030, 0x88AAFF, 0xCC88DD, 0x66CCAA, 0xFFCC66, 0xAA88CC];
+    const clusters = [];
+    const clusterPositions = [
+      [350, 60, -400], [-400, -30, 300], [500, 90, 100],
+      [-300, 40, -500], [200, -70, 500], [-500, 80, -200],
+      [450, -50, 350], [-200, 100, 450], [300, -80, -300],
+      [-450, 50, 150], [550, 30, -150], [-350, -60, -350],
+    ];
+    for (let c = 0; c < clusterPositions.length; c++) {
+      const [px, py, pz] = clusterPositions[c];
+      const particleCount = 50 + Math.floor(Math.random() * 150);
+      const cGeo = new THREE.BufferGeometry();
+      const cPositions = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount; i++) {
+        cPositions[i * 3] = px + (Math.random() - 0.5) * 40;
+        cPositions[i * 3 + 1] = py + (Math.random() - 0.5) * 30;
+        cPositions[i * 3 + 2] = pz + (Math.random() - 0.5) * 40;
+      }
+      cGeo.setAttribute('position', new THREE.BufferAttribute(cPositions, 3));
+      const cMat = new THREE.PointsMaterial({
+        color: clusterColors[c % clusterColors.length],
+        size: 0.3 + Math.random() * 0.4,
+        transparent: true,
+        opacity: 0.1 + Math.random() * 0.15,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
+      const cPts = new THREE.Points(cGeo, cMat);
+      scene.add(cPts);
+      clusters.push(cPts);
+    }
+    distantClustersRef.current = clusters;
+
+    // Star-directed warm PointLight at origin
+    const starLight = new THREE.PointLight(0xFFBB44, 1.5, 200);
+    starLight.position.set(0, 0, 0);
+    scene.add(starLight);
+
+    // Purple rim light below/behind camera — Discovery-style drama
+    const rimLight = new THREE.PointLight(0x8866AA, 0.5, 150);
+    rimLight.position.set(0, -40, 60);
+    scene.add(rimLight);
+    deepSpaceLightsRef.current = [starLight, rimLight];
 
     // 3D cockpit mesh (VR mode — replaces CSS CockpitFrame)
     let cockpitMesh = null;
@@ -323,6 +376,15 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
         controllerRay.geometry.dispose();
         controllerRay.material.dispose();
       }
+      if (enhancedNeb) enhancedNeb.dispose();
+      for (const cl of clusters) {
+        cl.geometry.dispose();
+        cl.material.dispose();
+        scene.remove(cl);
+      }
+      for (const light of deepSpaceLightsRef.current) {
+        scene.remove(light);
+      }
       flightController.dispose();
       disposePlanetTextures();
       flightControllerRef.current = null;
@@ -488,6 +550,7 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
     sceneConfig: {
       enableVR: IS_VR,
       cameraMaxDistance: 350,
+      fogDensity: 0.002,
       bloomConfig: { threshold: 0.7, strength: 1.0, radius: 0.3 },
     },
     planetaryMode: true,
@@ -495,6 +558,16 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
     onAnimate: handleAnimate,
     onClick: handleClick,
   });
+
+  // Hide core flat nebulas — enhanced volumetric ones replace them
+  useEffect(() => {
+    const nebulas = coreResult.nebulasRef?.current;
+    if (nebulas) {
+      for (const neb of nebulas) {
+        if (neb && neb.visible !== undefined) neb.visible = false;
+      }
+    }
+  }, [coreResult.nebulasRef]);
 
   return {
     ...coreResult,
