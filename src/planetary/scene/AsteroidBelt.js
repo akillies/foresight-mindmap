@@ -9,30 +9,115 @@
 import * as THREE from 'three';
 import { BIOME_BELT_COLORS, BELT_DENSITY } from '@planetary/constants';
 
-// Pre-create 3 deformed base geometries (shared across all belts)
-let geoCache = null;
+// Per-biome geometry cache
+const biomeGeoCache = new Map();
 
 function getBaseGeometries() {
-  if (geoCache) return geoCache;
+  return getBiomeGeometries('default');
+}
 
-  // Type 1: Deformed icosahedron (classic asteroid)
-  const ico = new THREE.IcosahedronGeometry(0.15, 0);
-  deformVertices(ico, 0.6, 0.7);
+/**
+ * Get biome-specific geometry sets.
+ * Each biome has 3 distinctive asteroid shapes.
+ */
+function getBiomeGeometries(biome) {
+  if (biomeGeoCache.has(biome)) return biomeGeoCache.get(biome);
 
-  // Type 2: Stretched box (elongated shard)
-  const box = new THREE.BoxGeometry(0.12, 0.25, 0.1);
-  deformVertices(box, 0.7, 0.5);
-
-  // Type 3: Flattened dodecahedron (flat rock)
-  const dodec = new THREE.DodecahedronGeometry(0.14, 0);
-  const dPos = dodec.attributes.position;
-  for (let i = 0; i < dPos.count; i++) {
-    dPos.setY(i, dPos.getY(i) * 0.4); // flatten Y
+  let geos;
+  switch (biome) {
+    case 'star': {
+      // Molten lumps — deformed spheres, large scale
+      const g1 = new THREE.SphereGeometry(0.18, 6, 6);
+      deformVertices(g1, 0.5, 0.8);
+      const g2 = new THREE.IcosahedronGeometry(0.2, 1);
+      deformVertices(g2, 0.4, 0.9);
+      const g3 = new THREE.DodecahedronGeometry(0.16, 0);
+      deformVertices(g3, 0.5, 0.7);
+      geos = [g1, g2, g3];
+      break;
+    }
+    case 'volcanic': {
+      // Sharp angular shards — stretched boxes, tetrahedra
+      const g1 = new THREE.BoxGeometry(0.08, 0.3, 0.06);
+      deformVertices(g1, 0.7, 0.5);
+      const g2 = new THREE.TetrahedronGeometry(0.16, 0);
+      deformVertices(g2, 0.6, 0.6);
+      const g3 = new THREE.ConeGeometry(0.08, 0.25, 4);
+      deformVertices(g3, 0.6, 0.5);
+      geos = [g1, g2, g3];
+      break;
+    }
+    case 'gasGiant': {
+      // Icy chunks — dodecahedra, flattened discs
+      const g1 = new THREE.DodecahedronGeometry(0.14, 0);
+      deformVertices(g1, 0.7, 0.5);
+      const g2 = new THREE.CylinderGeometry(0.12, 0.12, 0.04, 8);
+      deformVertices(g2, 0.8, 0.3);
+      const g3 = new THREE.IcosahedronGeometry(0.13, 0);
+      deformVertices(g3, 0.7, 0.5);
+      geos = [g1, g2, g3];
+      break;
+    }
+    case 'crystal': {
+      // Prismatic — octahedra, hexagonal prisms
+      const g1 = new THREE.OctahedronGeometry(0.14, 0);
+      deformVertices(g1, 0.85, 0.2);
+      const g2 = new THREE.CylinderGeometry(0.08, 0.08, 0.22, 6);
+      deformVertices(g2, 0.9, 0.15);
+      const g3 = new THREE.TetrahedronGeometry(0.12, 0);
+      deformVertices(g3, 0.8, 0.25);
+      geos = [g1, g2, g3];
+      break;
+    }
+    case 'ocean': {
+      // Smooth rounded — low-poly spheres
+      const g1 = new THREE.SphereGeometry(0.12, 8, 8);
+      deformVertices(g1, 0.8, 0.3);
+      const g2 = new THREE.IcosahedronGeometry(0.11, 1);
+      deformVertices(g2, 0.8, 0.3);
+      const g3 = new THREE.DodecahedronGeometry(0.1, 0);
+      deformVertices(g3, 0.85, 0.25);
+      geos = [g1, g2, g3];
+      break;
+    }
+    case 'desert': {
+      // Dusty rubble — small, angular
+      const g1 = new THREE.BoxGeometry(0.1, 0.08, 0.06);
+      deformVertices(g1, 0.6, 0.6);
+      const g2 = new THREE.TetrahedronGeometry(0.09, 0);
+      deformVertices(g2, 0.6, 0.5);
+      const g3 = new THREE.IcosahedronGeometry(0.08, 0);
+      deformVertices(g3, 0.6, 0.6);
+      geos = [g1, g2, g3];
+      break;
+    }
+    case 'garden': {
+      // Mixed organic rubble
+      const g1 = new THREE.DodecahedronGeometry(0.11, 0);
+      deformVertices(g1, 0.7, 0.4);
+      const g2 = new THREE.SphereGeometry(0.1, 6, 6);
+      deformVertices(g2, 0.7, 0.4);
+      const g3 = new THREE.IcosahedronGeometry(0.1, 0);
+      deformVertices(g3, 0.7, 0.4);
+      geos = [g1, g2, g3];
+      break;
+    }
+    default: {
+      // Classic fallback
+      const g1 = new THREE.IcosahedronGeometry(0.15, 0);
+      deformVertices(g1, 0.6, 0.7);
+      const g2 = new THREE.BoxGeometry(0.12, 0.25, 0.1);
+      deformVertices(g2, 0.7, 0.5);
+      const g3 = new THREE.DodecahedronGeometry(0.14, 0);
+      const dPos = g3.attributes.position;
+      for (let i = 0; i < dPos.count; i++) dPos.setY(i, dPos.getY(i) * 0.4);
+      deformVertices(g3, 0.8, 0.4);
+      geos = [g1, g2, g3];
+    }
   }
-  deformVertices(dodec, 0.8, 0.4);
 
-  geoCache = [ico, box, dodec];
-  return geoCache;
+  biomeGeoCache.set(biome, geos);
+  return geos;
 }
 
 function deformVertices(geo, minScale, range) {
@@ -67,7 +152,7 @@ export function createAsteroidBelt(planet, {
   const palette = biome && BIOME_BELT_COLORS[biome];
   const totalCount = count || (biome && BELT_DENSITY[biome]) || 300;
 
-  const geometries = getBaseGeometries();
+  const geometries = biome ? getBiomeGeometries(biome) : getBaseGeometries();
   const group = new THREE.Group();
 
   // Split count across 3 geometry types (roughly equal, with some randomness)

@@ -168,8 +168,8 @@ export function createLevel1Nodes(scene, nodesRef, connectionsRef) {
       const biome = pillar.biome || BIOME_MAP[pillar.id] || 'ocean';
       node = createPlanetLOD({ color: pillar.color, biome, position, userData: pillar });
 
-      // Asteroid belts only on gasGiant biome (not every planet)
-      if (biome === 'gasGiant' || biome === 'volcanic') {
+      // Asteroid belts on all biomes in planetary mode
+      if (biome) {
         const belt = createAsteroidBelt(node, {
           innerRadius: PLANET_CONFIG.planet.size * 2.5,
           outerRadius: PLANET_CONFIG.planet.size * 3.5,

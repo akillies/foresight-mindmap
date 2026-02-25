@@ -30,10 +30,13 @@ export const SELECTION_RING = {
 
 // Biome-specific asteroid belt density (count override)
 export const BELT_DENSITY = {
-  volcanic: 400,
-  crystal: 180,
-  gasGiant: 350,
   star: 250,
+  volcanic: 400,
+  gasGiant: 350,
+  crystal: 180,
+  ocean: 120,
+  desert: 80,
+  garden: 60,
 };
 
 // Biome-to-pillar mapping for procedural planet generation
