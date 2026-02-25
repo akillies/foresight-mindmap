@@ -53,6 +53,11 @@ export class FlightController {
     this._onClearConnection = null;
     this._sourceNodeId = null;
     this._targetNodeId = null;
+
+    // Camera shake state
+    this._shakeOffset = new THREE.Vector3();
+    this._shakeTime = 0;
+    this._baseFov = 75;
   }
 
   /**
@@ -103,6 +108,10 @@ export class FlightController {
 
     // Build flight path
     this._buildCurve();
+
+    // Store base FOV for manipulation during flight
+    this._baseFov = cam.fov;
+    this._shakeTime = 0;
 
     // Begin DEPARTING phase
     this._elapsed = 0;
@@ -162,6 +171,38 @@ export class FlightController {
       case STATES.ARRIVING:
         this._updateArriving();
         break;
+    }
+
+    // Camera shake during DEPARTING and IN_TRANSIT
+    this._shakeTime += deltaTime;
+    if (this.state === STATES.DEPARTING || this.state === STATES.IN_TRANSIT) {
+      const shakeIntensity = this.state === STATES.IN_TRANSIT
+        ? Math.sin(this._elapsed / this._phaseDuration * Math.PI) * 0.15
+        : this._elapsed / this._phaseDuration * 0.08;
+      this._shakeOffset.set(
+        Math.sin(this._shakeTime * 17.3) * shakeIntensity,
+        Math.cos(this._shakeTime * 23.7) * shakeIntensity * 0.7,
+        Math.sin(this._shakeTime * 31.1) * shakeIntensity * 0.4,
+      );
+      this._camera.position.add(this._shakeOffset);
+    }
+
+    // FOV manipulation: widen during transit for speed feel
+    if (this._camera) {
+      let targetFov = this._baseFov;
+      if (this.state === STATES.DEPARTING) {
+        const t = this._elapsed / this._phaseDuration;
+        targetFov = this._baseFov + 10 * t;
+      } else if (this.state === STATES.IN_TRANSIT) {
+        targetFov = this._baseFov + 10;
+      } else if (this.state === STATES.ARRIVING) {
+        const t = this._elapsed / this._phaseDuration;
+        targetFov = this._baseFov + 10 * (1 - t);
+      }
+      if (Math.abs(this._camera.fov - targetFov) > 0.1) {
+        this._camera.fov = targetFov;
+        this._camera.updateProjectionMatrix();
+      }
     }
   }
 
@@ -254,6 +295,12 @@ export class FlightController {
     if (t >= 1) {
       this.state = STATES.ORBITING;
 
+      // Restore FOV
+      if (this._camera && this._baseFov) {
+        this._camera.fov = this._baseFov;
+        this._camera.updateProjectionMatrix();
+      }
+
       // Clear connection highlight
       if (this._onClearConnection) {
         this._onClearConnection();
@@ -283,6 +330,12 @@ export class FlightController {
   /** @returns {string} current state label */
   getState() {
     return this.state;
+  }
+
+  /** @returns {number} 0..1 progress within the current flight phase */
+  getPhaseProgress() {
+    if (this._phaseDuration <= 0) return 0;
+    return Math.min(this._elapsed / this._phaseDuration, 1);
   }
 
   /**

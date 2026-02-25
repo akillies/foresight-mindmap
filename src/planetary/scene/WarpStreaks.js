@@ -9,8 +9,8 @@
  */
 import * as THREE from 'three';
 
-const STREAK_COUNT = 300;
-const MAX_STREAK_LENGTH = 12;  // maximum radial elongation at peak speed
+const STREAK_COUNT = 500;
+const MAX_STREAK_LENGTH = 20;  // maximum radial elongation at peak speed
 
 /**
  * Create the warp streak system.
@@ -134,14 +134,19 @@ export function createWarpStreaks(scene) {
         posArr[si + 4] = sinA * outerR;
         posArr[si + 5] = scrolledDepth + elongation * 0.15; // slight z-trail
 
-        // Rainbow chromatic color (hue cycles around the ring)
-        // Leading edge: bright white-shifted
-        // Trailing edge: saturated rainbow color
-        const hueShift = Math.sin(time * 1.5 + i * 0.3) * 0.08; // subtle hue oscillation
-        const hue = (d.hue + hueShift + 1) % 1;
+        // Rainbow chromatic color with doppler shift
+        const hueShift = Math.sin(time * 1.5 + i * 0.3) * 0.08;
+        let hue = (d.hue + hueShift + 1) % 1;
 
-        leadColor.setHSL(hue, 0.3, 0.9);  // desaturated, bright
-        trailColor.setHSL(hue, 0.95, 0.6); // vivid rainbow
+        // Doppler: blue-shift on depart, red-shift on arrive
+        if (flightState === 'DEPARTING') {
+          hue = (hue - phaseProgress * 0.1 + 1) % 1; // shift toward blue
+        } else if (flightState === 'ARRIVING') {
+          hue = (hue + phaseProgress * 0.1) % 1; // shift toward red
+        }
+
+        leadColor.setHSL(hue, 0.3, 0.9);
+        trailColor.setHSL(hue, 0.95, 0.6);
 
         // Leading point color
         colArr[si]     = leadColor.r;

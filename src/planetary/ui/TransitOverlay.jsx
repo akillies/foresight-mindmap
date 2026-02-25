@@ -46,15 +46,15 @@ export function TransitOverlay() {
     setEta(remaining);
   }, [isInTransit, transitProgress]);
 
-  // Generate stable streaks
+  // Generate stable streaks — more of them, with speed-dependent length
   const streaks = useMemo(() => {
     const result = [];
-    const count = 36;
+    const count = 60;
     for (let i = 0; i < count; i++) {
       const angle = (360 / count) * i + (Math.random() * 5 - 2.5);
       const delay = Math.random() * 0.6;
-      const length = 80 + Math.random() * 200;
-      result.push({ angle, delay, length, key: i });
+      const baseLength = 80 + Math.random() * 200;
+      result.push({ angle, delay, baseLength, key: i });
     }
     return result;
   }, []);
@@ -82,18 +82,18 @@ export function TransitOverlay() {
         background: `radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.6) 100%)`,
       }} />
 
-      {/* Warp streaks */}
+      {/* Warp streaks — speed-dependent length */}
       {streaks.map(s => (
         <WarpStreak
           key={s.key}
           angle={s.angle}
           delay={s.delay}
-          length={s.length}
+          length={s.baseLength * (1 + (transitProgress || 0) * 2)}
           color={color}
         />
       ))}
 
-      {/* Center ring */}
+      {/* Center ring with chromatic aberration hint */}
       <div style={{
         position: 'absolute',
         top: '50%',
@@ -103,7 +103,7 @@ export function TransitOverlay() {
         height: '80px',
         borderRadius: '50%',
         border: `1px solid ${color}40`,
-        boxShadow: `0 0 40px ${color}20, inset 0 0 20px ${color}10`,
+        boxShadow: `0 0 40px ${color}20, inset 0 0 20px ${color}10, -1px 0 0 rgba(255,80,80,0.15), 1px 0 0 rgba(80,80,255,0.15)`,
         animation: 'hud-transit-glow 1.2s ease-in-out infinite',
       }} />
 

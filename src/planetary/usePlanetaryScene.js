@@ -457,13 +457,22 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
       gSprites[g].material.rotation += 0.00002 * (g + 1);
     }
 
-    // Ambient dust: slow drift relative to camera
+    // Ambient dust: slow drift relative to camera (boosted during transit)
     const dustPts = dustParticlesRef.current;
     if (dustPts) {
+      const isTransit = flightController && flightController.isFlying();
+      const driftMult = isTransit ? 3.0 : 1.0;
       dustPts.position.x = camera.position.x * 0.3;
       dustPts.position.y = camera.position.y * 0.3;
       dustPts.position.z = camera.position.z * 0.3;
-      dustPts.rotation.y += 0.00005;
+      dustPts.rotation.y += 0.00005 * driftMult;
+      dustPts.material.opacity = isTransit ? 0.08 : 0.04;
+    }
+
+    // Boost GPU starfield opacity during transit
+    if (gpuStarfield && flightController) {
+      const isTransit = flightController.isFlying();
+      gpuStarfield.opacityUniform && (gpuStarfield.opacityUniform.value = isTransit ? 0.7 : 0.45);
     }
 
     // Selection ring animation (rotation + opacity pulse + position tracking)
