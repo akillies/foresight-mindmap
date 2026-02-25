@@ -560,7 +560,7 @@ export function usePlanetaryScene(onNodeClick, onHoverChange, selectedNode) {
       enableVR: IS_VR,
       cameraMaxDistance: 350,
       fogDensity: 0.002,
-      bloomConfig: { threshold: 0.7, strength: 1.0, radius: 0.3 },
+      bloomConfig: { threshold: 0.5, strength: 1.4, radius: 0.5 },
     },
     planetaryMode: true,
     onInit: handleInit,
